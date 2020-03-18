@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\FlightQuery.Interpreter\FlightQuery.Interpreter.csproj" />
+    <ProjectReference Include="..\FlightQuery.Parser\FlightQuery.Parser.csproj" />
+    <ProjectReference Include="..\FlightQuery.Sdk\FlightQuery.Sdk.csproj" />
+  </ItemGroup>
+
+</Project>

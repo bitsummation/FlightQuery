@@ -1,0 +1,80 @@
+[
+  {
+    "ident": "WJA6475",
+    "actual_ident": "DAL503",
+    "departuretime": 1579652100,
+    "arrivaltime": 1579660080,
+    "origin": "KATL",
+    "destination": "KEWR",
+    "aircrafttype": "B739",
+    "meal_service": "Business: No meal / Economy: No meal",
+    "seats_cabin_first": 0,
+    "seats_cabin_business": 20,
+    "seats_cabin_coach": 160
+  },
+  {
+    "ident": "KLM5952",
+    "actual_ident": "DAL503",
+    "departuretime": 1579652100,
+    "arrivaltime": 1579660080,
+    "origin": "KATL",
+    "destination": "KEWR",
+    "aircrafttype": "B739",
+    "meal_service": "Business: Dinner / Economy: No meal",
+    "seats_cabin_first": 0,
+    "seats_cabin_business": 20,
+    "seats_cabin_coach": 160
+  },
+  {
+    "ident": "VIR2123",
+    "actual_ident": "DAL503",
+    "departuretime": 1579652100,
+    "arrivaltime": 1579660080,
+    "origin": "KATL",
+    "destination": "KEWR",
+    "aircrafttype": "B739",
+    "meal_service": "Business: Dinner / Economy: Snack or brunch",
+    "seats_cabin_first": 0,
+    "seats_cabin_business": 20,
+    "seats_cabin_coach": 160
+  },
+  {
+    "ident": "DAL503",
+    "actual_ident": "",
+    "departuretime": 1579652100,
+    "arrivaltime": 1579660080,
+    "origin": "KATL",
+    "destination": "KEWR",
+    "aircrafttype": "B739",
+    "meal_service": "Business: Dinner / Economy: No meal",
+    "seats_cabin_first": 0,
+    "seats_cabin_business": 20,
+    "seats_cabin_coach": 160
+  },
+  {
+    "ident": "AMX3102",
+    "actual_ident": "DAL503",
+    "departuretime": 1579652100,
+    "arrivaltime": 1579660080,
+    "origin": "KATL",
+    "destination": "KEWR",
+    "aircrafttype": "B739",
+    "meal_service": "Business: No meal / Economy: No meal",
+    "seats_cabin_first": 0,
+    "seats_cabin_business": 20,
+    "seats_cabin_coach": 160
+  },
+  {
+    "ident": "AFR2140",
+    "actual_ident": "DAL503",
+    "departuretime": 1579656300,
+    "arrivaltime": 1579676340,
+    "origin": "KATL",
+    "destination": "KPDX",
+    "aircrafttype": "B752",
+    "meal_service": "Business: Dinner / Economy: Refreshments for sale",
+    "seats_cabin_first": 0,
+    "seats_cabin_business": 20,
+    "seats_cabin_coach": 179
+  }
+]
