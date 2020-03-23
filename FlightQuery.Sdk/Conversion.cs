@@ -19,7 +19,8 @@ namespace FlightQuery.Sdk
         public static object ConvertLongToDateTime(object f)
         {
             long unixTime = (long)f;
-            return DateTimeOffset.FromUnixTimeSeconds(unixTime).DateTime;
+            var dateTime = DateTimeOffset.FromUnixTimeSeconds(unixTime).DateTime;
+            return DateTime.SpecifyKind(dateTime, DateTimeKind.Utc);
         }
 
         public static object ConvertDateTimeToLong(object f)
@@ -38,7 +39,7 @@ namespace FlightQuery.Sdk
             DateTime date;
             if (DateTime.TryParse(s, CultureInfo.InvariantCulture, DateTimeStyles.None, out date))
             {
-                return date;
+                return DateTime.SpecifyKind(date, DateTimeKind.Utc);
             }
             
             /*if (DateTime.TryParseExact(s, "YYYY-MM-DD HH:MM:SS", CultureInfo.InvariantCulture, DateTimeStyles.None, out date))

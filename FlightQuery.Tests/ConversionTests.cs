@@ -16,6 +16,7 @@ namespace FlightQuery.Tests
             Assert.IsTrue(date.Month == month);
             Assert.IsTrue(date.Day == day);
             Assert.IsTrue(date.Year == year);
+            Assert.IsTrue(date.Kind == DateTimeKind.Utc);
 
         }
     }

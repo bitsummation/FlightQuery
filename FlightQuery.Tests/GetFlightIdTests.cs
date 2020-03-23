@@ -84,7 +84,7 @@ where ident = 'DAL503' and departuretime = '2020-3-7 9:15'
 select a.ident, faFlightID
 from AirlineFlightSchedules a
 join GetFlightId f on f.ident = a.ident and f.departureTime = a.departureTime 
-where departuretime < '2020-3-7 9:15' and origin = 'katl'
+where a.departuretime < '2020-3-7 9:15' and a.origin = 'katl'
 ";
 
             var mock = new Mock<IHttpExecutor>();
