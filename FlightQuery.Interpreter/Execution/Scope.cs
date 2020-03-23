@@ -66,7 +66,7 @@ namespace FlightQuery.Interpreter.Execution
         {
             foreach(KeyValuePair<string, TableBase> entry in _variableScope.Peek().Variables)
             {
-                if (entry.Value.Descriptor.ContainsKey(property.ToLower()))
+                if (entry.Value.Descriptor.ContainsKey(property))
                     return entry.Value;
             }   
 

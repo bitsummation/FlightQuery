@@ -2,7 +2,7 @@
 
 namespace FlightQuery.Sdk.Model.V2
 {
-    public class FlightId
+    public class GetFlightId
     {
         [Required]
         [Queryable]

@@ -38,10 +38,10 @@ namespace FlightQuery.Interpreter.Http
             return Deserialize.DeserializeObject<AirlineFlightSchedule[]>(json);
         }
 
-        public FlightId GetFlightID(HttpExecuteArg args)
+        public GetFlightId GetFlightID(HttpExecuteArg args)
         {
             string flightId = Task.Run(async () => await Execute(args)).Result;
-            return new FlightId() { faFlightID = flightId };
+            return new GetFlightId() { faFlightID = flightId };
         }       
     }
 }

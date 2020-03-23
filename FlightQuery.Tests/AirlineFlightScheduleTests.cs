@@ -52,6 +52,9 @@ where departuretime > '2020-1-21 9:15' and origin = 'KATL' and destination = 'KE
 
             var context = new RunContext(code, ExecuteFlags.Run, new EmptyHttpExecutor(), mock.Object);
             var result = context.Run();
+            Assert.IsTrue(result.Columns.Length == 4);
+            Assert.IsTrue(result.Columns[0] == "aircrafttype");
+
             Assert.IsTrue(context.Errors.Count == 0);
             Assert.IsTrue(result.Rows.Length == 1);
             Assert.AreEqual(result.Rows[0].Values[0], "B739");

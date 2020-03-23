@@ -12,7 +12,7 @@ namespace FlightQuery.Interpreter.Execution
             using (var s = _scope.Push())
             {
                 _scope.AddTable("airlineflightschedules", new AirlineFlightScheduleQueryTable(_httpExecutor) {Descriptor = PropertyDescriptor.GenerateQueryDescriptor(typeof(AirlineFlightSchedule)) } );
-                _scope.AddTable("flightId", new FlightIdQueryTable(_httpExecutor) { Descriptor = PropertyDescriptor.GenerateQueryDescriptor(typeof(FlightId)) } );
+                _scope.AddTable("getflightid", new GetFlightIdQueryTable(_httpExecutor) { Descriptor = PropertyDescriptor.GenerateQueryDescriptor(typeof(GetFlightId)) } );
 
                 foreach (var c in program.Statements)
                     VisitChild(c);

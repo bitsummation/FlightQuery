@@ -68,7 +68,7 @@ namespace FlightQuery.Interpreter.QueryResults
         {
             var dto = HttpExecutor.AirlineFlightSchedule(args);
             TableDescriptor tableDescriptor = PropertyDescriptor.GenerateRunDescriptor(typeof(AirlineFlightSchedule));
-
+                
             var rows = new List<Row>();
             foreach (var d in dto)
             {

@@ -10,9 +10,9 @@ namespace FlightQuery.Sdk
             return new AirlineFlightSchedule[]{ new AirlineFlightSchedule()};
         }
 
-        public FlightId GetFlightID(HttpExecuteArg args)
+        public GetFlightId GetFlightID(HttpExecuteArg args)
         {
-            return new FlightId();
+            return new GetFlightId();
         }
     }
 }

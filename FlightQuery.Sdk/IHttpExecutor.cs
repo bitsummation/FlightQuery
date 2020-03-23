@@ -6,6 +6,6 @@ namespace FlightQuery.Sdk
     public interface IHttpExecutor
     {
         IEnumerable<AirlineFlightSchedule> AirlineFlightSchedule(HttpExecuteArg args);
-        FlightId GetFlightID(HttpExecuteArg args);
+        GetFlightId GetFlightID(HttpExecuteArg args);
     }
 }

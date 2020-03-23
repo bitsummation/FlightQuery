@@ -26,7 +26,7 @@ namespace FlightQuery.Interpreter.Descriptors.Model
                 _hash = new Dictionary<string, PropertyDescriptor>();
                 _propertyDescriptor = value;
                 foreach(var p in _propertyDescriptor)
-                    _hash.Add(p.Name, p);
+                    _hash.Add(p.Name.ToLower(), p);
             }
         }
 
