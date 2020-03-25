@@ -1,0 +1,94 @@
+﻿@{
+    ViewBag.Title = "Home";
+}
+
+    <script id="results-template" type="text/x-handlebars-template">
+        {{#if errors}}
+        {{#each errors}}
+        <div class="error">
+            {{this.message}}
+        </div>
+        {{/each}}
+        {{else}}
+    <div>
+        {{table.rows.length }} Results
+    </div>
+        <table class="data">
+            <thead>
+                <tr></tr>
+                <tr>
+                    {{#each table.columns}}
+                    <th>{{this}}</th>
+                    {{/each}}
+                </tr>
+            </thead>
+            <tbody>
+                {{#each table.rows}}
+                <tr>
+                    {{#each this.values}}
+                    <td>{{this}}</td>
+                    {{/each}}
+                </tr>
+            {{/each}}
+            </tbody>
+        </table>
+         {{/if}}
+</script>
+
+<div id="sitenav-wrapper" class="wrapper">
+    <div id="sitenav-wrap" class="wrap xxw8">
+        <span id="tagline">
+            Query FlightAware FlightXML using SQL
+        </span>
+    </div>
+</div>
+
+<div id="content-wrap" class="wrap xxw8 xcw8">
+    <div>
+        <h2>Flight Query</h2>
+    </div>
+    <div id="discussion" class="xxw8 xcw8">
+        <div style="width: 550px; float:left">
+            Enter Query:
+            <div>
+                @using (Html.BeginForm())
+                {
+                    @Html.TextArea("code")
+                    <div>
+                        <input type="submit" class="button" value="Run Query" />
+                    </div>
+                }
+            </div>
+
+            <div id="loading" class="none">
+                <img src="@Url.Content("~/img/ajax-loader.gif")" alt="loading" />
+            </div>
+            <div id="results">
+
+            </div>
+        </div>
+        <div id="sidebar">
+            <div class="help-title">Help</div>
+
+            <div class="title">Examples</div>
+            <div id="examples">
+                <a href="" query="strokes">Strokes</a>
+                <a href="" query="gir">Greens in regulation</a>
+                <a href="" query="girBirdies">One putt birdies</a>
+                <a href="" query="saves">Missed green par (Save)</a>
+                <a href="" query="missedSave">Missed green bogeys</a>
+                <a href="" query="averagePutsForBirdie">Averages distance putts for birde</a>
+                <a href="" query="birdiePutsInsideTenFeet">Birdie putt attempts inside 10 feet</a>
+                <a href="" query="birdiePutsMadeInsideTenFeet">Birdie putts holed inside 10 feet</a>
+                <a href="" query="missedPuttsFieldSevenToEight">Missed puts 7-8 feet by field</a>
+                <a href="" query="bunkerSavesFieldDistanceFrom">Bunker saves distance to pin per player</a>
+                <a href="" query="offGreenHoleOuts">Off green chip ins</a>
+                <a href="" query="philMadeBirdie">Phil Mickelson holed birdie distances in feet</a>
+                <a href="" query="kevinNaMissedGreenSavesFrom">Kevin Na par saves from in yards</a>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+

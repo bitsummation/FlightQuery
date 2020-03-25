@@ -1,0 +1,123 @@
+﻿body {
+    background: none repeat scroll 0 0 #EEEEE3;
+    font: 14px/18px Georgia,"Cambria",serif;
+}
+
+a {
+    color: #339933;
+}
+
+a {
+    cursor: pointer;
+}
+
+h2 {
+    font-size: 30px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+h2, h3 {
+    font-weight: normal;
+}
+
+#sidebar {
+    background: url(../img/black-bg-5.png);
+    float: left;
+    padding: 5px;
+    width: 300px;
+}
+
+#sitenav-wrapper {
+    background: url(../img/sitenav-bg.png) center bottom repeat-x #339933;
+    color: #fff;
+}
+
+#sitenav-wrap {
+    line-height: 35px;
+}
+
+#discussion {
+    width: 880px;
+    padding: 15px;
+    background: none repeat scroll 0 0 #FFFFFF;
+}
+
+.wrap {
+    position: relative;
+    margin: 0 auto;
+}
+
+.xxw8 {
+    width: 940px;
+    overflow: hidden;
+}
+
+.xxw7 {
+    width: 820px;
+}
+
+.xcw8 {
+    width: 910px;
+}
+
+#content-wrap {
+    background: url(../img/black-bg-5.png);
+}
+
+#content-wrap {
+    padding: 20px 15px;
+}
+
+#tagline {
+    font-style: italic;
+}
+
+
+#code {
+    width: 500px;
+    height: 200px;
+    border: 1px solid black;
+}
+
+#sidebar .help-title {
+    font-size: 22px;
+}
+
+#sidebar div.title {
+    margin: 10px 0px 5px 0px;
+    font-size: 15px;
+}
+
+#sidebar #examples a {
+    display: block;
+}
+
+.button {
+    margin: 5px 0px;
+}
+
+#results {
+    margin-top: 15px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+    #results .error {
+        color: Red;
+    }
+
+table {
+    border-spacing: 0px;
+}
+
+.data th, .data td {
+    padding: 3px 10px;
+    text-align: left;
+}
+
+.none {
+    display: none;
+}
+
+.odd {
+    background-color: #D8D8D8;
+}
