@@ -1,4 +1,5 @@
 lexer grammar SqlLexer;
+@lexer::header {#pragma warning disable 3021}
 
 OPENPAREN : '(';
 CLOSEPAREN : ')';

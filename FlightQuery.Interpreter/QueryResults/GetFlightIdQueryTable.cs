@@ -2,7 +2,6 @@
 using FlightQuery.Sdk;
 using FlightQuery.Sdk.Model.V2;
 using System;
-using System.Linq;
 
 namespace FlightQuery.Interpreter.QueryResults
 {
@@ -22,12 +21,12 @@ namespace FlightQuery.Interpreter.QueryResults
             var dto = HttpExecutor.GetFlightID(args);
 
             long departerTimeValue = 0;
-            if (QueryArgs.Count(x => x.Variable == "departuretime") > 0)
-                departerTimeValue = (long)QueryArgs.Where(x => x.Variable == "departuretime").Single().PropertyValue.Value;
+            if (QueryArgs.ContainsVariable("departuretime"))
+                departerTimeValue = (long)QueryArgs["departuretime"].PropertyValue.Value;
 
             string identValue = string.Empty;
-            if(QueryArgs.Count(x => x.Variable == "ident") > 0)
-                identValue = (string)QueryArgs.Where(x => x.Variable == "ident").Single().PropertyValue.Value;
+            if (QueryArgs.ContainsVariable("ident"))
+                identValue = (string)QueryArgs["ident"].PropertyValue.Value;
 
             dto.departuretime = (DateTime)Conversion.ConvertLongToDateTime(departerTimeValue);
             dto.ident = identValue;

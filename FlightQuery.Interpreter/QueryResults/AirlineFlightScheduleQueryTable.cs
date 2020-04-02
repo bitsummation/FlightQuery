@@ -25,13 +25,13 @@ namespace FlightQuery.Interpreter.QueryResults
         {
             base.ValidateArgs();
            
-            var departTimeCount = QueryArgs.Where(x => x.Variable == "departuretime").Count();
+            var departTimeCount = QueryArgs.Args.Where(x => x.Variable == "departuretime").Count();
             if (departTimeCount > 2)
                 throw new InvalidOperationException("Can only have 2 departureTime");
 
-            var ident = QueryArgs.Where(x => x.Variable == "ident").SingleOrDefault();
-            if(ident != null)
+            if(QueryArgs.ContainsVariable("ident"))
             {
+                var ident = QueryArgs["ident"];
                 var match = Regex.Match(ident.PropertyValue.Value.ToString(), @"(\D+)(\d+)", RegexOptions.IgnoreCase);
                 if (match.Success)
                 {
@@ -44,7 +44,7 @@ namespace FlightQuery.Interpreter.QueryResults
 
             if (departTimeCount == 1)
             {
-                var param = QueryArgs.Where(x => x.Variable == "departuretime").Single();
+                var param = QueryArgs["departuretime"];
                 if ( (param is QueryGreaterThan && param.LeftProperty) || (param is QueryLessThan && !param.LeftProperty))
                 {
                     param.Variable = "startDate";

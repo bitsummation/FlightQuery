@@ -3,7 +3,7 @@ using FlightQuery.Interpreter.QueryResults;
 
 namespace FlightQuery.Interpreter.Http
 {
-    public class QueryArgs
+    public class QueryArgs : IPropertyArgs
     {
         public QueryArgs()
         {

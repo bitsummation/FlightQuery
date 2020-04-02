@@ -5,6 +5,7 @@ namespace FlightQuery.Sdk.Model.V2
     public class FlightInfoEx
     {
         [Required]
+        [Queryable]
         public string faFlightID { get; set; }
 
         public DateTime actualarrivaltime { get; set; } //these can be 0 or -1

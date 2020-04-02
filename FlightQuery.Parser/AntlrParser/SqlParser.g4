@@ -1,4 +1,5 @@
 parser grammar SqlParser;
+@parser::header {#pragma warning disable 3021}
 
 options { tokenVocab = SqlLexer; }
 

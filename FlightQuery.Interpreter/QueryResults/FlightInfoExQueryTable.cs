@@ -3,7 +3,6 @@ using FlightQuery.Interpreter.Http;
 using FlightQuery.Sdk;
 using FlightQuery.Sdk.Model.V2;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace FlightQuery.Interpreter.QueryResults
 {
@@ -21,9 +20,13 @@ namespace FlightQuery.Interpreter.QueryResults
         protected override bool ValidateArgs()
         {
             base.ValidateArgs();
-            var param = QueryArgs.Where(x => x.Variable == "faFlightID").SingleOrDefault();
-            if (param != null)
-                QueryArgs.Add(new QueryArgs { Variable = "ident", PropertyValue = new PropertyValue(param.PropertyValue.Value) });
+
+            if (QueryArgs.ContainsVariable("faFlightID"))
+            {
+                var flightid = QueryArgs["faFlightID"];
+                QueryArgs.Clear();
+                QueryArgs.Add(new QueryArgs { Variable = "ident", PropertyValue = new PropertyValue(flightid.PropertyValue.Value) });
+            }
 
             return true;
         }

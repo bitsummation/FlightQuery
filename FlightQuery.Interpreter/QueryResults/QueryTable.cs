@@ -1,9 +1,7 @@
-﻿using FlightQuery.Interpreter.Common;
-using FlightQuery.Interpreter.Http;
+﻿using FlightQuery.Interpreter.Http;
 using FlightQuery.Sdk;
 using FlightQuery.Sdk.Semantic;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 
 namespace FlightQuery.Interpreter.QueryResults
@@ -13,12 +11,12 @@ namespace FlightQuery.Interpreter.QueryResults
         protected QueryTable(IHttpExecutor httpExecutor)
         {
             HttpExecutor = httpExecutor;
-            QueryArgs = new List<QueryArgs>();
+            QueryArgs = new VariableContainer<QueryArgs>();
         }
 
         protected IHttpExecutor HttpExecutor { get; private set; }
 
-        public List<QueryArgs> QueryArgs { get; private set; }
+        public VariableContainer<QueryArgs> QueryArgs { get; private set; }
 
         public override bool HasExecuted { get { return false; } }
         protected abstract string TableName { get; }
@@ -33,7 +31,7 @@ namespace FlightQuery.Interpreter.QueryResults
             ValidateArgs();
 
             var args = new HttpExecuteArg() {
-                Variables = QueryArgs.Select(x => new HttpQueryVariabels() {Variable = x.Variable, Value = x.PropertyValue.Value.ToString()  }),
+                Variables = QueryArgs.Args.Select(x => new HttpQueryVariabels() {Variable = x.Variable, Value = x.PropertyValue.Value.ToString()  }),
                 TableName = TableName
             };
 
@@ -45,7 +43,7 @@ namespace FlightQuery.Interpreter.QueryResults
         protected virtual bool ValidateArgs()
         {
             //make sure args that are required are there.
-            var missingRequiredParams = Descriptor.RequiredProperties.Select(x => x.Name).Except(QueryArgs.Select(x => x.Variable)).ToArray();
+            var missingRequiredParams = Descriptor.RequiredProperties.Select(x => x.Name).Except(QueryArgs.Args.Select(x => x.Variable)).ToArray();
             if (missingRequiredParams.Length > 0)
             {
                 foreach(var param in missingRequiredParams)
@@ -53,7 +51,7 @@ namespace FlightQuery.Interpreter.QueryResults
             }
                
             //Convert Datetime Args to unix time
-            foreach (var param in QueryArgs.Where(x => x.PropertyValue.Value != null).Where(x => x.PropertyValue.Value.GetType() == typeof(DateTime)))
+            foreach (var param in QueryArgs.Args.Where(x => x.PropertyValue.Value != null).Where(x => x.PropertyValue.Value.GetType() == typeof(DateTime)))
             {
                 string key = param.PropertyValue.Value.GetType().Name + "-" + typeof(long).Name;
                 var converstion = Conversion.Map[key](param.PropertyValue.Value);
