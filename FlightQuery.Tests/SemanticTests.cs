@@ -23,6 +23,23 @@ where blah < 55
             Assert.IsTrue(context.Errors[1].Message == "departuretime is required");
         }
 
+        [Test]
+        public void TestAmbiguousVariable()
+        {
+            string code = @"
+select a.ident, faFlightID
+from AirlineFlightSchedules a
+join GetFlightId f on ident = a.ident and f.departureTime = a.departureTime 
+where a.departuretime < '2020-3-7 9:15' and a.origin = 'katl'
+";
+
+            var context = new RunContext(code);
+            context.Run();
+
+            Assert.IsTrue(context.Errors.Count == 1);
+            Assert.IsTrue(context.Errors[0].Message == "ident is ambiguous at line=4, column=22");
+        }
+
         
     }
     

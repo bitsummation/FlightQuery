@@ -62,15 +62,16 @@ namespace FlightQuery.Interpreter.Execution
             return _variableScope.Peek().Variables.Values.Where(x => x is ExecutedTable).ToArray();
         }
 
-        public TableBase FindTableFromPropertySameLevel(string property)
+        public IReadOnlyList<TableBase> FindTableFromPropertySameLevel(string property)
         {
+            var list = new List<TableBase>();
             foreach(KeyValuePair<string, TableBase> entry in _variableScope.Peek().Variables)
             {
                 if (entry.Value.Descriptor.ContainsKey(property))
-                    return entry.Value;
+                    list.Add(entry.Value);
             }   
 
-            return null;
+            return list;
         }
 
         public void AddTable(string v, TableBase table)

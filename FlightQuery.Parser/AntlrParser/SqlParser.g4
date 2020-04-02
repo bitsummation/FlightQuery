@@ -7,7 +7,7 @@ program
 	;
 
 queryStatement
-	: s=selectStatement f=fromStatement? w=whereStatement?	# QueryStatementExp
+	: s=selectStatement f=fromStatement w=whereStatement?	# QueryStatementExp
 	;
 
 selectStatement

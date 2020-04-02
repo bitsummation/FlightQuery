@@ -42,6 +42,12 @@ namespace FlightQuery.Interpreter.Http
         {
             string flightId = Task.Run(async () => await Execute(args)).Result;
             return new GetFlightId() { faFlightID = flightId };
-        }       
+        }
+
+        public IEnumerable<FlightInfoEx> GetFlightInfoEx(HttpExecuteArg args)
+        {
+            string json = Task.Run(async () => await Execute(args)).Result;
+            return Deserialize.DeserializeObject<FlightInfoEx[]>(json);
+        }
     }
 }

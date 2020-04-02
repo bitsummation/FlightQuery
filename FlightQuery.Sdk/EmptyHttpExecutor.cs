@@ -14,5 +14,10 @@ namespace FlightQuery.Sdk
         {
             return new GetFlightId();
         }
+
+        public IEnumerable<FlightInfoEx> GetFlightInfoEx(HttpExecuteArg args)
+        {
+            return new FlightInfoEx[] { new FlightInfoEx() };
+        }
     }
 }

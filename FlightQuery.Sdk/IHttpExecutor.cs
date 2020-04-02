@@ -7,5 +7,6 @@ namespace FlightQuery.Sdk
     {
         IEnumerable<AirlineFlightSchedule> AirlineFlightSchedule(HttpExecuteArg args);
         GetFlightId GetFlightID(HttpExecuteArg args);
+        IEnumerable<FlightInfoEx> GetFlightInfoEx(HttpExecuteArg args);
     }
 }

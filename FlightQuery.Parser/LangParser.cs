@@ -28,7 +28,10 @@ namespace FlightQuery.Parser
             parser.AddErrorListener(new ErrorListener(Errors));
 
             var cst = parser.program();
-            return new AstBuilder().VisitProgram(cst);
+            if(Errors.Count == 0)
+                return new AstBuilder().VisitProgram(cst);
+
+            return null;
         }
 
         private class ErrorListener : BaseErrorListener
