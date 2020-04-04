@@ -74,7 +74,7 @@ where '2020-3-7 9:15' > a.departuretime and origin = 'kaus' and destination = 'k
             var mock = new Mock<IHttpExecutor>();
             mock.Setup(x => x.AirlineFlightSchedule(It.IsAny<HttpExecuteArg>())).Callback<HttpExecuteArg>(args =>
             {
-                Assert.IsTrue(args.Variables.Count() == 7);
+                Assert.IsTrue(args.Variables.Count() == 6);
                 var start = args.Variables.Where(x => x.Variable == "startDate").SingleOrDefault();
                 Assert.IsTrue(start != null);
                 Assert.IsTrue(start.Value == "1");

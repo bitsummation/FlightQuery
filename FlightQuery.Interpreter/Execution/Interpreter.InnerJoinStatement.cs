@@ -75,6 +75,7 @@ namespace FlightQuery.Interpreter.Execution
                 e.Rows = joinedRows.ToArray();
             });
 
+            VisitChild(statement.InnerJoin);
         }
     }
 }

@@ -3,7 +3,9 @@ using FlightQuery.Sdk;
 using FlightQuery.Sdk.Model.V2;
 using Moq;
 using NUnit.Framework;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 
 namespace FlightQuery.Tests
 {
@@ -50,6 +52,64 @@ where faFlightID = 'some-flight-number'
             Assert.IsTrue(context.Errors.Count == 0);
             mock.Verify(x => x.GetFlightInfoEx(It.IsAny<HttpExecuteArg>()), Times.Once());
 
+        }
+
+        [Test]
+        public void TestExecute()
+        {
+            string code = @"
+select aircrafttype
+from FlightInfoEx
+where faFlightID = 'some-flight-number'
+";
+
+            var mock = new Mock<IHttpExecutor>();
+            mock.Setup(x => x.GetFlightInfoEx(It.IsAny<HttpExecuteArg>())).Returns(() => new FlightInfoEx[] { new FlightInfoEx() {aircrafttype = "B739", faFlightID = "some-flight-number" } });
+
+            var context = new RunContext(code, ExecuteFlags.Run, new EmptyHttpExecutor(), mock.Object);
+            var result = context.Run();
+
+            Assert.IsTrue(context.Errors.Count == 0);
+            Assert.IsTrue(result.Columns.Length == 1);
+            Assert.IsTrue(result.Columns[0] == "aircrafttype");
+
+            Assert.IsTrue(result.Rows.Length == 1);
+            Assert.AreEqual(result.Rows[0].Values[0], "B739");
+        }
+
+        [Test]
+        public void TestJoin()
+        {
+            string code = @"
+select a.ident, i.faFlightID, i.aircrafttype
+from AirlineFlightSchedules a
+join GetFlightId f on f.ident = a.ident and f.departureTime = a.departureTime 
+join FlightInfoEx i on i.faFlightID = f.faFlightID
+where a.departuretime < '2020-3-7 9:15' and a.origin = 'katl'
+";
+
+            var mock = new Mock<IHttpExecutor>();
+            mock.Setup(x => x.AirlineFlightSchedule(It.IsAny<HttpExecuteArg>())).Returns(() =>
+            {
+                string source = string.Empty;
+                var assembly = Assembly.GetExecutingAssembly();
+                using (Stream stream = assembly.GetManifestResourceStream("FlightQuery.Tests.AirlineFlightSchedule.json"))
+                using (StreamReader reader = new StreamReader(stream))
+                {
+                    source = reader.ReadToEnd();
+                }
+                return Deserialize.DeserializeObject<AirlineFlightSchedule[]>(source);
+            });
+            mock.Setup(x => x.GetFlightID(It.IsAny<HttpExecuteArg>())).Returns<HttpExecuteArg>((args) =>
+            {
+                return new GetFlightId() { faFlightID = "XYZ1234-1530000000-airline-0500" };
+            });
+
+            mock.Setup(x => x.GetFlightInfoEx(It.IsAny<HttpExecuteArg>()))
+                .Returns(() => new FlightInfoEx[] { new FlightInfoEx() { aircrafttype = "B739", faFlightID = "XYZ1234-1530000000-airline-0500" } });
+
+            var context = new RunContext(code, ExecuteFlags.Run, new EmptyHttpExecutor(), mock.Object);
+            var result = context.Run();
         }
     }
 }

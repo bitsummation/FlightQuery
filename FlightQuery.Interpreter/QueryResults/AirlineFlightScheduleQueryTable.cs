@@ -39,6 +39,7 @@ namespace FlightQuery.Interpreter.QueryResults
                     var flightno = match.Groups[2].Value;
                     QueryArgs.Add(new QueryArgs { Variable = "airline", PropertyValue = new PropertyValue(airline) });
                     QueryArgs.Add(new QueryArgs { Variable = "flightno", PropertyValue = new PropertyValue(flightno) });
+                    QueryArgs.Remove(ident);
                 }
             }
 

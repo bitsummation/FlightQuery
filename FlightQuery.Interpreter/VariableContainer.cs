@@ -19,6 +19,12 @@ namespace FlightQuery.Interpreter
             _hash[args.Variable.ToLower()] = args;
         }
 
+        public void Remove(TArgs args)
+        {
+            _properties.Remove(args);
+            _hash.Remove(args.Variable);
+        }
+
         public bool ContainsVariable(string name)
         {
             return _hash.ContainsKey(name.ToLower());
