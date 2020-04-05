@@ -33,6 +33,7 @@ obj/
 [Bb]in
 [Bb]in/[Dd]ebug*/
 [Rr]elease*/
+[Oo]ut
 TestResults*/
 .vs/
 Build\Artifact*/
