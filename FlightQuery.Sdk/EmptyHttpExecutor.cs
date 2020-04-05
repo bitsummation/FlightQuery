@@ -5,19 +5,19 @@ namespace FlightQuery.Sdk
 {
     public class EmptyHttpExecutor : IHttpExecutor
     {
-        public IEnumerable<AirlineFlightSchedule> AirlineFlightSchedule(HttpExecuteArg args)
+        public ApiExecuteResult<IEnumerable<AirlineFlightSchedule>> AirlineFlightSchedule(HttpExecuteArg args)
         {
-            return new AirlineFlightSchedule[]{ new AirlineFlightSchedule()};
+            return new ApiExecuteResult<IEnumerable<AirlineFlightSchedule>>(new AirlineFlightSchedule[] { new AirlineFlightSchedule() });
         }
 
-        public GetFlightId GetFlightID(HttpExecuteArg args)
+        public ApiExecuteResult<GetFlightId> GetFlightID(HttpExecuteArg args)
         {
-            return new GetFlightId();
+            return new ApiExecuteResult<GetFlightId>(new GetFlightId());
         }
 
-        public IEnumerable<FlightInfoEx> GetFlightInfoEx(HttpExecuteArg args)
+        public ApiExecuteResult<IEnumerable<FlightInfoEx>> GetFlightInfoEx(HttpExecuteArg args)
         {
-            return new FlightInfoEx[] { new FlightInfoEx() };
+            return new ApiExecuteResult<IEnumerable<FlightInfoEx>>(new FlightInfoEx[] { new FlightInfoEx() });
         }
     }
 }

@@ -14,7 +14,7 @@ namespace FlightQuery.Tests
 select asdf, 
 ";
 
-            var context = new RunContext(code, ExecuteFlags.Semantic);
+            var context = new RunContext(code, string.Empty, ExecuteFlags.Semantic);
             context.Run();
 
             Assert.IsTrue(context.Errors.Count == 1);
@@ -27,7 +27,7 @@ select asdf,
 select * asdfsad
 ";
 
-            var context = new RunContext(code, ExecuteFlags.Semantic);
+            var context = new RunContext(code, string.Empty, ExecuteFlags.Semantic);
             context.Run();
 
             Assert.IsTrue(context.Errors.Count == 1);

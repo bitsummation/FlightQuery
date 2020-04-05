@@ -3,6 +3,7 @@ using FlightQuery.Sdk;
 using FlightQuery.Sdk.Model.V2;
 using Moq;
 using NUnit.Framework;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -20,7 +21,7 @@ select faFlightID
 from GetFlightId
 where ident = 'DAL503'
 ";
-            var context = new RunContext(code, ExecuteFlags.Semantic);
+            var context = new RunContext(code, string.Empty, ExecuteFlags.Semantic);
             context.Run();
 
             Assert.IsTrue(context.Errors.Count == 1);
@@ -46,9 +47,9 @@ where ident = 'DAL503' and departuretime = '2020-3-7 9:15'
 
                 var end = args.Variables.Where(x => x.Variable == "departuretime").SingleOrDefault();
                 Assert.IsTrue(end.Value == "1583572500");
-            }).Returns(() => new GetFlightId());
+            }).Returns(() => new ApiExecuteResult<GetFlightId>(new GetFlightId()));
 
-            var context = new RunContext(code, ExecuteFlags.Semantic, mock.Object);
+            var context = new RunContext(code, string.Empty, ExecuteFlags.Semantic, mock.Object);
             context.Run();
 
             Assert.IsTrue(context.Errors.Count == 0);
@@ -64,9 +65,9 @@ from GetFlightId
 where ident = 'DAL503' and departuretime = '2020-3-7 9:15'
 ";
             var mock = new Mock<IHttpExecutor>();
-            mock.Setup(x => x.GetFlightID(It.IsAny<HttpExecuteArg>())).Returns(() => new GetFlightId() {faFlightID = "XYZ1234-1530000000-airline-0500" });
+            mock.Setup(x => x.GetFlightID(It.IsAny<HttpExecuteArg>())).Returns(() => new ApiExecuteResult<GetFlightId>(new GetFlightId() {faFlightID = "XYZ1234-1530000000-airline-0500" }));
 
-            var context = new RunContext(code, ExecuteFlags.Run, new EmptyHttpExecutor(), mock.Object);
+            var context = new RunContext(code, string.Empty, ExecuteFlags.Run, new EmptyHttpExecutor(), mock.Object);
             var result = context.Run();
 
             Assert.IsTrue(context.Errors.Count == 0);
@@ -97,14 +98,14 @@ where a.departuretime < '2020-3-7 9:15' and a.origin = 'katl'
                 {
                     source = reader.ReadToEnd();
                 }
-                return Deserialize.DeserializeObject<AirlineFlightSchedule[]>(source);
+                return new ApiExecuteResult<IEnumerable<AirlineFlightSchedule>>(Deserialize.DeserializeObject<AirlineFlightSchedule[]>(source));
             });
             mock.Setup(x => x.GetFlightID(It.IsAny<HttpExecuteArg>())).Returns<HttpExecuteArg>((args) =>
             {
-                return new GetFlightId() { faFlightID = "XYZ1234-1530000000-airline-0500" };
+                return new ApiExecuteResult<GetFlightId>(new GetFlightId() { faFlightID = "XYZ1234-1530000000-airline-0500" });
             });
             
-            var context = new RunContext(code, ExecuteFlags.Run, new EmptyHttpExecutor(), mock.Object);
+            var context = new RunContext(code, string.Empty, ExecuteFlags.Run, new EmptyHttpExecutor(), mock.Object);
             var result = context.Run();
 
             Assert.IsTrue(context.Errors.Count == 0);

@@ -1,5 +1,6 @@
 ﻿using FlightQuery.Interpreter.Descriptors.Model;
 using FlightQuery.Interpreter.Http;
+using FlightQuery.Sdk;
 using FlightQuery.Sdk.Semantic;
 using System.Collections.Generic;
 
@@ -9,10 +10,10 @@ namespace FlightQuery.Interpreter.QueryResults
     {
         protected TableBase()
         {
-            Errors = new List<SemanticError>();
+            Errors = new List<ErrorBase>();
         }
 
-        public IList<SemanticError> Errors { get; private set; }
+        public IList<ErrorBase> Errors { get; private set; }
 
         public TableDescriptor Descriptor { get; set; }
 

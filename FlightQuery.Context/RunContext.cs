@@ -12,28 +12,31 @@ namespace FlightQuery.Context
         private IHttpExecutor _httpExecutor;
         private ExecuteFlags _flags;
         public ErrorsCollection Errors { get; private set; }
+        public string Authorization { get; private set; }
 
-        public RunContext(string source)
-            : this(source, ExecuteFlags.Run)
+        public RunContext(string source, string authorization)
+            : this(source, authorization, ExecuteFlags.Run)
         {
         }
 
-        public RunContext(string source, ExecuteFlags flags)
-            : this(source, flags, new EmptyHttpExecutor())
+        public RunContext(string source, string authorization, ExecuteFlags flags)
+            : this(source, authorization, flags, new EmptyHttpExecutor())
         {
         }
 
-        public RunContext(string source, ExecuteFlags flags, IHttpExecutor semanticHttpExecutor)
-            : this(source, flags, semanticHttpExecutor, null)
+        public RunContext(string source, string authorization, ExecuteFlags flags, IHttpExecutor semanticHttpExecutor)
+            : this(source, authorization, flags, semanticHttpExecutor, null)
         {
         }
 
-        public RunContext(string source, ExecuteFlags flags, IHttpExecutor semanticHttpExecutor, IHttpExecutor httpExecutor)
+        public RunContext(string source, string authorization, ExecuteFlags flags, IHttpExecutor semanticHttpExecutor, IHttpExecutor httpExecutor)
         {
             _source = source;
             _flags = flags;
             _semanticHttpExecutor = semanticHttpExecutor;
             _httpExecutor = httpExecutor;
+            Authorization = authorization;
+
             Errors = new ErrorsCollection();
         }
 
@@ -50,7 +53,7 @@ namespace FlightQuery.Context
                 //semantic check
                 if ((_flags & ExecuteFlags.Semantic) == ExecuteFlags.Semantic)
                 {
-                    var inter = new Interpreter.Execution.Interpreter(ast, _semanticHttpExecutor);
+                    var inter = new Interpreter.Execution.Interpreter(ast, Authorization, _semanticHttpExecutor);
                     inter.Execute();
                     if (inter.Errors.Count > 0)
                         Errors = inter.Errors;
@@ -58,8 +61,9 @@ namespace FlightQuery.Context
 
                 if (Errors.Count == 0 && ((_flags & ExecuteFlags.Execute) == ExecuteFlags.Execute)) // we run
                 {
-                    var inter = new Interpreter.Execution.Interpreter(ast, _httpExecutor);
+                    var inter = new Interpreter.Execution.Interpreter(ast, Authorization, _httpExecutor);
                     table = inter.Execute();
+                    Errors = inter.Errors;
                 }
             }
 

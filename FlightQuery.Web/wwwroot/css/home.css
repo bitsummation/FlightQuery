@@ -130,3 +130,77 @@ table {
 .odd {
     background-color: #D8D8D8;
 }
+
+.green-form {
+    background: url(../img/sitenav-bg.png) center bottom repeat-x #339933;
+}
+
+.green-form .input-text, .green-form .textarea {
+    border-top: #003300 solid 1px;
+    border-left: #003300 solid 1px;
+    border-right: #006600 solid 1px;
+    border-bottom: #006600 solid 1px;
+}
+
+.green-form {
+    padding: 5px;
+}
+
+.input-text, .textarea {
+    padding: 5px;
+}
+
+label {
+    line-height: 29px;
+}
+
+.green-form label {
+    display: inline-block;
+    width: 100px;
+}
+
+.green-form h3 {
+    padding-bottom: 0;
+}
+
+.green-form fieldset {
+    padding: 5px 0;
+}
+
+.green-form h3, .green-form .checkbox-radio, .green-form .tags {
+    padding-left: 10px;
+}
+
+div.help {
+    font-size: 17px;
+    padding-left: 12px;
+    padding-bottom: 10px;
+}
+
+
+fieldset, h3{
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    font-size: 100%;
+    vertical-align: baseline;
+    background: transparent;
+}
+
+h3 {
+    font-size: 24px;
+    line-height: 28px;
+    padding-bottom: 8px;
+}
+
+.green-form  .validation-error {
+    border-top: #FF0000 solid 2px;
+    border-left: #FF0000 solid 2px;
+    border-right: #FF0000 solid 2px;
+    border-bottom: #FF0000 solid 2px;
+}
+
+
+
+

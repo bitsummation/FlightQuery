@@ -3,6 +3,7 @@ using FlightQuery.Sdk;
 using FlightQuery.Sdk.Model.V2;
 using Moq;
 using NUnit.Framework;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -21,7 +22,7 @@ from AirlineFlightSchedules
 where origin = 'katl'
 ";
 
-            var context = new RunContext(code, ExecuteFlags.Semantic);
+            var context = new RunContext(code, string.Empty, ExecuteFlags.Semantic);
             context.Run();
 
             Assert.IsTrue(context.Errors.Count == 1);
@@ -47,10 +48,10 @@ where departuretime > '2020-1-21 9:15' and origin = 'KATL' and destination = 'KE
                 {
                     source = reader.ReadToEnd();
                 }
-                return Deserialize.DeserializeObject<AirlineFlightSchedule[]>(source);
+                return new ApiExecuteResult<IEnumerable<AirlineFlightSchedule>>(Deserialize.DeserializeObject<AirlineFlightSchedule[]>(source));
             });
 
-            var context = new RunContext(code, ExecuteFlags.Run, new EmptyHttpExecutor(), mock.Object);
+            var context = new RunContext(code, string.Empty, ExecuteFlags.Run, new EmptyHttpExecutor(), mock.Object);
             var result = context.Run();
             Assert.IsTrue(result.Columns.Length == 4);
             Assert.IsTrue(result.Columns[0] == "aircrafttype");
@@ -93,9 +94,9 @@ where '2020-3-7 9:15' > a.departuretime and origin = 'kaus' and destination = 'k
 
                 Assert.IsTrue(args.Variables.Where(x => x.Variable == "flightno").Count() == 1);
                 Assert.IsTrue(args.Variables.Where(x => x.Variable == "flightno").Select(x => x.Value).Single() == "6879");
-            });
+            }).Returns(new ApiExecuteResult<IEnumerable<AirlineFlightSchedule>>(new AirlineFlightSchedule[] {new AirlineFlightSchedule() }));
 
-            var context = new RunContext(code, ExecuteFlags.Semantic, mock.Object);
+            var context = new RunContext(code, string.Empty, ExecuteFlags.Semantic, mock.Object);
             context.Run();
 
             mock.Verify(v => v.AirlineFlightSchedule(It.IsAny<HttpExecuteArg>()), Times.Once());
@@ -119,9 +120,9 @@ where '2020-3-7 9:15' > departuretime
 
                 var end = args.Variables.Where(x => x.Variable == "endDate").SingleOrDefault();
                 Assert.IsTrue(end.Value == "1583572500");
-            });
+            }).Returns(new ApiExecuteResult<IEnumerable<AirlineFlightSchedule>>(new AirlineFlightSchedule[] { new AirlineFlightSchedule() }));
 
-            var context = new RunContext(code, ExecuteFlags.Semantic, mock.Object);
+            var context = new RunContext(code, string.Empty, ExecuteFlags.Semantic, mock.Object);
             context.Run();
 
             mock.Verify(v => v.AirlineFlightSchedule(It.IsAny<HttpExecuteArg>()), Times.Once());
@@ -146,9 +147,9 @@ where departuretime < '2020-3-7 9:15'
 
                 var end = args.Variables.Where(x => x.Variable == "endDate").SingleOrDefault();
                 Assert.IsTrue(end.Value == "1583572500");
-            });
+            }).Returns(new ApiExecuteResult<IEnumerable<AirlineFlightSchedule>>(new AirlineFlightSchedule[] { new AirlineFlightSchedule() }));
 
-            var context = new RunContext(code, ExecuteFlags.Semantic, mock.Object);
+            var context = new RunContext(code, string.Empty, ExecuteFlags.Semantic, mock.Object);
             context.Run();
 
             mock.Verify(v => v.AirlineFlightSchedule(It.IsAny<HttpExecuteArg>()), Times.Once());
@@ -174,9 +175,9 @@ where '2020-3-7 9:15' < departuretime
 
                 var end = args.Variables.Where(x => x.Variable == "endDate").SingleOrDefault();
                 Assert.IsTrue(end.Value == "2147483646");
-            });
+            }).Returns(new ApiExecuteResult<IEnumerable<AirlineFlightSchedule>>(new AirlineFlightSchedule[] { new AirlineFlightSchedule() }));
 
-            var context = new RunContext(code, ExecuteFlags.Semantic, mock.Object);
+            var context = new RunContext(code, string.Empty, ExecuteFlags.Semantic, mock.Object);
             context.Run();
 
             mock.Verify(v => v.AirlineFlightSchedule(It.IsAny<HttpExecuteArg>()), Times.Once());
@@ -201,9 +202,9 @@ where departuretime > '2020-3-7 9:15'
 
                 var end  = args.Variables.Where(x => x.Variable == "endDate").SingleOrDefault();
                 Assert.IsTrue(end.Value == "2147483646");
-            });
+            }).Returns(new ApiExecuteResult<IEnumerable<AirlineFlightSchedule>>(new AirlineFlightSchedule[] { new AirlineFlightSchedule() }));
 
-            var context = new RunContext(code, ExecuteFlags.Semantic, mock.Object);
+            var context = new RunContext(code, string.Empty, ExecuteFlags.Semantic, mock.Object);
             context.Run();
 
             mock.Verify(v => v.AirlineFlightSchedule(It.IsAny<HttpExecuteArg>()), Times.Once());

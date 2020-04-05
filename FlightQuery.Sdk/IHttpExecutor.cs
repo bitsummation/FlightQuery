@@ -5,8 +5,8 @@ namespace FlightQuery.Sdk
 {
     public interface IHttpExecutor
     {
-        IEnumerable<AirlineFlightSchedule> AirlineFlightSchedule(HttpExecuteArg args);
-        GetFlightId GetFlightID(HttpExecuteArg args);
-        IEnumerable<FlightInfoEx> GetFlightInfoEx(HttpExecuteArg args);
+        ApiExecuteResult<IEnumerable<AirlineFlightSchedule>> AirlineFlightSchedule(HttpExecuteArg args);
+        ApiExecuteResult<GetFlightId> GetFlightID(HttpExecuteArg args);
+        ApiExecuteResult<IEnumerable<FlightInfoEx>> GetFlightInfoEx(HttpExecuteArg args);
     }
 }

@@ -11,15 +11,7 @@ var home = {
         gir: "Query().Filter('Green.GIR').PerPlayer().Count().Descending().Print()",
         girBirdies: "Query().Filter('Green.GIR.Holed').PerPlayer().Count().Descending().Print()",
         saves: "Query().Filter('Green.Holed').Not('.GIR').PreviousShot().Not('Green').Score('Par').PerPlayer().Count().Descending().Print()",
-        missedSave: "Query().Filter('Green').Not('.GIR').PreviousShot().Not('Green').Score('Bogey').PerPlayer().Count().Descending().Print()",
-        averagePutsForBirdie: "Query().Filter('Green.GIR').PerPlayer().Values('ToPin:Feet').Average().Print()",
-        birdiePutsInsideTenFeet: "var range = {min:0, max:10};\r\n\r\nQuery().Filter('Green.GIR').PerPlayer().Values('ToPin:Feet').Between(range).Count().Descending().Print()",
-        birdiePutsMadeInsideTenFeet: "var range = {min:0, max:10};\r\n\r\nQuery().Filter('Green.GIR.Holed').PerPlayer().Values('ToPin:Feet').Between(range).Count().Descending().Print()",
-        philMadeBirdie: "Query().Filter('Green.GIR.Holed').PerPlayer('Phil').Values('ToPin:Feet').Descending('ToPin').Print()",
-        kevinNaMissedGreenSavesFrom: "Query().Filter('Green.Holed').Not('.GIR').PreviousShot().Not('Green').Score('Par').PerPlayer('Kevin Na').Values('ToPin:Yards, Location').Descending('ToPin').Print();",
-        missedPuttsFieldSevenToEight: "var range = {min:7, max:8};\r\n\r\nQuery().Filter('Green.Miss').PerTournment().Values('ToPin:Feet').Between(range).Count().Print();",
-        bunkerSavesFieldDistanceFrom: "Query().Filter('Green.Holed').Not('.GIR').PreviousShot().Filter('Bunker').Score('Par').PerPlayer().Values('ToPin:Yards, Location').Descending('ToPin').Print();",
-        offGreenHoleOuts: "Query().Filter('.Holed').Not('Green').PerPlayer().Count().Descending().Print()"
+        missedSave: "Query().Filter('Green').Not('.GIR').PreviousShot().Not('Green').Score('Bogey').PerPlayer().Count().Descending().Print()"
     },
 
     animateSubmit: function () {
@@ -72,6 +64,14 @@ var home = {
         return $("#code").val();
     },
 
+    getBasicHeader: function () {
+        var userName = $("#username").val();
+        var pass = $("#pass").val();
+        var token = userName + ":" + pass;
+        var hash = btoa(token);
+        return "Basic " + hash;
+    },
+
     renderQuery: function () {
         this.preLoad();
         var data = this.getQuery();
@@ -79,6 +79,9 @@ var home = {
 
         $.ajax({
             type: "Post",
+            beforeSend: function (request) {
+                request.setRequestHeader("Authorization", that.getBasicHeader());
+            },
             url: "query",
             data: data,
             contentType: 'text/plain',
@@ -86,7 +89,7 @@ var home = {
                 that.loadResults(data);
             },
             error: function () {
-                that.loadResults("<div class='error'>Unexpected error occured</div>");
+                that.loadResults({ errors: [{ message: 'Bad error. Interpreter crashy' }] });
             }
         });
     },

@@ -18,7 +18,9 @@ namespace FlightQuery.Interpreter.QueryResults
 
         protected override ExecutedTable ExecuteCore(HttpExecuteArg args)
         {
-            var dto = HttpExecutor.GetFlightID(args);
+            var result = HttpExecutor.GetFlightID(args);
+            if (result.Error != null)
+                Errors.Add(result.Error);
 
             long departerTimeValue = 0;
             if (QueryArgs.ContainsVariable("departuretime"))
@@ -28,6 +30,7 @@ namespace FlightQuery.Interpreter.QueryResults
             if (QueryArgs.ContainsVariable("ident"))
                 identValue = (string)QueryArgs["ident"].PropertyValue.Value;
 
+            var dto = result.Data;
             dto.departuretime = (DateTime)Conversion.ConvertLongToDateTime(departerTimeValue);
             dto.ident = identValue;
 

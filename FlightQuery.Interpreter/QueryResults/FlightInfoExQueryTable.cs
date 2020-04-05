@@ -33,14 +33,20 @@ namespace FlightQuery.Interpreter.QueryResults
 
         protected override ExecutedTable ExecuteCore(HttpExecuteArg args)
         {
-            var dto = HttpExecutor.GetFlightInfoEx(args);
+            var result = HttpExecutor.GetFlightInfoEx(args);
+            if (result.Error != null)
+                Errors.Add(result.Error);
+
             TableDescriptor tableDescriptor = PropertyDescriptor.GenerateRunDescriptor(typeof(FlightInfoEx));
 
             var rows = new List<Row>();
-            foreach (var d in dto)
+            if (result.Data != null)
             {
-                var row = new Row() { Values = ToValues(d, tableDescriptor) };
-                rows.Add(row);
+                foreach (var d in result.Data)
+                {
+                    var row = new Row() { Values = ToValues(d, tableDescriptor) };
+                    rows.Add(row);
+                }
             }
 
             return new ExecutedTable() { Rows = rows.ToArray(), Descriptor = tableDescriptor };

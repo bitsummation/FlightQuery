@@ -15,7 +15,7 @@ from AirlineFlightSchedules
 where blah < 55
 ";
 
-            var context = new RunContext(code);
+            var context = new RunContext(code, string.Empty);
             context.Run();
 
             Assert.IsTrue(context.Errors.Count == 2);
@@ -33,7 +33,7 @@ join GetFlightId f on ident = a.ident and f.departureTime = a.departureTime
 where a.departuretime < '2020-3-7 9:15' and a.origin = 'katl'
 ";
 
-            var context = new RunContext(code);
+            var context = new RunContext(code, string.Empty);
             context.Run();
 
             Assert.IsTrue(context.Errors.Count == 1);

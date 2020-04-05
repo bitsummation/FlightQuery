@@ -53,7 +53,7 @@
             <div>
                 @using (Html.BeginForm())
                 {
-                    @Html.TextArea("code")
+                    @Html.TextArea("code", null, new { @spellcheck = "false"})
                     <div>
                         <input type="submit" class="button" value="Run Query" />
                     </div>
@@ -63,13 +63,19 @@
             <div id="loading" class="none">
                 <img src="@Url.Content("~/img/ajax-loader.gif")" alt="loading" />
             </div>
-            <div id="results">
-
-            </div>
         </div>
         <div id="sidebar">
-            <div class="help-title">Help</div>
-
+            <div class="green-form">
+                <div class="help">FlightAware API credentials</div>
+                <fieldset>
+                    <label>Username:</label>
+                    <input class="input-text" title="Username" id="username" name="username" type="text" value="">
+                </fieldset>
+                <fieldset>
+                    <label>Password:</label>
+                    <input class="input-text" title="Password" id="pass" name="pass" type="password" value="">
+                </fieldset>
+            </div>
             <div class="title">Examples</div>
             <div id="examples">
                 <a href="" query="strokes">Strokes</a>
@@ -77,15 +83,10 @@
                 <a href="" query="girBirdies">One putt birdies</a>
                 <a href="" query="saves">Missed green par (Save)</a>
                 <a href="" query="missedSave">Missed green bogeys</a>
-                <a href="" query="averagePutsForBirdie">Averages distance putts for birde</a>
-                <a href="" query="birdiePutsInsideTenFeet">Birdie putt attempts inside 10 feet</a>
-                <a href="" query="birdiePutsMadeInsideTenFeet">Birdie putts holed inside 10 feet</a>
-                <a href="" query="missedPuttsFieldSevenToEight">Missed puts 7-8 feet by field</a>
-                <a href="" query="bunkerSavesFieldDistanceFrom">Bunker saves distance to pin per player</a>
-                <a href="" query="offGreenHoleOuts">Off green chip ins</a>
-                <a href="" query="philMadeBirdie">Phil Mickelson holed birdie distances in feet</a>
-                <a href="" query="kevinNaMissedGreenSavesFrom">Kevin Na par saves from in yards</a>
             </div>
+        </div>
+        <div id="results" style="float:left; width:880px">
+
         </div>
     </div>
 
