@@ -12,6 +12,22 @@ namespace FlightQuery.Tests
     public class AirportInfoTests
     {
         [Test]
+        public void TestRequiredAirportCode()
+        {
+            string code = @"
+select location
+from AirportInfo 
+where location = 'kaus'
+";
+
+            var context = new RunContext(code, string.Empty, ExecuteFlags.Semantic);
+            context.Run();
+
+            Assert.IsTrue(context.Errors.Count == 1);
+            Assert.IsTrue(context.Errors[0].Message == "airportCode is required");
+        }
+
+        [Test]
         public void TestExecute()
         {
             string code = @"

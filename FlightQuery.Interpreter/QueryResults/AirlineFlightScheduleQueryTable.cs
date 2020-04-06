@@ -24,6 +24,16 @@ namespace FlightQuery.Interpreter.QueryResults
         {
             base.ValidateArgs();
            
+            if(QueryArgs.ContainsVariable("origin"))
+            {
+                QueryArgs["origin"].PropertyValue = new PropertyValue(((string)QueryArgs["origin"].PropertyValue.Value).ToUpper());
+            }
+
+            if (QueryArgs.ContainsVariable("destination"))
+            {
+                QueryArgs["destination"].PropertyValue = new PropertyValue(((string)QueryArgs["destination"].PropertyValue.Value).ToUpper());
+            }
+
             var departTimeCount = QueryArgs.Args.Where(x => x.Variable == "departuretime").Count();
             if (departTimeCount > 2)
                 throw new InvalidOperationException("Can only have 2 departureTime");
@@ -48,7 +58,9 @@ namespace FlightQuery.Interpreter.QueryResults
                 if ( (param is QueryGreaterThan && param.LeftProperty) || (param is QueryLessThan && !param.LeftProperty))
                 {
                     param.Variable = "startDate";
-                    QueryArgs.Add(new QueryArgs { Variable = "endDate", PropertyValue = new PropertyValue(Conversion.MaxUnixDate) });
+                    var startDate = (DateTime)Conversion.ConvertLongToDateTime(param.PropertyValue.Value);
+                    var endDate = startDate.AddDays(7); //no end date we just assume a week forward
+                    QueryArgs.Add(new QueryArgs { Variable = "endDate", PropertyValue = new PropertyValue(Conversion.ConvertDateTimeToLong(endDate)) });
                 }
                 else if( (param is QueryLessThan && param.LeftProperty) || (param is QueryGreaterThan && !param.LeftProperty) )
                 {

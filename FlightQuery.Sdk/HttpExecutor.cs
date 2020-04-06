@@ -18,9 +18,20 @@ namespace FlightQuery.Sdk
         public ApiExecuteResult<IEnumerable<AirlineFlightSchedule>> AirlineFlightSchedule(HttpExecuteArg args)
         {
             var result = _raw.AirlineFlightSchedule(args);
-            return new ApiExecuteResult<IEnumerable<AirlineFlightSchedule>>(
-                Deserialize.DeserializeObject<AirlineFlightSchedule[]>(result.Result),
-                result.Error);
+            if (result == null || result.Error != null)
+            {
+                return new ApiExecuteResult<IEnumerable<AirlineFlightSchedule>>(_empty.AirlineFlightSchedule(args).Data, result != null ? result.Error : null);
+            }
+            else
+            {
+                dynamic dynamicResult = JsonConvert.DeserializeObject(result.Result, null, new UnixDateTimeConverter());
+                if (dynamicResult.error != null)
+                {
+                    return new ApiExecuteResult<IEnumerable<AirlineFlightSchedule>>(_empty.AirlineFlightSchedule(args).Data, new ApiExecuteError((string)dynamicResult.error));
+                }
+                var raw = JsonConvert.SerializeObject(dynamicResult.AirlineFlightSchedulesResult.data);
+                return new ApiExecuteResult<IEnumerable<AirlineFlightSchedule>>(Deserialize.DeserializeObject<AirlineFlightSchedule[]>(raw), result.Error);
+            }
         }
 
         public ApiExecuteResult<AirportInfo> AirportInfo(HttpExecuteArg args)

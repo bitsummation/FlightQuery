@@ -3,7 +3,6 @@ var home = {
     init: function () {
         this.initSubmit();
         this.initExamples();
-        this.initKeyStrokes();
     },
 
     exampleQueries: {
@@ -32,13 +31,6 @@ var home = {
         var query = this.exampleQueries[attr];
         $("#code").val(query);
         this.renderQuery();
-    },
-
-    initKeyStrokes: function () {
-        var that = this;
-        $("#code").keyup(function () {
-            $("#results").empty();
-        });
     },
 
     initExamples: function () {
