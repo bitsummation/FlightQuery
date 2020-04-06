@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <None Remove="AirlineFlightSchedule.json" />
+    <None Remove="AirportInfo.json" />
   </ItemGroup>
 
   <ItemGroup>
@@ -24,6 +25,10 @@
 
   <ItemGroup>
     <ProjectReference Include="..\FlightQuery.Context\FlightQuery.Context.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="AirportInfo.json" />
   </ItemGroup>
 
 </Project>

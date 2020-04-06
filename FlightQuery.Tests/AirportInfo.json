@@ -1,0 +1,9 @@
+{
+  "AirportInfoResult": {
+    "name": "Austin-Bergstrom Intl",
+    "location": "Austin, TX",
+    "longitude": -97.6698761,
+    "latitude": 30.1945272,
+    "timezone": ":America/Chicago"
+  }
+}

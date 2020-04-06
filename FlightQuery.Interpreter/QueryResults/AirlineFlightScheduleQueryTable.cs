@@ -1,5 +1,4 @@
-﻿using FlightQuery.Interpreter.Common;
-using FlightQuery.Interpreter.Descriptors.Model;
+﻿using FlightQuery.Interpreter.Descriptors.Model;
 using FlightQuery.Interpreter.Http;
 using FlightQuery.Sdk;
 using FlightQuery.Sdk.Model.V2;
@@ -14,7 +13,7 @@ namespace FlightQuery.Interpreter.QueryResults
     {
         public AirlineFlightScheduleQueryTable(IHttpExecutor httpExecutor) : base(httpExecutor) { }
 
-        protected override string TableName { get { return "AirlineFlightSchedule"; } }
+        protected override string TableName { get { return "AirlineFlightSchedules"; } }
 
         public override TableBase Create()
         {

@@ -7,6 +7,7 @@ namespace FlightQuery.Sdk
     {
         ApiExecuteResult<IEnumerable<AirlineFlightSchedule>> AirlineFlightSchedule(HttpExecuteArg args);
         ApiExecuteResult<GetFlightId> GetFlightID(HttpExecuteArg args);
+        ApiExecuteResult<AirportInfo> AirportInfo(HttpExecuteArg args);
         ApiExecuteResult<IEnumerable<FlightInfoEx>> GetFlightInfoEx(HttpExecuteArg args);
     }
 }

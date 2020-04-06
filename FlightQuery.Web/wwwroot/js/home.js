@@ -7,7 +7,7 @@ var home = {
     },
 
     exampleQueries: {
-        strokes: "Query().Filter('Stroke').PerPlayer().Count().Print()",
+        strokes: "select location, name\nfrom AirportInfo\nwhere airportCode = 'kaus'",
         gir: "Query().Filter('Green.GIR').PerPlayer().Count().Descending().Print()",
         girBirdies: "Query().Filter('Green.GIR.Holed').PerPlayer().Count().Descending().Print()",
         saves: "Query().Filter('Green.Holed').Not('.GIR').PreviousShot().Not('Green').Score('Par').PerPlayer().Count().Descending().Print()",

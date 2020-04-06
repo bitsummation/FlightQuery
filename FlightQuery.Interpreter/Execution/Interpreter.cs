@@ -18,14 +18,14 @@ namespace FlightQuery.Interpreter.Execution
 
         public ErrorsCollection Errors { get; private set; }
 
-        public Interpreter(Element root, string authorization) : this(root, authorization, new HttpExecutor(authorization)) { } 
+        public Interpreter(Element root, string authorization) : this(root, authorization, new HttpExecutor(new HttpExecutorRaw(authorization))) { } 
 
         public Interpreter(Element root, string authorization, IHttpExecutor httpExecutor)
         {
             _program = root;
             _scope = new Scope();
             _visitStack = new Stack<QueryPhaseArgs>();
-            _httpExecutor = httpExecutor ?? new HttpExecutor(authorization);
+            _httpExecutor = httpExecutor ?? new HttpExecutor(new HttpExecutorRaw(authorization));
 
             Errors = new ErrorsCollection();
         }
