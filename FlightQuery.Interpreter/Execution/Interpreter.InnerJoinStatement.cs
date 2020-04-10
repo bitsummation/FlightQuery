@@ -1,4 +1,5 @@
 ﻿using FlightQuery.Interpreter.QueryResults;
+using FlightQuery.Sdk.Semantic;
 using FlightQuery.Sdk.SqlAst;
 using System;
 using System.Collections.Generic;
@@ -22,7 +23,10 @@ namespace FlightQuery.Interpreter.Execution
                 throw new InvalidOperationException("");
 
             if (!_scope.IsTableDefinedAnyLevel(tableName)) //we don't know this table at any level
-                throw new InvalidOperationException("");
+            {
+                Errors.Add(new TableNotDefined(tableName, statement.ParseInfo));
+                return;
+            }
 
             if (_scope.IsTableDefineSameLevel(tableVariable)) //if variable exists we have conflict
                 throw new InvalidOperationException("");

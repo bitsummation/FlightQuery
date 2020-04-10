@@ -16,32 +16,39 @@ namespace FlightQuery.Interpreter.Execution
                 statement.From.Accept(this);
 
                 var executedTables = _scope.FetchAllExecutedTablesSameLevel();
-                var rowCount = executedTables.First().Rows.Length;
-                for (int row = 0; row < rowCount; row++)
+                if (executedTables.Length > 0)
                 {
-                    Array.ForEach(executedTables, (x) => x.RowIndex = row);
-                    var arg = new QueryPhaseArgs();
-                    VisitChild(statement.Where, arg);
-                    if(!arg.RowResult)
+                    var rowCount = executedTables.First().Rows.Length;
+                    for (int row = 0; row < rowCount; row++)
                     {
-                        Array.ForEach(executedTables, (x) => x.Rows[x.RowIndex].Match = false);
+                        Array.ForEach(executedTables, (x) => x.RowIndex = row);
+                        var arg = new QueryPhaseArgs();
+                        VisitChild(statement.Where, arg);
+                        if (!arg.RowResult)
+                        {
+                            Array.ForEach(executedTables, (x) => x.Rows[x.RowIndex].Match = false);
+                        }
                     }
+
+                    //remove rows that didn't match through all executed tables
+                    executedTables = _scope.FetchAllExecutedTablesSameLevel();
+                    Array.ForEach(executedTables, (e) =>
+                    {
+                        var joinedRows = new List<Row>();
+                        Array.ForEach(e.Rows, r =>
+                        {
+                            if (r.Match)
+                                joinedRows.Add(r);
+                        });
+
+                        e.Rows = joinedRows.ToArray();
+                    });
                 }
 
-                //remove rows that didn't match through all executed tables
-                executedTables = _scope.FetchAllExecutedTablesSameLevel();
-                Array.ForEach(executedTables, (e) =>
-                {
-                    var joinedRows = new List<Row>();
-                    Array.ForEach(e.Rows, r => {
-                        if (r.Match)
-                            joinedRows.Add(r);
-                    });
+                if(statement.Select != null)
+                    statement.Select.Accept(this);
 
-                    e.Rows = joinedRows.ToArray();
-                });
-
-                statement.Select.Accept(this);
+                ScopeModel = _scope.BuildScopeModel();
             }
         }
     }

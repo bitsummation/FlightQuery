@@ -99,7 +99,7 @@ where a.departuretime < '2020-3-7 9:15' and a.origin = 'katl'
                 {
                     source = reader.ReadToEnd();
                 }
-                return new ApiExecuteResult<IEnumerable<AirlineFlightSchedule>>(Deserialize.DeserializeObject<AirlineFlightSchedule[]>(source));
+                return new ApiExecuteResult<IEnumerable<AirlineFlightSchedule>>(Json.DeserializeObject<AirlineFlightSchedule[]>(source));
             });
             mock.Setup(x => x.GetFlightID(It.IsAny<HttpExecuteArg>())).Returns<HttpExecuteArg>((args) =>
             {

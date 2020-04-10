@@ -42,15 +42,6 @@ h2, h3 {
     background: none repeat scroll 0 0 #FFFFFF;
 }
 
-#discussion textarea {
-    background: url(http://i.imgur.com/2cOaJ.png);
-    background-attachment: local;
-    background-repeat: no-repeat;
-    padding-left: 35px;
-    padding-top: 10px;
-    border-color: #ccc;
-}
-
 .wrap {
     position: relative;
     margin: 0 auto;
@@ -83,7 +74,7 @@ h2, h3 {
 
 
 #code {
-    width: 500px;
+    width: 510px;
     height: 200px;
     border: 1px solid black;
 }
@@ -146,7 +137,7 @@ table {
     padding: 5px;
 }
 
-.input-text, .textarea {
+.input-text, div#code {
     padding: 5px;
 }
 

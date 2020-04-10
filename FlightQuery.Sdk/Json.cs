@@ -3,14 +3,21 @@ using System;
 
 namespace FlightQuery.Sdk
 {
-    public static class Deserialize
+    public static class Json
     {
+        public const string PrintDateTimeFormat = "yyyy-MM-dd HH:mm";
+
         public static TValue DeserializeObject<TValue>(string json)
         {
             return JsonConvert.DeserializeObject<TValue>(json, new UnixDateTimeConverter());
         }
 
-        private class UnixDateTimeConverter : JsonConverter
+        public static string SerializeObject(object val)
+        {
+            return JsonConvert.SerializeObject(val, new UnixDateTimeConverter());
+        }
+
+        public class UnixDateTimeConverter : JsonConverter
         {
             public override bool CanConvert(Type objectType)
             {
@@ -25,7 +32,8 @@ namespace FlightQuery.Sdk
 
             public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
             {
-                throw new NotImplementedException();
+                var val = (DateTime)value;
+                writer.WriteValue(val.ToString(PrintDateTimeFormat));
             }
         }
     }

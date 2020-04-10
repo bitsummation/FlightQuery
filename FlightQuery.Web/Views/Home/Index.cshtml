@@ -49,16 +49,14 @@
     </div>
     <div id="discussion" class="xxw8 xcw8">
         <div style="width: 550px; float:left">
-            Enter Query:
-            <div>
-                @using (Html.BeginForm())
-                {
-                    @Html.TextArea("code", null, new { @spellcheck = "false"})
-                    <div>
-                        <input type="submit" class="button" value="Run Query" />
-                    </div>
-                }
+            <div>Enter Query:</div>
+           
+            <div id="code">
             </div>
+            <div>
+                <button type="button" class="button" id="run">Run Query</button>
+            </div>
+      
 
             <div id="loading" class="none">
                 <img src="@Url.Content("~/img/ajax-loader.gif")" alt="loading" />
@@ -78,14 +76,14 @@
             </div>
             <div class="title">Examples</div>
             <div id="examples">
-                <a href="" query="strokes">Strokes</a>
+                <a href="" query="airportInfo">Austin Airport Info</a>
                 <a href="" query="gir">Greens in regulation</a>
                 <a href="" query="girBirdies">One putt birdies</a>
                 <a href="" query="saves">Missed green par (Save)</a>
                 <a href="" query="missedSave">Missed green bogeys</a>
             </div>
         </div>
-        <div id="results" style="float:left; width:880px">
+        <div id="results" style="float:left; width:880px; overflow-x:auto">
 
         </div>
     </div>

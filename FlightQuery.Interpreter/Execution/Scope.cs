@@ -1,5 +1,5 @@
-﻿using FlightQuery.Interpreter.Descriptors.Model;
-using FlightQuery.Interpreter.QueryResults;
+﻿using FlightQuery.Interpreter.QueryResults;
+using FlightQuery.Sdk;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -89,6 +89,34 @@ namespace FlightQuery.Interpreter.Execution
         public void Dispose()
         {
             _variableScope.Pop();
+        }
+
+        public ScopeModel BuildScopeModel()
+        {
+            var scope = _variableScope.ToArray();
+            var keys = new List<string>();
+            var items = new Dictionary<string, IEnumerable<string>>();
+
+            foreach(var key in scope[0].Variables.Keys)
+            {
+                keys.Add(key);
+                items.Add(key, scope[0].Variables[key].Descriptor.Properties.Select(x => x.Name).ToArray());
+            }
+
+            var queryScope = new ScopeDescriptor() { Keys = keys, Items = items };
+
+            keys = new List<string>();
+            items = new Dictionary<string, IEnumerable<string>>();
+
+            foreach (var key in scope[1].Variables.Keys)
+            {
+                keys.Add(key);
+                items.Add(key, scope[1].Variables[key].Descriptor.Properties.Select(x => x.Name).ToArray());
+            }
+
+            var globalScope = new ScopeDescriptor() { Keys = keys, Items = items };
+
+            return new ScopeModel() {Global = globalScope, QueryScope = queryScope };
         }
     }
 }

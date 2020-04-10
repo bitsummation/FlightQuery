@@ -11,6 +11,9 @@ namespace FlightQuery.Context
         private IHttpExecutor _semanticHttpExecutor;
         private IHttpExecutor _httpExecutor;
         private ExecuteFlags _flags;
+
+        public ScopeModel ScopeModel { get; private set; }
+
         public ErrorsCollection Errors { get; private set; }
         public string Authorization { get; private set; }
 
@@ -44,7 +47,7 @@ namespace FlightQuery.Context
         {
             SelectTable table = null;
             
-            var parser = new LangParser(_source);
+            var parser = new LangParser(_source, (_flags & ExecuteFlags.SkipParseErrors) == ExecuteFlags.SkipParseErrors);
             var ast = parser.Parse();
             parser.Errors.ToList().ForEach(x => Errors.Add(x));
 
@@ -57,6 +60,8 @@ namespace FlightQuery.Context
                     inter.Execute();
                     if (inter.Errors.Count > 0)
                         Errors = inter.Errors;
+
+                    ScopeModel = inter.ScopeModel;
                 }
 
                 if (Errors.Count == 0 && ((_flags & ExecuteFlags.Execute) == ExecuteFlags.Execute)) // we run

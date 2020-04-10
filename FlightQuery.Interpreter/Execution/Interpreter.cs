@@ -17,6 +17,7 @@ namespace FlightQuery.Interpreter.Execution
         private IHttpExecutor _httpExecutor;
 
         public ErrorsCollection Errors { get; private set; }
+        public ScopeModel ScopeModel { get; set; }
 
         public Interpreter(Element root, string authorization) : this(root, authorization, new HttpExecutor(new HttpExecutorRaw(authorization))) { } 
 

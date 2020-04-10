@@ -12,7 +12,8 @@ queryStatement
 	;
 
 selectStatement
-	: SELECT (selectArg COMMA)* selectArg					# SelectStatementExp
+	: SELECT STAR											# SelectStarStatementExp
+	| SELECT (selectArg COMMA)* selectArg					# SelectStatementExp
 	;
 
 selectArg

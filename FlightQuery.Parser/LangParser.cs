@@ -10,11 +10,13 @@ namespace FlightQuery.Parser
     public class LangParser
     {
         private string _source;
+        private bool _skipParseErrors;
 
-        public LangParser(string source)
+        public LangParser(string source, bool skipParseErrors)
         {
             Errors = new ErrorsCollection();
             _source = source;
+            _skipParseErrors = skipParseErrors;
         }
 
         public ErrorsCollection Errors { get; private set; }
@@ -28,9 +30,14 @@ namespace FlightQuery.Parser
             parser.AddErrorListener(new ErrorListener(Errors));
 
             var cst = parser.program();
-            if(Errors.Count == 0)
-                return new AstBuilder().VisitProgram(cst);
+            if (Errors.Count == 0 || _skipParseErrors)
+            {
+                if(_skipParseErrors)
+                    Errors = new ErrorsCollection();
 
+                return new AstBuilder().VisitProgram(cst);
+            }
+            
             return null;
         }
 

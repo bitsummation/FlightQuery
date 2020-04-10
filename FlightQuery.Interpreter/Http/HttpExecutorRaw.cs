@@ -8,7 +8,7 @@ namespace FlightQuery.Interpreter.Http
 {
     public class HttpExecutorRaw : IHttpExecutorRaw
     {
-        private const string BaseUrl = "http://flightxml.flightaware.com/json/FlightXML2/";
+        private const string BaseUrl = "https://flightxml.flightaware.com/json/FlightXML2/";
 
         public HttpExecutorRaw(string authorization)
         {

@@ -29,8 +29,8 @@ namespace FlightQuery.Sdk
                 {
                     return new ApiExecuteResult<IEnumerable<AirlineFlightSchedule>>(_empty.AirlineFlightSchedule(args).Data, new ApiExecuteError((string)dynamicResult.error));
                 }
-                var raw = JsonConvert.SerializeObject(dynamicResult.AirlineFlightSchedulesResult.data);
-                return new ApiExecuteResult<IEnumerable<AirlineFlightSchedule>>(Deserialize.DeserializeObject<AirlineFlightSchedule[]>(raw), result.Error);
+                var raw = JsonConvert.SerializeObject(dynamicResult.AirlineFlightSchedulesResult.data, new UnixDateTimeConverter());
+                return new ApiExecuteResult<IEnumerable<AirlineFlightSchedule>>(Json.DeserializeObject<AirlineFlightSchedule[]>(raw), result.Error);
             }
         }
 
@@ -49,8 +49,8 @@ namespace FlightQuery.Sdk
                 {
                     return new ApiExecuteResult<AirportInfo>(_empty.AirportInfo(args).Data, new ApiExecuteError((string)dynamicResult.error));
                 }
-                var raw = JsonConvert.SerializeObject(dynamicResult.AirportInfoResult);
-                return new ApiExecuteResult<AirportInfo>(Deserialize.DeserializeObject<AirportInfo>(raw), result.Error);
+                var raw = JsonConvert.SerializeObject(dynamicResult.AirportInfoResult, new UnixDateTimeConverter());
+                return new ApiExecuteResult<AirportInfo>(Json.DeserializeObject<AirportInfo>(raw), result.Error);
             }
         }
 
@@ -64,7 +64,7 @@ namespace FlightQuery.Sdk
         {
             var result = _raw.GetFlightID(args);
             return new ApiExecuteResult<IEnumerable<FlightInfoEx>>(
-                Deserialize.DeserializeObject<FlightInfoEx[]>(result.Result),
+                Json.DeserializeObject<FlightInfoEx[]>(result.Result),
                 result.Error);
         }
     }

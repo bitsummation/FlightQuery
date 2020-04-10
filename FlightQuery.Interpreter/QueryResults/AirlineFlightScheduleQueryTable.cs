@@ -34,6 +34,11 @@ namespace FlightQuery.Interpreter.QueryResults
                 QueryArgs["destination"].PropertyValue = new PropertyValue(((string)QueryArgs["destination"].PropertyValue.Value).ToUpper());
             }
 
+            if (QueryArgs.ContainsVariable("ident"))
+            {
+                QueryArgs["ident"].PropertyValue = new PropertyValue(((string)QueryArgs["ident"].PropertyValue.Value).ToUpper());
+            }
+
             var departTimeCount = QueryArgs.Args.Where(x => x.Variable == "departuretime").Count();
             if (departTimeCount > 2)
                 throw new InvalidOperationException("Can only have 2 departureTime");

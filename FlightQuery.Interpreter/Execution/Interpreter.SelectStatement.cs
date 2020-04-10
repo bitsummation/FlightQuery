@@ -13,6 +13,15 @@ namespace FlightQuery.Interpreter.Execution
         public void Visit(SelectStatement statement)
         {
             var executedTables = _scope.FetchAllExecutedTablesSameLevel();
+
+            if (statement.All && statement.Args.Length == 0) //get all columns
+            {
+                foreach (var arg in executedTables.SelectMany(x => x.Descriptor.Properties.Select(x => x.Name)))
+                {
+                    statement.Children.Add(new SingleVariableExpression(statement.ParseInfo) { Id = arg });
+                }
+            }
+           
             for (int selectIndex = 0; selectIndex < statement.Args.Length; selectIndex++)
             {
                 Array.ForEach(executedTables, (x) => x.SelectIndex = selectIndex);
@@ -31,17 +40,20 @@ namespace FlightQuery.Interpreter.Execution
             }
 
             var rows = new List<Row>();
-            var rowCount = executedTables.First().Rows.Length;
-            for (int rowIndex = 0; rowIndex < rowCount; rowIndex++) //select data for only those columns selected
+            if (executedTables.Length > 0)
             {
-                var values = new List<PropertyValue>();
-                for (int selectIndex = 0; selectIndex < statement.Args.Length; selectIndex++)
+                var rowCount = executedTables.First().Rows.Length;
+                for (int rowIndex = 0; rowIndex < rowCount; rowIndex++) //select data for only those columns selected
                 {
-                    var selectedColumn = descriptors[selectIndex];
-                    values.Add(selectedColumn.Table.Rows[rowIndex].Values[selectedColumn.PropIndex]);
-                }
+                    var values = new List<PropertyValue>();
+                    for (int selectIndex = 0; selectIndex < statement.Args.Length; selectIndex++)
+                    {
+                        var selectedColumn = descriptors[selectIndex];
+                        values.Add(selectedColumn.Table.Rows[rowIndex].Values[selectedColumn.PropIndex]);
+                    }
 
-                rows.Add(new Row() { Values = values.ToArray() });
+                    rows.Add(new Row() { Values = values.ToArray() });
+                }
             }
 
             TableDescriptor tableDescriptor = descriptors.Select(x => x.PropDescriptor).ToArray();

@@ -28,6 +28,48 @@ where location = 'kaus'
         }
 
         [Test]
+        public void TestSelectStar()
+        {
+            string code = @"
+select *
+from AirportInfo 
+where airportCode = 'kaus'
+";
+            var mock = new Mock<IHttpExecutorRaw>();
+            mock.Setup(x => x.AirportInfo(It.IsAny<HttpExecuteArg>())).Returns(() =>
+            {
+                string source = string.Empty;
+                var assembly = Assembly.GetExecutingAssembly();
+                using (Stream stream = assembly.GetManifestResourceStream("FlightQuery.Tests.AirportInfo.json"))
+                using (StreamReader reader = new StreamReader(stream))
+                {
+                    source = reader.ReadToEnd();
+                }
+
+                return new ExecuteResult() { Result = source };
+            });
+
+            var context = new RunContext(code, string.Empty, ExecuteFlags.Run, new EmptyHttpExecutor(), new HttpExecutor(mock.Object));
+            var result = context.Run();
+
+            Assert.IsTrue(context.Errors.Count == 0);
+            Assert.IsTrue(result.Columns.Length == 6);
+            Assert.IsTrue(result.Columns[0] == "airportCode");
+            Assert.IsTrue(result.Columns[1] == "latitude");
+            Assert.IsTrue(result.Columns[2] == "longitude");
+            Assert.IsTrue(result.Columns[3] == "location");
+            Assert.IsTrue(result.Columns[4] == "name");
+            Assert.IsTrue(result.Columns[5] == "timezone");
+
+            Assert.AreEqual(result.Rows[0].Values[0], "kaus");
+            Assert.AreEqual(result.Rows[0].Values[1], 30.1945272f);
+            Assert.AreEqual(result.Rows[0].Values[2], -97.6698761f);
+            Assert.AreEqual(result.Rows[0].Values[3], "Austin, TX");
+            Assert.AreEqual(result.Rows[0].Values[5], ":America/Chicago");
+
+        }
+
+        [Test]
         public void TestExecute()
         {
             string code = @"

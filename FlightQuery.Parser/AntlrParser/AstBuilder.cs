@@ -25,7 +25,8 @@ namespace FlightQuery.Parser.AntlrParser
 
             query.Children.Add(Visit(context.s));
             query.Children.Add(Visit(context.f));
-            query.Children.Add(Visit(context.w));
+            if(context.w != null)
+                query.Children.Add(Visit(context.w));
 
             return query;
         }   
@@ -44,9 +45,14 @@ namespace FlightQuery.Parser.AntlrParser
             return select;
         }
 
+        public override Element VisitSelectStarStatementExp(SqlParser.SelectStarStatementExpContext context)
+        {
+            return new SelectStatement(CreateParseInfo(context)) {All = true };
+        }
+
         public override Element VisitFromStatementExp(SqlParser.FromStatementExpContext context)
         {
-            var from = new FromStatement(CreateParseInfo(context)) { Name = context.t.Text, Alias = context.a != null ? context.a.Text : null };
+            var from = new FromStatement(CreateParseInfo(context)) { Name = context.t != null ? context.t.Text : null, Alias = context.a != null ? context.a.Text : null };
             if(context.j != null)
                 from.Children.Add(Visit(context.j));
 
@@ -55,8 +61,9 @@ namespace FlightQuery.Parser.AntlrParser
 
         public override Element VisitInnerJoinStatementExp(SqlParser.InnerJoinStatementExpContext context)
         {
-            var join = new InnerJoinStatement(CreateParseInfo(context)) { Name = context.t.Text, Alias = context.a != null ? context.a.Text : null } ;
-            join.Children.Add(Visit(context.b));
+            var join = new InnerJoinStatement(CreateParseInfo(context)) { Name = context.t == null ? "" : context.t.Text, Alias = context.a != null ? context.a.Text : null } ;
+            if(context.b != null)
+                join.Children.Add(Visit(context.b));
             if (context.j != null)
                 join.Children.Add(Visit(context.j));
 

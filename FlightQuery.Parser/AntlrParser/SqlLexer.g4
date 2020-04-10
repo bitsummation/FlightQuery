@@ -13,6 +13,7 @@ ON: O N;
 WHERE : W H E R E;
 COMMA : ',';
 DOT : '.';
+STAR : '*';
 
 AND : A N D;
 OR : O R;

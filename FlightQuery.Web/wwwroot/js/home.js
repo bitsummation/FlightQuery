@@ -1,4 +1,113 @@
-﻿
+﻿var intellisense = {
+
+    globalTriggers : ["from", "join"],
+    scopeTriggers: ["select", "on", "where", "and"],
+
+    fetch: function (code, callback) {
+       
+        $.ajax({
+            type: "Post",
+            url: "scope",
+            data: code,
+            contentType: 'text/plain',
+            success: function (data) {
+                callback(data);
+            }
+        });
+
+    },
+
+    getPrompts: function (token, code, callback) {
+        var that = this;
+        if (! (this.globalTriggers.includes(token) || this.scopeTriggers.includes(token) )) {
+            callback([]);
+        }
+
+        this.fetch(code, function (scope) {
+            console.log(scope);
+            if (that.globalTriggers.includes(token)) {
+                callback(scope.global.keys)
+            }
+            else if (that.scopeTriggers.includes(token)) {
+                if (scope.queryScope.keys.length > 0) {
+                    var prompts = []
+                    prompts = prompts.concat(scope.queryScope.keys);
+                    scope.queryScope.keys.forEach(function (e) { prompts = prompts.concat(scope.queryScope.items[e]); });
+                    callback(prompts);
+                }
+            }
+            else {
+                callback(["foo", "bar", "baz"]);
+            }
+        });
+
+    },
+
+    init: function () {
+        
+        var that = this;
+        var editor = ace.edit("code");
+        var langTools = ace.require('ace/ext/language_tools');
+
+        langTools.setCompleters([])
+
+        editor.getSession().setMode("ace/mode/mysql");
+        editor.setValue(""); //clear global ones
+
+        var staticWordCompleter = {
+            getCompletions: function (editor, session, pos, prefix, callback) {
+                console.log("fetch completions");
+                console.log({ "prefix": prefix });
+                console.log({ "pos": pos });
+                
+                var token = editor.session.getTokenAt(pos.row, pos.column - 1);
+                if (token != null) {
+                    console.log({ "token": token });
+                    
+                    token = token.value.toLowerCase();
+                    console.log({ "keyword": token });
+                }
+
+                var code = editor.getValue();
+                console.log({"source": code });
+                that.getPrompts(token, code, function (wordList) {
+
+                    callback(null, wordList.map(function (word) {
+                        return {
+                            caption: word,
+                            value: word,
+                            score: 1000
+                        };
+                    }));
+
+                });
+
+               
+            }
+        };
+
+        langTools.addCompleter(staticWordCompleter);
+
+        var doLiveAutocomplete = function (e) {
+            var editor = e.editor;
+            if (e.command.name === "insertstring") {
+                // Only autocomplete if there's a prefix that can be matched
+                console.log({ "insert": e.args })
+                if (/[\.|\s]/.test(e.args)) {
+                    editor.execCommand("startAutocomplete")
+                }
+            }
+        };
+
+        editor.commands.on('afterExec', doLiveAutocomplete);
+        editor.setOptions({
+            enableBasicAutocompletion: true
+        });
+
+    }
+
+};
+
 var home = {
     init: function () {
         this.initSubmit();
@@ -6,15 +115,11 @@ var home = {
     },
 
     exampleQueries: {
-        strokes: "select location, name\nfrom AirportInfo\nwhere airportCode = 'kaus'",
+        airportInfo: "select *\nfrom AirportInfo\nwhere airportCode = 'kaus'",
         gir: "Query().Filter('Green.GIR').PerPlayer().Count().Descending().Print()",
         girBirdies: "Query().Filter('Green.GIR.Holed').PerPlayer().Count().Descending().Print()",
         saves: "Query().Filter('Green.Holed').Not('.GIR').PreviousShot().Not('Green').Score('Par').PerPlayer().Count().Descending().Print()",
         missedSave: "Query().Filter('Green').Not('.GIR').PreviousShot().Not('Green').Score('Bogey').PerPlayer().Count().Descending().Print()"
-    },
-
-    animateSubmit: function () {
-        $("form :submit").delay(200).fadeOut('slow').delay(50).fadeIn('slow', this.animateSubmit);
     },
 
     preLoad: function () {
@@ -29,13 +134,11 @@ var home = {
 
     loadExamples: function (attr) {
         var query = this.exampleQueries[attr];
-        $("#code").val(query);
-        this.renderQuery();
+        var editor = ace.edit("code");
+        editor.setValue(query);
     },
 
     initExamples: function () {
-        $("#code").val(this.exampleQueries.strokes);
-
         var that = this;
         $("#examples a").click(function () {
             var attr = $(this).attr("query");
@@ -46,14 +149,14 @@ var home = {
 
     initSubmit: function () {
         var that = this;
-        $("form").submit(function () {
+        $("#run").click(function () {
             that.renderQuery();
-            return false;
         });
     },
 
     getQuery: function () {
-        return $("#code").val();
+        var editor = ace.edit("code");
+        return editor.getValue();
     },
 
     getBasicHeader: function () {
@@ -103,4 +206,5 @@ var home = {
 
 $().ready(function () {
     home.init();
+    intellisense.init();
 });
