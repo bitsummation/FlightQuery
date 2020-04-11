@@ -19,19 +19,31 @@ namespace FlightQuery.Interpreter.QueryResults
         protected override ExecutedTable ExecuteCore(HttpExecuteArg args)
         {
             var result = HttpExecutor.GetFlightID(args);
-            if (result.Error != null)
+            if (result.Error != null && result.Error.Type != ApiExecuteErrorType.NoData)
                 Errors.Add(result.Error);
 
+            bool noDataError = result.Error != null && result.Error.Type == ApiExecuteErrorType.NoData;
+            
             long departerTimeValue = 0;
             if (QueryArgs.ContainsVariable("departuretime"))
-                departerTimeValue = (long)QueryArgs["departuretime"].PropertyValue.Value;
+            {
+                if (noDataError)
+                    departerTimeValue = 0;
+                else
+                    departerTimeValue = (long)(QueryArgs["departuretime"].PropertyValue.Value ?? 0L);
+            }
 
             string identValue = string.Empty;
             if (QueryArgs.ContainsVariable("ident"))
-                identValue = (string)QueryArgs["ident"].PropertyValue.Value;
+            {
+                if (noDataError)
+                    identValue = null;
+                else
+                    identValue = (string)QueryArgs["ident"].PropertyValue.Value;
+            }
 
             var dto = result.Data;
-            dto.departuretime = (DateTime)Conversion.ConvertLongToDateTime(departerTimeValue);
+            dto.departureTime = (DateTime)Conversion.ConvertLongToDateTime(departerTimeValue);
             dto.ident = identValue;
 
             TableDescriptor tableDescriptor = PropertyDescriptor.GenerateRunDescriptor(typeof(GetFlightId));

@@ -65,6 +65,26 @@ where departuretime > '2020-1-21 9:15'
         }
 
         [Test]
+        public void TestApiReturn200WithError()
+        {
+            string code = @"
+select aircrafttype, actual_ident, ident, seats_cabin_business, arrivaltime
+from AirlineFlightSchedules
+where departuretime < '2020-1-21 9:15'
+";
+
+            var mock = new Mock<IHttpExecutorRaw>();
+            mock.Setup(x => x.AirlineFlightSchedule(It.IsAny<HttpExecuteArg>())).Returns(
+                new ExecuteResult() { Result = @"{""error"":""INVALID_ARGUMENT startDate is too far in the past(3 months)""}" }
+            );
+
+            var context = new RunContext(code, string.Empty, ExecuteFlags.Run, new EmptyHttpExecutor(), new HttpExecutor(mock.Object));
+            var result = context.Run();
+            Assert.IsTrue(context.Errors.Count == 1);
+            Assert.IsTrue(context.Errors[0].Message == "Error executing request: INVALID_ARGUMENT startDate is too far in the past(3 months)");
+        }
+
+        [Test]
         public void TestQuerableParameters()
         {
             string code = @"

@@ -20,7 +20,7 @@ namespace FlightQuery.Web.Controllers
                 query = await reader.ReadToEndAsync();
             }
  
-            var context = new RunContext(query, "", ExecuteFlags.Semantic | ExecuteFlags.SkipParseErrors);
+            var context = new RunContext(query, "", ExecuteFlags.Semantic | ExecuteFlags.Intellisense);
             context.Run();
 
             return context.ScopeModel;

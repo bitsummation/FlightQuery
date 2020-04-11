@@ -66,7 +66,6 @@ where airportCode = 'kaus'
             Assert.AreEqual(result.Rows[0].Values[2], -97.6698761f);
             Assert.AreEqual(result.Rows[0].Values[3], "Austin, TX");
             Assert.AreEqual(result.Rows[0].Values[5], ":America/Chicago");
-
         }
 
         [Test]
@@ -114,7 +113,7 @@ where airportCode = 'kaus'
             var mock = new Mock<IHttpExecutorRaw>();
             mock.Setup(x => x.AirportInfo(It.IsAny<HttpExecuteArg>())).Returns(() =>
             {
-                return new ExecuteResult() { Result = "", Error = new ApiExecuteError("Authentication error") };
+                return new ExecuteResult() { Result = "", Error = new ApiExecuteError(ApiExecuteErrorType.AuthError, "Authentication error") };
             });
 
             var context = new RunContext(code, string.Empty, ExecuteFlags.Run, new EmptyHttpExecutor(), new HttpExecutor(mock.Object));

@@ -10,7 +10,7 @@ namespace FlightQuery.Sdk.Model.V2
 
         [Required]
         [Queryable]
-        public DateTime departuretime { get; set; }
+        public DateTime departureTime { get; set; }
 
         public string faFlightID { get; set; }
     }

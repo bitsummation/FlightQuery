@@ -14,18 +14,28 @@ namespace FlightQuery.Interpreter.Execution
         {
             var executedTables = _scope.FetchAllExecutedTablesSameLevel();
 
-            if (statement.All && statement.Args.Length == 0) //get all columns
+            if (statement.All) //get all columns
             {
-                foreach (var arg in executedTables.SelectMany(x => x.Descriptor.Properties.Select(x => x.Name)))
+                var selectedIndex = 0;
+                foreach(var executeTable in executedTables)
                 {
-                    statement.Children.Add(new SingleVariableExpression(statement.ParseInfo) { Id = arg });
+                    foreach(var p in executeTable.Descriptor.Properties)
+                    {
+                        p.SelectedIndex = selectedIndex;
+                        if(selectedIndex >= statement.Args.Length)
+                            statement.Children.Add(new SingleVariableExpression(statement.ParseInfo) { Id = p.Name });
+
+                        selectedIndex++;
+                    }
                 }
             }
-           
-            for (int selectIndex = 0; selectIndex < statement.Args.Length; selectIndex++)
+            else
             {
-                Array.ForEach(executedTables, (x) => x.SelectIndex = selectIndex);
-                VisitChild(statement.Args[selectIndex]);
+                for (int selectIndex = 0; selectIndex < statement.Args.Length; selectIndex++)
+                {
+                    Array.ForEach(executedTables, (x) => x.SelectIndex = selectIndex);
+                    VisitChild(statement.Args[selectIndex]);
+                }
             }
 
             var descriptors = new List<SelectColumn>();
@@ -56,7 +66,7 @@ namespace FlightQuery.Interpreter.Execution
                 }
             }
 
-            TableDescriptor tableDescriptor = descriptors.Select(x => x.PropDescriptor).ToArray();
+            FinalSelectTableDescriptor tableDescriptor = descriptors.Select(x => x.PropDescriptor).ToArray();
             var selectTable = new ExecutedTable() { Rows = rows.ToArray(), Descriptor = tableDescriptor };
             _selectResult = ToSelectTable(selectTable);
         }

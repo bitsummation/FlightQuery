@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
+using System.ComponentModel;
 
 namespace FlightQuery.Sdk.Model.V2
 {
@@ -19,6 +21,7 @@ namespace FlightQuery.Sdk.Model.V2
         public string destinationCity { get; set; }
         public string destinationName { get; set; }
 
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
         public bool diverted { get; set; }
         
         public int filed_airspeed_kts { get; set; }

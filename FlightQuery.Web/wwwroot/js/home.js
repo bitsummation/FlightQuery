@@ -17,18 +17,18 @@
 
     },
 
-    getPrompts: function (token, code, callback) {
+    getPrompts: function (args, callback) {
         var that = this;
-        if (! (this.globalTriggers.includes(token) || this.scopeTriggers.includes(token) )) {
+        /*if (! (this.globalTriggers.includes(token) || this.scopeTriggers.includes(token) )) {
             callback([]);
-        }
+        }*/
 
-        this.fetch(code, function (scope) {
+        this.fetch(args.code, function (scope) {
             console.log(scope);
-            if (that.globalTriggers.includes(token)) {
+            if (that.globalTriggers.includes(args.token)) {
                 callback(scope.global.keys)
             }
-            else if (that.scopeTriggers.includes(token)) {
+            else if (that.scopeTriggers.includes(args.token)) {
                 if (scope.queryScope.keys.length > 0) {
                     var prompts = []
                     prompts = prompts.concat(scope.queryScope.keys);
@@ -36,8 +36,13 @@
                     callback(prompts);
                 }
             }
-            else {
-                callback(["foo", "bar", "baz"]);
+            else { 
+                if (args.promptToken == '.' && scope.queryScope.keys.length > 0 && scope.queryScope.keys.includes(args.token)) { //do we match alias with a dot
+                    var prompts = scope.queryScope.items[args.token]
+                    callback(prompts);
+                }
+                else
+                    callback([]);
             }
         });
 
@@ -58,19 +63,25 @@
             getCompletions: function (editor, session, pos, prefix, callback) {
                 console.log("fetch completions");
                 console.log({ "prefix": prefix });
-                console.log({ "pos": pos });
+
+                var args = {};
+                var firstToken = editor.session.getTokenAt(pos.row, pos.column);
+                if (firstToken != null) {
+                    console.log({ "firsttoken": firstToken.value });
+                    args.promptToken = firstToken.value;
+                }
                 
                 var token = editor.session.getTokenAt(pos.row, pos.column - 1);
                 if (token != null) {
-                    console.log({ "token": token });
-                    
                     token = token.value.toLowerCase();
+                    args.token = token;
                     console.log({ "keyword": token });
                 }
 
                 var code = editor.getValue();
+                args.code = code;
                 console.log({"source": code });
-                that.getPrompts(token, code, function (wordList) {
+                that.getPrompts(args, function (wordList) {
 
                     callback(null, wordList.map(function (word) {
                         return {

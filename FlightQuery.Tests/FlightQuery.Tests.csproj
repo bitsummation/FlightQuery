@@ -7,6 +7,8 @@
   <ItemGroup>
     <None Remove="AirlineFlightSchedule.json" />
     <None Remove="AirportInfo.json" />
+    <None Remove="FlightInfoEx.json" />
+    <None Remove="GetFlightId.json" />
   </ItemGroup>
 
   <ItemGroup>
@@ -29,6 +31,14 @@
 
   <ItemGroup>
     <EmbeddedResource Include="AirportInfo.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="GetFlightId.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="FlightInfoEx.json" />
   </ItemGroup>
 
 </Project>

@@ -35,30 +35,48 @@ namespace FlightQuery.Interpreter.Execution
             var rowCount = executedTables.First().Rows.Length;
 
             var rightTableRows = new List<Row>();
-            for(int row = 0; row < rowCount; row++)
+            if (rowCount == 0) //need to visit for semantic errors
             {
                 var table = _scope.TableLookupAnyLevel(tableName);
                 table = table.Create();
                 _scope.AddTable(tableVariable, table);
-
-                Array.ForEach(executedTables, (x) => x.RowIndex = row);
                 VisitChild(statement.BooleanExpression);
                 var executeTable = table.Execute();
+                foreach (var e in table.Errors)
+                    Errors.Add(e);
 
                 _scope.RemoveTable(tableVariable);
-                _scope.AddTable(tableVariable, executeTable);
-                var arg = new QueryPhaseArgs();
-                VisitChild(statement.BooleanExpression, arg);
-                if(arg.RowResult) //row passed join. If didn't row needs to be removed from the left joining result
+            }
+            else
+            {
+                for (int row = 0; row < rowCount; row++)
                 {
-                    rightTableRows.AddRange(executeTable.Rows);
-                }
-                else
-                {
-                    Array.ForEach(executedTables, (x) => x.Rows[x.RowIndex].Match = false);
-                }
+                    var table = _scope.TableLookupAnyLevel(tableName);
+                    table = table.Create();
+                    _scope.AddTable(tableVariable, table);
 
-                _scope.RemoveTable(tableVariable);
+                    Array.ForEach(executedTables, (x) => x.RowIndex = row);
+                    VisitChild(statement.BooleanExpression);
+                    var executeTable = table.Execute();
+
+                    foreach (var e in table.Errors)
+                        Errors.Add(e);
+
+                    _scope.RemoveTable(tableVariable);
+                    _scope.AddTable(tableVariable, executeTable);
+                    var arg = new QueryPhaseArgs();
+                    VisitChild(statement.BooleanExpression, arg);
+                    if (arg.RowResult) //row passed join. If didn't row needs to be removed from the left joining result
+                    {
+                        rightTableRows.AddRange(executeTable.Rows);
+                    }
+                    else
+                    {
+                        Array.ForEach(executedTables, (x) => x.Rows[x.RowIndex].Match = false);
+                    }
+
+                    _scope.RemoveTable(tableVariable);
+                }
             }
 
 

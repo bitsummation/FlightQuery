@@ -1,4 +1,5 @@
-﻿using FlightQuery.Interpreter.Http;
+﻿
+using FlightQuery.Interpreter.Http;
 
 namespace FlightQuery.Interpreter.QueryResults
 {

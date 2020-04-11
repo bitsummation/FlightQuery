@@ -15,6 +15,16 @@ namespace FlightQuery.Sdk
             _empty = new EmptyHttpExecutor();
         }
 
+        private ApiExecuteError ParseFlightAwareError(string error)
+        {
+            if(error.StartsWith("NO_DATA"))
+                return new ApiExecuteError(ApiExecuteErrorType.NoData, error);
+            if(error.StartsWith("INVALID_ARGUMENT"))
+                return new ApiExecuteError(ApiExecuteErrorType.InvalidArgument, error);
+
+            return new ApiExecuteError(ApiExecuteErrorType.Fail, error);
+        }
+
         public ApiExecuteResult<IEnumerable<AirlineFlightSchedule>> AirlineFlightSchedule(HttpExecuteArg args)
         {
             var result = _raw.AirlineFlightSchedule(args);
@@ -27,10 +37,29 @@ namespace FlightQuery.Sdk
                 dynamic dynamicResult = JsonConvert.DeserializeObject(result.Result, null, new UnixDateTimeConverter());
                 if (dynamicResult.error != null)
                 {
-                    return new ApiExecuteResult<IEnumerable<AirlineFlightSchedule>>(_empty.AirlineFlightSchedule(args).Data, new ApiExecuteError((string)dynamicResult.error));
+                    return new ApiExecuteResult<IEnumerable<AirlineFlightSchedule>>(_empty.AirlineFlightSchedule(args).Data, ParseFlightAwareError((string)dynamicResult.error));
                 }
                 var raw = JsonConvert.SerializeObject(dynamicResult.AirlineFlightSchedulesResult.data, new UnixDateTimeConverter());
                 return new ApiExecuteResult<IEnumerable<AirlineFlightSchedule>>(Json.DeserializeObject<AirlineFlightSchedule[]>(raw), result.Error);
+            }
+        }
+
+        public ApiExecuteResult<IEnumerable<FlightInfoEx>> GetFlightInfoEx(HttpExecuteArg args)
+        {
+            var result = _raw.GetFlightInfoEx(args);
+            if (result == null || result.Error != null)
+            {
+                return new ApiExecuteResult<IEnumerable<FlightInfoEx>>(_empty.GetFlightInfoEx(args).Data, result != null ? result.Error : null);
+            }
+            else
+            {
+                dynamic dynamicResult = JsonConvert.DeserializeObject(result.Result, null, new UnixDateTimeConverter());
+                if (dynamicResult.error != null)
+                {
+                    return new ApiExecuteResult<IEnumerable<FlightInfoEx>>(_empty.GetFlightInfoEx(args).Data, ParseFlightAwareError((string)dynamicResult.error));
+                }
+                var raw = JsonConvert.SerializeObject(dynamicResult.FlightInfoExResult.flights, new UnixDateTimeConverter());
+                return new ApiExecuteResult<IEnumerable<FlightInfoEx>>(Json.DeserializeObject<FlightInfoEx[]>(raw), result.Error);
             }
         }
 
@@ -47,7 +76,7 @@ namespace FlightQuery.Sdk
                 dynamic dynamicResult = JsonConvert.DeserializeObject(result.Result, null, new UnixDateTimeConverter());
                 if(dynamicResult.error != null)
                 {
-                    return new ApiExecuteResult<AirportInfo>(_empty.AirportInfo(args).Data, new ApiExecuteError((string)dynamicResult.error));
+                    return new ApiExecuteResult<AirportInfo>(_empty.AirportInfo(args).Data, ParseFlightAwareError((string)dynamicResult.error));
                 }
                 var raw = JsonConvert.SerializeObject(dynamicResult.AirportInfoResult, new UnixDateTimeConverter());
                 return new ApiExecuteResult<AirportInfo>(Json.DeserializeObject<AirportInfo>(raw), result.Error);
@@ -57,15 +86,19 @@ namespace FlightQuery.Sdk
         public ApiExecuteResult<GetFlightId> GetFlightID(HttpExecuteArg args)
         {
             var result = _raw.GetFlightID(args);
-            return new ApiExecuteResult<GetFlightId>(new GetFlightId() { faFlightID = result.Result }, result.Error);
+            if (result == null || result.Error != null)
+            {
+                return new ApiExecuteResult<GetFlightId>(_empty.GetFlightID(args).Data, result != null ? result.Error : null);
+            }
+            dynamic dynamicResult = JsonConvert.DeserializeObject(result.Result, null, new UnixDateTimeConverter());
+            if (dynamicResult.error != null)
+            {
+                return new ApiExecuteResult<GetFlightId>(_empty.GetFlightID(args).Data, ParseFlightAwareError((string)dynamicResult.error));
+            }
+
+            return new ApiExecuteResult<GetFlightId>(new GetFlightId() {faFlightID = dynamicResult.GetFlightIDResult }, result.Error);
         }
 
-        public ApiExecuteResult<IEnumerable<FlightInfoEx>> GetFlightInfoEx(HttpExecuteArg args)
-        {
-            var result = _raw.GetFlightID(args);
-            return new ApiExecuteResult<IEnumerable<FlightInfoEx>>(
-                Json.DeserializeObject<FlightInfoEx[]>(result.Result),
-                result.Error);
-        }
+      
     }
 }

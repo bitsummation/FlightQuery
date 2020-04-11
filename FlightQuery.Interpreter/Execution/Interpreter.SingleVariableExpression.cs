@@ -1,6 +1,5 @@
 ﻿using FlightQuery.Sdk.Semantic;
 using FlightQuery.Sdk.SqlAst;
-using System;
 
 namespace FlightQuery.Interpreter.Execution
 {
@@ -35,7 +34,7 @@ namespace FlightQuery.Interpreter.Execution
             if (prop.Queryable)
                 table.AddArg(arg);
 
-            if (table.HasExecuted)
+            if (table.HasExecuted && table.Rows.Length > 0)
             {
                 arg.PropertyValue = table.Rows[table.RowIndex].Values[table.Descriptor.GetDataRowIndex(expression.Id)];
             }

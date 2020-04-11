@@ -26,8 +26,13 @@ namespace FlightQuery.Interpreter.Descriptors.Model
                 _hash = new Dictionary<string, PropertyDescriptor>();
                 _propertyDescriptor = value;
                 foreach(var p in _propertyDescriptor)
-                    _hash.Add(p.Name.ToLower(), p);
+                    HashInsert(p.Name.ToLower(), p);
             }
+        }
+
+        protected virtual void HashInsert(string key, PropertyDescriptor p)
+        {
+            _hash.Add(key, p);
         }
 
         public int GetDataRowIndex(string name)

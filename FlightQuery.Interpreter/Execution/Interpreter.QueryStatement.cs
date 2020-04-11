@@ -19,14 +19,23 @@ namespace FlightQuery.Interpreter.Execution
                 if (executedTables.Length > 0)
                 {
                     var rowCount = executedTables.First().Rows.Length;
-                    for (int row = 0; row < rowCount; row++)
+                    if (rowCount == 0) //even if no rows we still want to validate where variables
                     {
-                        Array.ForEach(executedTables, (x) => x.RowIndex = row);
+                        Array.ForEach(executedTables, (x) => x.RowIndex = 0);
                         var arg = new QueryPhaseArgs();
                         VisitChild(statement.Where, arg);
-                        if (!arg.RowResult)
+                    }
+                    else
+                    {
+                        for (int row = 0; row < rowCount; row++)
                         {
-                            Array.ForEach(executedTables, (x) => x.Rows[x.RowIndex].Match = false);
+                            Array.ForEach(executedTables, (x) => x.RowIndex = row);
+                            var arg = new QueryPhaseArgs();
+                            VisitChild(statement.Where, arg);
+                            if (!arg.RowResult)
+                            {
+                                Array.ForEach(executedTables, (x) => x.Rows[x.RowIndex].Match = false);
+                            }
                         }
                     }
 

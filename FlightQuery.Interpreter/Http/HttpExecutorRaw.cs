@@ -1,4 +1,5 @@
 ﻿using FlightQuery.Sdk;
+using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
@@ -21,30 +22,39 @@ namespace FlightQuery.Interpreter.Http
         {
             var json = string.Empty;
             ApiExecuteError error = null;
-            using (var client = new HttpClient())
+            try
             {
-                var dict = new Dictionary<string, string>();
-                foreach (var arg in args.Variables)
-                    dict.Add(arg.Variable, arg.Value.ToString());
+               
+                using (var client = new HttpClient())
+                {
+                    var dict = new Dictionary<string, string>();
+                    foreach (var arg in args.Variables)
+                        dict.Add(arg.Variable, arg.Value.ToString());
 
-                client.DefaultRequestHeaders.Add("Authorization", Authorization);
+                    client.DefaultRequestHeaders.Add("Authorization", Authorization);
 
-                var result = await client.PostAsync(BaseUrl + args.TableName, new FormUrlEncodedContent(dict));
-                if (result.StatusCode == System.Net.HttpStatusCode.Unauthorized)  //auth error
-                {
-                    error = new ApiExecuteError("Authentication error");
+                    var result = await client.PostAsync(BaseUrl + args.TableName, new FormUrlEncodedContent(dict));
+                    if (result.StatusCode == System.Net.HttpStatusCode.Unauthorized)  //auth error
+                    {
+                        error = new ApiExecuteError(ApiExecuteErrorType.AuthError, "Authentication error");
+                    }
+                    else if (result.StatusCode != HttpStatusCode.OK) // some other error
+                    {
+                        string message = await result.Content.ReadAsStringAsync();
+                        error = new ApiExecuteError(ApiExecuteErrorType.Fail, message);
+                    }
+                    else
+                    {
+                        //{"error":"NO_DATA unknown airport INVALID"}
+                        //{"error":"NO_DATA flight not found"}
+                        //{"error":"INVALID_ARGUMENT endDate is too far in the future (12 months)"}
+                        json = await result.Content.ReadAsStringAsync();
+                    }
                 }
-                else if (result.StatusCode != HttpStatusCode.OK) // some other error
-                {
-                    string message = await result.Content.ReadAsStringAsync();
-                    error = new ApiExecuteError(message);
-                }
-                else
-                {
-                    //{"error":"NO_DATA unknown airport INVALID"}
-                    //{"error":"INVALID_ARGUMENT endDate is too far in the future (12 months)"}
-                    json = await result.Content.ReadAsStringAsync();
-                }
+            }
+            catch(Exception)
+            {
+                return new ExecuteResult() { Result = string.Empty, Error = new ApiExecuteError(ApiExecuteErrorType.Fail, "Api error") };
             }
 
             return new ExecuteResult() { Result = json, Error = error };

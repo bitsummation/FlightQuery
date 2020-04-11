@@ -1,0 +1,29 @@
+{
+  "FlightInfoExResult": {
+    "next_offset": -1,
+    "flights": [
+      {
+        "faFlightID": "AAL2594-1586309220-schedule-0000",
+        "ident": "AAL2563",
+        "aircrafttype": "B738",
+        "filed_ete": "00:42:00",
+        "filed_time": 1586513100,
+        "filed_departuretime": 1586513400,
+        "filed_airspeed_kts": 237,
+        "filed_airspeed_mach": "",
+        "filed_altitude": 190,
+        "route": "ELOEL2 FORSS GUTZZ SOCKK3",
+        "actualdeparturetime": 1586513140,
+        "estimatedarrivaltime": 1586515200,
+        "actualarrivaltime": 1586515200,
+        "diverted": "",
+        "origin": "KAUS",
+        "destination": "KDFW",
+        "originName": "Austin-Bergstrom Intl",
+        "originCity": "Austin, TX",
+        "destinationName": "Dallas-Fort Worth Intl",
+        "destinationCity": "Dallas-Fort Worth, TX"
+      }
+    ]
+  }
+}

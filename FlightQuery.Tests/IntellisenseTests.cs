@@ -1,4 +1,5 @@
 ﻿using FlightQuery.Context;
+using FlightQuery.Sdk;
 using NUnit.Framework;
 
 namespace FlightQuery.Tests
@@ -12,7 +13,7 @@ namespace FlightQuery.Tests
             string code = @"
 select
 ";
-            var context = new RunContext(code, string.Empty, ExecuteFlags.Semantic | ExecuteFlags.SkipParseErrors);
+            var context = new RunContext(code, string.Empty, ExecuteFlags.Semantic | ExecuteFlags.Intellisense);
             context.Run();
 
             Assert.IsTrue(context.ScopeModel.QueryScope.Items.Count == 0);
@@ -25,7 +26,7 @@ select
 select *
 from 
 ";
-            var context = new RunContext(code, string.Empty, ExecuteFlags.Semantic|ExecuteFlags.SkipParseErrors);
+            var context = new RunContext(code, string.Empty, ExecuteFlags.Semantic|ExecuteFlags.Intellisense);
             context.Run();
 
             Assert.IsTrue(context.ScopeModel.QueryScope.Items.Count == 0);
@@ -39,7 +40,7 @@ select *
 from airportinfo
 join 
 ";
-            var context = new RunContext(code, string.Empty, ExecuteFlags.Semantic | ExecuteFlags.SkipParseErrors);
+            var context = new RunContext(code, string.Empty, ExecuteFlags.Semantic | ExecuteFlags.Intellisense);
             context.Run();
 
             Assert.IsTrue(context.ScopeModel.QueryScope.Items.ContainsKey("airportinfo"));
@@ -53,12 +54,78 @@ select *
 from airportinfo a
 join airlineflightschedules s on 
 ";
-            var context = new RunContext(code, string.Empty, ExecuteFlags.Semantic | ExecuteFlags.SkipParseErrors);
+            var context = new RunContext(code, string.Empty, ExecuteFlags.Semantic | ExecuteFlags.Intellisense);
             context.Run();
 
             Assert.IsTrue(context.ScopeModel.QueryScope.Items.ContainsKey("a"));
             Assert.IsTrue(context.ScopeModel.QueryScope.Items.ContainsKey("s"));
         }
+
+
+        [Test]
+        public void TestJoinOnWithWhere()
+        {
+            string code = @"
+select *
+from airlineflightschedules a
+join getflightid o on 
+where departuretime > '2020-4-10 1:00' and origin = 'kaus'
+";
+            var context = new RunContext(code, string.Empty, ExecuteFlags.Semantic | ExecuteFlags.Intellisense);
+            context.Run();
+
+            Assert.IsTrue(context.ScopeModel.QueryScope.Items.ContainsKey("a"));
+            Assert.IsTrue(context.ScopeModel.QueryScope.Items.ContainsKey("o"));
+        }
+
+        [Test]
+        public void TestJoinOnWithWhereOnAlias()
+        {
+            string code = @"
+select *
+from airlineflightschedules a
+join getflightid o on o.
+where departuretime > '2020-4-10 1:00' and origin = 'kaus'
+";
+            var context = new RunContext(code, string.Empty, ExecuteFlags.Semantic | ExecuteFlags.Intellisense);
+            context.Run();
+
+            Assert.IsTrue(context.ScopeModel.QueryScope.Items.ContainsKey("a"));
+            Assert.IsTrue(context.ScopeModel.QueryScope.Items.ContainsKey("o"));
+        }
+
+        [Test]
+        public void TestJoinConditionNoWhere()
+        {
+            string code = @"
+select *
+from airlineflightschedules a
+join getflightid o on o.ident = a.
+";
+            var context = new RunContext(code, string.Empty, ExecuteFlags.Semantic | ExecuteFlags.Intellisense);
+            context.Run();
+
+            Assert.IsTrue(context.ScopeModel.QueryScope.Items.ContainsKey("a"));
+            Assert.IsTrue(context.ScopeModel.QueryScope.Items.ContainsKey("o"));
+        }
+
+
+        [Test]
+        public void TestJoinConditionNoWhereAnd()
+        {
+            string code = @"
+select *
+from airlineflightschedules a
+join getflightid o on o.ident = a.ident and o.departuretime = a.
+where departuretime > '2020-4-10 1:00' and origin = 'kaus'
+";
+            var context = new RunContext(code, string.Empty, ExecuteFlags.Semantic | ExecuteFlags.Intellisense);
+            context.Run();
+
+            Assert.IsTrue(context.ScopeModel.QueryScope.Items.ContainsKey("a"));
+            Assert.IsTrue(context.ScopeModel.QueryScope.Items.ContainsKey("o"));
+        }
+
 
         [Test]
         public void TestWhere()
@@ -68,7 +135,7 @@ select *
 from airportinfo
 where 
 ";
-            var context = new RunContext(code, string.Empty, ExecuteFlags.Semantic | ExecuteFlags.SkipParseErrors);
+            var context = new RunContext(code, string.Empty, ExecuteFlags.Semantic | ExecuteFlags.Intellisense);
             context.Run();
 
             Assert.IsTrue(context.ScopeModel.QueryScope.Items.ContainsKey("airportinfo"));

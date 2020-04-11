@@ -47,7 +47,7 @@ namespace FlightQuery.Context
         {
             SelectTable table = null;
             
-            var parser = new LangParser(_source, (_flags & ExecuteFlags.SkipParseErrors) == ExecuteFlags.SkipParseErrors);
+            var parser = new LangParser(_source, _flags);
             var ast = parser.Parse();
             parser.Errors.ToList().ForEach(x => Errors.Add(x));
 
@@ -56,7 +56,7 @@ namespace FlightQuery.Context
                 //semantic check
                 if ((_flags & ExecuteFlags.Semantic) == ExecuteFlags.Semantic)
                 {
-                    var inter = new Interpreter.Execution.Interpreter(ast, Authorization, _semanticHttpExecutor);
+                    var inter = new Interpreter.Execution.Interpreter(ast, Authorization, _flags, _semanticHttpExecutor);
                     inter.Execute();
                     if (inter.Errors.Count > 0)
                         Errors = inter.Errors;
@@ -66,7 +66,7 @@ namespace FlightQuery.Context
 
                 if (Errors.Count == 0 && ((_flags & ExecuteFlags.Execute) == ExecuteFlags.Execute)) // we run
                 {
-                    var inter = new Interpreter.Execution.Interpreter(ast, Authorization, _httpExecutor);
+                    var inter = new Interpreter.Execution.Interpreter(ast, Authorization, _flags, _httpExecutor);
                     table = inter.Execute();
                     Errors = inter.Errors;
                 }

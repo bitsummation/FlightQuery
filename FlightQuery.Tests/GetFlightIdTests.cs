@@ -3,7 +3,6 @@ using FlightQuery.Sdk;
 using FlightQuery.Sdk.Model.V2;
 using Moq;
 using NUnit.Framework;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -25,7 +24,7 @@ where ident = 'DAL503'
             context.Run();
 
             Assert.IsTrue(context.Errors.Count == 1);
-            Assert.IsTrue(context.Errors[0].Message == "departuretime is required");
+            Assert.IsTrue(context.Errors[0].Message == "departureTime is required");
         }
 
         [Test]
@@ -45,7 +44,7 @@ where ident = 'DAL503' and departuretime = '2020-3-7 9:15'
                 Assert.IsTrue(start != null);
                 Assert.IsTrue(start.Value == "DAL503");
 
-                var end = args.Variables.Where(x => x.Variable == "departuretime").SingleOrDefault();
+                var end = args.Variables.Where(x => x.Variable == "departureTime").SingleOrDefault();
                 Assert.IsTrue(end.Value == "1583572500");
             }).Returns(() => new ApiExecuteResult<GetFlightId>(new GetFlightId()));
 
@@ -79,16 +78,37 @@ where ident = 'DAL503' and departuretime = '2020-3-7 9:15'
         }
 
         [Test]
-        public void TestJoin()
+        public void TestExecuteNoFlightID()
+        {
+            string code = @"
+select faFlightID
+from GetFlightId
+where ident = 'DAL503' and departuretime = '2020-3-7 9:15'
+";
+
+            var mock = new Mock<IHttpExecutorRaw>();
+            
+            mock.Setup(x => x.GetFlightID(It.IsAny<HttpExecuteArg>())).Returns(
+                new ExecuteResult() { Result = @"{""error"":""NO_DATA flight not found""}" }
+            );
+
+            var context = new RunContext(code, string.Empty, ExecuteFlags.Run, new EmptyHttpExecutor(), new HttpExecutor(mock.Object));
+            var result = context.Run();
+            Assert.IsTrue(context.Errors.Count == 0);
+            Assert.IsTrue(result.Rows.Length == 0);
+        }
+
+        [Test]
+        public void TestJoinNoFlightId()
         {
             string code = @"
 select a.ident, faFlightID
 from AirlineFlightSchedules a
 join GetFlightId f on f.ident = a.ident and f.departureTime = a.departureTime 
-where a.departuretime < '2020-3-7 9:15' and a.origin = 'katl'
+where a.departuretime > '2020-1-21 9:15'
 ";
 
-            var mock = new Mock<IHttpExecutor>();
+            var mock = new Mock<IHttpExecutorRaw>();
             mock.Setup(x => x.AirlineFlightSchedule(It.IsAny<HttpExecuteArg>())).Returns(() =>
             {
                 string source = string.Empty;
@@ -98,20 +118,92 @@ where a.departuretime < '2020-3-7 9:15' and a.origin = 'katl'
                 {
                     source = reader.ReadToEnd();
                 }
-                return new ApiExecuteResult<IEnumerable<AirlineFlightSchedule>>(Json.DeserializeObject<AirlineFlightSchedule[]>(source));
+                return new ExecuteResult() { Result = source };
+            });
+            mock.Setup(x => x.GetFlightID(It.IsAny<HttpExecuteArg>())).Returns(
+                 new ExecuteResult() { Result = @"{""error"":""NO_DATA flight not found""}" }
+             );
+
+            var context = new RunContext(code, string.Empty, ExecuteFlags.Run, new EmptyHttpExecutor(), new HttpExecutor(mock.Object));
+            var result = context.Run();
+            Assert.IsTrue(context.Errors.Count == 0);
+            Assert.IsTrue(result.Rows.Length == 0);
+
+        }
+
+        [Test]
+        public void TestJoinWithApi200Error()
+        {
+            string code = @"
+select *   
+from airlineflightschedules a
+join getflightid i on i.departureTime = a.departuretime and a.ident = i.ident
+where a.departuretime > '2020-4-10 8:00' and a.origin = 'PHLI' and a.ident = 'DAL1381'
+";
+
+            var mock = new Mock<IHttpExecutorRaw>();
+            mock.Setup(x => x.AirlineFlightSchedule(It.IsAny<HttpExecuteArg>())).Returns(
+                new ExecuteResult() { Result = @"{""error"":""INVALID_ARGUMENT startDate is too far in the past(3 months)""}" }
+            );
+            mock.Setup(x => x.GetFlightID(It.IsAny<HttpExecuteArg>())).Returns<HttpExecuteArg>((args) =>
+            {
+                string source = string.Empty;
+                var assembly = Assembly.GetExecutingAssembly();
+                using (Stream stream = assembly.GetManifestResourceStream("FlightQuery.Tests.GetFlightId.json"))
+                using (StreamReader reader = new StreamReader(stream))
+                {
+                    source = reader.ReadToEnd();
+                }
+                return new ExecuteResult() { Result = source };
+            });
+
+            var context = new RunContext(code, string.Empty, ExecuteFlags.Run, new EmptyHttpExecutor(), new HttpExecutor(mock.Object));
+            var result = context.Run();
+            Assert.IsTrue(context.Errors.Count == 1);
+            Assert.IsTrue(context.Errors[0].Message == "Error executing request: INVALID_ARGUMENT startDate is too far in the past(3 months)");
+        }
+
+        [Test]
+        public void TestJoin()
+        {
+            string code = @"
+select a.ident, faFlightID
+from AirlineFlightSchedules a
+join GetFlightId f on f.ident = a.ident and f.departureTime = a.departureTime 
+where a.departuretime > '2020-1-21 9:15'
+";
+
+            var mock = new Mock<IHttpExecutorRaw>();
+            mock.Setup(x => x.AirlineFlightSchedule(It.IsAny<HttpExecuteArg>())).Returns(() =>
+            {
+                string source = string.Empty;
+                var assembly = Assembly.GetExecutingAssembly();
+                using (Stream stream = assembly.GetManifestResourceStream("FlightQuery.Tests.AirlineFlightSchedule.json"))
+                using (StreamReader reader = new StreamReader(stream))
+                {
+                    source = reader.ReadToEnd();
+                }
+                return new ExecuteResult() { Result = source };
             });
             mock.Setup(x => x.GetFlightID(It.IsAny<HttpExecuteArg>())).Returns<HttpExecuteArg>((args) =>
             {
-                return new ApiExecuteResult<GetFlightId>(new GetFlightId() { faFlightID = "XYZ1234-1530000000-airline-0500" });
+                string source = string.Empty;
+                var assembly = Assembly.GetExecutingAssembly();
+                using (Stream stream = assembly.GetManifestResourceStream("FlightQuery.Tests.GetFlightId.json"))
+                using (StreamReader reader = new StreamReader(stream))
+                {
+                    source = reader.ReadToEnd();
+                }
+                return new ExecuteResult() { Result = source };
             });
             
-            var context = new RunContext(code, string.Empty, ExecuteFlags.Run, new EmptyHttpExecutor(), mock.Object);
+            var context = new RunContext(code, string.Empty, ExecuteFlags.Run, new EmptyHttpExecutor(), new HttpExecutor(mock.Object));
             var result = context.Run();
 
             Assert.IsTrue(context.Errors.Count == 0);
-            Assert.IsTrue(result.Rows.Length == 6);
+            Assert.IsTrue(result.Rows.Length == 15);
 
-            mock.Verify(v => v.GetFlightID(It.IsAny<HttpExecuteArg>()), Times.Exactly(6));
+            mock.Verify(v => v.GetFlightID(It.IsAny<HttpExecuteArg>()), Times.Exactly(15));
             mock.Verify(v => v.AirlineFlightSchedule(It.IsAny<HttpExecuteArg>()), Times.Once());
         }
 
