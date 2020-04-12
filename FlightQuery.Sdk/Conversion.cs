@@ -12,10 +12,23 @@ namespace FlightQuery.Sdk
         public static Dictionary<string, Func<object, object>> Map = new Dictionary<string, Func<object, object>>
         {
             {"String-DateTime", ConvertStringToDateTime},
+            {"DateTime-String", ConvertDateTimeToString},
+
             {"DateTime-Int64", ConvertDateTimeToLong},
             {"Int64-DateTime", ConvertLongToDateTime}
         };
-        
+
+        public static object NoOp (object f)
+        {
+            return f;
+        }
+
+        public static object ConvertDateTimeToString(object f)
+        {
+            var date = (DateTime)f;
+            return date.ToString(Json.PrintDateTimeFormat);
+        }
+
         public static object ConvertLongToDateTime(object f)
         {
             long unixTime = (long)f;

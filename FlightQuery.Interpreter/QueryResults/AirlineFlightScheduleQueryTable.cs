@@ -26,17 +26,17 @@ namespace FlightQuery.Interpreter.QueryResults
            
             if(QueryArgs.ContainsVariable("origin"))
             {
-                QueryArgs["origin"].PropertyValue = new PropertyValue(((string)QueryArgs["origin"].PropertyValue.Value).ToUpper());
+                QueryArgs["origin"].PropertyValue = new PropertyValue(((string)(QueryArgs["origin"].PropertyValue.Value ?? "")).ToUpper());
             }
 
             if (QueryArgs.ContainsVariable("destination"))
             {
-                QueryArgs["destination"].PropertyValue = new PropertyValue(((string)QueryArgs["destination"].PropertyValue.Value).ToUpper());
+                QueryArgs["destination"].PropertyValue = new PropertyValue(((string)(QueryArgs["destination"].PropertyValue.Value ?? "")).ToUpper());
             }
 
             if (QueryArgs.ContainsVariable("ident"))
             {
-                QueryArgs["ident"].PropertyValue = new PropertyValue(((string)QueryArgs["ident"].PropertyValue.Value).ToUpper());
+                QueryArgs["ident"].PropertyValue = new PropertyValue(((string)(QueryArgs["ident"].PropertyValue.Value ?? "")).ToUpper());
             }
 
             var departTimeCount = QueryArgs.Args.Where(x => x.Variable == "departuretime").Count();

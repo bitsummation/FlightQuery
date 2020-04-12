@@ -21,7 +21,7 @@ namespace FlightQuery.Interpreter.Execution
                 {
                     foreach(var p in executeTable.Descriptor.Properties)
                     {
-                        p.SelectedIndex = selectedIndex;
+                        p.SelectedIndex.Add(selectedIndex);
                         if(selectedIndex >= statement.Args.Length)
                             statement.Children.Add(new SingleVariableExpression(statement.ParseInfo) { Id = p.Name });
 
@@ -42,8 +42,8 @@ namespace FlightQuery.Interpreter.Execution
 
             for (int selectIndex = 0; selectIndex < statement.Args.Length; selectIndex++)
             {
-                var table = executedTables.Where(x => x.Descriptor.Properties.Where(x => x.SelectedIndex == selectIndex).SingleOrDefault() != null).Single();
-                var prop = table.Descriptor.Properties.Where(x => x.SelectedIndex == selectIndex).Single();
+                var table = executedTables.Where(x => x.Descriptor.Properties.Where(x => x.SelectedIndex.Contains(selectIndex)).SingleOrDefault() != null).Single();
+                var prop = table.Descriptor.Properties.Where(x => x.SelectedIndex.Contains(selectIndex)).Single();
                 int propIndex = table.Descriptor.GetDataRowIndex(prop.Name);
 
                 descriptors.Add(new SelectColumn() {Table = table, PropDescriptor = prop, PropIndex = propIndex });

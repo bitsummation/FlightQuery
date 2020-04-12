@@ -55,8 +55,16 @@ namespace FlightQuery.Interpreter.Execution
             if (arg.Property.Type != arg.PropertyValue.Value.GetType())
             {
                 string key = arg.PropertyValue.Value.GetType().Name + "-" + arg.Property.Type.Name;
-                var converstion = Conversion.Map[key](arg.PropertyValue.Value);
-                arg.PropertyValue = new PropertyValue(converstion);
+                Func<object, object> map;
+                if (!Conversion.Map.ContainsKey(key)) //can't convert.
+                {
+                    map = Conversion.NoOp;
+                }
+                else
+                    map = Conversion.Map[key];
+
+                var conversion = map(arg.PropertyValue.Value);
+                arg.PropertyValue = new PropertyValue(conversion);
             }
         }
 

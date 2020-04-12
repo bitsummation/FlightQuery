@@ -1,7 +1,7 @@
 ﻿var intellisense = {
 
     globalTriggers : ["from", "join"],
-    scopeTriggers: ["select", "on", "where", "and"],
+    scopeTriggers: ["select", "on", "where", "and", ","],
 
     fetch: function (code, callback) {
        
@@ -21,11 +21,11 @@
         var that = this;
        
         this.fetch(args.code, function (scope) {
-            console.log(scope);
+           
             if (that.globalTriggers.includes(args.token)) {
                 callback(scope.global.keys)
             }
-            else if (that.scopeTriggers.includes(args.token)) {
+            else if (that.scopeTriggers.includes(args.token) || args.promptToken == ',') {
                 if (scope.queryScope.keys.length > 0) {
                     var prompts = []
                     prompts = prompts.concat(scope.queryScope.keys);
@@ -58,26 +58,21 @@
 
         var staticWordCompleter = {
             getCompletions: function (editor, session, pos, prefix, callback) {
-                console.log("fetch completions");
-                console.log({ "prefix": prefix });
-
+               
                 var args = {};
                 var firstToken = editor.session.getTokenAt(pos.row, pos.column);
                 if (firstToken != null) {
-                    console.log({ "firsttoken": firstToken.value });
                     args.promptToken = firstToken.value;
                 }
                 
                 var token = editor.session.getTokenAt(pos.row, pos.column - 1);
                 if (token != null) {
                     token = token.value.toLowerCase();
-                    args.token = token;
-                    console.log({ "keyword": token });
+                    args.token = token.trim();
                 }
 
                 var code = editor.getValue();
                 args.code = code;
-                console.log({"source": code });
                 that.getPrompts(args, function (wordList) {
 
                     callback(null, wordList.map(function (word) {
@@ -99,15 +94,15 @@
         var doLiveAutocomplete = function (e) {
             var editor = e.editor;
             if (e.command.name === "insertstring") {
-                // Only autocomplete if there's a prefix that can be matched
-                console.log({ "insert": e.args })
-                if (/[\.|\s]/.test(e.args)) {
+                // Only autocomplete if there's a prefix that can be matched 
+                if (/[\.|\s|,]/.test(e.args)) {
                     editor.execCommand("startAutocomplete")
                 }
             }
         };
 
         editor.commands.on('afterExec', doLiveAutocomplete);
+        editor.setShowPrintMargin(false);
         editor.setOptions({
             enableBasicAutocompletion: true,
             fontSize: "12px"

@@ -10,7 +10,7 @@ namespace FlightQuery.Interpreter.Descriptors.Model
     {
         public PropertyDescriptor()
         {
-            SelectedIndex = -1;
+            SelectedIndex = new List<int>(); //can select same column multiple times
         }
 
         public string Name { get; set; }
@@ -18,7 +18,7 @@ namespace FlightQuery.Interpreter.Descriptors.Model
         public bool Queryable { get; set; }
         public bool Required { get; set; }
 
-        public int SelectedIndex { get; set; }
+        public List<int> SelectedIndex { get; set; }
 
         public static PropertyDescriptor[] GenerateQueryDescriptor(Type dto)
         {

@@ -141,7 +141,52 @@ where
             Assert.IsTrue(context.ScopeModel.QueryScope.Items.ContainsKey("airportinfo"));
         }
 
-     
+        [Test]
+        public void TestSameSelectVariable()
+        {
+            string code = @"
+select airportCode, airportCode, 
+from AirportInfo
+where airportCode = 'kaus'
+";
+
+            var context = new RunContext(code, string.Empty, ExecuteFlags.Semantic | ExecuteFlags.Intellisense);
+            context.Run();
+
+            Assert.IsTrue(context.ScopeModel.QueryScope.Items.ContainsKey("airportinfo"));
+        }
+
+        [Test]
+        public void TwoSameTable()
+        {
+            string code = @"
+select *
+from airlineflightschedules a
+join airlineflightschedules f on f.destination = a.
+";
+
+            var context = new RunContext(code, string.Empty, ExecuteFlags.Semantic | ExecuteFlags.Intellisense);
+            context.Run();
+
+            Assert.IsTrue(context.ScopeModel.QueryScope.Items.ContainsKey("a"));
+            Assert.IsTrue(context.ScopeModel.QueryScope.Items.ContainsKey("f"));
+        }
+
+        [Test]
+        public void TestMismatchingComparisionTypes()
+        {
+            string code = @"
+select 
+from airlineflightschedules a
+join airportinfo ar on ar.airportCode = a.arrivaltime
+";
+
+            var context = new RunContext(code, string.Empty, ExecuteFlags.Semantic | ExecuteFlags.Intellisense);
+            context.Run();
+
+            Assert.IsTrue(context.ScopeModel.QueryScope.Items.ContainsKey("a"));
+            Assert.IsTrue(context.ScopeModel.QueryScope.Items.ContainsKey("ar"));
+        }
 
     }
 }

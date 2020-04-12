@@ -19,7 +19,7 @@ namespace FlightQuery.Interpreter.Execution
             var prop = table.Descriptor[expression.Id];
             if (arg == null) //in select context. No boolean result needed
             {
-                prop.SelectedIndex = table.SelectIndex;
+                prop.SelectedIndex.Add(table.SelectIndex);
                 return;
             }
 
