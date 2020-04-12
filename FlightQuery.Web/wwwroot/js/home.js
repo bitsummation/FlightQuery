@@ -19,10 +19,7 @@
 
     getPrompts: function (args, callback) {
         var that = this;
-        /*if (! (this.globalTriggers.includes(token) || this.scopeTriggers.includes(token) )) {
-            callback([]);
-        }*/
-
+       
         this.fetch(args.code, function (scope) {
             console.log(scope);
             if (that.globalTriggers.includes(args.token)) {
@@ -112,7 +109,8 @@
 
         editor.commands.on('afterExec', doLiveAutocomplete);
         editor.setOptions({
-            enableBasicAutocompletion: true
+            enableBasicAutocompletion: true,
+            fontSize: "12px"
         });
 
     }
@@ -136,6 +134,7 @@ var home = {
     preLoad: function () {
         $("#results").empty();
         $("#loading").show();
+        $(".green-form input").removeClass("error");
     },
 
     postLoad: function () {
@@ -193,6 +192,12 @@ var home = {
             contentType: 'text/plain',
             success: function (data) {
                 that.loadResults(data);
+            },
+            statusCode: {
+                401: function () {
+                    that.loadResults({ errors: [{ message: 'Authentication error' }] });
+                    $(".green-form input").addClass("error");
+                }
             },
             error: function () {
                 that.loadResults({ errors: [{ message: 'Bad error. Interpreter crashy' }] });

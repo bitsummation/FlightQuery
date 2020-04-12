@@ -3,6 +3,7 @@ using FlightQuery.Sdk;
 using FlightQuery.Web.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace FlightQuery.Web.Controllers
@@ -28,7 +29,7 @@ namespace FlightQuery.Web.Controllers
 
         [HttpPost]
         [Route("query")]
-        public async Task<ResultViewModel> Query()
+        public async Task<IActionResult> Query()
         {
             string query = string.Empty;
             using (var reader = new StreamReader(Request.Body))
@@ -40,7 +41,19 @@ namespace FlightQuery.Web.Controllers
             var context = new RunContext(query, authorization, ExecuteFlags.Run);
             var result = context.Run();
 
-            return new ResultViewModel() {Table = result, Errors = context.Errors };
+            var isUnauthorized = context.Errors.Any(x =>
+            {
+                var apiError = x as ApiExecuteError;
+                if(apiError != null)
+                {
+                    return apiError.Type == ApiExecuteErrorType.AuthError;
+                }
+                return false;
+            });
+            if(isUnauthorized)
+                return Unauthorized();
+
+            return Ok(new ResultViewModel() {Table = result, Errors = context.Errors });
         }
     }
 }
