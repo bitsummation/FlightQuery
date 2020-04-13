@@ -72,6 +72,16 @@ namespace FlightQuery.Interpreter.QueryResults
                     param.Variable = "endDate";
                     QueryArgs.Add(new QueryArgs { Variable = "startDate", PropertyValue = new PropertyValue(Conversion.MinUnixDate) });
                 }
+                else if(param is EqualQueryArg)
+                {
+                    param.Variable = "startDate";
+                    var startDate = (DateTime)Conversion.ConvertLongToDateTime(param.PropertyValue.Value);
+                    var endDate = startDate.AddMinutes(1); 
+                    startDate = startDate.AddMinutes(-1);
+
+                    param.PropertyValue = new PropertyValue(Conversion.ConvertDateTimeToLong(startDate));
+                    QueryArgs.Add(new QueryArgs { Variable = "endDate", PropertyValue = new PropertyValue(Conversion.ConvertDateTimeToLong(endDate)) });
+                }
             }
             else //two departureTImes
             {

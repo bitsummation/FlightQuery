@@ -1,6 +1,5 @@
 ﻿using FlightQuery.Sdk.Semantic;
 using FlightQuery.Sdk.SqlAst;
-using System;
 
 namespace FlightQuery.Interpreter.Execution
 {
@@ -9,6 +8,12 @@ namespace FlightQuery.Interpreter.Execution
         public void Visit(MemberVariableExpression expression)
         {
             var table = _scope.TableLookupSameLevel(expression.Alias);
+            if(table == null) //table is null when invalid alias
+            {
+                Errors.Add(new VariableNotFound(expression.Alias, expression.ParseInfo));
+                return;
+            }
+            
             if (!table.Descriptor.ContainsKey(expression.Id))
             {
                 Errors.Add(new VariableNotFound(expression.Id, expression.ParseInfo));

@@ -119,8 +119,8 @@ var home = {
     },
 
     exampleQueries: {
-        airportInfo: "select *\nfrom AirportInfo\nwhere airportCode = 'kaus'",
-        gir: "Query().Filter('Green.GIR').PerPlayer().Count().Descending().Print()",
+        airportInfo: "select *\nfrom airportinfo\nwhere airportCode = 'kaus'",
+        austinDepartures: "select *\nfrom airlineflightschedules\nwhere departuretime > '{current_date}' and origin = 'kaus'",
         girBirdies: "Query().Filter('Green.GIR.Holed').PerPlayer().Count().Descending().Print()",
         saves: "Query().Filter('Green.Holed').Not('.GIR').PreviousShot().Not('Green').Score('Par').PerPlayer().Count().Descending().Print()",
         missedSave: "Query().Filter('Green').Not('.GIR').PreviousShot().Not('Green').Score('Bogey').PerPlayer().Count().Descending().Print()"
@@ -139,8 +139,13 @@ var home = {
 
     loadExamples: function (attr) {
         var query = this.exampleQueries[attr];
+        var d = new Date();
+        var dateString = d.getUTCFullYear() + "-" + (d.getUTCMonth() + 1) + "-" + d.getUTCDate() + " " + d.getUTCHours() + ":" + ((d.getMinutes() < 10 ? '0' : '') + d.getMinutes())
+       
+        query = query.replace("{current_date}", dateString)
         var editor = ace.edit("code");
         editor.setValue(query);
+        this.renderQuery();
     },
 
     initExamples: function () {
@@ -164,19 +169,33 @@ var home = {
         return editor.getValue();
     },
 
+    getUserName: function () {
+        return $("#username").val();
+    },
+
+    getPassword: function () {
+        return $("#pass").val();
+    },
+
     getBasicHeader: function () {
-        var userName = $("#username").val();
-        var pass = $("#pass").val();
+        var userName = this.getUserName();
+        var pass = this.getPassword();
         var token = userName + ":" + pass;
         var hash = btoa(token);
         return "Basic " + hash;
     },
 
     renderQuery: function () {
+        if (this.getUserName() == '' || this.getPassword() == '') {
+            $(".green-form input").addClass("error");
+            this.loadResults({ errors: [{ message: 'Authentication error' }] });
+            return;
+        }
+
         this.preLoad();
         var data = this.getQuery();
         var that = this;
-
+       
         $.ajax({
             type: "Post",
             beforeSend: function (request) {

@@ -38,6 +38,9 @@ namespace FlightQuery.Interpreter.Execution
                 }
             }
 
+            if (Errors.Count > 0) //errors no need to select at this point
+                return;
+
             var descriptors = new List<SelectColumn>();
 
             for (int selectIndex = 0; selectIndex < statement.Args.Length; selectIndex++)

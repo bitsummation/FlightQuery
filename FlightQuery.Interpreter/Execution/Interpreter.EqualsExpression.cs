@@ -7,10 +7,10 @@ namespace FlightQuery.Interpreter.Execution
     {
         public void Visit(EqualsExpression expression)
         {
-            var leftArg = new QueryPhaseArgs() {BoolQueryArg = new QueryArgs() };
+            var leftArg = new QueryPhaseArgs() {BoolQueryArg = new EqualQueryArg() };
             VisitChild(expression.Left, leftArg);
 
-            var rightArg = new QueryPhaseArgs() { BoolQueryArg = new QueryArgs() };
+            var rightArg = new QueryPhaseArgs() { BoolQueryArg = new EqualQueryArg() };
             VisitChild(expression.Right, rightArg);
             
             var parentArgs = _visitStack.Peek();

@@ -123,6 +123,32 @@ where '2020-3-7 9:15' > a.departuretime and origin = 'kaus' and destination = 'k
         }
 
         [Test]
+        public void TestDepartureTimeEqual()
+        {
+            string code = @"
+select arrivaltime, aircrafttype
+from AirlineFlightSchedules a
+where '2020-3-7 9:15' = departuretime
+";
+            var mock = new Mock<IHttpExecutorRaw>();
+            mock.Setup(x => x.AirlineFlightSchedule(It.IsAny<HttpExecuteArg>())).Callback<HttpExecuteArg>(args =>
+            {
+                Assert.IsTrue(args.Variables.Count() == 2);
+                var start = args.Variables.Where(x => x.Variable == "startDate").SingleOrDefault();
+                Assert.IsTrue(start != null);
+                Assert.IsTrue(start.Value == "1583572440");
+
+                var end = args.Variables.Where(x => x.Variable == "endDate").SingleOrDefault();
+                Assert.IsTrue(end.Value == "1583572560");
+            });
+
+            var context = new RunContext(code, string.Empty, ExecuteFlags.Semantic, new HttpExecutor(mock.Object));
+            context.Run();
+
+            mock.Verify(v => v.AirlineFlightSchedule(It.IsAny<HttpExecuteArg>()), Times.Once());
+        }
+
+        [Test]
         public void TestDepartureTimeLessThanPropertyRight()
         {
             string code = @"

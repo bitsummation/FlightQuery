@@ -7,6 +7,24 @@ namespace FlightQuery.Tests
     [TestFixture]
     public class SemanticTests
     {
+
+        [Test]
+        public void TestInvalidAliasinSelect()
+        {
+            string code = @"
+select f.ident, f.departuretime, f.arrivaltime, a.airportCode
+from airlineflightschedules f
+join airportinfo d on d.airportCode = f.destination
+where f.departuretime > '2020-4-13 2:8' and f.origin = 'kaus'
+";
+
+            var context = new RunContext(code, string.Empty, ExecuteFlags.Semantic);
+            context.Run();
+
+            Assert.IsTrue(context.Errors.Count == 1);
+            Assert.IsTrue(context.Errors[0].Message == "a variable not found at line=2, column=48");
+        }
+
         [Test]
         public void TestInvalidWhereVariable()
         {
@@ -25,7 +43,24 @@ where blah < 55
         }
 
         [Test]
-        public void TestAmbiguousVariable()
+        public void TestAmbiguousVariableInSelect()
+        {
+            string code = @"
+select a.ident, faFlightID, ident
+from AirlineFlightSchedules a
+join GetFlightId f on f.ident = a.ident and f.departureTime = a.departureTime 
+where a.departuretime < '2020-3-7 9:15' and a.origin = 'katl'
+";
+
+            var context = new RunContext(code, string.Empty, ExecuteFlags.Semantic);
+            context.Run();
+
+            Assert.IsTrue(context.Errors.Count == 1);
+            Assert.IsTrue(context.Errors[0].Message == "ident is ambiguous at line=2, column=28");
+        }
+
+        [Test]
+        public void TestAmbiguousVariableInJoin()
         {
             string code = @"
 select a.ident, faFlightID
