@@ -126,6 +126,24 @@ where departuretime > '2020-4-10 1:00' and origin = 'kaus'
             Assert.IsTrue(context.ScopeModel.QueryScope.Items.ContainsKey("o"));
         }
 
+        [Test]
+        public void TestMultpleJoin()
+        {
+            string code = @"
+select f.ident, f.departuretime, f.arrivaltime, d.name
+from airlineflightschedules f
+join airportinfo d on d.airportCode = f.departuretime
+join 
+where f.departuretime > '2020-4-13 2:8' and f.origin = 'kaus'
+";
+            var context = new RunContext(code, string.Empty, ExecuteFlags.Semantic | ExecuteFlags.Intellisense);
+            context.Run();
+
+        
+            Assert.IsTrue(context.ScopeModel.QueryScope.Items.ContainsKey("f"));
+            Assert.IsTrue(context.ScopeModel.QueryScope.Items.ContainsKey("d"));
+
+        }
 
         [Test]
         public void TestWhere()

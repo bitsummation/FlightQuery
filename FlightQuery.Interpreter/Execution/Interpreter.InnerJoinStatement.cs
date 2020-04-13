@@ -20,7 +20,7 @@ namespace FlightQuery.Interpreter.Execution
                 tableVariable = statement.Name;
 
             if (_scope.IsTableDefineSameLevel(tableName)) //if variable exists at this level we have conflict.
-                throw new InvalidOperationException("");
+                Errors.Add(new TableConflict(tableName, statement.ParseInfo));
 
             if (!_scope.IsTableDefinedAnyLevel(tableName)) //we don't know this table at any level
             {

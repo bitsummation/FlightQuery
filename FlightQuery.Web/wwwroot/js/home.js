@@ -121,9 +121,7 @@ var home = {
     exampleQueries: {
         airportInfo: "select *\nfrom airportinfo\nwhere airportCode = 'kaus'",
         austinDepartures: "select *\nfrom airlineflightschedules\nwhere departuretime > '{current_date}' and origin = 'kaus'",
-        girBirdies: "Query().Filter('Green.GIR.Holed').PerPlayer().Count().Descending().Print()",
-        saves: "Query().Filter('Green.Holed').Not('.GIR').PreviousShot().Not('Green').Score('Par').PerPlayer().Count().Descending().Print()",
-        missedSave: "Query().Filter('Green').Not('.GIR').PreviousShot().Not('Green').Score('Bogey').PerPlayer().Count().Descending().Print()"
+        austinDeparturesFriendly: "select f.ident, f.departuretime, f.arrivaltime, o.name, d.name\nfrom airlineflightschedules f\njoin airportinfo d on d.airportCode = f.destination\njoin airportinfo o on o.airportCode = f.origin\nwhere f.departuretime > '{current_date}' and f.origin = 'kaus'"
     },
 
     preLoad: function () {
