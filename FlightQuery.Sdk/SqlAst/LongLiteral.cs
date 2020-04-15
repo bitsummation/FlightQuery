@@ -1,10 +1,10 @@
 ﻿namespace FlightQuery.Sdk.SqlAst
 {
-    public class IntegerLiteral : VariableExpresion
+    public class LongLiteral : VariableExpresion
     {
-        public IntegerLiteral(ParseInfo parseInfo) : base(parseInfo) { }
+        public LongLiteral(ParseInfo parseInfo) : base(parseInfo) { }
 
-        public int Value { get; set; }
+        public long Value { get; set; }
 
         public override void Accept(IElementVisitor visitor)
         {

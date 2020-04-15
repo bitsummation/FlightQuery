@@ -135,6 +135,11 @@ namespace FlightQuery.Parser.AntlrParser
             return Visit(context.b);
         }
 
+        public override Element VisitNotEqualStatementExp(SqlParser.NotEqualStatementExpContext context)
+        {
+            return new NotEqualsExpression(CreateParseInfo(context));
+        }
+
         public override Element VisitEqualsStatmentExp(SqlParser.EqualsStatmentExpContext context)
         {
             return new EqualsExpression(CreateParseInfo(context));
@@ -152,7 +157,7 @@ namespace FlightQuery.Parser.AntlrParser
 
         public override Element VisitIntegerExp(SqlParser.IntegerExpContext context)
         {
-            return new IntegerLiteral(CreateParseInfo(context)) { Value = int.Parse(context.GetText()) };
+            return new LongLiteral(CreateParseInfo(context)) { Value = long.Parse(context.GetText()) };
         }
 
         public override Element VisitStringLiteralExp(SqlParser.StringLiteralExpContext context)

@@ -1,0 +1,29 @@
+{
+  "FlightInfoExResult": {
+    "next_offset": -1,
+    "flights": [
+      {
+        "faFlightID": "SWA4567-1586580328-airline-0591",
+        "ident": "SWA4567",
+        "aircrafttype": "B738",
+        "filed_ete": "03:25:00",
+        "filed_time": 1586580328,
+        "filed_departuretime": 1586829600,
+        "filed_airspeed_kts": 376,
+        "filed_airspeed_mach": "",
+        "filed_altitude": 0,
+        "route": "",
+        "actualdeparturetime": -1,
+        "estimatedarrivaltime": -1,
+        "actualarrivaltime": -1,
+        "diverted": "",
+        "origin": "KAUS",
+        "destination": "KSJC",
+        "originName": "Austin-Bergstrom Intl",
+        "originCity": "Austin, TX",
+        "destinationName": "San Jose Int'l",
+        "destinationCity": "San Jose, CA"
+      }
+    ]
+  }
+}

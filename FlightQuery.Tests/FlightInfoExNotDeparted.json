@@ -1,0 +1,29 @@
+{
+  "FlightInfoExResult": {
+    "next_offset": -1,
+    "flights": [
+      {
+        "faFlightID": "SWA147-1586580328-airline-0030",
+        "ident": "SWA147",
+        "aircrafttype": "B738",
+        "filed_ete": "02:30:00",
+        "filed_time": 1586580328,
+        "filed_departuretime": 1586837100,
+        "filed_airspeed_kts": 448,
+        "filed_airspeed_mach": "",
+        "filed_altitude": 400,
+        "route": "BNDIA2 BNDIA KINEY DLF FST J86 PGS TYSSN5",
+        "actualdeparturetime": 0,
+        "estimatedarrivaltime": 1586846100,
+        "actualarrivaltime": 0,
+        "diverted": "",
+        "origin": "KAUS",
+        "destination": "KLAS",
+        "originName": "Austin-Bergstrom Intl",
+        "originCity": "Austin, TX",
+        "destinationName": "McCarran Intl",
+        "destinationCity": "Las Vegas, NV"
+      }
+    ]
+  }
+}

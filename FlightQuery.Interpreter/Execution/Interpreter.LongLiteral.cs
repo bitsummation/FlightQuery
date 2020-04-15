@@ -5,9 +5,9 @@ namespace FlightQuery.Interpreter.Execution
 {
     public partial class Interpreter
     {
-        public void Visit(IntegerLiteral literal)
+        public void Visit(LongLiteral literal)
         {
-            var arg = ((QueryPhaseArgs)_visitStack.Peek()).BoolQueryArg;
+            var arg = _visitStack.Peek().BoolQueryArg;
             arg.PropertyValue = new PropertyValue(literal.Value);
         }
     }

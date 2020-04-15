@@ -65,7 +65,11 @@ namespace FlightQuery.Web
 
             public override void Write(Utf8JsonWriter writer, DateTime value, JsonSerializerOptions options)
             {
-                writer.WriteStringValue(value.ToString(Json.PrintDateTimeFormat));
+                long val = (long)Conversion.ConvertDateTimeToLong(value);
+                if(val <= 0)
+                    writer.WriteStringValue(val.ToString());
+                else
+                    writer.WriteStringValue(value.ToString(Json.PrintDateTimeFormat));
             }
         }
 

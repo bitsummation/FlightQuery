@@ -9,6 +9,23 @@ namespace FlightQuery.Tests
     {
 
         [Test]
+        public void TestJoinConditionInWhereNoError()
+        {
+            string code = @"
+select *
+from airlineflightschedules a
+join getflightid f on f.departureTime = a.departuretime and f.ident = a.ident
+join flightinfoex e on e.faFlightID = f.faFlightID 
+where a.departuretime > '2020-4-14 1:31' and a.origin = 'kaus' and e.actualarrivaltime = 0 and e.actualdeparturetime != 0
+";
+
+            var context = new RunContext(code, string.Empty, ExecuteFlags.Semantic);
+            context.Run();
+
+            Assert.IsTrue(context.Errors.Count == 0);
+        }
+
+        [Test]
         public void TestInvalidAliasinSelect()
         {
             string code = @"
@@ -38,8 +55,9 @@ where blah < 55
             context.Run();
 
             Assert.IsTrue(context.Errors.Count == 2);
-            Assert.IsTrue(context.Errors[0].Message == "blah variable not found at line=4, column=6");
-            Assert.IsTrue(context.Errors[1].Message == "departuretime is required");
+
+            Assert.IsTrue(context.Errors[0].Message == "departuretime is required");
+            Assert.IsTrue(context.Errors[1].Message == "blah variable not found at line=4, column=6");
         }
 
         [Test]

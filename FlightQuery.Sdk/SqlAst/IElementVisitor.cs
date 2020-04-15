@@ -12,13 +12,14 @@
         void Visit(AndExpression expression);
         void Visit(OrExpression expression);
         void Visit(EqualsExpression expression);
+        void Visit(NotEqualsExpression expression);
         void Visit(GreaterThanExpression expression);
         void Visit(LessThanExpression expression);
         
         void Visit(MemberVariableExpression expression);
         void Visit(SingleVariableExpression expression);
 
-        void Visit(IntegerLiteral literal);
+        void Visit(LongLiteral literal);
         void Visit(StringLiteral literal);
     }
 }

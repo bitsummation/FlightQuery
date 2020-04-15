@@ -18,7 +18,7 @@ STAR : '*';
 AND : A N D;
 OR : O R;
 
-INT : DIGIT+;
+INT : MINUS? DIGIT+;
 
 EQUALS : '=';
 LESSTHAN : '<';
@@ -57,6 +57,7 @@ fragment X:('x'|'X');
 fragment Y:('y'|'Y');
 fragment Z:('z'|'Z');
 
+fragment MINUS:'-';
 fragment DIGIT: '0'..'9';
 fragment NEWLINE : ('\n'|'\r');
 fragment LETTER :('a'..'z' | 'A'..'Z'); 

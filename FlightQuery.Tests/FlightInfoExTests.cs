@@ -30,6 +30,7 @@ where a.departuretime > '2020-4-10 8:00' and a.origin = 'kaus'
             Assert.IsTrue(context.Errors[0].Message == "faFlightID is required");
 
         }
+
         [Test]
         public void TestMissingRequired()
         {
@@ -43,6 +44,66 @@ where filed_ete = 'whatever'
 
             Assert.IsTrue(context.Errors.Count == 1);
             Assert.IsTrue(context.Errors[0].Message == "faFlightID is required");
+        }
+
+        [Test]
+        public void TestExecuteCancelled()
+        {
+            string code = @"
+select *
+from FlightInfoEx
+where faFlightID = 'SWA4567-1586580328-airline-0591' and actualdeparturetime = -1 and estimatedarrivaltime = -1 and actualarrivaltime = -1
+";
+            var mock = new Mock<IHttpExecutorRaw>();
+            mock.Setup(x => x.GetFlightInfoEx(It.IsAny<HttpExecuteArg>()))
+               .Returns<HttpExecuteArg>((args) =>
+               {
+                   string source = string.Empty;
+                   var assembly = Assembly.GetExecutingAssembly();
+                   using (Stream stream = assembly.GetManifestResourceStream("FlightQuery.Tests.FlightInfoExCancelled.json"))
+                   using (StreamReader reader = new StreamReader(stream))
+                   {
+                       source = reader.ReadToEnd();
+                   }
+
+                   return new ExecuteResult() { Result = source };
+               });
+
+            var context = new RunContext(code, string.Empty, ExecuteFlags.Run, new EmptyHttpExecutor(), new HttpExecutor(mock.Object));
+            var result = context.Run();
+
+            Assert.IsTrue(context.Errors.Count == 0);
+            Assert.IsTrue(result.Rows.Length == 1);
+        }
+
+        [Test]
+        public void TestExecuteCancelledEmpty()
+        {
+            string code = @"
+select *
+from FlightInfoEx
+where faFlightID = 'SWA4567-1586580328-airline-0591' and actualdeparturetime != -1 and estimatedarrivaltime != -1 and actualarrivaltime != -1
+";
+            var mock = new Mock<IHttpExecutorRaw>();
+            mock.Setup(x => x.GetFlightInfoEx(It.IsAny<HttpExecuteArg>()))
+               .Returns<HttpExecuteArg>((args) =>
+               {
+                   string source = string.Empty;
+                   var assembly = Assembly.GetExecutingAssembly();
+                   using (Stream stream = assembly.GetManifestResourceStream("FlightQuery.Tests.FlightInfoExCancelled.json"))
+                   using (StreamReader reader = new StreamReader(stream))
+                   {
+                       source = reader.ReadToEnd();
+                   }
+
+                   return new ExecuteResult() { Result = source };
+               });
+
+            var context = new RunContext(code, string.Empty, ExecuteFlags.Run, new EmptyHttpExecutor(), new HttpExecutor(mock.Object));
+            var result = context.Run();
+
+            Assert.IsTrue(context.Errors.Count == 0);
+            Assert.IsTrue(result.Rows.Length == 0);
         }
 
         [Test]
