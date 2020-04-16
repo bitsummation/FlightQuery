@@ -121,7 +121,8 @@ var home = {
     exampleQueries: {
         airportInfo: "select *\nfrom airportinfo\nwhere airportCode = 'kaus'",
         austinDepartures: "select *\nfrom airlineflightschedules\nwhere departuretime > '{current_date}' and origin = 'kaus'",
-        austinDeparturesFriendly: "select f.ident, f.departuretime, f.arrivaltime, o.name, d.name\nfrom airlineflightschedules f\njoin airportinfo d on d.airportCode = f.destination\njoin airportinfo o on o.airportCode = f.origin\nwhere f.departuretime > '{current_date}' and f.origin = 'kaus'"
+        austinDeparturesFriendly: "select f.ident, f.departuretime, f.arrivaltime, o.name, d.name\nfrom airlineflightschedules f\njoin airportinfo d on d.airportCode = f.destination\njoin airportinfo o on o.airportCode = f.origin\nwhere f.departuretime > '{current_date}' and f.origin = 'kaus'",
+        austinDeparturesNoCancelled: "select *\nfrom airlineflightschedules a\njoin getflightid f on f.departureTime = a.departuretime and f.ident = a.ident\njoin flightinfoex e on e.faFlightID = f.faFlightID and e.actualarrivaltime != -1 and e.actualdeparturetime != -1 and estimatedarrivaltime != -1\nwhere a.departuretime > '{current_date}' and a.origin = 'kaus'"
     },
 
     preLoad: function () {
@@ -164,7 +165,12 @@ var home = {
 
     getQuery: function () {
         var editor = ace.edit("code");
-        return editor.getValue();
+        var source = editor.getSelectedText();
+        if (source == "") {
+            source = editor.getValue();
+        }
+
+        return source;
     },
 
     getUserName: function () {
