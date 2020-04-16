@@ -19,7 +19,7 @@ namespace FlightQuery.Interpreter.Execution
             else
                 tableVariable = statement.Name;
 
-            if (_scope.IsTableDefineSameLevel(tableName)) //if variable exists at this level we have conflict.
+            if (_scope.IsTableDefineSameLevel(tableName)) //table exists already
                 Errors.Add(new TableConflict(tableName, statement.ParseInfo));
 
             if (!_scope.IsTableDefinedAnyLevel(tableName)) //we don't know this table at any level
@@ -28,7 +28,7 @@ namespace FlightQuery.Interpreter.Execution
                 return;
             }
 
-            if (_scope.IsTableDefineSameLevel(tableVariable)) //if variable exists we have conflict
+            if (_scope.IsTableDefineSameLevel(tableVariable)) //if alias variable exists we have conflict
                 throw new InvalidOperationException("");
 
             var executedTables = _scope.FetchAllExecutedTablesSameLevel();
@@ -41,6 +41,8 @@ namespace FlightQuery.Interpreter.Execution
                 table = table.Create();
                 _scope.AddTable(tableVariable, table);
                 VisitChild(statement.BooleanExpression);
+                VisitWhereIgnoreErrors(statement.ParentWhere);
+
                 var executeTable = table.Execute();
                 foreach (var e in table.Errors)
                     Errors.Add(e);
@@ -57,6 +59,7 @@ namespace FlightQuery.Interpreter.Execution
 
                     Array.ForEach(executedTables, (x) => x.RowIndex = row);
                     VisitChild(statement.BooleanExpression);
+                    VisitWhereIgnoreErrors(statement.ParentWhere);
                     var executeTable = table.Execute();
 
                     foreach (var e in table.Errors)

@@ -102,6 +102,51 @@ where airportCode = 'kaus'
         }
 
         [Test]
+        public void TestJoin()
+        {
+            string code = @"
+select f.ident, f.departuretime, f.arrivaltime, o.name, d.name
+from airlineflightschedules f
+join airportinfo d on d.airportCode = f.destination
+join airportinfo o on o.airportCode = f.origin
+where f.departuretime > '2020-1-16 1:46'and f.ident = 'DAL1381'";
+
+            var mock = new Mock<IHttpExecutorRaw>();
+            mock.Setup(x => x.AirlineFlightSchedule(It.IsAny<HttpExecuteArg>())).Returns(() =>
+            {
+                string source = string.Empty;
+                var assembly = Assembly.GetExecutingAssembly();
+                using (Stream stream = assembly.GetManifestResourceStream("FlightQuery.Tests.AirlineFlightSchedule.json"))
+                using (StreamReader reader = new StreamReader(stream))
+                {
+                    source = reader.ReadToEnd();
+                }
+                return new ExecuteResult() { Result = source };
+            });
+            mock.Setup(x => x.AirportInfo(It.IsAny<HttpExecuteArg>())).Returns(() =>
+            {
+                string source = string.Empty;
+                var assembly = Assembly.GetExecutingAssembly();
+                using (Stream stream = assembly.GetManifestResourceStream("FlightQuery.Tests.AirportInfo.json"))
+                using (StreamReader reader = new StreamReader(stream))
+                {
+                    source = reader.ReadToEnd();
+                }
+
+                return new ExecuteResult() { Result = source };
+            });
+
+            var context = new RunContext(code, string.Empty, ExecuteFlags.Run, new EmptyHttpExecutor(), new HttpExecutor(mock.Object));
+            var result = context.Run();
+            Assert.IsTrue(context.Errors.Count == 0);
+            Assert.IsTrue(result.Columns.Length == 5);
+            Assert.IsTrue(result.Rows.Length == 1);
+
+            mock.Verify(x => x.AirlineFlightSchedule(It.IsAny<HttpExecuteArg>()), Times.Once);
+            mock.Verify(x => x.AirportInfo(It.IsAny<HttpExecuteArg>()), Times.Exactly(30));
+        }
+
+        [Test]
         public void TestNoAuth()
         {
             string code = @"

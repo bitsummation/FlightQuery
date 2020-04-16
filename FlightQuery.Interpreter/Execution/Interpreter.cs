@@ -5,6 +5,7 @@ using FlightQuery.Sdk.Semantic;
 using FlightQuery.Sdk.SqlAst;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace FlightQuery.Interpreter.Execution
 {
@@ -48,6 +49,16 @@ namespace FlightQuery.Interpreter.Execution
         private QueryPhaseArgs VisitChild(Element node)
         {
             return VisitChild(node, new QueryPhaseArgs());
+        }
+
+        private void VisitWhereIgnoreErrors(WhereStatement statement)
+        {
+            // visit where to gather query variables.
+            // We ignore errors as the where statement is visited in the Query
+            var errors = Errors.ToArray();
+            VisitChild(statement);
+            Errors.Clear();
+            Array.ForEach(errors, x => Errors.Add(x));
         }
 
         private void ValidateComparisionType(QueryArgs arg)

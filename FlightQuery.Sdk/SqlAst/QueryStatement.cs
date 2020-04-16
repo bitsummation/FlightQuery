@@ -22,6 +22,11 @@ namespace FlightQuery.Sdk.SqlAst
             get { return Children.OfType<WhereStatement>().SingleOrDefault(); }
         }
 
+        public override WhereStatement ParentWhere
+        {
+            get { return Where; }
+        }
+
         public override void Accept(IElementVisitor visitor)
         {
             visitor.Visit(this);

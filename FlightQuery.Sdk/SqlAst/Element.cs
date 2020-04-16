@@ -14,6 +14,19 @@ namespace FlightQuery.Sdk.SqlAst
         public ChildCollection Children { get; private set; }
         public Element Parent { get; set; }
 
+        public virtual WhereStatement ParentWhere
+        {
+            get
+            {
+                if(Parent != null)
+                {
+                    return Parent.ParentWhere;
+                }
+
+                return null;
+            }
+        }
+
         public abstract void Accept(IElementVisitor visitor);
     }
 }
