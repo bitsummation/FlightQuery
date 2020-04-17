@@ -17,7 +17,7 @@ selectStatement
 	;
 
 selectArg
-	: selectVariable (AS ID)?								# SelectArgsExp
+	: selectVariable (AS a=ID)?								# SelectArgsExp
 	;
 
 selectVariable

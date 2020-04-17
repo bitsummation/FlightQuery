@@ -8,9 +8,9 @@ namespace FlightQuery.Sdk.SqlAst
 
         public bool All { get; set; }
 
-        public VariableExpresion[] Args
+        public SelectArgExpression[] Args
         {
-            get { return Children.OfType<VariableExpresion>().ToArray(); }
+            get { return Children.OfType<SelectArgExpression>().ToArray(); }
         }
 
         public override void Accept(IElementVisitor visitor)

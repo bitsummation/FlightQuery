@@ -78,6 +78,20 @@ namespace FlightQuery.Parser.AntlrParser
             return whereStatement;
         }
 
+        public override Element VisitSelectArgsExp(SqlParser.SelectArgsExpContext context)
+        {
+            var selectArg = new SelectArgExpression(CreateParseInfo(context));
+            
+            if (context.a != null)
+            {
+                selectArg.Children.Add(new AsExpression(CreateParseInfo(context)) { Alias = context.a.Text});
+            }
+
+            selectArg.Children.Add(Visit(context.GetChild(0)));
+
+            return selectArg;
+        }
+
         public override Element VisitSelectVariableIdExp(SqlParser.SelectVariableIdExpContext context)
         {
             return new SingleVariableExpression(CreateParseInfo(context)) { Id = context.GetText() };

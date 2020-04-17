@@ -16,20 +16,18 @@ namespace FlightQuery.Interpreter.Execution
         private Scope _scope;
         private Stack<QueryPhaseArgs> _visitStack;
         private IHttpExecutor _httpExecutor;
-        private bool _intellisense;
 
         public ErrorsCollection Errors { get; private set; }
         public ScopeModel ScopeModel { get; set; }
 
-        public Interpreter(Element root, string authorization) : this(root, authorization, ExecuteFlags.Run, new HttpExecutor(new HttpExecutorRaw(authorization))) { } 
+        public Interpreter(Element root, string authorization) : this(root, authorization, new HttpExecutor(new HttpExecutorRaw(authorization))) { } 
 
-        public Interpreter(Element root, string authorization, ExecuteFlags flags, IHttpExecutor httpExecutor)
+        public Interpreter(Element root, string authorization, IHttpExecutor httpExecutor)
         {
             _program = root;
             _scope = new Scope();
             _visitStack = new Stack<QueryPhaseArgs>();
             _httpExecutor = httpExecutor ?? new HttpExecutor(new HttpExecutorRaw(authorization));
-            _intellisense = ((flags & ExecuteFlags.Intellisense) == ExecuteFlags.Intellisense);
 
             Errors = new ErrorsCollection();
         }

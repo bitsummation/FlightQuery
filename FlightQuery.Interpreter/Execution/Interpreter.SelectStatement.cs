@@ -22,9 +22,12 @@ namespace FlightQuery.Interpreter.Execution
                     foreach(var p in executeTable.Descriptor.Properties)
                     {
                         p.SelectedIndex.Add(selectedIndex);
-                        if(selectedIndex >= statement.Args.Length)
-                            statement.Children.Add(new SingleVariableExpression(statement.ParseInfo) { Id = p.Name });
-
+                        if (selectedIndex >= statement.Args.Length)
+                        {
+                            var selectArg = new SelectArgExpression(statement.ParseInfo);
+                            selectArg.Children.Add(new SingleVariableExpression(statement.ParseInfo) { Id = p.Name });
+                            statement.Children.Add(selectArg);
+                        }
                         selectedIndex++;
                     }
                 }
@@ -34,7 +37,7 @@ namespace FlightQuery.Interpreter.Execution
                 for (int selectIndex = 0; selectIndex < statement.Args.Length; selectIndex++)
                 {
                     Array.ForEach(executedTables, (x) => x.SelectIndex = selectIndex);
-                    VisitChild(statement.Args[selectIndex]);
+                    VisitChild(statement.Args[selectIndex].Variable);
                 }
             }
 
@@ -48,6 +51,7 @@ namespace FlightQuery.Interpreter.Execution
                 var table = executedTables.Where(x => x.Descriptor.Properties.Where(x => x.SelectedIndex.Contains(selectIndex)).SingleOrDefault() != null).Single();
                 var prop = table.Descriptor.Properties.Where(x => x.SelectedIndex.Contains(selectIndex)).Single();
                 int propIndex = table.Descriptor.GetDataRowIndex(prop.Name);
+                prop.Name = statement.Args[selectIndex].As != null ? statement.Args[selectIndex].As.Alias : prop.Name;
 
                 descriptors.Add(new SelectColumn() {Table = table, PropDescriptor = prop, PropIndex = propIndex });
             }
