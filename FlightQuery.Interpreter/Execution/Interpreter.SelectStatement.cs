@@ -13,6 +13,8 @@ namespace FlightQuery.Interpreter.Execution
         public void Visit(SelectStatement statement)
         {
             var executedTables = _scope.FetchAllExecutedTablesSameLevel();
+            var dynamicColumns = new List<DynamicColumn>();
+            var descriptors = new List<IResult>();
 
             if (statement.All) //get all columns
             {
@@ -21,7 +23,9 @@ namespace FlightQuery.Interpreter.Execution
                 {
                     foreach(var p in executeTable.Descriptor.Properties)
                     {
-                        p.SelectedIndex.Add(selectedIndex);
+                        int propIndex = executeTable.Descriptor.GetDataRowIndex(p.Name);
+                        descriptors.Add(new SelectColumn() { Table = executeTable, PropDescriptor = p, PropIndex = propIndex });
+
                         if (selectedIndex >= statement.Args.Length)
                         {
                             var selectArg = new SelectArgExpression(statement.ParseInfo);
@@ -37,24 +41,43 @@ namespace FlightQuery.Interpreter.Execution
                 for (int selectIndex = 0; selectIndex < statement.Args.Length; selectIndex++)
                 {
                     Array.ForEach(executedTables, (x) => x.SelectIndex = selectIndex);
-                    VisitChild(statement.Args[selectIndex].Variable);
+                    var arg = new QueryPhaseArgs();
+                    VisitChild(statement.Args[selectIndex], arg);
+
+                    if (arg.BoolQueryArg.Table == null) //can't find selected PropertyDescriptor. Must be a statement
+                    {
+                        var prop = new PropertyDescriptor() { Name = arg.BoolQueryArg.Variable };
+                        var dynamicColumn = new DynamicColumn { SelectArgExpression = statement.Args[selectIndex], PropDescriptor = prop };
+                        descriptors.Add(dynamicColumn);
+                        dynamicColumns.Add(dynamicColumn);
+                    }
+                    else
+                    {
+                        int propIndex = arg.BoolQueryArg.Table.Descriptor.GetDataRowIndex(arg.BoolQueryArg.Property.Name);
+                        arg.BoolQueryArg.Property.Name = arg.BoolQueryArg.Variable;
+                        descriptors.Add(new SelectColumn() { Table = arg.BoolQueryArg.Table, PropDescriptor = arg.BoolQueryArg.Property, PropIndex = propIndex });
+                    }
+                }
+            }
+
+            //need to go through every row here of select dynamic statement then add it Properties
+            if (executedTables.Length > 0)
+            {
+                var rowCount = executedTables.First().Rows.Length;
+                for (int row = 0; row < rowCount; row++)
+                {
+                    Array.ForEach(executedTables, (x) => x.RowIndex = row);
+                    foreach (var d in dynamicColumns) //run each column. Value goes in data at selected index
+                    {
+                        var arg = new QueryPhaseArgs();
+                        VisitChild(d.SelectArgExpression, arg);
+                        d.Values.Add(arg.BoolQueryArg.PropertyValue);
+                    }
                 }
             }
 
             if (Errors.Count > 0) //errors no need to select at this point
                 return;
-
-            var descriptors = new List<SelectColumn>();
-
-            for (int selectIndex = 0; selectIndex < statement.Args.Length; selectIndex++)
-            {
-                var table = executedTables.Where(x => x.Descriptor.Properties.Where(x => x.SelectedIndex.Contains(selectIndex)).SingleOrDefault() != null).Single();
-                var prop = table.Descriptor.Properties.Where(x => x.SelectedIndex.Contains(selectIndex)).Single();
-                int propIndex = table.Descriptor.GetDataRowIndex(prop.Name);
-                prop.Name = statement.Args[selectIndex].As != null ? statement.Args[selectIndex].As.Alias : prop.Name;
-
-                descriptors.Add(new SelectColumn() {Table = table, PropDescriptor = prop, PropIndex = propIndex });
-            }
 
             var rows = new List<Row>();
             if (executedTables.Length > 0)
@@ -66,15 +89,15 @@ namespace FlightQuery.Interpreter.Execution
                     for (int selectIndex = 0; selectIndex < statement.Args.Length; selectIndex++)
                     {
                         var selectedColumn = descriptors[selectIndex];
-                        values.Add(selectedColumn.Table.Rows[rowIndex].Values[selectedColumn.PropIndex]);
+                        values.Add(selectedColumn.Fetch(rowIndex));
                     }
 
                     rows.Add(new Row() { Values = values.ToArray() });
                 }
             }
 
-            FinalSelectTableDescriptor tableDescriptor = descriptors.Select(x => x.PropDescriptor).ToArray();
-            var selectTable = new ExecutedTable() { Rows = rows.ToArray(), Descriptor = tableDescriptor };
+            FinalSelectTableDescriptor tableDescriptor = descriptors.Select(x => x.Descriptor()).ToArray();
+            var selectTable = new ExecutedTable(tableDescriptor) { Rows = rows.ToArray() };
             _selectResult = ToSelectTable(selectTable);
         }
 
@@ -96,12 +119,51 @@ namespace FlightQuery.Interpreter.Execution
             return select;
         }
 
+        private interface IResult
+        {
+            PropertyValue Fetch(int rowIndex);
+            PropertyDescriptor Descriptor();
+        }
 
-        private class SelectColumn
+
+        private class DynamicColumn : IResult
+        {
+            public DynamicColumn()
+            {
+                Values = new List<PropertyValue>();
+            }
+
+            public SelectArgExpression SelectArgExpression { get; set; }
+            public IList<PropertyValue> Values { get; private set; }
+            public PropertyDescriptor PropDescriptor { get; set; }
+
+            public PropertyDescriptor Descriptor()
+            {
+                return PropDescriptor;
+            }
+
+            public PropertyValue Fetch(int rowIndex)
+            {
+                return Values[rowIndex];
+            }
+        }
+
+
+        private class SelectColumn : IResult
         {
             public TableBase Table { get; set; }
             public PropertyDescriptor PropDescriptor { get; set; }
             public int PropIndex { get; set; }
+
+            public PropertyDescriptor Descriptor()
+            {
+                return PropDescriptor;
+            }
+
+            public PropertyValue Fetch(int rowIndex)
+            {
+                return Table.Rows[rowIndex].Values[PropIndex];
+            }
         }
 
     }

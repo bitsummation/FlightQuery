@@ -69,37 +69,6 @@ where airportCode = 'kaus'
         }
 
         [Test]
-        public void TestSelectAs()
-        {
-            string code = @"
-select name, location as loc
-from AirportInfo 
-where airportCode = 'kaus'
-";
-
-            var mock = new Mock<IHttpExecutorRaw>();
-            mock.Setup(x => x.AirportInfo(It.IsAny<HttpExecuteArg>())).Returns(() =>
-            {
-                string source = string.Empty;
-                var assembly = Assembly.GetExecutingAssembly();
-                using (Stream stream = assembly.GetManifestResourceStream("FlightQuery.Tests.AirportInfo.json"))
-                using (StreamReader reader = new StreamReader(stream))
-                {
-                    source = reader.ReadToEnd();
-                }
-
-                return new ExecuteResult() { Result = source };
-            });
-
-            var context = new RunContext(code, string.Empty, ExecuteFlags.Run, new EmptyHttpExecutor(), new HttpExecutor(mock.Object));
-            var result = context.Run();
-            Assert.IsTrue(context.Errors.Count == 0);
-            Assert.IsTrue(result.Columns.Length == 2);
-            Assert.IsTrue(result.Columns[0] == "name");
-            Assert.IsTrue(result.Columns[1] == "loc");
-        }
-
-        [Test]
         public void TestExecute()
         {
             string code = @"

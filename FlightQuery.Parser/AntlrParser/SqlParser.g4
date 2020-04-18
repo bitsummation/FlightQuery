@@ -18,6 +18,15 @@ selectStatement
 
 selectArg
 	: selectVariable (AS a=ID)?								# SelectArgsExp
+	| caseStatement	(AS a=ID)?								# SelectArgsExp
+	;
+
+caseStatement
+	: CASE whenExpression+ (ELSE s=selectVariable)? END 	# CaseStatementExp
+	;
+
+whenExpression
+	: WHEN b=boolExpression THEN s=selectVariable			# WhenExpressionExp
 	;
 
 selectVariable

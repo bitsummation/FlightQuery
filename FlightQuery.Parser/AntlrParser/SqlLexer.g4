@@ -15,6 +15,12 @@ COMMA : ',';
 DOT : '.';
 STAR : '*';
 
+CASE : C A S E;
+WHEN : W H E N;
+THEN: T H E N;
+END: E N D;
+ELSE: E L S E;
+
 AND : A N D;
 OR : O R;
 

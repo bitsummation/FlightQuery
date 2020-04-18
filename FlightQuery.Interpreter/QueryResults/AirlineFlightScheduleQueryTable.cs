@@ -11,13 +11,13 @@ namespace FlightQuery.Interpreter.QueryResults
 {
     public class AirlineFlightScheduleQueryTable : QueryTable
     {
-        public AirlineFlightScheduleQueryTable(IHttpExecutor httpExecutor) : base(httpExecutor) { }
+        public AirlineFlightScheduleQueryTable(IHttpExecutor httpExecutor, TableDescriptor descriptor) : base(httpExecutor, descriptor) { }
 
         protected override string TableName { get { return "AirlineFlightSchedules"; } }
 
         public override TableBase Create()
         {
-            return new AirlineFlightScheduleQueryTable(HttpExecutor) { Descriptor = PropertyDescriptor.GenerateQueryDescriptor(typeof(AirlineFlightSchedule)) };
+            return new AirlineFlightScheduleQueryTable(HttpExecutor, PropertyDescriptor.GenerateQueryDescriptor(typeof(AirlineFlightSchedule)));
         }
 
         protected override bool ValidateArgs()
@@ -109,7 +109,7 @@ namespace FlightQuery.Interpreter.QueryResults
                 }
             }
 
-            return new ExecutedTable() { Rows = rows.ToArray(), Descriptor = tableDescriptor };
+            return new ExecutedTable(tableDescriptor) { Rows = rows.ToArray()};
         }
     }
 }

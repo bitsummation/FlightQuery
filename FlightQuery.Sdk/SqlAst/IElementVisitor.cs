@@ -9,6 +9,10 @@
         void Visit(WhereStatement statement);
         void Visit(InnerJoinStatement statement);
 
+        void Visit(SelectArgExpression expression);
+        void Visit(CaseStatement statement);
+        void Visit(WhenExpression expression);
+
         void Visit(AndExpression expression);
         void Visit(OrExpression expression);
         void Visit(EqualsExpression expression);

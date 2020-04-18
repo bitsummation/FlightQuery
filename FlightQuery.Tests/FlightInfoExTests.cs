@@ -156,6 +156,8 @@ where faFlightID = 'some-flight-number'
             Assert.AreEqual(result.Rows[0].Values[0], "B739");
         }
 
+       
+
         [Test]
         public void TestJoin()
         {

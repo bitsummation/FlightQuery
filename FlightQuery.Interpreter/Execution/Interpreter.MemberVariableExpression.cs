@@ -21,19 +21,16 @@ namespace FlightQuery.Interpreter.Execution
             }
 
             var arg = _visitStack.Peek().BoolQueryArg;
+            arg.Table = table;
+
             var prop = table.Descriptor[expression.Id];
-            if (arg == null) //in select context. No boolean result needed
-            {
-                prop.SelectedIndex.Add(table.SelectIndex);
-                return;
-            }
 
             arg.Variable = prop.Name;
             arg.Property = prop;
             if (prop.Queryable)
                 table.AddArg(arg);
 
-            if(table.HasExecuted && table.Rows.Length > 0)
+            if(table.HasExecuted && table.Rows.Length > 0 && table.RowIndex < table.Rows.Length)
             {
                 arg.PropertyValue = table.Rows[table.RowIndex].Values[table.Descriptor.GetDataRowIndex(expression.Id)];
             }

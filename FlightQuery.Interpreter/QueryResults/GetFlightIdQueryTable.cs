@@ -7,13 +7,13 @@ namespace FlightQuery.Interpreter.QueryResults
 {
     public class GetFlightIdQueryTable : QueryTable
     {
-        public GetFlightIdQueryTable(IHttpExecutor httpExecutor) : base(httpExecutor) { }
+        public GetFlightIdQueryTable(IHttpExecutor httpExecutor, TableDescriptor descriptor) : base(httpExecutor, descriptor) { }
 
         protected override string TableName { get { return "GetFlightID"; } }
 
         public override TableBase Create()
         {
-            return new GetFlightIdQueryTable(HttpExecutor) { Descriptor = PropertyDescriptor.GenerateQueryDescriptor(typeof(GetFlightId)) };
+            return new GetFlightIdQueryTable(HttpExecutor, PropertyDescriptor.GenerateQueryDescriptor(typeof(GetFlightId)));
         }
 
         protected override ExecutedTable ExecuteCore(HttpExecuteArg args)
@@ -49,7 +49,7 @@ namespace FlightQuery.Interpreter.QueryResults
             TableDescriptor tableDescriptor = PropertyDescriptor.GenerateRunDescriptor(typeof(GetFlightId));
 
             var row = new Row() { Values = ToValues(dto, tableDescriptor) };
-            return new ExecutedTable() { Rows = new Row[] { row }, Descriptor = tableDescriptor };
+            return new ExecutedTable(tableDescriptor) { Rows = new Row[] { row } };
         }
     }
 }

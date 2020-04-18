@@ -1,5 +1,6 @@
 ﻿using Antlr4.Runtime;
 using FlightQuery.Sdk.SqlAst;
+using static FlightQuery.Parser.AntlrParser.SqlParser;
 
 namespace FlightQuery.Parser.AntlrParser
 {
@@ -90,6 +91,36 @@ namespace FlightQuery.Parser.AntlrParser
             selectArg.Children.Add(Visit(context.GetChild(0)));
 
             return selectArg;
+        }
+
+        public override Element VisitCaseStatementExp(SqlParser.CaseStatementExpContext context)
+        {
+            var caseStatement = new CaseStatement(CreateParseInfo(context));
+
+            int c = 1;
+            var child = context.GetChild(c);
+            while(child is WhenExpressionExpContext)
+            {
+                caseStatement.Children.Add(Visit(child));
+                c++;
+                child = context.GetChild(c);
+            }
+           
+            if(context.s != null)
+            {
+                caseStatement.Children.Add(Visit(context.s));
+            }
+
+            return caseStatement;
+        }
+
+        public override Element VisitWhenExpressionExp(WhenExpressionExpContext context)
+        {
+            var whenExpresion = new WhenExpression(CreateParseInfo(context));
+            whenExpresion.Children.Add(Visit(context.b));
+            whenExpresion.Children.Add(Visit(context.s));
+
+            return whenExpresion;
         }
 
         public override Element VisitSelectVariableIdExp(SqlParser.SelectVariableIdExpContext context)

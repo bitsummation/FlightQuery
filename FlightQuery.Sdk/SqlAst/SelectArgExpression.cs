@@ -12,14 +12,14 @@ namespace FlightQuery.Sdk.SqlAst
             get { return Children.OfType<AsExpression>().SingleOrDefault(); }
         }
 
-        public VariableExpresion Variable
+        public Element Statement
         {
-            get { return Children.OfType<VariableExpresion>().SingleOrDefault(); }
+            get { return Children.Where(x => !typeof(AsExpression).IsInstanceOfType(x)).Single(); }
         }
 
         public override void Accept(IElementVisitor visitor)
         {
-            throw new NotImplementedException();
+            visitor.Visit(this);
         }
     }
 }

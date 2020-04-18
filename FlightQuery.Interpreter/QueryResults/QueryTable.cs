@@ -1,4 +1,5 @@
-﻿using FlightQuery.Interpreter.Http;
+﻿using FlightQuery.Interpreter.Descriptors.Model;
+using FlightQuery.Interpreter.Http;
 using FlightQuery.Sdk;
 using FlightQuery.Sdk.Semantic;
 using System;
@@ -8,7 +9,7 @@ namespace FlightQuery.Interpreter.QueryResults
 {
     public abstract class QueryTable : TableBase
     {
-        protected QueryTable(IHttpExecutor httpExecutor)
+        protected QueryTable(IHttpExecutor httpExecutor, TableDescriptor descriptor) : base(descriptor)
         {
             HttpExecutor = httpExecutor;
             QueryArgs = new VariableContainer<QueryArgs>();

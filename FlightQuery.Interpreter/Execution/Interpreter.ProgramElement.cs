@@ -11,10 +11,10 @@ namespace FlightQuery.Interpreter.Execution
         {
             using (var s = _scope.Push())
             {
-                _scope.AddTable("airlineflightschedules", new AirlineFlightScheduleQueryTable(_httpExecutor) {Descriptor = PropertyDescriptor.GenerateQueryDescriptor(typeof(AirlineFlightSchedule)) } );
-                _scope.AddTable("getflightid", new GetFlightIdQueryTable(_httpExecutor) { Descriptor = PropertyDescriptor.GenerateQueryDescriptor(typeof(GetFlightId)) } );
-                _scope.AddTable("flightinfoex", new FlightInfoExQueryTable(_httpExecutor) { Descriptor = PropertyDescriptor.GenerateQueryDescriptor(typeof(FlightInfoEx)) });
-                _scope.AddTable("airportinfo", new AirportInfoQueryTable(_httpExecutor) { Descriptor = PropertyDescriptor.GenerateQueryDescriptor(typeof(AirportInfo)) });
+                _scope.AddTable("airlineflightschedules", new AirlineFlightScheduleQueryTable(_httpExecutor, PropertyDescriptor.GenerateQueryDescriptor(typeof(AirlineFlightSchedule))));
+                _scope.AddTable("getflightid", new GetFlightIdQueryTable(_httpExecutor, PropertyDescriptor.GenerateQueryDescriptor(typeof(GetFlightId))));
+                _scope.AddTable("flightinfoex", new FlightInfoExQueryTable(_httpExecutor, PropertyDescriptor.GenerateQueryDescriptor(typeof(FlightInfoEx))));
+                _scope.AddTable("airportinfo", new AirportInfoQueryTable(_httpExecutor, PropertyDescriptor.GenerateQueryDescriptor(typeof(AirportInfo))));
 
                 foreach (var c in program.Statements)
                     VisitChild(c);

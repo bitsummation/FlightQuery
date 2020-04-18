@@ -8,13 +8,13 @@ namespace FlightQuery.Interpreter.QueryResults
 {
     public class FlightInfoExQueryTable : QueryTable
     {
-        public FlightInfoExQueryTable(IHttpExecutor httpExecutor) : base(httpExecutor) { }
+        public FlightInfoExQueryTable(IHttpExecutor httpExecutor, TableDescriptor descriptor) : base(httpExecutor, descriptor) { }
 
         protected override string TableName { get { return "FlightInfoEx"; } }
 
         public override TableBase Create()
         {
-            return new FlightInfoExQueryTable(HttpExecutor) { Descriptor = PropertyDescriptor.GenerateQueryDescriptor(typeof(FlightInfoEx)) };
+            return new FlightInfoExQueryTable(HttpExecutor, PropertyDescriptor.GenerateQueryDescriptor(typeof(FlightInfoEx)));
         }
 
         protected override bool ValidateArgs()
@@ -49,7 +49,7 @@ namespace FlightQuery.Interpreter.QueryResults
                 }
             }
 
-            return new ExecutedTable() { Rows = rows.ToArray(), Descriptor = tableDescriptor };
+            return new ExecutedTable(tableDescriptor) { Rows = rows.ToArray() };
         }
     }
 }

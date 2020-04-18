@@ -84,7 +84,7 @@ namespace FlightQuery.Interpreter.Execution
 
 
             var returnTable = _scope.TableLookupAnyLevel(tableName);
-            var returnExecuteTable = new ExecutedTable() { Descriptor = returnTable.Create().Descriptor, Rows = rightTableRows.ToArray() };
+            var returnExecuteTable = new ExecutedTable(returnTable.Create().Descriptor) { Rows = rightTableRows.ToArray() };
             _scope.AddTable(tableVariable, returnExecuteTable);
 
             //remove rows that didn't match through all executed tables

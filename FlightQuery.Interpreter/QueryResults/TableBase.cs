@@ -8,14 +8,15 @@ namespace FlightQuery.Interpreter.QueryResults
 {
     public abstract class TableBase
     {
-        protected TableBase()
+        protected TableBase(TableDescriptor descriptor)
         {
             Errors = new List<ErrorBase>();
+            Descriptor = descriptor;
         }
 
         public IList<ErrorBase> Errors { get; private set; }
 
-        public TableDescriptor Descriptor { get; set; }
+        public TableDescriptor Descriptor { get; private set; }
 
         public int SelectIndex { get; set; }
         public int RowIndex { get; set; }

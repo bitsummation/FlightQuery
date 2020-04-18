@@ -14,6 +14,7 @@ namespace FlightQuery.Interpreter.Http
         public bool LeftProperty { get; set; }
         public PropertyDescriptor Property { get; set;}
         public string Variable { get; set; }
+        public TableBase Table { get; set; }
 
         public bool HasProperty
         {
