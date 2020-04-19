@@ -8,6 +8,11 @@ then go to
 http://localhost:5001
 ```
 Enter your username and apikey and type your query or click on the example links on the right side.
+To send a query from code, post the sql text and authorization header to:
+```
+http://localhost:5001/query
+```
+
 Example below and more docs to follow.
 
 ```sql
