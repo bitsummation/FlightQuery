@@ -1,7 +1,7 @@
 ﻿var intellisense = {
 
     globalTriggers : ["from", "join"],
-    scopeTriggers: ["select", "on", "where", "and", ","],
+    scopeTriggers: ["select", "on", "where", "and", ",", "when", "then", "else"],
 
     fetch: function (code, callback) {
        
@@ -121,8 +121,8 @@ var home = {
     exampleQueries: {
         airportInfo: "select *\nfrom airportinfo\nwhere airportCode = 'kaus'",
         austinDepartures: "select *\nfrom airlineflightschedules\nwhere departuretime > '{current_date}' and origin = 'kaus'",
-        austinDeparturesFriendly: "select f.ident, f.departuretime, f.arrivaltime, o.name as origin, d.name as destination\nfrom airlineflightschedules f\njoin airportinfo d on d.airportCode = f.destination\njoin airportinfo o on o.airportCode = f.origin\nwhere f.departuretime > '{current_date}' and f.origin = 'kaus'",
-        austinDeparturesNoCancelled: "select *\nfrom airlineflightschedules a\njoin getflightid f on f.departureTime = a.departuretime and f.ident = a.ident\njoin flightinfoex e on e.faFlightID = f.faFlightID and e.actualarrivaltime != -1 and e.actualdeparturetime != -1 and estimatedarrivaltime != -1\nwhere a.departuretime > '{current_date}' and a.origin = 'kaus'"
+        austinDeparturesFriendly: "select\n\tf.ident,\n\tf.departuretime,\n\tf.arrivaltime,\n\to.name as origin,\n\td.name as destination\nfrom airlineflightschedules f\njoin airportinfo d on d.airportCode = f.destination\njoin airportinfo o on o.airportCode = f.origin\nwhere f.departuretime > '{current_date}' and f.origin = 'kaus'",
+        austinDeparturesNoStatus: "select\n\ta.ident,\n\ta.departuretime,\n\ta.origin,\n\ta.destination,\n\tcase\n\twhen e.actualarrivaltime = -1 and e.actualdeparturetime = -1 and e.estimatedarrivaltime = -1\n\t\tthen 'cancelled'\n\twhen e.actualdeparturetime != 0 and e.actualarrivaltime = 0\n\t\tthen 'enroute'\n\twhen e.actualdeparturetime != 0 and e.actualarrivaltime != 0 and e.actualdeparturetime != e.actualarrivaltime\n\t\tthen 'arrived'\n\telse 'not departed'\n\tend as status\nfrom airlineflightschedules a\njoin getflightid f on f.departureTime = a.departuretime and f.ident = a.ident\njoin flightinfoex e on e.faFlightID = f.faFlightID\nwhere a.departuretime > '{current_date}' and a.origin = 'kaus'"
     },
 
     preLoad: function () {

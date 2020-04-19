@@ -30,7 +30,7 @@ namespace FlightQuery.Interpreter.Execution
             if (prop.Queryable)
                 table.AddArg(arg);
 
-            if (table.HasExecuted && table.Rows.Length > 0)
+            if (table.HasExecuted && table.Rows.Length > 0 && table.RowIndex < table.Rows.Length)
             {
                 arg.PropertyValue = table.Rows[table.RowIndex].Values[table.Descriptor.GetDataRowIndex(expression.Id)];
             }

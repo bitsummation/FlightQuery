@@ -111,8 +111,6 @@ where departuretime > '2020-4-10 1:00' and origin = 'kaus'
             Assert.IsTrue(context.Errors.Count == 1);
             Assert.IsTrue(context.Errors[0].Message == "departuretime is ambiguous at line=5, column=6");
         }
-
-
     }
     
 }

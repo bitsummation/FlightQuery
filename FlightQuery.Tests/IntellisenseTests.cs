@@ -206,5 +206,36 @@ join airportinfo ar on ar.airportCode = a.arrivaltime
             Assert.IsTrue(context.ScopeModel.QueryScope.Items.ContainsKey("ar"));
         }
 
+        [Test]
+        public void TestCase()
+        {
+            string code = @"
+select
+    a.ident,
+    a.
+    a.departuretime,
+    case
+        when e.actualarrivaltime = -1 and e.actualdeparturetime = -1 and e.estimatedarrivaltime = -1
+        then 'cancelled'
+        when e.actualdeparturetime != 0 and e.actualarrivaltime = 0
+        then 'enroute'
+        when e.actualdeparturetime != 0 and e.actualarrivaltime != 0 and e.actualdeparturetime != e.actualarrivaltime
+        then 'arrived'
+        else 'not departed'
+    end as status
+from airlineflightschedules a
+join getflightid f on f.departureTime = a.departuretime and f.ident = a.ident
+join flightinfoex e on e.faFlightID = f.faFlightID
+where a.departuretime > '2020-4-18 19:34' and a.origin = 'kaus'
+";
+
+            var context = new RunContext(code, string.Empty, ExecuteFlags.Semantic | ExecuteFlags.Intellisense);
+            context.Run();
+
+            Assert.IsTrue(context.ScopeModel.QueryScope.Items.ContainsKey("a"));
+            Assert.IsTrue(context.ScopeModel.QueryScope.Items.ContainsKey("f"));
+            Assert.IsTrue(context.ScopeModel.QueryScope.Items.ContainsKey("e"));
+        }
+
     }
 }

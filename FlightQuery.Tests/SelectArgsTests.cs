@@ -43,17 +43,50 @@ where airportCode = 'kaus'
         }
 
         [Test]
+        public void TestAirlineflightScheduleTestCase()
+        {
+            string code = @"
+select
+    case
+        when actual_ident != ''
+            then actual_ident
+        else
+            ident
+        end
+from airlineflightschedules
+where departuretime > '2020-1-21 9:15'
+";
+
+            var mock = new Mock<IHttpExecutorRaw>();
+            mock.Setup(x => x.AirlineFlightSchedule(It.IsAny<HttpExecuteArg>())).Returns(() =>
+            {
+                string source = string.Empty;
+                var assembly = Assembly.GetExecutingAssembly();
+                using (Stream stream = assembly.GetManifestResourceStream("FlightQuery.Tests.AirlineFlightSchedule.json"))
+                using (StreamReader reader = new StreamReader(stream))
+                {
+                    source = reader.ReadToEnd();
+                }
+                return new ExecuteResult() { Result = source };
+            });
+
+            var context = new RunContext(code, string.Empty, ExecuteFlags.Run, new EmptyHttpExecutor(), new HttpExecutor(mock.Object));
+            var result = context.Run();
+
+            Assert.IsTrue(context.Errors.Count == 0);
+
+        }
+
+        [Test]
         public void TestSelectCaseWithElse()
         {
             string code = @"
 select a.ident,
     case
-        when i.actualarrivaltime != -1 and i.actualdeparturetime != -1 and i.estimatedarrivaltime != -1
+        when i.actualarrivaltime = -1 and i.actualdeparturetime = -1 and i.estimatedarrivaltime = -1
         then 'cancelled'
         when i.actualdeparturetime != 0 and i.actualarrivaltime = 0
         then 'enroute'
-        when i.actualdeparturetime != 0 and i.actualarrivaltime != 0 and i.actualdeparturetime != i.actualarrivaltime
-        then 'arrived'
         else 'scheduled'
     end as status
 from AirlineFlightSchedules a
@@ -110,5 +143,351 @@ where a.departuretime > '2020-1-21 9:15' and a.ident = 'ACI4600'
             Assert.AreEqual(result.Rows[0].Values[1], "scheduled");
 
         }
+
+
+        [Test]
+        public void TestSelectCaseWithElseNoAs()
+        {
+            string code = @"
+select a.ident,
+    case
+        when i.actualarrivaltime = -1 and i.actualdeparturetime = -1 and i.estimatedarrivaltime = -1
+        then 'cancelled'
+        when i.actualdeparturetime != 0 and i.actualarrivaltime = 0
+        then 'enroute'
+        else 'scheduled'
+    end
+from AirlineFlightSchedules a
+join GetFlightId f on f.ident = a.ident and f.departureTime = a.departureTime 
+join FlightInfoEx i on i.faFlightID = f.faFlightID
+where a.departuretime > '2020-1-21 9:15' and a.ident = 'ACI4600'
+";
+
+            var mock = new Mock<IHttpExecutorRaw>();
+            mock.Setup(x => x.AirlineFlightSchedule(It.IsAny<HttpExecuteArg>())).Returns(() =>
+            {
+                string source = string.Empty;
+                var assembly = Assembly.GetExecutingAssembly();
+                using (Stream stream = assembly.GetManifestResourceStream("FlightQuery.Tests.AirlineFlightSchedule.json"))
+                using (StreamReader reader = new StreamReader(stream))
+                {
+                    source = reader.ReadToEnd();
+                }
+                return new ExecuteResult() { Result = source };
+            });
+            mock.Setup(x => x.GetFlightID(It.IsAny<HttpExecuteArg>())).Returns<HttpExecuteArg>((args) =>
+            {
+                string source = string.Empty;
+                var assembly = Assembly.GetExecutingAssembly();
+                using (Stream stream = assembly.GetManifestResourceStream("FlightQuery.Tests.GetFlightId.json"))
+                using (StreamReader reader = new StreamReader(stream))
+                {
+                    source = reader.ReadToEnd();
+                }
+                return new ExecuteResult() { Result = source };
+            });
+            mock.Setup(x => x.GetFlightInfoEx(It.IsAny<HttpExecuteArg>()))
+                .Returns<HttpExecuteArg>((args) =>
+                {
+                    string source = string.Empty;
+                    var assembly = Assembly.GetExecutingAssembly();
+                    using (Stream stream = assembly.GetManifestResourceStream("FlightQuery.Tests.FlightInfoEx.json"))
+                    using (StreamReader reader = new StreamReader(stream))
+                    {
+                        source = reader.ReadToEnd();
+                    }
+
+                    return new ExecuteResult() { Result = source };
+                });
+
+            var context = new RunContext(code, string.Empty, ExecuteFlags.Run, new EmptyHttpExecutor(), new HttpExecutor(mock.Object));
+            var result = context.Run();
+
+            Assert.IsTrue(context.Errors.Count == 0);
+
+            Assert.IsTrue(result.Columns[0] == "ident");
+            Assert.IsTrue(result.Columns[1] == "(No column name)");
+            Assert.AreEqual(result.Rows[0].Values[0], "ACI4600");
+            Assert.AreEqual(result.Rows[0].Values[1], "scheduled");
+
+        }
+
+
+        [Test]
+        public void TestSelectCaseWithElseNoAsNoElse()
+        {
+            string code = @"
+select a.ident,
+    case
+        when i.actualarrivaltime = -1 and i.actualdeparturetime = -1 and i.estimatedarrivaltime = -1
+        then 'cancelled'
+        when i.actualdeparturetime != 0 and i.actualarrivaltime = 0
+        then 'enroute'
+        
+    end
+from AirlineFlightSchedules a
+join GetFlightId f on f.ident = a.ident and f.departureTime = a.departureTime 
+join FlightInfoEx i on i.faFlightID = f.faFlightID
+where a.departuretime > '2020-1-21 9:15' and a.ident = 'ACI4600'
+";
+
+            var mock = new Mock<IHttpExecutorRaw>();
+            mock.Setup(x => x.AirlineFlightSchedule(It.IsAny<HttpExecuteArg>())).Returns(() =>
+            {
+                string source = string.Empty;
+                var assembly = Assembly.GetExecutingAssembly();
+                using (Stream stream = assembly.GetManifestResourceStream("FlightQuery.Tests.AirlineFlightSchedule.json"))
+                using (StreamReader reader = new StreamReader(stream))
+                {
+                    source = reader.ReadToEnd();
+                }
+                return new ExecuteResult() { Result = source };
+            });
+            mock.Setup(x => x.GetFlightID(It.IsAny<HttpExecuteArg>())).Returns<HttpExecuteArg>((args) =>
+            {
+                string source = string.Empty;
+                var assembly = Assembly.GetExecutingAssembly();
+                using (Stream stream = assembly.GetManifestResourceStream("FlightQuery.Tests.GetFlightId.json"))
+                using (StreamReader reader = new StreamReader(stream))
+                {
+                    source = reader.ReadToEnd();
+                }
+                return new ExecuteResult() { Result = source };
+            });
+            mock.Setup(x => x.GetFlightInfoEx(It.IsAny<HttpExecuteArg>()))
+                .Returns<HttpExecuteArg>((args) =>
+                {
+                    string source = string.Empty;
+                    var assembly = Assembly.GetExecutingAssembly();
+                    using (Stream stream = assembly.GetManifestResourceStream("FlightQuery.Tests.FlightInfoEx.json"))
+                    using (StreamReader reader = new StreamReader(stream))
+                    {
+                        source = reader.ReadToEnd();
+                    }
+
+                    return new ExecuteResult() { Result = source };
+                });
+
+            var context = new RunContext(code, string.Empty, ExecuteFlags.Run, new EmptyHttpExecutor(), new HttpExecutor(mock.Object));
+            var result = context.Run();
+
+            Assert.IsTrue(context.Errors.Count == 0);
+
+            Assert.IsTrue(result.Columns[0] == "ident");
+            Assert.IsTrue(result.Columns[1] == "(No column name)");
+            Assert.AreEqual(result.Rows[0].Values[0], "ACI4600");
+            Assert.AreEqual(result.Rows[0].Values[1], null);
+
+        }
+
+
+        [Test]
+        public void TestSelectCaseWithElseNoAsElseReturnVariable()
+        {
+            string code = @"
+select a.ident,
+    case
+        when i.actualarrivaltime = -1 and i.actualdeparturetime = -1 and i.estimatedarrivaltime = -1
+        then 'cancelled'
+        when i.actualdeparturetime != 0 and i.actualarrivaltime = 0
+        then 'enroute'
+      
+        else a.seats_cabin_business
+    end
+from AirlineFlightSchedules a
+join GetFlightId f on f.ident = a.ident and f.departureTime = a.departureTime 
+join FlightInfoEx i on i.faFlightID = f.faFlightID
+where a.departuretime > '2020-1-21 9:15' and a.ident = 'ACI4600'
+";
+
+            var mock = new Mock<IHttpExecutorRaw>();
+            mock.Setup(x => x.AirlineFlightSchedule(It.IsAny<HttpExecuteArg>())).Returns(() =>
+            {
+                string source = string.Empty;
+                var assembly = Assembly.GetExecutingAssembly();
+                using (Stream stream = assembly.GetManifestResourceStream("FlightQuery.Tests.AirlineFlightSchedule.json"))
+                using (StreamReader reader = new StreamReader(stream))
+                {
+                    source = reader.ReadToEnd();
+                }
+                return new ExecuteResult() { Result = source };
+            });
+            mock.Setup(x => x.GetFlightID(It.IsAny<HttpExecuteArg>())).Returns<HttpExecuteArg>((args) =>
+            {
+                string source = string.Empty;
+                var assembly = Assembly.GetExecutingAssembly();
+                using (Stream stream = assembly.GetManifestResourceStream("FlightQuery.Tests.GetFlightId.json"))
+                using (StreamReader reader = new StreamReader(stream))
+                {
+                    source = reader.ReadToEnd();
+                }
+                return new ExecuteResult() { Result = source };
+            });
+            mock.Setup(x => x.GetFlightInfoEx(It.IsAny<HttpExecuteArg>()))
+                .Returns<HttpExecuteArg>((args) =>
+                {
+                    string source = string.Empty;
+                    var assembly = Assembly.GetExecutingAssembly();
+                    using (Stream stream = assembly.GetManifestResourceStream("FlightQuery.Tests.FlightInfoEx.json"))
+                    using (StreamReader reader = new StreamReader(stream))
+                    {
+                        source = reader.ReadToEnd();
+                    }
+
+                    return new ExecuteResult() { Result = source };
+                });
+
+            var context = new RunContext(code, string.Empty, ExecuteFlags.Run, new EmptyHttpExecutor(), new HttpExecutor(mock.Object));
+            var result = context.Run();
+
+            Assert.IsTrue(context.Errors.Count == 0);
+
+            Assert.IsTrue(result.Columns[0] == "ident");
+            Assert.IsTrue(result.Columns[1] == "(No column name)");
+            Assert.AreEqual(result.Rows[0].Values[0], "ACI4600");
+            Assert.AreEqual(result.Rows[0].Values[1], 30);
+
+        }
+
+
+        [Test]
+        public void TestSelectFirstCase()
+        {
+            string code = @"
+select a.ident,
+    case
+        when i.actualarrivaltime = -1 and i.actualdeparturetime = -1 and i.estimatedarrivaltime = -1
+        then 'cancelled'
+        when i.actualdeparturetime != 0 and i.actualarrivaltime = 0
+        then 'enroute'
+        when i.actualdeparturetime != 0 and i.actualarrivaltime != 0 and i.actualdeparturetime != i.actualarrivaltime
+        then 'arrived'
+        else a.seats_cabin_business
+    end
+from AirlineFlightSchedules a
+join GetFlightId f on f.ident = a.ident and f.departureTime = a.departureTime 
+join FlightInfoEx i on i.faFlightID = f.faFlightID
+where a.departuretime > '2020-1-21 9:15' and a.ident = 'ACI4600'
+";
+
+            var mock = new Mock<IHttpExecutorRaw>();
+            mock.Setup(x => x.AirlineFlightSchedule(It.IsAny<HttpExecuteArg>())).Returns(() =>
+            {
+                string source = string.Empty;
+                var assembly = Assembly.GetExecutingAssembly();
+                using (Stream stream = assembly.GetManifestResourceStream("FlightQuery.Tests.AirlineFlightSchedule.json"))
+                using (StreamReader reader = new StreamReader(stream))
+                {
+                    source = reader.ReadToEnd();
+                }
+                return new ExecuteResult() { Result = source };
+            });
+            mock.Setup(x => x.GetFlightID(It.IsAny<HttpExecuteArg>())).Returns<HttpExecuteArg>((args) =>
+            {
+                string source = string.Empty;
+                var assembly = Assembly.GetExecutingAssembly();
+                using (Stream stream = assembly.GetManifestResourceStream("FlightQuery.Tests.GetFlightId.json"))
+                using (StreamReader reader = new StreamReader(stream))
+                {
+                    source = reader.ReadToEnd();
+                }
+                return new ExecuteResult() { Result = source };
+            });
+            mock.Setup(x => x.GetFlightInfoEx(It.IsAny<HttpExecuteArg>()))
+                .Returns<HttpExecuteArg>((args) =>
+                {
+                    string source = string.Empty;
+                    var assembly = Assembly.GetExecutingAssembly();
+                    using (Stream stream = assembly.GetManifestResourceStream("FlightQuery.Tests.FlightInfoExCancelled.json"))
+                    using (StreamReader reader = new StreamReader(stream))
+                    {
+                        source = reader.ReadToEnd();
+                    }
+
+                    return new ExecuteResult() { Result = source };
+                });
+
+            var context = new RunContext(code, string.Empty, ExecuteFlags.Run, new EmptyHttpExecutor(), new HttpExecutor(mock.Object));
+            var result = context.Run();
+
+            Assert.IsTrue(context.Errors.Count == 0);
+
+            Assert.IsTrue(result.Columns[0] == "ident");
+            Assert.IsTrue(result.Columns[1] == "(No column name)");
+            Assert.AreEqual(result.Rows[0].Values[0], "ACI4600");
+            Assert.AreEqual(result.Rows[0].Values[1], "cancelled");
+
+        }
+
+
+        [Test]
+        public void TestSelecThirdCase()
+        {
+            string code = @"
+select a.ident,
+    case
+        when i.actualarrivaltime = -1 and i.actualdeparturetime = -1 and i.estimatedarrivaltime = -1
+        then 'cancelled'
+        when i.actualdeparturetime != 0 and i.actualarrivaltime = 0
+        then 'enroute'
+        when i.actualdeparturetime != 0 and i.actualarrivaltime != 0 and i.actualdeparturetime != i.actualarrivaltime
+        then 'arrived'
+        else a.seats_cabin_business
+    end
+from AirlineFlightSchedules a
+join GetFlightId f on f.ident = a.ident and f.departureTime = a.departureTime 
+join FlightInfoEx i on i.faFlightID = f.faFlightID
+where a.departuretime > '2020-1-21 9:15' and a.ident = 'ACI4600'
+";
+
+            var mock = new Mock<IHttpExecutorRaw>();
+            mock.Setup(x => x.AirlineFlightSchedule(It.IsAny<HttpExecuteArg>())).Returns(() =>
+            {
+                string source = string.Empty;
+                var assembly = Assembly.GetExecutingAssembly();
+                using (Stream stream = assembly.GetManifestResourceStream("FlightQuery.Tests.AirlineFlightSchedule.json"))
+                using (StreamReader reader = new StreamReader(stream))
+                {
+                    source = reader.ReadToEnd();
+                }
+                return new ExecuteResult() { Result = source };
+            });
+            mock.Setup(x => x.GetFlightID(It.IsAny<HttpExecuteArg>())).Returns<HttpExecuteArg>((args) =>
+            {
+                string source = string.Empty;
+                var assembly = Assembly.GetExecutingAssembly();
+                using (Stream stream = assembly.GetManifestResourceStream("FlightQuery.Tests.GetFlightId.json"))
+                using (StreamReader reader = new StreamReader(stream))
+                {
+                    source = reader.ReadToEnd();
+                }
+                return new ExecuteResult() { Result = source };
+            });
+            mock.Setup(x => x.GetFlightInfoEx(It.IsAny<HttpExecuteArg>()))
+                .Returns<HttpExecuteArg>((args) =>
+                {
+                    string source = string.Empty;
+                    var assembly = Assembly.GetExecutingAssembly();
+                    using (Stream stream = assembly.GetManifestResourceStream("FlightQuery.Tests.FlightInfoEx.json"))
+                    using (StreamReader reader = new StreamReader(stream))
+                    {
+                        source = reader.ReadToEnd();
+                    }
+
+                    return new ExecuteResult() { Result = source };
+                });
+
+            var context = new RunContext(code, string.Empty, ExecuteFlags.Run, new EmptyHttpExecutor(), new HttpExecutor(mock.Object));
+            var result = context.Run();
+
+            Assert.IsTrue(context.Errors.Count == 0);
+
+            Assert.IsTrue(result.Columns[0] == "ident");
+            Assert.IsTrue(result.Columns[1] == "(No column name)");
+            Assert.AreEqual(result.Rows[0].Values[0], "ACI4600");
+            Assert.AreEqual(result.Rows[0].Values[1], "arrived");
+
+        }
     }
 }
+

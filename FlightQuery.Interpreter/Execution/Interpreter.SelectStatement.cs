@@ -46,7 +46,7 @@ namespace FlightQuery.Interpreter.Execution
 
                     if (arg.BoolQueryArg.Table == null) //can't find selected PropertyDescriptor. Must be a statement
                     {
-                        var prop = new PropertyDescriptor() { Name = arg.BoolQueryArg.Variable };
+                        var prop = new PropertyDescriptor() { Name = arg.BoolQueryArg.Variable ?? "(No column name)" };
                         var dynamicColumn = new DynamicColumn { SelectArgExpression = statement.Args[selectIndex], PropDescriptor = prop };
                         descriptors.Add(dynamicColumn);
                         dynamicColumns.Add(dynamicColumn);

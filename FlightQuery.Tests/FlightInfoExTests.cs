@@ -52,7 +52,7 @@ where filed_ete = 'whatever'
             string code = @"
 select *
 from FlightInfoEx
-where faFlightID = 'SWA4567-1586580328-airline-0591' and actualdeparturetime = -1 and estimatedarrivaltime = -1 and actualarrivaltime = -1
+where faFlightID = 'AAL2594-1586309220-schedule-0000' and actualdeparturetime = -1 and estimatedarrivaltime = -1 and actualarrivaltime = -1
 ";
             var mock = new Mock<IHttpExecutorRaw>();
             mock.Setup(x => x.GetFlightInfoEx(It.IsAny<HttpExecuteArg>()))
@@ -82,7 +82,7 @@ where faFlightID = 'SWA4567-1586580328-airline-0591' and actualdeparturetime = -
             string code = @"
 select *
 from FlightInfoEx
-where faFlightID = 'SWA4567-1586580328-airline-0591' and actualdeparturetime != -1 and estimatedarrivaltime != -1 and actualarrivaltime != -1
+where faFlightID = 'AAL2594-1586309220-schedule-0000' and actualdeparturetime != -1 and estimatedarrivaltime != -1 and actualarrivaltime != -1
 ";
             var mock = new Mock<IHttpExecutorRaw>();
             mock.Setup(x => x.GetFlightInfoEx(It.IsAny<HttpExecuteArg>()))

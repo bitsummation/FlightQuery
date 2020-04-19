@@ -11,7 +11,7 @@ namespace FlightQuery.Interpreter.Execution
             foreach (var when in statement.WhenExpression)
             {
                 var arg = new QueryPhaseArgs();
-                VisitChild(when.BooleanExpression);
+                VisitChild(when.BooleanExpression, arg);
                 if (arg.RowResult) //we matched
                 {
                     arg = new QueryPhaseArgs();
