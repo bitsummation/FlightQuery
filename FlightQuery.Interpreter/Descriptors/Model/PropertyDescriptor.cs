@@ -16,6 +16,7 @@ namespace FlightQuery.Interpreter.Descriptors.Model
         public Type Type { get; set; }
         public bool Queryable { get; set; }
         public bool Required { get; set; }
+        public int RequiredGroup { get; set; }
 
         public static PropertyDescriptor[] GenerateQueryDescriptor(Type dto)
         {
@@ -31,7 +32,10 @@ namespace FlightQuery.Interpreter.Descriptors.Model
                 if (queryAttribute != null)
                     descriptor.Queryable = true;
                 if (requiredAttribute != null)
+                {
                     descriptor.Required = true;
+                    descriptor.RequiredGroup = requiredAttribute.Group;
+                }
 
                 descriptor.Type = p.PropertyType;
                 descriptor.Name = p.Name;

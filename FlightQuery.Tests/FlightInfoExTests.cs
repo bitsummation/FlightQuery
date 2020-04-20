@@ -77,6 +77,26 @@ where faFlightID = 'AAL2594-1586309220-schedule-0000' and actualdeparturetime = 
         }
 
         [Test]
+        public void TestNoDataError()
+        {
+            string code = @"
+select destination
+from FlightInfoEx
+where ident = 'AAL2563'
+";
+            var mock = new Mock<IHttpExecutorRaw>();
+
+            mock.Setup(x => x.GetFlightInfoEx(It.IsAny<HttpExecuteArg>())).Returns(
+               new ExecuteResult() { Result = @"{""error"":""NO_DATA flight not found""}" }
+               );
+
+            var context = new RunContext(code, string.Empty, ExecuteFlags.Run, new EmptyHttpExecutor(), new HttpExecutor(mock.Object));
+            var result = context.Run();
+            Assert.IsTrue(context.Errors.Count == 0);
+            Assert.IsTrue(result.Rows.Length == 0);
+        }
+
+        [Test]
         public void TestExecuteCancelledEmpty()
         {
             string code = @"
@@ -107,6 +127,33 @@ where faFlightID = 'AAL2594-1586309220-schedule-0000' and actualdeparturetime !=
         }
 
         [Test]
+        public void TestQuerableParametersIdent()
+        {
+            string code = @"
+select diverted
+from FlightInfoEx
+where ident = 'AAL2563'
+";
+
+            var mock = new Mock<IHttpExecutor>();
+            mock.Setup(x => x.GetFlightInfoEx(It.IsAny<HttpExecuteArg>())).Callback<HttpExecuteArg>(args =>
+            {
+                Assert.IsTrue(args.Variables.Count() == 1);
+                var ident = args.Variables.Where(x => x.Variable == "ident").SingleOrDefault();
+                Assert.IsTrue(ident != null);
+                Assert.IsTrue(ident.Value == "AAL2563");
+
+            }).Returns(() => new ApiExecuteResult<IEnumerable<FlightInfoEx>>(new FlightInfoEx[] { new FlightInfoEx() }));
+
+            var context = new RunContext(code, string.Empty, ExecuteFlags.Semantic, mock.Object);
+            context.Run();
+
+            Assert.IsTrue(context.Errors.Count == 0);
+            mock.Verify(x => x.GetFlightInfoEx(It.IsAny<HttpExecuteArg>()), Times.Once());
+
+        }
+
+        [Test]
         public void TestQuerableParameters()
         {
             string code = @"
@@ -130,6 +177,38 @@ where faFlightID = 'some-flight-number'
 
             Assert.IsTrue(context.Errors.Count == 0);
             mock.Verify(x => x.GetFlightInfoEx(It.IsAny<HttpExecuteArg>()), Times.Once());
+
+        }
+
+        [Test]
+        public void TestExecuteIdent()
+        {
+            string code = @"
+select destination
+from FlightInfoEx
+where ident = 'AAL2563'
+";
+
+            var mock = new Mock<IHttpExecutorRaw>();
+            mock.Setup(x => x.GetFlightInfoEx(It.IsAny<HttpExecuteArg>())).Returns(() =>
+            {
+                string source = string.Empty;
+                var assembly = Assembly.GetExecutingAssembly();
+                using (Stream stream = assembly.GetManifestResourceStream("FlightQuery.Tests.FlightInfoEx.json"))
+                using (StreamReader reader = new StreamReader(stream))
+                {
+                    source = reader.ReadToEnd();
+                }
+                return new ExecuteResult() { Result = source };
+            });
+
+            var context = new RunContext(code, string.Empty, ExecuteFlags.Run, new EmptyHttpExecutor(), new HttpExecutor(mock.Object));
+            var result = context.Run();
+
+            Assert.IsTrue(context.Errors.Count == 0);
+            Assert.IsTrue(result.Rows.Length == 1);
+            Assert.IsTrue(result.Columns.Length == 1);
+            Assert.AreEqual(result.Rows[0].Values[0], "KDFW");
 
         }
 

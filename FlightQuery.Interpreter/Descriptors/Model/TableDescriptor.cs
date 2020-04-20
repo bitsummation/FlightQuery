@@ -61,11 +61,11 @@ namespace FlightQuery.Interpreter.Descriptors.Model
             }
         }
 
-        public PropertyDescriptor[] RequiredProperties
+        public IDictionary<int, PropertyDescriptor[]> RequiredProperties
         {
             get
             {
-                return _propertyDescriptor.Where(x => x.Required).ToArray();
+                return _propertyDescriptor.Where(x => x.Required).GroupBy(x => x.RequiredGroup).ToDictionary(x => x.Key, x => x.ToArray());
             }
         }
 

@@ -4,11 +4,11 @@ namespace FlightQuery.Sdk.Model.V2
 {
     public class GetFlightId
     {
-        [Required]
+        [Required(1)]
         [Queryable]
         public string ident { get; set; }
 
-        [Required]
+        [Required(1)]
         [Queryable]
         public DateTime departureTime { get; set; }
 

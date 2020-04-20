@@ -9,7 +9,7 @@ namespace FlightQuery.Sdk.Model.V2
         public string ident { get; set; }
         public string actual_ident { get; set; }
 
-        [Required]
+        [Required(1)]
         [Queryable]
         public DateTime departuretime { get; set; }
 

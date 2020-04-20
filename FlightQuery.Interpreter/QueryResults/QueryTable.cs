@@ -3,6 +3,7 @@ using FlightQuery.Interpreter.Http;
 using FlightQuery.Sdk;
 using FlightQuery.Sdk.Semantic;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace FlightQuery.Interpreter.QueryResults
@@ -41,16 +42,35 @@ namespace FlightQuery.Interpreter.QueryResults
 
         protected abstract ExecutedTable ExecuteCore(HttpExecuteArg args);
 
-        protected virtual bool ValidateArgs()
+        private void ValidateRequired()
         {
-            //make sure args that are required are there.
-            var missingRequiredParams = Descriptor.RequiredProperties.Select(x => x.Name).Except(QueryArgs.Args.Select(x => x.Variable)).ToArray();
-            if (missingRequiredParams.Length > 0)
+            var required = Descriptor.RequiredProperties;
+            var missingParams = new List<string[]>();
+            
+            foreach (var key in required.Keys) //look in each group and make sure each is there
             {
-                foreach(var param in missingRequiredParams)
+                var missingRequiredParams = required[key].Select(x => x.Name).Except(QueryArgs.Args.Select(x => x.Variable)).ToArray();
+                if (missingRequiredParams.Length == 0) // all required params in group are there.
+                {
+                    missingParams = new List<string[]>();
+                    break;
+                }
+
+                if (missingRequiredParams.Length > 0)
+                    missingParams.Add(missingRequiredParams);
+            }
+
+            if (missingParams.Count > 0)
+            {
+                foreach (var param in missingParams.First())
                     Errors.Add(new RequiredMissingParameter(param));
             }
-               
+        }
+
+        protected virtual void ValidateArgs()
+        {
+            ValidateRequired();
+
             //Convert Datetime Args to unix time
             foreach (var param in QueryArgs.Args.Where(x => x.PropertyValue.Value != null).Where(x => x.PropertyValue.Value.GetType() == typeof(DateTime)))
             {
@@ -58,8 +78,6 @@ namespace FlightQuery.Interpreter.QueryResults
                 var converstion = Conversion.Map[key](param.PropertyValue.Value);
                 param.PropertyValue = new PropertyValue(converstion);
             }
-
-            return true;
         }
     
     }

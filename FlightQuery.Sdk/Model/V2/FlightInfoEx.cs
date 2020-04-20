@@ -1,12 +1,11 @@
 ﻿using Newtonsoft.Json;
 using System;
-using System.ComponentModel;
 
 namespace FlightQuery.Sdk.Model.V2
 {
     public class FlightInfoEx
     {
-        [Required]
+        [Required(1)]
         [Queryable]
         public string faFlightID { get; set; }
 
@@ -30,8 +29,11 @@ namespace FlightQuery.Sdk.Model.V2
         public int filed_altitude { get; set; }
         
         public string filed_ete { get; set;}
-      
+
+        [Required(2)]
+        [Queryable]
         public string ident { get; set; }
+
         public string origin { get; set; }
         public string originCity { get; set; }
         public string originName { get; set; }

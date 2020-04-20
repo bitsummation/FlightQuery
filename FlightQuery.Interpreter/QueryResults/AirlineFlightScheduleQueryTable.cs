@@ -20,7 +20,7 @@ namespace FlightQuery.Interpreter.QueryResults
             return new AirlineFlightScheduleQueryTable(HttpExecutor, PropertyDescriptor.GenerateQueryDescriptor(typeof(AirlineFlightSchedule)));
         }
 
-        protected override bool ValidateArgs()
+        protected override void ValidateArgs()
         {
             base.ValidateArgs();
            
@@ -88,7 +88,6 @@ namespace FlightQuery.Interpreter.QueryResults
 
             }
 
-            return true;
         }
 
         protected override ExecutedTable ExecuteCore(HttpExecuteArg args)

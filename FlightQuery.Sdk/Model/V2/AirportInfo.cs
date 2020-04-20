@@ -3,7 +3,7 @@
     public class AirportInfo
     {
         [Queryable]
-        [Required]
+        [Required(1)]
         public string airportCode { get; set; }
 
         public float latitude { get; set; }

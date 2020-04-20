@@ -17,24 +17,26 @@ namespace FlightQuery.Interpreter.QueryResults
             return new FlightInfoExQueryTable(HttpExecutor, PropertyDescriptor.GenerateQueryDescriptor(typeof(FlightInfoEx)));
         }
 
-        protected override bool ValidateArgs()
+        protected override void ValidateArgs()
         {
             base.ValidateArgs();
 
-            if (QueryArgs.ContainsVariable("faFlightID"))
+            if(QueryArgs.ContainsVariable("ident"))
+            {
+                QueryArgs["ident"].PropertyValue = new PropertyValue(((string)(QueryArgs["ident"].PropertyValue.Value ?? "")).ToUpper());
+            }
+            else if (QueryArgs.ContainsVariable("faFlightID"))
             {
                 var flightid = QueryArgs["faFlightID"];
                 QueryArgs.Clear();
                 QueryArgs.Add(new QueryArgs { Variable = "ident", PropertyValue = new PropertyValue(flightid.PropertyValue.Value) });
             }
-
-            return true;
         }
 
         protected override ExecutedTable ExecuteCore(HttpExecuteArg args)
         {
             var result = HttpExecutor.GetFlightInfoEx(args);
-            if (result.Error != null)
+            if (result.Error != null && result.Error.Type != ApiExecuteErrorType.NoData)
                 Errors.Add(result.Error);
 
             TableDescriptor tableDescriptor = PropertyDescriptor.GenerateRunDescriptor(typeof(FlightInfoEx));
