@@ -93,13 +93,13 @@ namespace FlightQuery.Interpreter.QueryResults
         protected override ExecutedTable ExecuteCore(HttpExecuteArg args)
         {
             var result = HttpExecutor.AirlineFlightSchedule(args);
-            if (result.Error != null)
+            if (result.Error != null && result.Error.Type != ApiExecuteErrorType.NoData)
                 Errors.Add(result.Error);
 
             TableDescriptor tableDescriptor = PropertyDescriptor.GenerateRunDescriptor(typeof(AirlineFlightSchedule));
                 
             var rows = new List<Row>();
-            if (result.Data != null)
+            if (result.Data != null && result.Error == null)
             {
                 foreach (var d in result.Data)
                 {

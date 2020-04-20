@@ -42,7 +42,7 @@ namespace FlightQuery.Interpreter.QueryResults
             TableDescriptor tableDescriptor = PropertyDescriptor.GenerateRunDescriptor(typeof(FlightInfoEx));
 
             var rows = new List<Row>();
-            if (result.Data != null)
+            if (result.Data != null && result.Error == null)
             {
                 foreach (var d in result.Data)
                 {

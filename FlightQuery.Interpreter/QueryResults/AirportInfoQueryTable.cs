@@ -1,6 +1,7 @@
 ﻿using FlightQuery.Interpreter.Descriptors.Model;
 using FlightQuery.Sdk;
 using FlightQuery.Sdk.Model.V2;
+using System.Collections.Generic;
 
 namespace FlightQuery.Interpreter.QueryResults
 {
@@ -26,8 +27,11 @@ namespace FlightQuery.Interpreter.QueryResults
 
             TableDescriptor tableDescriptor = PropertyDescriptor.GenerateRunDescriptor(typeof(AirportInfo));
 
-            var row = new Row() { Values = ToValues(result.Data, tableDescriptor) };
-            return new ExecutedTable(tableDescriptor) { Rows = new Row[] { row }};
+            var rows = new List<Row>();
+            if (result.Error == null)
+                rows.Add(new Row() { Values = ToValues(result.Data, tableDescriptor) });
+
+            return new ExecutedTable(tableDescriptor) { Rows = rows.ToArray()};
         }
     }
 }

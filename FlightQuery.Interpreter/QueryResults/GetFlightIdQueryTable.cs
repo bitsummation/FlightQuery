@@ -2,6 +2,7 @@
 using FlightQuery.Sdk;
 using FlightQuery.Sdk.Model.V2;
 using System;
+using System.Collections.Generic;
 
 namespace FlightQuery.Interpreter.QueryResults
 {
@@ -21,26 +22,14 @@ namespace FlightQuery.Interpreter.QueryResults
             var result = HttpExecutor.GetFlightID(args);
             if (result.Error != null && result.Error.Type != ApiExecuteErrorType.NoData)
                 Errors.Add(result.Error);
-
-            bool noDataError = result.Error != null && result.Error.Type == ApiExecuteErrorType.NoData;
             
             long departerTimeValue = 0;
             if (QueryArgs.ContainsVariable("departuretime"))
-            {
-                if (noDataError)
-                    departerTimeValue = 0;
-                else
-                    departerTimeValue = (long)(QueryArgs["departuretime"].PropertyValue.Value ?? 0L);
-            }
-
+                departerTimeValue = (long)(QueryArgs["departuretime"].PropertyValue.Value ?? 0L);
+            
             string identValue = string.Empty;
             if (QueryArgs.ContainsVariable("ident"))
-            {
-                if (noDataError)
-                    identValue = null;
-                else
-                    identValue = (string)QueryArgs["ident"].PropertyValue.Value;
-            }
+                identValue = (string)QueryArgs["ident"].PropertyValue.Value;
 
             var dto = result.Data;
             dto.departureTime = (DateTime)Conversion.ConvertLongToDateTime(departerTimeValue);
@@ -48,8 +37,11 @@ namespace FlightQuery.Interpreter.QueryResults
 
             TableDescriptor tableDescriptor = PropertyDescriptor.GenerateRunDescriptor(typeof(GetFlightId));
 
-            var row = new Row() { Values = ToValues(dto, tableDescriptor) };
-            return new ExecutedTable(tableDescriptor) { Rows = new Row[] { row } };
+            var rows = new List<Row>();
+            if(result.Error == null)
+                rows.Add(new Row() { Values = ToValues(dto, tableDescriptor) });
+
+            return new ExecutedTable(tableDescriptor) { Rows = rows.ToArray() };
         }
     }
 }
