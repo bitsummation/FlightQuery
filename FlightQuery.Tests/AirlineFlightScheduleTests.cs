@@ -65,6 +65,32 @@ where departuretime > '2020-1-21 9:15'
         }
 
         [Test]
+        public void TestQuerableParametersTwoDepartureTime()
+        {
+            string code = @"
+select aircrafttype, actual_ident, ident, seats_cabin_business, arrivaltime
+from AirlineFlightSchedules
+where departuretime > '2020-1-21 9:15' and departuretime < '2020-11-21 9:15'
+";
+
+            var mock = new Mock<IHttpExecutorRaw>();
+            mock.Setup(x => x.AirlineFlightSchedule(It.IsAny<HttpExecuteArg>())).Callback<HttpExecuteArg>(args =>
+            {
+                Assert.IsTrue(args.Variables.Count() == 2);
+                var start = args.Variables.Where(x => x.Variable == "startDate").SingleOrDefault();
+                Assert.IsTrue(start.Value == "1579598100");
+
+                var end = args.Variables.Where(x => x.Variable == "endDate").SingleOrDefault();
+                Assert.IsTrue(end.Value == "1605950100");
+            });
+
+            var context = new RunContext(code, string.Empty, ExecuteFlags.Run, new EmptyHttpExecutor(), new HttpExecutor(mock.Object));
+            var result = context.Run();
+
+            mock.Verify(v => v.AirlineFlightSchedule(It.IsAny<HttpExecuteArg>()), Times.Once());
+        }
+
+        [Test]
         public void TestApiReturn200WithError()
         {
             string code = @"

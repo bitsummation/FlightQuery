@@ -85,7 +85,17 @@ namespace FlightQuery.Interpreter.QueryResults
             }
             else //two departureTImes
             {
-
+                foreach (var param in QueryArgs.Args.Where(x => x.Variable == "departuretime"))
+                {
+                    if ((param is QueryGreaterThan && param.LeftProperty) || (param is QueryLessThan && !param.LeftProperty))
+                    {
+                        param.Variable = "startDate";
+                    }
+                    else if ((param is QueryLessThan && param.LeftProperty) || (param is QueryGreaterThan && !param.LeftProperty))
+                    {
+                        param.Variable = "endDate";
+                    }
+                }
             }
 
         }
