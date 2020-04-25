@@ -1,5 +1,5 @@
 ﻿using FlightQuery.Interpreter.Descriptors.Model;
-using FlightQuery.Interpreter.QueryResults;
+using FlightQuery.Interpreter.QueryTables;
 using FlightQuery.Sdk.Model.V2;
 using FlightQuery.Sdk.SqlAst;
 
@@ -16,6 +16,7 @@ namespace FlightQuery.Interpreter.Execution
                 _scope.AddTable("flightinfoex", new FlightInfoExQueryTable(_httpExecutor, PropertyDescriptor.GenerateQueryDescriptor(typeof(FlightInfoEx))));
                 _scope.AddTable("airportinfo", new AirportInfoQueryTable(_httpExecutor, PropertyDescriptor.GenerateQueryDescriptor(typeof(AirportInfo))));
                 _scope.AddTable("inboundflightinfo", new InboundFlightInfoQueryTable(_httpExecutor, PropertyDescriptor.GenerateQueryDescriptor(typeof(InboundFlightInfo))));
+                _scope.AddTable("inflightinfo", new InFlightInfoQueryTable(_httpExecutor, PropertyDescriptor.GenerateQueryDescriptor(typeof(InFlightInfo))));
 
                 foreach (var c in program.Statements)
                     VisitChild(c);

@@ -29,5 +29,10 @@ namespace FlightQuery.Sdk
         {
             return new ApiExecuteResult<InboundFlightInfo>(new InboundFlightInfo());
         }
+
+        public ApiExecuteResult<InFlightInfo> GetInFlightInfo(HttpExecuteArg args)
+        {
+            return new ApiExecuteResult<InFlightInfo>(new InFlightInfo());
+        }
     }
 }

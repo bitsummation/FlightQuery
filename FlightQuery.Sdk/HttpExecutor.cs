@@ -96,5 +96,14 @@ namespace FlightQuery.Sdk
                 (dynamic json) => json.InboundFlightInfoResult
                 );
         }
+
+        public ApiExecuteResult<InFlightInfo> GetInFlightInfo(HttpExecuteArg args)
+        {
+            return ParseFindResult(
+                () => _raw.GetInFlightInfo(args),
+                () => _empty.GetInFlightInfo(args).Data,
+                (dynamic json) => json.InFlightInfoResult
+                );
+        }
     }
 }

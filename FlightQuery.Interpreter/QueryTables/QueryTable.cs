@@ -1,12 +1,13 @@
 ﻿using FlightQuery.Interpreter.Descriptors.Model;
 using FlightQuery.Interpreter.Http;
+using FlightQuery.Interpreter.QueryResults;
 using FlightQuery.Sdk;
 using FlightQuery.Sdk.Semantic;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace FlightQuery.Interpreter.QueryResults
+namespace FlightQuery.Interpreter.QueryTables
 {
     public abstract class QueryTable : TableBase
     {

@@ -7,5 +7,6 @@
         ExecuteResult GetFlightID(HttpExecuteArg args);
         ExecuteResult GetFlightInfoEx(HttpExecuteArg args);
         ExecuteResult GetInboundFlightInfo(HttpExecuteArg args);
+        ExecuteResult GetInFlightInfo(HttpExecuteArg args);
     }
 }

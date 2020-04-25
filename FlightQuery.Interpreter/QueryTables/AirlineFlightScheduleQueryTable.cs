@@ -1,5 +1,6 @@
 ﻿using FlightQuery.Interpreter.Descriptors.Model;
 using FlightQuery.Interpreter.Http;
+using FlightQuery.Interpreter.QueryResults;
 using FlightQuery.Sdk;
 using FlightQuery.Sdk.Model.V2;
 using System;
@@ -7,7 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 
-namespace FlightQuery.Interpreter.QueryResults
+namespace FlightQuery.Interpreter.QueryTables
 {
     public class AirlineFlightScheduleQueryTable : QueryTable
     {

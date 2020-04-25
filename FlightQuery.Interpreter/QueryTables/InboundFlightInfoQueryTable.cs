@@ -1,9 +1,10 @@
 ﻿using FlightQuery.Interpreter.Descriptors.Model;
+using FlightQuery.Interpreter.QueryResults;
 using FlightQuery.Sdk;
 using FlightQuery.Sdk.Model.V2;
 using System.Collections.Generic;
 
-namespace FlightQuery.Interpreter.QueryResults
+namespace FlightQuery.Interpreter.QueryTables
 {
     public class InboundFlightInfoQueryTable : QueryTable
     {

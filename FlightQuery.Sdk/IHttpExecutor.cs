@@ -10,5 +10,6 @@ namespace FlightQuery.Sdk
         ApiExecuteResult<AirportInfo> AirportInfo(HttpExecuteArg args);
         ApiExecuteResult<IEnumerable<FlightInfoEx>> GetFlightInfoEx(HttpExecuteArg args);
         ApiExecuteResult<InboundFlightInfo> GetInboundFlightInfo(HttpExecuteArg args);
+        ApiExecuteResult<InFlightInfo> GetInFlightInfo(HttpExecuteArg args);
     }
 }

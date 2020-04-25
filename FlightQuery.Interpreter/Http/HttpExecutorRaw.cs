@@ -84,5 +84,10 @@ namespace FlightQuery.Interpreter.Http
         {
             return Task.Run(async () => await ExecuteInternal(args)).Result;
         }
+
+        public ExecuteResult GetInFlightInfo(HttpExecuteArg args)
+        {
+            return Task.Run(async () => await ExecuteInternal(args)).Result;
+        }
     }
 }
