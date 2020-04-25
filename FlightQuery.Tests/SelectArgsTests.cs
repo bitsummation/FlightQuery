@@ -21,7 +21,7 @@ where airportCode = 'kaus'
 ";
 
             var mock = new Mock<IHttpExecutorRaw>();
-            mock.Setup(x => x.AirportInfo(It.IsAny<HttpExecuteArg>())).Returns(() =>
+            mock.Setup(x => x.GetAirportInfo(It.IsAny<HttpExecuteArg>())).Returns(() =>
             {
                 string source = string.Empty;
                 var assembly = Assembly.GetExecutingAssembly();
@@ -58,7 +58,7 @@ where departuretime > '2020-1-21 9:15'
 ";
 
             var mock = new Mock<IHttpExecutorRaw>();
-            mock.Setup(x => x.AirlineFlightSchedule(It.IsAny<HttpExecuteArg>())).Returns(() =>
+            mock.Setup(x => x.GetAirlineFlightSchedule(It.IsAny<HttpExecuteArg>())).Returns(() =>
             {
                 string source = string.Empty;
                 var assembly = Assembly.GetExecutingAssembly();
@@ -96,7 +96,7 @@ where a.departuretime > '2020-1-21 9:15' and a.ident = 'ACI4600'
 ";
 
             var mock = new Mock<IHttpExecutorRaw>();
-            mock.Setup(x => x.AirlineFlightSchedule(It.IsAny<HttpExecuteArg>())).Returns(() =>
+            mock.Setup(x => x.GetAirlineFlightSchedule(It.IsAny<HttpExecuteArg>())).Returns(() =>
             {
                 string source = string.Empty;
                 var assembly = Assembly.GetExecutingAssembly();
@@ -164,7 +164,7 @@ where a.departuretime > '2020-1-21 9:15' and a.ident = 'ACI4600'
 ";
 
             var mock = new Mock<IHttpExecutorRaw>();
-            mock.Setup(x => x.AirlineFlightSchedule(It.IsAny<HttpExecuteArg>())).Returns(() =>
+            mock.Setup(x => x.GetAirlineFlightSchedule(It.IsAny<HttpExecuteArg>())).Returns(() =>
             {
                 string source = string.Empty;
                 var assembly = Assembly.GetExecutingAssembly();
@@ -232,7 +232,7 @@ where a.departuretime > '2020-1-21 9:15' and a.ident = 'ACI4600'
 ";
 
             var mock = new Mock<IHttpExecutorRaw>();
-            mock.Setup(x => x.AirlineFlightSchedule(It.IsAny<HttpExecuteArg>())).Returns(() =>
+            mock.Setup(x => x.GetAirlineFlightSchedule(It.IsAny<HttpExecuteArg>())).Returns(() =>
             {
                 string source = string.Empty;
                 var assembly = Assembly.GetExecutingAssembly();
@@ -301,7 +301,7 @@ where a.departuretime > '2020-1-21 9:15' and a.ident = 'ACI4600'
 ";
 
             var mock = new Mock<IHttpExecutorRaw>();
-            mock.Setup(x => x.AirlineFlightSchedule(It.IsAny<HttpExecuteArg>())).Returns(() =>
+            mock.Setup(x => x.GetAirlineFlightSchedule(It.IsAny<HttpExecuteArg>())).Returns(() =>
             {
                 string source = string.Empty;
                 var assembly = Assembly.GetExecutingAssembly();
@@ -371,7 +371,7 @@ where a.departuretime > '2020-1-21 9:15' and a.ident = 'ACI4600'
 ";
 
             var mock = new Mock<IHttpExecutorRaw>();
-            mock.Setup(x => x.AirlineFlightSchedule(It.IsAny<HttpExecuteArg>())).Returns(() =>
+            mock.Setup(x => x.GetAirlineFlightSchedule(It.IsAny<HttpExecuteArg>())).Returns(() =>
             {
                 string source = string.Empty;
                 var assembly = Assembly.GetExecutingAssembly();
@@ -441,7 +441,7 @@ where a.departuretime > '2020-1-21 9:15' and a.ident = 'ACI4600'
 ";
 
             var mock = new Mock<IHttpExecutorRaw>();
-            mock.Setup(x => x.AirlineFlightSchedule(It.IsAny<HttpExecuteArg>())).Returns(() =>
+            mock.Setup(x => x.GetAirlineFlightSchedule(It.IsAny<HttpExecuteArg>())).Returns(() =>
             {
                 string source = string.Empty;
                 var assembly = Assembly.GetExecutingAssembly();

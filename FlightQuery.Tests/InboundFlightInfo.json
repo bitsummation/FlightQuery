@@ -1,0 +1,24 @@
+{
+  "InboundFlightInfoResult": {
+    "faFlightID": "SWA2055-1587444311-airline-0873",
+    "ident": "SWA2055",
+    "aircrafttype": "B738",
+    "filed_ete": "01:10:00",
+    "filed_time": 1587677358,
+    "filed_departuretime": 1587677700,
+    "filed_airspeed_kts": 452,
+    "filed_airspeed_mach": "",
+    "filed_altitude": 400,
+    "route": "LFT LCH WLEEE WLEEE5",
+    "actualdeparturetime": 1587677374,
+    "estimatedarrivaltime": 1587681720,
+    "actualarrivaltime": 1587681720,
+    "diverted": "",
+    "origin": "KMSY",
+    "destination": "KAUS",
+    "originName": "",
+    "originCity": "",
+    "destinationName": "",
+    "destinationCity": ""
+  }
+}

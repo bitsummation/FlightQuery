@@ -109,7 +109,7 @@ where a.departuretime > '2020-1-21 9:15'
 ";
 
             var mock = new Mock<IHttpExecutorRaw>();
-            mock.Setup(x => x.AirlineFlightSchedule(It.IsAny<HttpExecuteArg>())).Returns(() =>
+            mock.Setup(x => x.GetAirlineFlightSchedule(It.IsAny<HttpExecuteArg>())).Returns(() =>
             {
                 string source = string.Empty;
                 var assembly = Assembly.GetExecutingAssembly();
@@ -142,7 +142,7 @@ where a.departuretime > '2020-4-10 8:00' and a.origin = 'PHLI' and a.ident = 'DA
 ";
 
             var mock = new Mock<IHttpExecutorRaw>();
-            mock.Setup(x => x.AirlineFlightSchedule(It.IsAny<HttpExecuteArg>())).Returns(
+            mock.Setup(x => x.GetAirlineFlightSchedule(It.IsAny<HttpExecuteArg>())).Returns(
                 new ExecuteResult() { Result = @"{""error"":""INVALID_ARGUMENT startDate is too far in the past(3 months)""}" }
             );
             mock.Setup(x => x.GetFlightID(It.IsAny<HttpExecuteArg>())).Returns<HttpExecuteArg>((args) =>
@@ -174,7 +174,7 @@ where a.departuretime > '2020-1-21 9:15'
 ";
 
             var mock = new Mock<IHttpExecutorRaw>();
-            mock.Setup(x => x.AirlineFlightSchedule(It.IsAny<HttpExecuteArg>())).Returns(() =>
+            mock.Setup(x => x.GetAirlineFlightSchedule(It.IsAny<HttpExecuteArg>())).Returns(() =>
             {
                 string source = string.Empty;
                 var assembly = Assembly.GetExecutingAssembly();
@@ -204,7 +204,7 @@ where a.departuretime > '2020-1-21 9:15'
             Assert.IsTrue(result.Rows.Length == 15);
 
             mock.Verify(v => v.GetFlightID(It.IsAny<HttpExecuteArg>()), Times.Exactly(15));
-            mock.Verify(v => v.AirlineFlightSchedule(It.IsAny<HttpExecuteArg>()), Times.Once());
+            mock.Verify(v => v.GetAirlineFlightSchedule(It.IsAny<HttpExecuteArg>()), Times.Once());
         }
 
     }

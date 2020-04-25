@@ -36,7 +36,7 @@ from AirportInfo
 where airportCode = 'kaus'
 ";
             var mock = new Mock<IHttpExecutorRaw>();
-            mock.Setup(x => x.AirportInfo(It.IsAny<HttpExecuteArg>())).Returns(() =>
+            mock.Setup(x => x.GetAirportInfo(It.IsAny<HttpExecuteArg>())).Returns(() =>
             {
                 string source = string.Empty;
                 var assembly = Assembly.GetExecutingAssembly();
@@ -78,7 +78,7 @@ where airportCode = 'kaus'
 ";
 
             var mock = new Mock<IHttpExecutorRaw>();
-            mock.Setup(x => x.AirportInfo(It.IsAny<HttpExecuteArg>())).Returns(() =>
+            mock.Setup(x => x.GetAirportInfo(It.IsAny<HttpExecuteArg>())).Returns(() =>
             {
                 string source = string.Empty;
                 var assembly = Assembly.GetExecutingAssembly();
@@ -112,7 +112,7 @@ join airportinfo o on o.airportCode = f.origin
 where f.departuretime > '2020-1-16 1:46'and f.ident = 'DAL1381'";
 
             var mock = new Mock<IHttpExecutorRaw>();
-            mock.Setup(x => x.AirlineFlightSchedule(It.IsAny<HttpExecuteArg>())).Returns(() =>
+            mock.Setup(x => x.GetAirlineFlightSchedule(It.IsAny<HttpExecuteArg>())).Returns(() =>
             {
                 string source = string.Empty;
                 var assembly = Assembly.GetExecutingAssembly();
@@ -123,7 +123,7 @@ where f.departuretime > '2020-1-16 1:46'and f.ident = 'DAL1381'";
                 }
                 return new ExecuteResult() { Result = source };
             });
-            mock.Setup(x => x.AirportInfo(It.IsAny<HttpExecuteArg>())).Returns(() =>
+            mock.Setup(x => x.GetAirportInfo(It.IsAny<HttpExecuteArg>())).Returns(() =>
             {
                 string source = string.Empty;
                 var assembly = Assembly.GetExecutingAssembly();
@@ -142,8 +142,8 @@ where f.departuretime > '2020-1-16 1:46'and f.ident = 'DAL1381'";
             Assert.IsTrue(result.Columns.Length == 5);
             Assert.IsTrue(result.Rows.Length == 1);
 
-            mock.Verify(x => x.AirlineFlightSchedule(It.IsAny<HttpExecuteArg>()), Times.Once);
-            mock.Verify(x => x.AirportInfo(It.IsAny<HttpExecuteArg>()), Times.Exactly(30));
+            mock.Verify(x => x.GetAirlineFlightSchedule(It.IsAny<HttpExecuteArg>()), Times.Once);
+            mock.Verify(x => x.GetAirportInfo(It.IsAny<HttpExecuteArg>()), Times.Exactly(30));
         }
 
         [Test]
@@ -156,7 +156,7 @@ where airportCode = 'kaus'
 ";
 
             var mock = new Mock<IHttpExecutorRaw>();
-            mock.Setup(x => x.AirportInfo(It.IsAny<HttpExecuteArg>())).Returns(() =>
+            mock.Setup(x => x.GetAirportInfo(It.IsAny<HttpExecuteArg>())).Returns(() =>
             {
                 return new ExecuteResult() { Result = "", Error = new ApiExecuteError(ApiExecuteErrorType.AuthError, "Authentication error") };
             });
@@ -176,7 +176,7 @@ where airportCode = 'kaus'
 ";
 
             var mock = new Mock<IHttpExecutorRaw>();
-            mock.Setup(x => x.AirportInfo(It.IsAny<HttpExecuteArg>())).Returns(() =>
+            mock.Setup(x => x.GetAirportInfo(It.IsAny<HttpExecuteArg>())).Returns(() =>
             {
                 return new ExecuteResult() { Result = @"{""error"":""NO_DATA unknown airport INVALID""}"};
             });
@@ -198,7 +198,7 @@ where airportCode = 'kaus'
 ";
 
             var mock = new Mock<IHttpExecutorRaw>();
-            mock.Setup(x => x.AirportInfo(It.IsAny<HttpExecuteArg>())).Callback<HttpExecuteArg>((args) =>
+            mock.Setup(x => x.GetAirportInfo(It.IsAny<HttpExecuteArg>())).Callback<HttpExecuteArg>((args) =>
             {
                 Assert.IsTrue(args.Variables.Count() == 1);
                 var start = args.Variables.Where(x => x.Variable == "airportCode").SingleOrDefault();
@@ -219,7 +219,7 @@ where airportcode = 'kaus'
 ";
 
             var mock = new Mock<IHttpExecutorRaw>();
-            mock.Setup(x => x.AirportInfo(It.IsAny<HttpExecuteArg>())).Callback<HttpExecuteArg>((args) =>
+            mock.Setup(x => x.GetAirportInfo(It.IsAny<HttpExecuteArg>())).Callback<HttpExecuteArg>((args) =>
             {
                 Assert.IsTrue(args.Variables.Count() == 1);
                 var start = args.Variables.Where(x => x.Variable == "airportCode").SingleOrDefault();

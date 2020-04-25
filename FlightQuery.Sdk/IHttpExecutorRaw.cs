@@ -2,9 +2,10 @@
 {
     public interface IHttpExecutorRaw
     {
-        ExecuteResult AirlineFlightSchedule(HttpExecuteArg args);
-        ExecuteResult AirportInfo(HttpExecuteArg args);
+        ExecuteResult GetAirlineFlightSchedule(HttpExecuteArg args);
+        ExecuteResult GetAirportInfo(HttpExecuteArg args);
         ExecuteResult GetFlightID(HttpExecuteArg args);
         ExecuteResult GetFlightInfoEx(HttpExecuteArg args);
+        ExecuteResult GetInboundFlightInfo(HttpExecuteArg args);
     }
 }

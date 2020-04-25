@@ -116,6 +116,10 @@ var home = {
     init: function () {
         this.initSubmit();
         this.initExamples();
+
+        Handlebars.registerHelper('isNull', function (value) {
+            return value == null;
+        });
     },
 
     exampleQueries: {

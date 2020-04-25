@@ -38,7 +38,7 @@ where departuretime > '2020-1-21 9:15'
 ";
 
             var mock = new Mock<IHttpExecutorRaw>();
-            mock.Setup(x => x.AirlineFlightSchedule(It.IsAny<HttpExecuteArg>())).Returns(() =>
+            mock.Setup(x => x.GetAirlineFlightSchedule(It.IsAny<HttpExecuteArg>())).Returns(() =>
             {
                 string source = string.Empty;
                 var assembly = Assembly.GetExecutingAssembly();
@@ -74,7 +74,7 @@ where departuretime > '2020-1-21 9:15' and departuretime < '2020-11-21 9:15'
 ";
 
             var mock = new Mock<IHttpExecutorRaw>();
-            mock.Setup(x => x.AirlineFlightSchedule(It.IsAny<HttpExecuteArg>())).Callback<HttpExecuteArg>(args =>
+            mock.Setup(x => x.GetAirlineFlightSchedule(It.IsAny<HttpExecuteArg>())).Callback<HttpExecuteArg>(args =>
             {
                 Assert.IsTrue(args.Variables.Count() == 2);
                 var start = args.Variables.Where(x => x.Variable == "startDate").SingleOrDefault();
@@ -87,7 +87,7 @@ where departuretime > '2020-1-21 9:15' and departuretime < '2020-11-21 9:15'
             var context = new RunContext(code, string.Empty, ExecuteFlags.Run, new EmptyHttpExecutor(), new HttpExecutor(mock.Object));
             var result = context.Run();
 
-            mock.Verify(v => v.AirlineFlightSchedule(It.IsAny<HttpExecuteArg>()), Times.Once());
+            mock.Verify(v => v.GetAirlineFlightSchedule(It.IsAny<HttpExecuteArg>()), Times.Once());
         }
 
         [Test]
@@ -100,7 +100,7 @@ where departuretime < '2020-1-21 9:15'
 ";
 
             var mock = new Mock<IHttpExecutorRaw>();
-            mock.Setup(x => x.AirlineFlightSchedule(It.IsAny<HttpExecuteArg>())).Returns(
+            mock.Setup(x => x.GetAirlineFlightSchedule(It.IsAny<HttpExecuteArg>())).Returns(
                 new ExecuteResult() { Result = @"{""error"":""INVALID_ARGUMENT startDate is too far in the past(3 months)""}" }
             );
 
@@ -119,7 +119,7 @@ from AirlineFlightSchedules a
 where '2020-3-7 9:15' > a.departuretime and origin = 'kaus' and destination = 'kpdx' and ident = 'UAL6879'
 ";
             var mock = new Mock<IHttpExecutorRaw>();
-            mock.Setup(x => x.AirlineFlightSchedule(It.IsAny<HttpExecuteArg>())).Callback<HttpExecuteArg>(args =>
+            mock.Setup(x => x.GetAirlineFlightSchedule(It.IsAny<HttpExecuteArg>())).Callback<HttpExecuteArg>(args =>
             {
                 Assert.IsTrue(args.Variables.Count() == 6);
                 var start = args.Variables.Where(x => x.Variable == "startDate").SingleOrDefault();
@@ -145,7 +145,7 @@ where '2020-3-7 9:15' > a.departuretime and origin = 'kaus' and destination = 'k
             var context = new RunContext(code, string.Empty, ExecuteFlags.Semantic, new HttpExecutor(mock.Object));
             context.Run();
 
-            mock.Verify(v => v.AirlineFlightSchedule(It.IsAny<HttpExecuteArg>()), Times.Once());
+            mock.Verify(v => v.GetAirlineFlightSchedule(It.IsAny<HttpExecuteArg>()), Times.Once());
         }
 
         [Test]
@@ -157,7 +157,7 @@ from AirlineFlightSchedules a
 where '2020-3-7 9:15' = departuretime
 ";
             var mock = new Mock<IHttpExecutorRaw>();
-            mock.Setup(x => x.AirlineFlightSchedule(It.IsAny<HttpExecuteArg>())).Callback<HttpExecuteArg>(args =>
+            mock.Setup(x => x.GetAirlineFlightSchedule(It.IsAny<HttpExecuteArg>())).Callback<HttpExecuteArg>(args =>
             {
                 Assert.IsTrue(args.Variables.Count() == 2);
                 var start = args.Variables.Where(x => x.Variable == "startDate").SingleOrDefault();
@@ -171,7 +171,7 @@ where '2020-3-7 9:15' = departuretime
             var context = new RunContext(code, string.Empty, ExecuteFlags.Semantic, new HttpExecutor(mock.Object));
             context.Run();
 
-            mock.Verify(v => v.AirlineFlightSchedule(It.IsAny<HttpExecuteArg>()), Times.Once());
+            mock.Verify(v => v.GetAirlineFlightSchedule(It.IsAny<HttpExecuteArg>()), Times.Once());
         }
 
         [Test]
@@ -183,7 +183,7 @@ from AirlineFlightSchedules a
 where '2020-3-7 9:15' > departuretime
 ";
             var mock = new Mock<IHttpExecutorRaw>();
-            mock.Setup(x => x.AirlineFlightSchedule(It.IsAny<HttpExecuteArg>())).Callback<HttpExecuteArg>(args =>
+            mock.Setup(x => x.GetAirlineFlightSchedule(It.IsAny<HttpExecuteArg>())).Callback<HttpExecuteArg>(args =>
             {
                 Assert.IsTrue(args.Variables.Count() == 2);
                 var start = args.Variables.Where(x => x.Variable == "startDate").SingleOrDefault();
@@ -197,7 +197,7 @@ where '2020-3-7 9:15' > departuretime
             var context = new RunContext(code, string.Empty, ExecuteFlags.Semantic, new HttpExecutor(mock.Object));
             context.Run();
 
-            mock.Verify(v => v.AirlineFlightSchedule(It.IsAny<HttpExecuteArg>()), Times.Once());
+            mock.Verify(v => v.GetAirlineFlightSchedule(It.IsAny<HttpExecuteArg>()), Times.Once());
 
         }
 
@@ -210,7 +210,7 @@ from AirlineFlightSchedules a
 where departuretime < '2020-3-7 9:15'
 ";
             var mock = new Mock<IHttpExecutorRaw>();
-            mock.Setup(x => x.AirlineFlightSchedule(It.IsAny<HttpExecuteArg>())).Callback<HttpExecuteArg>(args =>
+            mock.Setup(x => x.GetAirlineFlightSchedule(It.IsAny<HttpExecuteArg>())).Callback<HttpExecuteArg>(args =>
             {
                 Assert.IsTrue(args.Variables.Count() == 2);
                 var start = args.Variables.Where(x => x.Variable == "startDate").SingleOrDefault();
@@ -224,7 +224,7 @@ where departuretime < '2020-3-7 9:15'
             var context = new RunContext(code, string.Empty, ExecuteFlags.Semantic, new HttpExecutor(mock.Object));
             context.Run();
 
-            mock.Verify(v => v.AirlineFlightSchedule(It.IsAny<HttpExecuteArg>()), Times.Once());
+            mock.Verify(v => v.GetAirlineFlightSchedule(It.IsAny<HttpExecuteArg>()), Times.Once());
 
         }
 
@@ -238,7 +238,7 @@ where '2020-3-7 9:15' < departuretime
 ";
 
             var mock = new Mock<IHttpExecutorRaw>();
-            mock.Setup(x => x.AirlineFlightSchedule(It.IsAny<HttpExecuteArg>())).Callback<HttpExecuteArg>(args =>
+            mock.Setup(x => x.GetAirlineFlightSchedule(It.IsAny<HttpExecuteArg>())).Callback<HttpExecuteArg>(args =>
             {
                 Assert.IsTrue(args.Variables.Count() == 2);
                 var start = args.Variables.Where(x => x.Variable == "startDate").SingleOrDefault();
@@ -252,7 +252,7 @@ where '2020-3-7 9:15' < departuretime
             var context = new RunContext(code, string.Empty, ExecuteFlags.Semantic, new HttpExecutor(mock.Object));
             context.Run();
 
-            mock.Verify(v => v.AirlineFlightSchedule(It.IsAny<HttpExecuteArg>()), Times.Once());
+            mock.Verify(v => v.GetAirlineFlightSchedule(It.IsAny<HttpExecuteArg>()), Times.Once());
 
         }
 
@@ -265,7 +265,7 @@ from AirlineFlightSchedules a
 where departuretime > '2020-3-7 9:15'
 ";
             var mock = new Mock<IHttpExecutorRaw>();
-            mock.Setup(x => x.AirlineFlightSchedule(It.IsAny<HttpExecuteArg>())).Callback<HttpExecuteArg>(args =>
+            mock.Setup(x => x.GetAirlineFlightSchedule(It.IsAny<HttpExecuteArg>())).Callback<HttpExecuteArg>(args =>
             {
                 Assert.IsTrue(args.Variables.Count() == 2);
                 var start = args.Variables.Where(x => x.Variable == "startDate").SingleOrDefault();
@@ -279,7 +279,7 @@ where departuretime > '2020-3-7 9:15'
             var context = new RunContext(code, string.Empty, ExecuteFlags.Semantic, new HttpExecutor(mock.Object));
             context.Run();
 
-            mock.Verify(v => v.AirlineFlightSchedule(It.IsAny<HttpExecuteArg>()), Times.Once());
+            mock.Verify(v => v.GetAirlineFlightSchedule(It.IsAny<HttpExecuteArg>()), Times.Once());
         }
     }
 }

@@ -15,6 +15,7 @@ namespace FlightQuery.Interpreter.Execution
                 _scope.AddTable("getflightid", new GetFlightIdQueryTable(_httpExecutor, PropertyDescriptor.GenerateQueryDescriptor(typeof(GetFlightId))));
                 _scope.AddTable("flightinfoex", new FlightInfoExQueryTable(_httpExecutor, PropertyDescriptor.GenerateQueryDescriptor(typeof(FlightInfoEx))));
                 _scope.AddTable("airportinfo", new AirportInfoQueryTable(_httpExecutor, PropertyDescriptor.GenerateQueryDescriptor(typeof(AirportInfo))));
+                _scope.AddTable("inboundflightinfo", new InboundFlightInfoQueryTable(_httpExecutor, PropertyDescriptor.GenerateQueryDescriptor(typeof(InboundFlightInfo))));
 
                 foreach (var c in program.Statements)
                     VisitChild(c);

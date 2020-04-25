@@ -11,12 +11,14 @@
     <None Remove="FlightInfoExCancelled.json" />
     <None Remove="FlightInfoExNotDeparted.json" />
     <None Remove="GetFlightId.json" />
+    <None Remove="InboundFlightInfo.json" />
   </ItemGroup>
 
   <ItemGroup>
     <EmbeddedResource Include="AirlineFlightSchedule.json" />
     <EmbeddedResource Include="FlightInfoExCancelled.json" />
     <EmbeddedResource Include="FlightInfoExNotDeparted.json" />
+    <EmbeddedResource Include="InboundFlightInfo.json" />
   </ItemGroup>
 
   <ItemGroup>

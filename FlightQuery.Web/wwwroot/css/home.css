@@ -24,6 +24,7 @@ h2, h3 {
     background: url(../img/black-bg-5.png);
     float: left;
     padding: 5px;
+    margin-top: 10px;
     width: 300px;
 }
 
@@ -37,7 +38,7 @@ h2, h3 {
 }
 
 #discussion {
-    width: 950px;
+    width: 1070px;
     padding: 15px;
     background: none repeat scroll 0 0 #FFFFFF;
 }
@@ -57,7 +58,7 @@ h2, h3 {
 }
 
 .xcw8 {
-    width: 980px;
+    width: 1100px;
 }
 
 #content-wrap {
@@ -74,8 +75,8 @@ h2, h3 {
 
 
 #code {
-    width: 610px;
-    height: 200px;
+    width: 730px;
+    height: 300px;
     border: 1px solid black;
 }
 

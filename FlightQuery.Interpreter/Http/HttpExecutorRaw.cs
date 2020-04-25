@@ -18,7 +18,7 @@ namespace FlightQuery.Interpreter.Http
 
         public string Authorization { get; private set; }
 
-        private async Task<ExecuteResult> Execute(HttpExecuteArg args)
+        private async Task<ExecuteResult> ExecuteInternal(HttpExecuteArg args)
         {
             var json = string.Empty;
             ApiExecuteError error = null;
@@ -60,24 +60,29 @@ namespace FlightQuery.Interpreter.Http
             return new ExecuteResult() { Result = json, Error = error };
         }
 
-        public ExecuteResult AirlineFlightSchedule(HttpExecuteArg args)
+        public ExecuteResult GetAirlineFlightSchedule(HttpExecuteArg args)
         {
-            return Task.Run(async () => await Execute(args)).Result;
+            return Task.Run(async () => await ExecuteInternal(args)).Result;
         }
 
         public ExecuteResult GetFlightID(HttpExecuteArg args)
         {
-            return Task.Run(async () => await Execute(args)).Result;
+            return Task.Run(async () => await ExecuteInternal(args)).Result;
         }
 
         public ExecuteResult GetFlightInfoEx(HttpExecuteArg args)
         {
-            return Task.Run(async () => await Execute(args)).Result;
+            return Task.Run(async () => await ExecuteInternal(args)).Result;
         }
 
-        public ExecuteResult AirportInfo(HttpExecuteArg args)
+        public ExecuteResult GetAirportInfo(HttpExecuteArg args)
         {
-            return Task.Run(async () => await Execute(args)).Result;
+            return Task.Run(async () => await ExecuteInternal(args)).Result;
+        }
+
+        public ExecuteResult GetInboundFlightInfo(HttpExecuteArg args)
+        {
+            return Task.Run(async () => await ExecuteInternal(args)).Result;
         }
     }
 }

@@ -26,7 +26,11 @@
                 {{#each table.rows}}
                 <tr>
                     {{#each this.values}}
-                    <td>{{this}}</td>
+                        {{#if (isNull this)}}
+                        <td>NULL</td>
+                        {{else}}
+                        <td>{{this}}</td>
+                        {{/if}}
                     {{/each}}
                 </tr>
             {{/each}}
@@ -48,7 +52,7 @@
         <h2>Flight Query</h2>
     </div>
     <div id="discussion" class="xxw8 xcw8">
-        <div style="width: 635px; float:left">
+        <div style="width: 760px; float:left">
             <div>Enter Query:</div>
            
             <div id="code">
@@ -82,7 +86,7 @@
                 <a href="" query="austinDeparturesNoStatus">Austin Airport Departures Status</a>
             </div>
         </div>
-        <div id="results" style="float:left; width:880px; overflow-x:auto">
+        <div id="results" style="float:left; width:1070px; overflow-x:auto">
 
         </div>
     </div>
