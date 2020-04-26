@@ -22,6 +22,8 @@ namespace FlightQuery.Sdk.Model.V2
         
         public string originCity { get; set; }
         public string originName { get; set; }
+        [Queryable]
+        public string filter { get; set; }
 
     }
 }

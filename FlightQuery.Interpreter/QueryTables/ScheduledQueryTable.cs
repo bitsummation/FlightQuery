@@ -43,6 +43,9 @@ namespace FlightQuery.Interpreter.QueryTables
                     if (QueryArgs.ContainsVariable("airport"))
                         d.airport = (string)QueryArgs["airport"].PropertyValue.Value;
 
+                    if (QueryArgs.ContainsVariable("filter"))
+                        d.filter = (string)QueryArgs["filter"].PropertyValue.Value;
+
                     var row = new Row() { Values = ToValues(d, tableDescriptor) };
                     rows.Add(row);
                 }
