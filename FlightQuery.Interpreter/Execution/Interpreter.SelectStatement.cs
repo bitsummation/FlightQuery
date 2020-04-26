@@ -96,8 +96,27 @@ namespace FlightQuery.Interpreter.Execution
                 }
             }
 
-            FinalSelectTableDescriptor tableDescriptor = descriptors.Select(x => x.Descriptor()).ToArray();
+            var finalDescriptors = descriptors.Select(x => x.Descriptor()).ToArray();
+            TableDescriptor tableDescriptor;
+            //if nested
+            if (statement.IsNestedSelect)
+            {
+                var dups = finalDescriptors.GroupBy(x => x.Name).Where(g => g.Count() > 1).Select(x => x.Key).ToList();
+                if (dups.Count > 1) //error
+                {
+                }
+
+                tableDescriptor = finalDescriptors;
+            }
+            else
+            {
+                FinalSelectTableDescriptor ftableDescriptor = descriptors.Select(x => x.Descriptor()).ToArray();
+                tableDescriptor = ftableDescriptor;
+            }
+
             var selectTable = new ExecutedTable(tableDescriptor) { Rows = rows.ToArray() };
+            _visitStack.Peek().QueryTable = selectTable;
+
             _selectResult = ToSelectTable(selectTable);
         }
 

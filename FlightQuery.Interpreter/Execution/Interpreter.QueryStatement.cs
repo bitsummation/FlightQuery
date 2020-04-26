@@ -13,10 +13,11 @@ namespace FlightQuery.Interpreter.Execution
             using (var s = _scope.Push())
             {
                 //Visit from to get tables in scope
-                statement.From.Accept(this);
+                if(statement.From != null)
+                    statement.From.Accept(this);
 
                 var executedTables = _scope.FetchAllExecutedTablesSameLevel();
-                if (executedTables.Length > 0)
+                if (executedTables.Length > 0 && statement.Where != null)
                 {
                     var rowCount = executedTables.First().Rows.Length;
                     if (rowCount == 0) //even if no rows we still want to validate where variables
@@ -54,9 +55,11 @@ namespace FlightQuery.Interpreter.Execution
                     });
                 }
 
-                if(statement.Select != null)
-                    statement.Select.Accept(this);
+                var args = new QueryPhaseArgs();
+                if (statement.Select != null)
+                    VisitChild(statement.Select, args);
 
+                _visitStack.Peek().QueryTable = args.QueryTable;
                 ScopeModel = _scope.BuildScopeModel();
             }
         }

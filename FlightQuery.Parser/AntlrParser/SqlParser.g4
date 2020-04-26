@@ -36,7 +36,8 @@ selectVariable
 	;
 
 fromStatement
-	: FROM t=ID a=ID? j=innerJoinStatement?					# fromStatementExp
+	: FROM OPENPAREN q=queryStatement CLOSEPAREN a=ID j=innerJoinStatement?		# fromNestedQueryExp 
+	| FROM t=ID a=ID? j=innerJoinStatement?										# fromStatementExp
 	;
 
 innerJoinStatement

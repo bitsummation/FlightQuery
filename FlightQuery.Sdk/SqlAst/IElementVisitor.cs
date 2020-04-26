@@ -6,6 +6,7 @@
         void Visit(QueryStatement statement);
         void Visit(SelectStatement statement);
         void Visit(FromStatement statement);
+        void Visit(NestedFromStatement statement);
         void Visit(WhereStatement statement);
         void Visit(InnerJoinStatement statement);
 

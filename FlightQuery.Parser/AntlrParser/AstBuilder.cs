@@ -60,6 +60,16 @@ namespace FlightQuery.Parser.AntlrParser
             return from;
         }
 
+        public override Element VisitFromNestedQueryExp(FromNestedQueryExpContext context)
+        {
+            var from = new NestedFromStatement(CreateParseInfo(context)) { Alias = context.a != null ? context.a.Text : null };
+            from.Children.Add(Visit(context.q));
+            if (context.j != null)
+                from.Children.Add(Visit(context.j));
+
+            return from;
+        }
+
         public override Element VisitInnerJoinStatementExp(SqlParser.InnerJoinStatementExpContext context)
         {
             var join = new InnerJoinStatement(CreateParseInfo(context)) { Name = context.t == null ? "" : context.t.Text, Alias = context.a != null ? context.a.Text : null } ;
