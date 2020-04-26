@@ -63,12 +63,30 @@ namespace FlightQuery.Sdk
                 );
         }
 
+        public ApiExecuteResult<IEnumerable<Scheduled>> GetScheduled(HttpExecuteArg args)
+        {
+            return ParseFindResult(
+               () => _raw.GetScheduled(args),
+               () => _empty.GetScheduled(args).Data,
+               (dynamic json) => json.ScheduledResult.scheduled
+               );
+        }
+
         public ApiExecuteResult<AirportInfo> AirportInfo(HttpExecuteArg args)
         {
             return ParseFindResult(
                 () => _raw.GetAirportInfo(args),
                 () => _empty.AirportInfo(args).Data,
                 (dynamic json) => json.AirportInfoResult
+                );
+        }
+
+        public ApiExecuteResult<AirlineInfo> AirlineInfo(HttpExecuteArg args)
+        {
+            return ParseFindResult(
+                () => _raw.GetAirlineInfo(args),
+                () => _empty.AirlineInfo(args).Data,
+                (dynamic json) => json.AirlineInfoResult
                 );
         }
 

@@ -10,6 +10,11 @@ namespace FlightQuery.Sdk
             return new ApiExecuteResult<IEnumerable<AirlineFlightSchedule>>(new AirlineFlightSchedule[] { new AirlineFlightSchedule() });
         }
 
+        public ApiExecuteResult<AirlineInfo> AirlineInfo(HttpExecuteArg args)
+        {
+            return new ApiExecuteResult<AirlineInfo>(new AirlineInfo());
+        }
+
         public ApiExecuteResult<AirportInfo> AirportInfo(HttpExecuteArg args)
         {
             return new ApiExecuteResult<AirportInfo>(new AirportInfo());
@@ -23,6 +28,11 @@ namespace FlightQuery.Sdk
         public ApiExecuteResult<IEnumerable<FlightInfoEx>> GetFlightInfoEx(HttpExecuteArg args)
         {
             return new ApiExecuteResult<IEnumerable<FlightInfoEx>>(new FlightInfoEx[] { new FlightInfoEx() });
+        }
+
+        public ApiExecuteResult<IEnumerable<Scheduled>> GetScheduled(HttpExecuteArg args)
+        {
+            return new ApiExecuteResult<IEnumerable<Scheduled>>(new Scheduled[] { new Scheduled() });
         }
 
         public ApiExecuteResult<InboundFlightInfo> GetInboundFlightInfo(HttpExecuteArg args)

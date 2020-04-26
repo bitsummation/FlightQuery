@@ -32,7 +32,7 @@ namespace FlightQuery.Interpreter.QueryTables
             if (result.Error == null)
                 rows.Add(new Row() { Values = ToValues(result.Data, tableDescriptor) });
 
-            return new ExecutedTable(tableDescriptor) { Rows = rows.ToArray()};
+            return new ExecutedTable(tableDescriptor) { Rows = rows.ToArray() };
         }
     }
 }

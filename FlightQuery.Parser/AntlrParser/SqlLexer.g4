@@ -34,7 +34,7 @@ GREATERTHANEQUAL: '>=';
 NOTEQUAL: '!=';
 
 ID : (LETTER | '_')+;
-STRING_LITERAL: '\'' ~('\'')* '\'';
+STRING_LITERAL: ('\''|'"') ~('\''|'"')* ('\''|'"');
 
 fragment A:('a'|'A');
 fragment B:('b'|'B');
@@ -67,4 +67,6 @@ fragment MINUS:'-';
 fragment DIGIT: '0'..'9';
 fragment NEWLINE : ('\n'|'\r');
 fragment LETTER :('a'..'z' | 'A'..'Z'); 
-WS :  (' '|'\t'|NEWLINE)+ -> skip ;
+WS :  (' '|'\t'|NEWLINE)+ -> skip;
+COMMENT : '/*' .* '*/'-> skip;
+LINE_COMMENT_DASH : '--' ~('\n'|'\r')* -> skip;

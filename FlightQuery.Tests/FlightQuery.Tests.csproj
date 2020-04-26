@@ -6,19 +6,25 @@
 
   <ItemGroup>
     <None Remove="AirlineFlightSchedule.json" />
+    <None Remove="AirlineInfo.json" />
     <None Remove="AirportInfo.json" />
     <None Remove="FlightInfoEx.json" />
     <None Remove="FlightInfoExCancelled.json" />
     <None Remove="FlightInfoExNotDeparted.json" />
     <None Remove="GetFlightId.json" />
     <None Remove="InboundFlightInfo.json" />
+    <None Remove="InFightInfo.json" />
+    <None Remove="Scheduled.json" />
   </ItemGroup>
 
   <ItemGroup>
     <EmbeddedResource Include="AirlineFlightSchedule.json" />
+    <EmbeddedResource Include="AirlineInfo.json" />
     <EmbeddedResource Include="FlightInfoExCancelled.json" />
     <EmbeddedResource Include="FlightInfoExNotDeparted.json" />
     <EmbeddedResource Include="InboundFlightInfo.json" />
+    <EmbeddedResource Include="InFightInfo.json" />
+    <EmbeddedResource Include="Scheduled.json" />
   </ItemGroup>
 
   <ItemGroup>

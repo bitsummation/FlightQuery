@@ -207,7 +207,7 @@ namespace FlightQuery.Parser.AntlrParser
 
         public override Element VisitStringLiteralExp(SqlParser.StringLiteralExpContext context)
         {
-            return new StringLiteral(CreateParseInfo(context)) { Value = context.GetText().Replace("'", "")};
+            return new StringLiteral(CreateParseInfo(context)) { Value = context.GetText().Replace("'", "").Replace("\"", "")};
         }
     }
 }

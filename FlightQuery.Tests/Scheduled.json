@@ -1,0 +1,187 @@
+{
+  "ScheduledResult": {
+    "next_offset": 15,
+    "scheduled": [
+      {
+        "ident": "AAL1593",
+        "aircrafttype": "B738",
+        "filed_departuretime": 1587899520,
+        "estimatedarrivaltime": 1587907740,
+        "origin": "KAUS",
+        "destination": "KMIA",
+        "originName": "Austin-Bergstrom Intl",
+        "originCity": "Austin, TX",
+        "destinationName": "Miami Intl",
+        "destinationCity": "Miami, FL"
+      },
+      {
+        "ident": "SWA3690",
+        "aircrafttype": "B738",
+        "filed_departuretime": 1587900600,
+        "estimatedarrivaltime": 1587911100,
+        "origin": "KAUS",
+        "destination": "KLAX",
+        "originName": "Austin-Bergstrom Intl",
+        "originCity": "Austin, TX",
+        "destinationName": "Los Angeles Intl",
+        "destinationCity": "Los Angeles, CA"
+      },
+      {
+        "ident": "SWA2610",
+        "aircrafttype": "B738",
+        "filed_departuretime": 1587901500,
+        "estimatedarrivaltime": 1587910500,
+        "origin": "KAUS",
+        "destination": "KLAS",
+        "originName": "Austin-Bergstrom Intl",
+        "originCity": "Austin, TX",
+        "destinationName": "McCarran Intl",
+        "destinationCity": "Las Vegas, NV"
+      },
+      {
+        "ident": "SWA5431",
+        "aircrafttype": "B737",
+        "filed_departuretime": 1587903000,
+        "estimatedarrivaltime": 1587906300,
+        "origin": "KAUS",
+        "destination": "KMSY",
+        "originName": "Austin-Bergstrom Intl",
+        "originCity": "Austin, TX",
+        "destinationName": "New Orleans Intl",
+        "destinationCity": "New Orleans, LA"
+      },
+      {
+        "ident": "DAL1984",
+        "aircrafttype": "A321",
+        "filed_departuretime": 1587903000,
+        "estimatedarrivaltime": 1587909060,
+        "origin": "KAUS",
+        "destination": "KATL",
+        "originName": "Austin-Bergstrom Intl",
+        "originCity": "Austin, TX",
+        "destinationName": "Hartsfield-Jackson Intl",
+        "destinationCity": "Atlanta, GA"
+      },
+      {
+        "ident": "AAL1595",
+        "aircrafttype": "B738",
+        "filed_departuretime": 1587903000,
+        "estimatedarrivaltime": 1587905640,
+        "origin": "KAUS",
+        "destination": "KDFW",
+        "originName": "Austin-Bergstrom Intl",
+        "originCity": "Austin, TX",
+        "destinationName": "Dallas-Fort Worth Intl",
+        "destinationCity": "Dallas-Fort Worth, TX"
+      },
+      {
+        "ident": "ASH6219",
+        "aircrafttype": "E75L",
+        "filed_departuretime": 1587903600,
+        "estimatedarrivaltime": 1587906180,
+        "origin": "KAUS",
+        "destination": "KIAH",
+        "originName": "Austin-Bergstrom Intl",
+        "originCity": "Austin, TX",
+        "destinationName": "Houston Bush Int'ctl",
+        "destinationCity": "Houston, TX"
+      },
+      {
+        "ident": "FDX621",
+        "aircrafttype": "A306",
+        "filed_departuretime": 1587904200,
+        "estimatedarrivaltime": 1587908880,
+        "origin": "KAUS",
+        "destination": "KMEM",
+        "originName": "Austin-Bergstrom Intl",
+        "originCity": "Austin, TX",
+        "destinationName": "Memphis Intl",
+        "destinationCity": "Memphis, TN"
+      },
+      {
+        "ident": "AAL2858",
+        "aircrafttype": "A321",
+        "filed_departuretime": 1587906600,
+        "estimatedarrivaltime": 1587909180,
+        "origin": "KAUS",
+        "destination": "KDFW",
+        "originName": "Austin-Bergstrom Intl",
+        "originCity": "Austin, TX",
+        "destinationName": "Dallas-Fort Worth Intl",
+        "destinationCity": "Dallas-Fort Worth, TX"
+      },
+      {
+        "ident": "DAL2966",
+        "aircrafttype": "BCS1",
+        "filed_departuretime": 1587906600,
+        "estimatedarrivaltime": 1587914520,
+        "origin": "KAUS",
+        "destination": "KMSP",
+        "originName": "Austin-Bergstrom Intl",
+        "originCity": "Austin, TX",
+        "destinationName": "Minneapolis/St Paul Intl",
+        "destinationCity": "Minneapolis, MN"
+      },
+      {
+        "ident": "AAL208",
+        "aircrafttype": "B738",
+        "filed_departuretime": 1587907620,
+        "estimatedarrivaltime": 1587916020,
+        "origin": "KAUS",
+        "destination": "KPHX",
+        "originName": "Austin-Bergstrom Intl",
+        "originCity": "Austin, TX",
+        "destinationName": "Phoenix Sky Harbor Intl",
+        "destinationCity": "Phoenix, AZ"
+      },
+      {
+        "ident": "UAL1262",
+        "aircrafttype": "B739",
+        "filed_departuretime": 1587910800,
+        "estimatedarrivaltime": 1587917700,
+        "origin": "KAUS",
+        "destination": "KDEN",
+        "originName": "Austin-Bergstrom Intl",
+        "originCity": "Austin, TX",
+        "destinationName": "Denver Intl",
+        "destinationCity": "Denver, CO"
+      },
+      {
+        "ident": "AAL1961",
+        "aircrafttype": "A319",
+        "filed_departuretime": 1587913740,
+        "estimatedarrivaltime": 1587922980,
+        "origin": "KAUS",
+        "destination": "KCLT",
+        "originName": "Austin-Bergstrom Intl",
+        "originCity": "Austin, TX",
+        "destinationName": "Charlotte/Douglas Intl",
+        "destinationCity": "Charlotte, NC"
+      },
+      {
+        "ident": "SWA5048",
+        "aircrafttype": "B737",
+        "filed_departuretime": 1587914100,
+        "estimatedarrivaltime": 1587923400,
+        "origin": "KAUS",
+        "destination": "KRDU",
+        "originName": "Austin-Bergstrom Intl",
+        "originCity": "Austin, TX",
+        "destinationName": "Raleigh-Durham Intl",
+        "destinationCity": "Raleigh/Durham, NC"
+      },
+      {
+        "ident": "DAL1868",
+        "aircrafttype": "A321",
+        "filed_departuretime": 1587917400,
+        "estimatedarrivaltime": 1587923340,
+        "origin": "KAUS",
+        "destination": "KATL",
+        "originName": "Austin-Bergstrom Intl",
+        "originCity": "Austin, TX",
+        "destinationName": "Hartsfield-Jackson Intl",
+        "destinationCity": "Atlanta, GA"
+      }
+    ]
+  }
+}
