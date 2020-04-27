@@ -2,8 +2,6 @@
 using FlightQuery.Sdk;
 using Moq;
 using NUnit.Framework;
-using System.IO;
-using System.Reflection;
 
 namespace FlightQuery.Tests
 {
@@ -23,15 +21,7 @@ where airportCode = 'kaus'
             var mock = new Mock<IHttpExecutorRaw>();
             mock.Setup(x => x.GetAirportInfo(It.IsAny<HttpExecuteArg>())).Returns(() =>
             {
-                string source = string.Empty;
-                var assembly = Assembly.GetExecutingAssembly();
-                using (Stream stream = assembly.GetManifestResourceStream("FlightQuery.Tests.AirportInfo.json"))
-                using (StreamReader reader = new StreamReader(stream))
-                {
-                    source = reader.ReadToEnd();
-                }
-
-                return new ExecuteResult() { Result = source };
+                return TestHelper.LoadJson("FlightQuery.Tests.AirportInfo.json");
             });
 
             var context = new RunContext(code, string.Empty, ExecuteFlags.Run, new EmptyHttpExecutor(), new HttpExecutor(mock.Object));
@@ -60,14 +50,7 @@ where departuretime > '2020-1-21 9:15'
             var mock = new Mock<IHttpExecutorRaw>();
             mock.Setup(x => x.GetAirlineFlightSchedule(It.IsAny<HttpExecuteArg>())).Returns(() =>
             {
-                string source = string.Empty;
-                var assembly = Assembly.GetExecutingAssembly();
-                using (Stream stream = assembly.GetManifestResourceStream("FlightQuery.Tests.AirlineFlightSchedule.json"))
-                using (StreamReader reader = new StreamReader(stream))
-                {
-                    source = reader.ReadToEnd();
-                }
-                return new ExecuteResult() { Result = source };
+                return TestHelper.LoadJson("FlightQuery.Tests.AirlineFlightSchedule.json");
             });
 
             var context = new RunContext(code, string.Empty, ExecuteFlags.Run, new EmptyHttpExecutor(), new HttpExecutor(mock.Object));
@@ -98,38 +81,16 @@ where a.departuretime > '2020-1-21 9:15' and a.ident = 'ACI4600'
             var mock = new Mock<IHttpExecutorRaw>();
             mock.Setup(x => x.GetAirlineFlightSchedule(It.IsAny<HttpExecuteArg>())).Returns(() =>
             {
-                string source = string.Empty;
-                var assembly = Assembly.GetExecutingAssembly();
-                using (Stream stream = assembly.GetManifestResourceStream("FlightQuery.Tests.AirlineFlightSchedule.json"))
-                using (StreamReader reader = new StreamReader(stream))
-                {
-                    source = reader.ReadToEnd();
-                }
-                return new ExecuteResult() { Result = source };
+                return TestHelper.LoadJson("FlightQuery.Tests.AirlineFlightSchedule.json");
             });
             mock.Setup(x => x.GetFlightID(It.IsAny<HttpExecuteArg>())).Returns<HttpExecuteArg>((args) =>
             {
-                string source = string.Empty;
-                var assembly = Assembly.GetExecutingAssembly();
-                using (Stream stream = assembly.GetManifestResourceStream("FlightQuery.Tests.GetFlightId.json"))
-                using (StreamReader reader = new StreamReader(stream))
-                {
-                    source = reader.ReadToEnd();
-                }
-                return new ExecuteResult() { Result = source };
+                return TestHelper.LoadJson("FlightQuery.Tests.GetFlightId.json");
             });
             mock.Setup(x => x.GetFlightInfoEx(It.IsAny<HttpExecuteArg>()))
                 .Returns<HttpExecuteArg>((args) =>
                 {
-                    string source = string.Empty;
-                    var assembly = Assembly.GetExecutingAssembly();
-                    using (Stream stream = assembly.GetManifestResourceStream("FlightQuery.Tests.FlightInfoEx.json"))
-                    using (StreamReader reader = new StreamReader(stream))
-                    {
-                        source = reader.ReadToEnd();
-                    }
-
-                    return new ExecuteResult() { Result = source };
+                    return TestHelper.LoadJson("FlightQuery.Tests.FlightInfoEx.json");
                 });
 
             var context = new RunContext(code, string.Empty, ExecuteFlags.Run, new EmptyHttpExecutor(), new HttpExecutor(mock.Object));
@@ -166,38 +127,16 @@ where a.departuretime > '2020-1-21 9:15' and a.ident = 'ACI4600'
             var mock = new Mock<IHttpExecutorRaw>();
             mock.Setup(x => x.GetAirlineFlightSchedule(It.IsAny<HttpExecuteArg>())).Returns(() =>
             {
-                string source = string.Empty;
-                var assembly = Assembly.GetExecutingAssembly();
-                using (Stream stream = assembly.GetManifestResourceStream("FlightQuery.Tests.AirlineFlightSchedule.json"))
-                using (StreamReader reader = new StreamReader(stream))
-                {
-                    source = reader.ReadToEnd();
-                }
-                return new ExecuteResult() { Result = source };
+                return TestHelper.LoadJson("FlightQuery.Tests.AirlineFlightSchedule.json");
             });
             mock.Setup(x => x.GetFlightID(It.IsAny<HttpExecuteArg>())).Returns<HttpExecuteArg>((args) =>
             {
-                string source = string.Empty;
-                var assembly = Assembly.GetExecutingAssembly();
-                using (Stream stream = assembly.GetManifestResourceStream("FlightQuery.Tests.GetFlightId.json"))
-                using (StreamReader reader = new StreamReader(stream))
-                {
-                    source = reader.ReadToEnd();
-                }
-                return new ExecuteResult() { Result = source };
+                return TestHelper.LoadJson("FlightQuery.Tests.GetFlightId.json");
             });
             mock.Setup(x => x.GetFlightInfoEx(It.IsAny<HttpExecuteArg>()))
                 .Returns<HttpExecuteArg>((args) =>
                 {
-                    string source = string.Empty;
-                    var assembly = Assembly.GetExecutingAssembly();
-                    using (Stream stream = assembly.GetManifestResourceStream("FlightQuery.Tests.FlightInfoEx.json"))
-                    using (StreamReader reader = new StreamReader(stream))
-                    {
-                        source = reader.ReadToEnd();
-                    }
-
-                    return new ExecuteResult() { Result = source };
+                    return TestHelper.LoadJson("FlightQuery.Tests.FlightInfoEx.json");
                 });
 
             var context = new RunContext(code, string.Empty, ExecuteFlags.Run, new EmptyHttpExecutor(), new HttpExecutor(mock.Object));
@@ -234,38 +173,16 @@ where a.departuretime > '2020-1-21 9:15' and a.ident = 'ACI4600'
             var mock = new Mock<IHttpExecutorRaw>();
             mock.Setup(x => x.GetAirlineFlightSchedule(It.IsAny<HttpExecuteArg>())).Returns(() =>
             {
-                string source = string.Empty;
-                var assembly = Assembly.GetExecutingAssembly();
-                using (Stream stream = assembly.GetManifestResourceStream("FlightQuery.Tests.AirlineFlightSchedule.json"))
-                using (StreamReader reader = new StreamReader(stream))
-                {
-                    source = reader.ReadToEnd();
-                }
-                return new ExecuteResult() { Result = source };
+                return TestHelper.LoadJson("FlightQuery.Tests.AirlineFlightSchedule.json");
             });
             mock.Setup(x => x.GetFlightID(It.IsAny<HttpExecuteArg>())).Returns<HttpExecuteArg>((args) =>
             {
-                string source = string.Empty;
-                var assembly = Assembly.GetExecutingAssembly();
-                using (Stream stream = assembly.GetManifestResourceStream("FlightQuery.Tests.GetFlightId.json"))
-                using (StreamReader reader = new StreamReader(stream))
-                {
-                    source = reader.ReadToEnd();
-                }
-                return new ExecuteResult() { Result = source };
+                return TestHelper.LoadJson("FlightQuery.Tests.GetFlightId.json");
             });
             mock.Setup(x => x.GetFlightInfoEx(It.IsAny<HttpExecuteArg>()))
                 .Returns<HttpExecuteArg>((args) =>
                 {
-                    string source = string.Empty;
-                    var assembly = Assembly.GetExecutingAssembly();
-                    using (Stream stream = assembly.GetManifestResourceStream("FlightQuery.Tests.FlightInfoEx.json"))
-                    using (StreamReader reader = new StreamReader(stream))
-                    {
-                        source = reader.ReadToEnd();
-                    }
-
-                    return new ExecuteResult() { Result = source };
+                    return TestHelper.LoadJson("FlightQuery.Tests.FlightInfoEx.json");
                 });
 
             var context = new RunContext(code, string.Empty, ExecuteFlags.Run, new EmptyHttpExecutor(), new HttpExecutor(mock.Object));
@@ -303,38 +220,16 @@ where a.departuretime > '2020-1-21 9:15' and a.ident = 'ACI4600'
             var mock = new Mock<IHttpExecutorRaw>();
             mock.Setup(x => x.GetAirlineFlightSchedule(It.IsAny<HttpExecuteArg>())).Returns(() =>
             {
-                string source = string.Empty;
-                var assembly = Assembly.GetExecutingAssembly();
-                using (Stream stream = assembly.GetManifestResourceStream("FlightQuery.Tests.AirlineFlightSchedule.json"))
-                using (StreamReader reader = new StreamReader(stream))
-                {
-                    source = reader.ReadToEnd();
-                }
-                return new ExecuteResult() { Result = source };
+                return TestHelper.LoadJson("FlightQuery.Tests.AirlineFlightSchedule.json");
             });
             mock.Setup(x => x.GetFlightID(It.IsAny<HttpExecuteArg>())).Returns<HttpExecuteArg>((args) =>
             {
-                string source = string.Empty;
-                var assembly = Assembly.GetExecutingAssembly();
-                using (Stream stream = assembly.GetManifestResourceStream("FlightQuery.Tests.GetFlightId.json"))
-                using (StreamReader reader = new StreamReader(stream))
-                {
-                    source = reader.ReadToEnd();
-                }
-                return new ExecuteResult() { Result = source };
+                return TestHelper.LoadJson("FlightQuery.Tests.GetFlightId.json");
             });
             mock.Setup(x => x.GetFlightInfoEx(It.IsAny<HttpExecuteArg>()))
                 .Returns<HttpExecuteArg>((args) =>
                 {
-                    string source = string.Empty;
-                    var assembly = Assembly.GetExecutingAssembly();
-                    using (Stream stream = assembly.GetManifestResourceStream("FlightQuery.Tests.FlightInfoEx.json"))
-                    using (StreamReader reader = new StreamReader(stream))
-                    {
-                        source = reader.ReadToEnd();
-                    }
-
-                    return new ExecuteResult() { Result = source };
+                    return TestHelper.LoadJson("FlightQuery.Tests.FlightInfoEx.json");
                 });
 
             var context = new RunContext(code, string.Empty, ExecuteFlags.Run, new EmptyHttpExecutor(), new HttpExecutor(mock.Object));
@@ -373,38 +268,16 @@ where a.departuretime > '2020-1-21 9:15' and a.ident = 'ACI4600'
             var mock = new Mock<IHttpExecutorRaw>();
             mock.Setup(x => x.GetAirlineFlightSchedule(It.IsAny<HttpExecuteArg>())).Returns(() =>
             {
-                string source = string.Empty;
-                var assembly = Assembly.GetExecutingAssembly();
-                using (Stream stream = assembly.GetManifestResourceStream("FlightQuery.Tests.AirlineFlightSchedule.json"))
-                using (StreamReader reader = new StreamReader(stream))
-                {
-                    source = reader.ReadToEnd();
-                }
-                return new ExecuteResult() { Result = source };
+                return TestHelper.LoadJson("FlightQuery.Tests.AirlineFlightSchedule.json");
             });
             mock.Setup(x => x.GetFlightID(It.IsAny<HttpExecuteArg>())).Returns<HttpExecuteArg>((args) =>
             {
-                string source = string.Empty;
-                var assembly = Assembly.GetExecutingAssembly();
-                using (Stream stream = assembly.GetManifestResourceStream("FlightQuery.Tests.GetFlightId.json"))
-                using (StreamReader reader = new StreamReader(stream))
-                {
-                    source = reader.ReadToEnd();
-                }
-                return new ExecuteResult() { Result = source };
+                return TestHelper.LoadJson("FlightQuery.Tests.GetFlightId.json");
             });
             mock.Setup(x => x.GetFlightInfoEx(It.IsAny<HttpExecuteArg>()))
                 .Returns<HttpExecuteArg>((args) =>
                 {
-                    string source = string.Empty;
-                    var assembly = Assembly.GetExecutingAssembly();
-                    using (Stream stream = assembly.GetManifestResourceStream("FlightQuery.Tests.FlightInfoExCancelled.json"))
-                    using (StreamReader reader = new StreamReader(stream))
-                    {
-                        source = reader.ReadToEnd();
-                    }
-
-                    return new ExecuteResult() { Result = source };
+                    return TestHelper.LoadJson("FlightQuery.Tests.FlightInfoExCancelled.json");
                 });
 
             var context = new RunContext(code, string.Empty, ExecuteFlags.Run, new EmptyHttpExecutor(), new HttpExecutor(mock.Object));
@@ -441,40 +314,19 @@ where a.departuretime > '2020-1-21 9:15' and a.ident = 'ACI4600'
 ";
 
             var mock = new Mock<IHttpExecutorRaw>();
+
             mock.Setup(x => x.GetAirlineFlightSchedule(It.IsAny<HttpExecuteArg>())).Returns(() =>
             {
-                string source = string.Empty;
-                var assembly = Assembly.GetExecutingAssembly();
-                using (Stream stream = assembly.GetManifestResourceStream("FlightQuery.Tests.AirlineFlightSchedule.json"))
-                using (StreamReader reader = new StreamReader(stream))
-                {
-                    source = reader.ReadToEnd();
-                }
-                return new ExecuteResult() { Result = source };
+                return TestHelper.LoadJson("FlightQuery.Tests.AirlineFlightSchedule.json");
             });
             mock.Setup(x => x.GetFlightID(It.IsAny<HttpExecuteArg>())).Returns<HttpExecuteArg>((args) =>
             {
-                string source = string.Empty;
-                var assembly = Assembly.GetExecutingAssembly();
-                using (Stream stream = assembly.GetManifestResourceStream("FlightQuery.Tests.GetFlightId.json"))
-                using (StreamReader reader = new StreamReader(stream))
-                {
-                    source = reader.ReadToEnd();
-                }
-                return new ExecuteResult() { Result = source };
+                return TestHelper.LoadJson("FlightQuery.Tests.GetFlightId.json");
             });
             mock.Setup(x => x.GetFlightInfoEx(It.IsAny<HttpExecuteArg>()))
                 .Returns<HttpExecuteArg>((args) =>
                 {
-                    string source = string.Empty;
-                    var assembly = Assembly.GetExecutingAssembly();
-                    using (Stream stream = assembly.GetManifestResourceStream("FlightQuery.Tests.FlightInfoEx.json"))
-                    using (StreamReader reader = new StreamReader(stream))
-                    {
-                        source = reader.ReadToEnd();
-                    }
-
-                    return new ExecuteResult() { Result = source };
+                    return TestHelper.LoadJson("FlightQuery.Tests.FlightInfoEx.json");
                 });
 
             var context = new RunContext(code, string.Empty, ExecuteFlags.Run, new EmptyHttpExecutor(), new HttpExecutor(mock.Object));

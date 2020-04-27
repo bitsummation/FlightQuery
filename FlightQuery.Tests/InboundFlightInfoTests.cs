@@ -2,8 +2,6 @@
 using FlightQuery.Sdk;
 using Moq;
 using NUnit.Framework;
-using System.IO;
-using System.Reflection;
 
 namespace FlightQuery.Tests
 {
@@ -21,14 +19,7 @@ where faFlightID = 'unique-flight-id'
             var mock = new Mock<IHttpExecutorRaw>();
             mock.Setup(x => x.GetInboundFlightInfo(It.IsAny<HttpExecuteArg>())).Returns(() =>
             {
-                string source = string.Empty;
-                var assembly = Assembly.GetExecutingAssembly();
-                using (Stream stream = assembly.GetManifestResourceStream("FlightQuery.Tests.InboundFlightInfo.json"))
-                using (StreamReader reader = new StreamReader(stream))
-                {
-                    source = reader.ReadToEnd();
-                }
-                return new ExecuteResult() { Result = source };
+                return TestHelper.LoadJson("FlightQuery.Tests.InboundFlightInfo.json");
             });
 
             var context = new RunContext(code, string.Empty, ExecuteFlags.Run, new EmptyHttpExecutor(), new HttpExecutor(mock.Object));

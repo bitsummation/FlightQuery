@@ -3,9 +3,7 @@ using FlightQuery.Sdk;
 using Moq;
 using NUnit.Framework;
 using System;
-using System.IO;
 using System.Linq;
-using System.Reflection;
 
 namespace FlightQuery.Tests
 {
@@ -40,14 +38,7 @@ where departuretime > '2020-1-21 9:15'
             var mock = new Mock<IHttpExecutorRaw>();
             mock.Setup(x => x.GetAirlineFlightSchedule(It.IsAny<HttpExecuteArg>())).Returns(() =>
             {
-                string source = string.Empty;
-                var assembly = Assembly.GetExecutingAssembly();
-                using (Stream stream = assembly.GetManifestResourceStream("FlightQuery.Tests.AirlineFlightSchedule.json"))
-                using (StreamReader reader = new StreamReader(stream))
-                {
-                    source = reader.ReadToEnd();
-                }
-                return new ExecuteResult() { Result = source };
+                return TestHelper.LoadJson("FlightQuery.Tests.AirlineFlightSchedule.json"); 
             });
 
             var context = new RunContext(code, string.Empty, ExecuteFlags.Run, new EmptyHttpExecutor(), new HttpExecutor(mock.Object));
