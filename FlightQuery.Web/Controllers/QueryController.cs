@@ -13,7 +13,7 @@ namespace FlightQuery.Web.Controllers
     {
         [HttpPost]
         [Route("scope")]
-        public async Task<ScopeModel> Scope()
+        public async Task<ScopeModel> Scope(int row, int column)
         {
             string query = string.Empty;
             using (var reader = new StreamReader(Request.Body))

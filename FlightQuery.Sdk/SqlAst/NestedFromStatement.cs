@@ -12,7 +12,7 @@ namespace FlightQuery.Sdk.SqlAst
             get { return Children.OfType<QueryStatement>().SingleOrDefault(); }
         }
 
-        public override bool IsNestedSelect
+        public override bool IsNestedQuery
         {
             get
             {

@@ -27,13 +27,13 @@ namespace FlightQuery.Sdk.SqlAst
             }
         }
 
-        public virtual bool IsNestedSelect
+        public virtual bool IsNestedQuery
         {
             get
             {
                 if (Parent != null)
                 {
-                    return Parent.IsNestedSelect;
+                    return Parent.IsNestedQuery;
                 }
                 return false;
             }

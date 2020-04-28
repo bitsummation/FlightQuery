@@ -32,7 +32,9 @@ namespace FlightQuery.Interpreter.Execution
                 throw new InvalidOperationException("");
 
             var executedTables = _scope.FetchAllExecutedTablesSameLevel();
-            var rowCount = executedTables.First().Rows.Length;
+            int rowCount = 0;
+            if(executedTables.Length > 0)
+                rowCount = executedTables.First().Rows.Length;
 
             var rightTableRows = new List<Row>();
             if (rowCount == 0) //need to visit for semantic errors

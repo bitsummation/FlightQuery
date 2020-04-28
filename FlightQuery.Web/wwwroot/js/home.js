@@ -3,12 +3,12 @@
     globalTriggers : ["from", "join"],
     scopeTriggers: ["select", "on", "where", "and", ",", "when", "then", "else"],
 
-    fetch: function (code, callback) {
+    fetch: function (args, callback) {
        
         $.ajax({
             type: "Post",
-            url: "scope",
-            data: code,
+            url: "scope?" + $.param(args.pos),
+            data: args.code,
             contentType: 'text/plain',
             success: function (data) {
                 callback(data);
@@ -20,7 +20,7 @@
     getPrompts: function (args, callback) {
         var that = this;
        
-        this.fetch(args.code, function (scope) {
+        this.fetch(args, function (scope) {
            
             if (that.globalTriggers.includes(args.token)) {
                 callback(scope.global.keys)
@@ -64,7 +64,7 @@
                 if (firstToken != null) {
                     args.promptToken = firstToken.value;
                 }
-                
+               
                 var token = editor.session.getTokenAt(pos.row, pos.column - 1);
                 if (token != null) {
                     token = token.value.toLowerCase();
@@ -73,6 +73,7 @@
 
                 var code = editor.getValue();
                 args.code = code;
+                args.pos = { row: pos.row+1, column: pos.column };
                 that.getPrompts(args, function (wordList) {
 
                     callback(null, wordList.map(function (word) {

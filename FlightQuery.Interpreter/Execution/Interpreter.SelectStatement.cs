@@ -75,10 +75,7 @@ namespace FlightQuery.Interpreter.Execution
                     }
                 }
             }
-
-            if (Errors.Count > 0) //errors no need to select at this point
-                return;
-
+			
             var rows = new List<Row>();
             if (executedTables.Length > 0)
             {
@@ -99,7 +96,7 @@ namespace FlightQuery.Interpreter.Execution
             var finalDescriptors = descriptors.Select(x => x.Descriptor()).ToArray();
             TableDescriptor tableDescriptor;
             //if nested
-            if (statement.IsNestedSelect)
+            if (statement.IsNestedQuery)
             {
                 var dups = finalDescriptors.GroupBy(x => x.Name).Where(g => g.Count() > 1).Select(x => x.Key).ToList();
                 if (dups.Count > 1) //error
