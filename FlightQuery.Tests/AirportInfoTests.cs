@@ -18,7 +18,7 @@ from AirportInfo
 where location = 'kaus'
 ";
 
-            var context = new RunContext(code, string.Empty, ExecuteFlags.Semantic);
+            var context = RunContext.CreateSemanticContext(code);
             context.Run();
 
             Assert.IsTrue(context.Errors.Count == 1);
@@ -39,7 +39,7 @@ where airportCode = 'kaus'
                 return TestHelper.LoadJson("FlightQuery.Tests.AirportInfo.json");
             });
 
-            var context = new RunContext(code, string.Empty, ExecuteFlags.Run, new EmptyHttpExecutor(), new HttpExecutor(mock.Object));
+            var context = RunContext.CreateRunContext(code, new HttpExecutor(mock.Object));
             var result = context.Run();
 
             Assert.IsTrue(context.Errors.Count == 0);
@@ -73,7 +73,7 @@ where airportCode = 'kaus'
                 return TestHelper.LoadJson("FlightQuery.Tests.AirportInfo.json");
             });
 
-            var context = new RunContext(code, string.Empty, ExecuteFlags.Run, new EmptyHttpExecutor(), new HttpExecutor(mock.Object));
+            var context = RunContext.CreateRunContext(code, new HttpExecutor(mock.Object));
             var result = context.Run();
             Assert.IsTrue(context.Errors.Count == 0);
             Assert.IsTrue(result.Columns.Length == 1);
@@ -103,7 +103,7 @@ where f.departuretime > '2020-1-16 1:46'and f.ident = 'DAL1381'";
                 return TestHelper.LoadJson("FlightQuery.Tests.AirportInfo.json");
             });
 
-            var context = new RunContext(code, string.Empty, ExecuteFlags.Run, new EmptyHttpExecutor(), new HttpExecutor(mock.Object));
+            var context = RunContext.CreateRunContext(code, new HttpExecutor(mock.Object));
             var result = context.Run();
             Assert.IsTrue(context.Errors.Count == 0);
             Assert.IsTrue(result.Columns.Length == 5);
@@ -128,7 +128,7 @@ where airportCode = 'kaus'
                 return new ExecuteResult() { Result = "", Error = new ApiExecuteError(ApiExecuteErrorType.AuthError, "Authentication error") };
             });
 
-            var context = new RunContext(code, string.Empty, ExecuteFlags.Run, new EmptyHttpExecutor(), new HttpExecutor(mock.Object));
+            var context = RunContext.CreateRunContext(code, new HttpExecutor(mock.Object));
             var result = context.Run();
             Assert.IsTrue(context.Errors.Count == 1);
         }
@@ -148,7 +148,7 @@ where airportCode = 'kaus'
                 return new ExecuteResult() { Result = @"{""error"":""NO_DATA unknown airport INVALID""}"};
             });
 
-            var context = new RunContext(code, string.Empty, ExecuteFlags.Run, new EmptyHttpExecutor(), new HttpExecutor(mock.Object));
+            var context = RunContext.CreateRunContext(code, new HttpExecutor(mock.Object));
             var result = context.Run();
 
             Assert.IsTrue(context.Errors.Count == 1);
@@ -172,7 +172,7 @@ where airportCode = 'kaus'
                 Assert.IsTrue(start != null);
             });
 
-            var context = new RunContext(code, string.Empty, ExecuteFlags.Run, new EmptyHttpExecutor(), new HttpExecutor(mock.Object));
+            var context = RunContext.CreateRunContext(code, new HttpExecutor(mock.Object));
             var result = context.Run();
         }
 
@@ -193,7 +193,7 @@ where airportcode = 'kaus'
                 Assert.IsTrue(start != null);
             });
 
-            var context = new RunContext(code, string.Empty, ExecuteFlags.Run, new EmptyHttpExecutor(), new HttpExecutor(mock.Object));
+            var context = RunContext.CreateRunContext(code, new HttpExecutor(mock.Object));
             var result = context.Run();
         }
     }

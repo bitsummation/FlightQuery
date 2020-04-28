@@ -4,7 +4,7 @@ namespace FlightQuery.Sdk.SqlAst
 {
     public class InnerJoinStatement : Element
     {
-        public InnerJoinStatement(ParseInfo parseInfo) : base(parseInfo) { }
+        public InnerJoinStatement(Cursor parseInfo) : base(parseInfo) { }
 
         public string Name { get; set; }
         public string Alias { get; set; }

@@ -12,9 +12,11 @@ namespace FlightQuery.Interpreter.Execution
         {
             using (var s = _scope.Push())
             {
+                _queryBounds = new QueryBounds(statement.Cursor, statement.Cursor);
+
                 //Visit from to get tables in scope
-                if(statement.From != null)
-                    statement.From.Accept(this);
+                if (statement.From != null)
+                    VisitChild(statement.From);
 
                 var executedTables = _scope.FetchAllExecutedTablesSameLevel();
                 if (executedTables.Length > 0 && statement.Where != null)
@@ -60,7 +62,9 @@ namespace FlightQuery.Interpreter.Execution
                     VisitChild(statement.Select, args);
 
                 _visitStack.Peek().QueryTable = args.QueryTable;
-                ScopeModel = _scope.BuildScopeModel();
+
+                if(_queryBounds.Contains(_editorCursor))
+                    ScopeModel = _scope.BuildScopeModel();
             }
         }
     }

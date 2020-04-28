@@ -24,7 +24,7 @@ where airportCode = 'kaus'
                 return TestHelper.LoadJson("FlightQuery.Tests.AirportInfo.json");
             });
 
-            var context = new RunContext(code, string.Empty, ExecuteFlags.Run, new EmptyHttpExecutor(), new HttpExecutor(mock.Object));
+            var context = RunContext.CreateRunContext(code, new HttpExecutor(mock.Object));
             var result = context.Run();
             Assert.IsTrue(context.Errors.Count == 0);
             Assert.IsTrue(result.Columns.Length == 2);
@@ -53,7 +53,7 @@ where departuretime > '2020-1-21 9:15'
                 return TestHelper.LoadJson("FlightQuery.Tests.AirlineFlightSchedule.json");
             });
 
-            var context = new RunContext(code, string.Empty, ExecuteFlags.Run, new EmptyHttpExecutor(), new HttpExecutor(mock.Object));
+            var context = RunContext.CreateRunContext(code, new HttpExecutor(mock.Object));
             var result = context.Run();
 
             Assert.IsTrue(context.Errors.Count == 0);
@@ -93,7 +93,7 @@ where a.departuretime > '2020-1-21 9:15' and a.ident = 'ACI4600'
                     return TestHelper.LoadJson("FlightQuery.Tests.FlightInfoEx.json");
                 });
 
-            var context = new RunContext(code, string.Empty, ExecuteFlags.Run, new EmptyHttpExecutor(), new HttpExecutor(mock.Object));
+            var context = RunContext.CreateRunContext(code, new HttpExecutor(mock.Object));
             var result = context.Run();
 
             Assert.IsTrue(context.Errors.Count == 0);
@@ -139,7 +139,7 @@ where a.departuretime > '2020-1-21 9:15' and a.ident = 'ACI4600'
                     return TestHelper.LoadJson("FlightQuery.Tests.FlightInfoEx.json");
                 });
 
-            var context = new RunContext(code, string.Empty, ExecuteFlags.Run, new EmptyHttpExecutor(), new HttpExecutor(mock.Object));
+            var context = RunContext.CreateRunContext(code, new HttpExecutor(mock.Object));
             var result = context.Run();
 
             Assert.IsTrue(context.Errors.Count == 0);
@@ -185,7 +185,7 @@ where a.departuretime > '2020-1-21 9:15' and a.ident = 'ACI4600'
                     return TestHelper.LoadJson("FlightQuery.Tests.FlightInfoEx.json");
                 });
 
-            var context = new RunContext(code, string.Empty, ExecuteFlags.Run, new EmptyHttpExecutor(), new HttpExecutor(mock.Object));
+            var context = RunContext.CreateRunContext(code, new HttpExecutor(mock.Object));
             var result = context.Run();
 
             Assert.IsTrue(context.Errors.Count == 0);
@@ -232,7 +232,7 @@ where a.departuretime > '2020-1-21 9:15' and a.ident = 'ACI4600'
                     return TestHelper.LoadJson("FlightQuery.Tests.FlightInfoEx.json");
                 });
 
-            var context = new RunContext(code, string.Empty, ExecuteFlags.Run, new EmptyHttpExecutor(), new HttpExecutor(mock.Object));
+            var context = RunContext.CreateRunContext(code, new HttpExecutor(mock.Object));
             var result = context.Run();
 
             Assert.IsTrue(context.Errors.Count == 0);
@@ -280,7 +280,7 @@ where a.departuretime > '2020-1-21 9:15' and a.ident = 'ACI4600'
                     return TestHelper.LoadJson("FlightQuery.Tests.FlightInfoExCancelled.json");
                 });
 
-            var context = new RunContext(code, string.Empty, ExecuteFlags.Run, new EmptyHttpExecutor(), new HttpExecutor(mock.Object));
+            var context = RunContext.CreateRunContext(code, new HttpExecutor(mock.Object));
             var result = context.Run();
 
             Assert.IsTrue(context.Errors.Count == 0);
@@ -329,7 +329,7 @@ where a.departuretime > '2020-1-21 9:15' and a.ident = 'ACI4600'
                     return TestHelper.LoadJson("FlightQuery.Tests.FlightInfoEx.json");
                 });
 
-            var context = new RunContext(code, string.Empty, ExecuteFlags.Run, new EmptyHttpExecutor(), new HttpExecutor(mock.Object));
+            var context = RunContext.CreateRunContext(code, new HttpExecutor(mock.Object));
             var result = context.Run();
 
             Assert.IsTrue(context.Errors.Count == 0);

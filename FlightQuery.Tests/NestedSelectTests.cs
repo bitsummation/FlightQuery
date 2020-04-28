@@ -31,7 +31,7 @@ from (
                 return TestHelper.LoadJson("FlightQuery.Tests.AirlineFlightSchedule.json");
             });
 
-            var context = new RunContext(code, string.Empty, ExecuteFlags.Run, new EmptyHttpExecutor(), new HttpExecutor(mock.Object));
+            var context = RunContext.CreateRunContext(code, new HttpExecutor(mock.Object));
             var result = context.Run();
 
             Assert.IsTrue(context.Errors.Count == 0);
@@ -70,7 +70,7 @@ join GetFlightId f on f.ident = a.ident and f.departureTime = a.departureTime
                 return TestHelper.LoadJson("FlightQuery.Tests.GetFlightId.json");
             });
 
-            var context = new RunContext(code, string.Empty, ExecuteFlags.Run, new EmptyHttpExecutor(), new HttpExecutor(mock.Object));
+            var context = RunContext.CreateRunContext(code, new HttpExecutor(mock.Object));
             var result = context.Run();
 
             Assert.IsTrue(context.Errors.Count == 0);
@@ -112,7 +112,7 @@ join GetFlightId f on f.ident = a.ident and f.departureTime = a.departureTime
                 return TestHelper.LoadJson("FlightQuery.Tests.GetFlightId.json");
             });
 
-            var context = new RunContext(code, string.Empty, ExecuteFlags.Run, new EmptyHttpExecutor(), new HttpExecutor(mock.Object));
+            var context = RunContext.CreateRunContext(code, new HttpExecutor(mock.Object));
             var result = context.Run();
 
             Assert.IsTrue(context.Errors.Count == 1);

@@ -4,7 +4,7 @@ namespace FlightQuery.Sdk.SqlAst
 {
     public class ProgramElement : Element
     {
-        public ProgramElement(ParseInfo parseInfo) : base(parseInfo) { }
+        public ProgramElement(Cursor parseInfo) : base(parseInfo) { }
 
         public Element[] Statements
         {

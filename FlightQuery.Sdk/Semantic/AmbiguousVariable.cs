@@ -7,7 +7,7 @@ namespace FlightQuery.Sdk.Semantic
 {
     public class AmbiguousVariable : SemanticLineError
     {
-        public AmbiguousVariable(string variable, ParseInfo parseInfo) : base(parseInfo)
+        public AmbiguousVariable(string variable, Cursor parseInfo) : base(parseInfo)
         {
             Variable = variable;
         }

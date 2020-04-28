@@ -4,7 +4,7 @@ namespace FlightQuery.Sdk.Semantic
 {
     public class VariableNotFound : SemanticLineError
     {
-        public VariableNotFound(string variable, ParseInfo parseInfo) : base(parseInfo)
+        public VariableNotFound(string variable, Cursor parseInfo) : base(parseInfo)
         {
             Variable = variable;
         }

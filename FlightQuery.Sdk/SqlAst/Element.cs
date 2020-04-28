@@ -4,13 +4,13 @@ namespace FlightQuery.Sdk.SqlAst
 {
     public abstract class Element
     {
-        protected Element(ParseInfo parseInfo)
+        protected Element(Cursor parseInfo)
         {
             Children = new ChildCollection(this);
-            ParseInfo = parseInfo;
+            Cursor = parseInfo;
         }
 
-        public ParseInfo ParseInfo { get; private set; }
+        public Cursor Cursor { get; private set; }
         public ChildCollection Children { get; private set; }
         public Element Parent { get; set; }
 

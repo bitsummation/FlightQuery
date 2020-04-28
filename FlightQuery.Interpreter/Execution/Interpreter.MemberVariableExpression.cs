@@ -10,13 +10,13 @@ namespace FlightQuery.Interpreter.Execution
             var table = _scope.TableLookupSameLevel(expression.Alias);
             if(table == null) //table is null when invalid alias
             {
-                Errors.Add(new VariableNotFound(expression.Alias, expression.ParseInfo));
+                Errors.Add(new VariableNotFound(expression.Alias, expression.Cursor));
                 return;
             }
             
             if (!table.Descriptor.ContainsKey(expression.Id))
             {
-                Errors.Add(new VariableNotFound(expression.Id, expression.ParseInfo));
+                Errors.Add(new VariableNotFound(expression.Id, expression.Cursor));
                 return;
             }
 

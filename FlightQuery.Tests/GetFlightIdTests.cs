@@ -18,7 +18,7 @@ select faFlightID
 from GetFlightId
 where ident = 'DAL503'
 ";
-            var context = new RunContext(code, string.Empty, ExecuteFlags.Semantic);
+            var context = RunContext.CreateSemanticContext(code);
             context.Run();
 
             Assert.IsTrue(context.Errors.Count == 1);
@@ -46,7 +46,7 @@ where ident = 'DAL503' and departuretime = '2020-3-7 9:15'
                 Assert.IsTrue(end.Value == "1583572500");
             }).Returns(() => new ApiExecuteResult<GetFlightId>(new GetFlightId()));
 
-            var context = new RunContext(code, string.Empty, ExecuteFlags.Semantic, mock.Object);
+            var context = RunContext.CreateSemanticContext(code, mock.Object);
             context.Run();
 
             Assert.IsTrue(context.Errors.Count == 0);
@@ -64,7 +64,7 @@ where ident = 'DAL503' and departuretime = '2020-3-7 9:15'
             var mock = new Mock<IHttpExecutor>();
             mock.Setup(x => x.GetFlightID(It.IsAny<HttpExecuteArg>())).Returns(() => new ApiExecuteResult<GetFlightId>(new GetFlightId() {faFlightID = "XYZ1234-1530000000-airline-0500" }));
 
-            var context = new RunContext(code, string.Empty, ExecuteFlags.Run, new EmptyHttpExecutor(), mock.Object);
+            var context = RunContext.CreateRunContext(code, mock.Object);
             var result = context.Run();
 
             Assert.IsTrue(context.Errors.Count == 0);
@@ -90,7 +90,7 @@ where ident = 'DAL503' and departuretime = '2020-3-7 9:15'
                 new ExecuteResult() { Result = @"{""error"":""NO_DATA flight not found""}" }
             );
 
-            var context = new RunContext(code, string.Empty, ExecuteFlags.Run, new EmptyHttpExecutor(), new HttpExecutor(mock.Object));
+            var context = RunContext.CreateRunContext(code, new HttpExecutor(mock.Object));
             var result = context.Run();
             Assert.IsTrue(context.Errors.Count == 0);
             Assert.IsTrue(result.Rows.Length == 0);
@@ -115,7 +115,7 @@ where a.departuretime > '2020-1-21 9:15'
                  new ExecuteResult() { Result = @"{""error"":""NO_DATA flight not found""}" }
              );
 
-            var context = new RunContext(code, string.Empty, ExecuteFlags.Run, new EmptyHttpExecutor(), new HttpExecutor(mock.Object));
+            var context = RunContext.CreateRunContext(code, new HttpExecutor(mock.Object));
             var result = context.Run();
             Assert.IsTrue(context.Errors.Count == 0);
             Assert.IsTrue(result.Rows.Length == 0);
@@ -141,7 +141,7 @@ where a.departuretime > '2020-4-10 8:00' and a.origin = 'PHLI' and a.ident = 'DA
                 return TestHelper.LoadJson("FlightQuery.Tests.GetFlightId.json");
             });
 
-            var context = new RunContext(code, string.Empty, ExecuteFlags.Run, new EmptyHttpExecutor(), new HttpExecutor(mock.Object));
+            var context = RunContext.CreateRunContext(code, new HttpExecutor(mock.Object));
             var result = context.Run();
             Assert.IsTrue(context.Errors.Count == 1);
             Assert.IsTrue(context.Errors[0].Message == "Error executing request: INVALID_ARGUMENT startDate is too far in the past(3 months)");
@@ -167,7 +167,7 @@ where a.departuretime > '2020-1-21 9:15'
                 return TestHelper.LoadJson("FlightQuery.Tests.GetFlightId.json");
             });
             
-            var context = new RunContext(code, string.Empty, ExecuteFlags.Run, new EmptyHttpExecutor(), new HttpExecutor(mock.Object));
+            var context = RunContext.CreateRunContext(code, new HttpExecutor(mock.Object));
             var result = context.Run();
 
             Assert.IsTrue(context.Errors.Count == 0);

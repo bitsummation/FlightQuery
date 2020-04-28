@@ -19,7 +19,7 @@ join flightinfoex e on e.faFlightID = f.faFlightID
 where a.departuretime > '2020-4-14 1:31' and a.origin = 'kaus' and e.actualarrivaltime = 0 and e.actualdeparturetime != 0
 ";
 
-            var context = new RunContext(code, string.Empty, ExecuteFlags.Semantic);
+            var context = RunContext.CreateSemanticContext(code);
             context.Run();
 
             Assert.IsTrue(context.Errors.Count == 0);
@@ -35,7 +35,7 @@ join airportinfo d on d.airportCode = f.destination
 where f.departuretime > '2020-4-13 2:8' and f.origin = 'kaus'
 ";
 
-            var context = new RunContext(code, string.Empty, ExecuteFlags.Semantic);
+            var context = RunContext.CreateSemanticContext(code);
             context.Run();
 
             Assert.IsTrue(context.Errors.Count == 1);
@@ -51,7 +51,7 @@ from AirlineFlightSchedules
 where blah < 55
 ";
 
-            var context = new RunContext(code, string.Empty, ExecuteFlags.Semantic);
+            var context = RunContext.CreateSemanticContext(code);
             context.Run();
 
             Assert.IsTrue(context.Errors.Count == 2);
@@ -70,7 +70,7 @@ join GetFlightId f on f.ident = a.ident and f.departureTime = a.departureTime
 where a.departuretime < '2020-3-7 9:15' and a.origin = 'katl'
 ";
 
-            var context = new RunContext(code, string.Empty, ExecuteFlags.Semantic);
+            var context = RunContext.CreateSemanticContext(code);
             context.Run();
 
             Assert.IsTrue(context.Errors.Count == 1);
@@ -87,7 +87,7 @@ join GetFlightId f on ident = a.ident and f.departureTime = a.departureTime
 where a.departuretime < '2020-3-7 9:15' and a.origin = 'katl'
 ";
 
-            var context = new RunContext(code, string.Empty, ExecuteFlags.Semantic);
+            var context = RunContext.CreateSemanticContext(code);
             context.Run();
 
             Assert.IsTrue(context.Errors.Count == 2);
@@ -105,7 +105,7 @@ join getflightid o on o.ident = a.ident and o.departuretime = a.departuretime
 where departuretime > '2020-4-10 1:00' and origin = 'kaus'
 ";
 
-            var context = new RunContext(code, string.Empty, ExecuteFlags.Semantic);
+            var context = RunContext.CreateSemanticContext(code);
             context.Run();
 
             Assert.IsTrue(context.Errors.Count == 1);

@@ -1,11 +1,10 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 
 namespace FlightQuery.Sdk.SqlAst
 {
     public class SelectArgExpression : Element
     {
-        public SelectArgExpression(ParseInfo parseInfo) : base(parseInfo) { }
+        public SelectArgExpression(Cursor parseInfo) : base(parseInfo) { }
 
         public AsExpression As
         {

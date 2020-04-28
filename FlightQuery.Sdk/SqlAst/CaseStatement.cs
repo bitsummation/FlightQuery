@@ -5,7 +5,7 @@ namespace FlightQuery.Sdk.SqlAst
 {
     public class CaseStatement : Element
     {
-        public CaseStatement(ParseInfo parseInfo) : base(parseInfo) { }
+        public CaseStatement(Cursor parseInfo) : base(parseInfo) { }
 
         public WhenExpression[] WhenExpression
         {

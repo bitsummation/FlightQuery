@@ -2,7 +2,7 @@
 {
     public class LessThanExpression : BooleanExpression
     {
-        public LessThanExpression(ParseInfo parseInfo) : base(parseInfo) { }
+        public LessThanExpression(Cursor parseInfo) : base(parseInfo) { }
 
         public override void Accept(IElementVisitor visitor)
         {

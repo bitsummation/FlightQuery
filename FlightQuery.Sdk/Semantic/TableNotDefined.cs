@@ -4,7 +4,7 @@ namespace FlightQuery.Sdk.Semantic
 {
     public class TableNotDefined : SemanticLineError
     {
-        public TableNotDefined(string variable, ParseInfo parseInfo) : base(parseInfo)
+        public TableNotDefined(string variable, Cursor parseInfo) : base(parseInfo)
         {
             Variable = variable;
         }

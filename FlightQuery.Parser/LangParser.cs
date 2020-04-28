@@ -51,7 +51,7 @@ namespace FlightQuery.Parser
 
             public override void SyntaxError(IRecognizer recognizer, IToken offendingSymbol, int line, int charPositionInLine, string msg, RecognitionException e)
             {
-                _errors.Add(new ParseError(msg, new ParseInfo(line, charPositionInLine)));
+                _errors.Add(new ParseError(msg, new Cursor(line, charPositionInLine)));
                 
                 base.SyntaxError(recognizer, offendingSymbol, line, charPositionInLine, msg, e);
             }

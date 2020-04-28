@@ -4,7 +4,7 @@ namespace FlightQuery.Sdk.Semantic
 {
     public class TableConflict :  SemanticLineError
     {
-        public TableConflict(string variable, ParseInfo parseInfo) : base(parseInfo)
+        public TableConflict(string variable, Cursor parseInfo) : base(parseInfo)
         {
             Variable = variable;
         }

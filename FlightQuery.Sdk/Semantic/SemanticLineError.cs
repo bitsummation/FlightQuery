@@ -4,12 +4,12 @@ namespace FlightQuery.Sdk.Semantic
 {
     public abstract class SemanticLineError : SemanticError
     {
-        protected SemanticLineError(ParseInfo parseInfo)
+        protected SemanticLineError(Cursor parseInfo)
         {
             ParseInfo = parseInfo;
         }
         
-        public ParseInfo ParseInfo { get; private set; }
+        public Cursor ParseInfo { get; private set; }
 
         public override string Message
         {

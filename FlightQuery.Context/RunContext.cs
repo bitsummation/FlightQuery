@@ -11,34 +11,56 @@ namespace FlightQuery.Context
         private IHttpExecutor _semanticHttpExecutor;
         private IHttpExecutor _httpExecutor;
         private ExecuteFlags _flags;
+        private Cursor _editorCursor;
 
         public ScopeModel ScopeModel { get; private set; }
 
         public ErrorsCollection Errors { get; private set; }
         public string Authorization { get; private set; }
 
-        public RunContext(string source, string authorization)
-            : this(source, authorization, ExecuteFlags.Run)
+        public static RunContext CreateRunContext(string code, IHttpExecutor httpExecutor)
+        {
+            return new RunContext(code, string.Empty, new Cursor(), ExecuteFlags.Run, new EmptyHttpExecutor(), httpExecutor);
+        }
+
+        public static RunContext CreateRunContext(string code, string authorization)
+        {
+            return new RunContext(code, authorization, new Cursor(), ExecuteFlags.Run);
+        }
+
+        public static RunContext CreateSemanticContext(string code)
+        {
+            return new RunContext(code, string.Empty, new Cursor(), ExecuteFlags.Semantic);
+        }
+
+        public static RunContext CreateSemanticContext(string code, IHttpExecutor semanticHttpExecutor)
+        {
+            return new RunContext(code, string.Empty, new Cursor(), ExecuteFlags.Semantic, semanticHttpExecutor);
+        }
+
+        public static RunContext CreateIntellisenseContext(string code, Cursor cursor)
+        {
+            return new RunContext(code, string.Empty, cursor, ExecuteFlags.Semantic | ExecuteFlags.Intellisense);
+        }
+
+        private RunContext(string source, string authorization, Cursor cursor, ExecuteFlags flags)
+            : this(source, authorization, cursor, flags, new EmptyHttpExecutor())
         {
         }
 
-        public RunContext(string source, string authorization, ExecuteFlags flags)
-            : this(source, authorization, flags, new EmptyHttpExecutor())
+        private RunContext(string source, string authorization, Cursor cursor, ExecuteFlags flags, IHttpExecutor semanticHttpExecutor)
+            : this(source, authorization, cursor, flags, semanticHttpExecutor, null)
         {
         }
 
-        public RunContext(string source, string authorization, ExecuteFlags flags, IHttpExecutor semanticHttpExecutor)
-            : this(source, authorization, flags, semanticHttpExecutor, null)
-        {
-        }
-
-        public RunContext(string source, string authorization, ExecuteFlags flags, IHttpExecutor semanticHttpExecutor, IHttpExecutor httpExecutor)
+        private RunContext(string source, string authorization, Cursor cursor, ExecuteFlags flags, IHttpExecutor semanticHttpExecutor, IHttpExecutor httpExecutor)
         {
             _source = source;
             _flags = flags;
             _semanticHttpExecutor = semanticHttpExecutor;
             _httpExecutor = httpExecutor;
             Authorization = authorization;
+            _editorCursor = cursor;
 
             Errors = new ErrorsCollection();
         }
@@ -56,7 +78,7 @@ namespace FlightQuery.Context
                 //semantic check
                 if ((_flags & ExecuteFlags.Semantic) == ExecuteFlags.Semantic)
                 {
-                    var inter = new Interpreter.Execution.Interpreter(ast, Authorization, _semanticHttpExecutor);
+                    var inter = new Interpreter.Execution.Interpreter(ast, _editorCursor, Authorization, _semanticHttpExecutor);
                     inter.Execute();
                     if (inter.Errors.Count > 0)
                         Errors = inter.Errors;
@@ -66,7 +88,7 @@ namespace FlightQuery.Context
 
                 if (Errors.Count == 0 && ((_flags & ExecuteFlags.Execute) == ExecuteFlags.Execute)) // we run
                 {
-                    var inter = new Interpreter.Execution.Interpreter(ast, Authorization, _httpExecutor);
+                    var inter = new Interpreter.Execution.Interpreter(ast, _editorCursor, Authorization, _httpExecutor);
                     table = inter.Execute();
                     Errors = inter.Errors;
                 }

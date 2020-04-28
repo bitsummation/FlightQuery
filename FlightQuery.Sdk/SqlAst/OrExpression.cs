@@ -2,7 +2,7 @@
 {
     public class OrExpression : BooleanExpression
     {
-        public OrExpression(ParseInfo parseInfo) : base(parseInfo) { }
+        public OrExpression(Cursor parseInfo) : base(parseInfo) { }
 
         public override void Accept(IElementVisitor visitor)
         {

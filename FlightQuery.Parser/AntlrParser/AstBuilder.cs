@@ -1,4 +1,5 @@
 ﻿using Antlr4.Runtime;
+using FlightQuery.Sdk;
 using FlightQuery.Sdk.SqlAst;
 using static FlightQuery.Parser.AntlrParser.SqlParser;
 
@@ -6,9 +7,9 @@ namespace FlightQuery.Parser.AntlrParser
 {
     internal class AstBuilder : SqlParserBaseVisitor<Element>
     {
-        private ParseInfo CreateParseInfo(ParserRuleContext context)
+        private Cursor CreateParseInfo(ParserRuleContext context)
         {
-            return new ParseInfo(context.start.Line, context.start.Column);
+            return new Cursor(context.start.Line, context.start.Column);
         }
 
         public override Element VisitProgram(SqlParser.ProgramContext context)

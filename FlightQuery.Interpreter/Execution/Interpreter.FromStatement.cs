@@ -24,7 +24,7 @@ namespace FlightQuery.Interpreter.Execution
 
             if (!_scope.IsTableDefinedAnyLevel(tableName)) //we don't know this table at any level
             {
-                Errors.Add(new TableNotDefined(tableName, statement.ParseInfo));
+                Errors.Add(new TableNotDefined(tableName, statement.Cursor));
                 return;
             }
 

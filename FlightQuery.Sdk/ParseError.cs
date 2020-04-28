@@ -4,14 +4,14 @@ namespace FlightQuery.Sdk
 {
     public class ParseError : ErrorBase
     {
-        public ParseError(string message, ParseInfo parseInfo)
+        public ParseError(string message, Cursor parseInfo)
         {
             ParseInfo = parseInfo;
             Error = message;
         }
 
         public string Error { get; private set; }
-        public ParseInfo ParseInfo { get; private set; }
+        public Cursor ParseInfo { get; private set; }
 
         public override string Message
         {

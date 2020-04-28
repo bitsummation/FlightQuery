@@ -22,7 +22,7 @@ join FlightInfoEx f on i.faFlightID = f.destination
 where a.departuretime > '2020-4-10 8:00' and a.origin = 'kaus'
 ";
 
-            var context = new RunContext(code, string.Empty, ExecuteFlags.Semantic);
+            var context = RunContext.CreateSemanticContext(code);
             context.Run();
             Assert.IsTrue(context.Errors.Count == 1);
             Assert.IsTrue(context.Errors[0].Message == "faFlightID is required");
@@ -37,7 +37,7 @@ select diverted
 from FlightInfoEx
 where filed_ete = 'whatever'
 ";
-            var context = new RunContext(code, string.Empty, ExecuteFlags.Semantic);
+            var context = RunContext.CreateSemanticContext(code);
             context.Run();
 
             Assert.IsTrue(context.Errors.Count == 1);
@@ -59,7 +59,7 @@ where faFlightID = 'AAL2594-1586309220-schedule-0000' and actualdeparturetime = 
                    return TestHelper.LoadJson("FlightQuery.Tests.FlightInfoExCancelled.json");
                });
 
-            var context = new RunContext(code, string.Empty, ExecuteFlags.Run, new EmptyHttpExecutor(), new HttpExecutor(mock.Object));
+            var context = RunContext.CreateRunContext(code, new HttpExecutor(mock.Object));
             var result = context.Run();
 
             Assert.IsTrue(context.Errors.Count == 0);
@@ -80,7 +80,7 @@ where ident = 'AAL2563'
                new ExecuteResult() { Result = @"{""error"":""NO_DATA flight not found""}" }
                );
 
-            var context = new RunContext(code, string.Empty, ExecuteFlags.Run, new EmptyHttpExecutor(), new HttpExecutor(mock.Object));
+            var context = RunContext.CreateRunContext(code, new HttpExecutor(mock.Object));
             var result = context.Run();
             Assert.IsTrue(context.Errors.Count == 0);
             Assert.IsTrue(result.Rows.Length == 0);
@@ -101,7 +101,7 @@ where faFlightID = 'AAL2594-1586309220-schedule-0000' and actualdeparturetime !=
                    return TestHelper.LoadJson("FlightQuery.Tests.FlightInfoExCancelled.json");
                });
 
-            var context = new RunContext(code, string.Empty, ExecuteFlags.Run, new EmptyHttpExecutor(), new HttpExecutor(mock.Object));
+            var context = RunContext.CreateRunContext(code, new HttpExecutor(mock.Object));
             var result = context.Run();
 
             Assert.IsTrue(context.Errors.Count == 0);
@@ -127,7 +127,7 @@ where ident = 'AAL2563'
 
             }).Returns(() => new ApiExecuteResult<IEnumerable<FlightInfoEx>>(new FlightInfoEx[] { new FlightInfoEx() }));
 
-            var context = new RunContext(code, string.Empty, ExecuteFlags.Semantic, mock.Object);
+            var context = RunContext.CreateSemanticContext(code, mock.Object);
             context.Run();
 
             Assert.IsTrue(context.Errors.Count == 0);
@@ -154,7 +154,7 @@ where faFlightID = 'some-flight-number'
 
             }).Returns(() => new ApiExecuteResult<IEnumerable<FlightInfoEx>>(new FlightInfoEx[] {new FlightInfoEx() }));
 
-            var context = new RunContext(code, string.Empty, ExecuteFlags.Semantic, mock.Object);
+            var context = RunContext.CreateSemanticContext(code, mock.Object);
             context.Run();
 
             Assert.IsTrue(context.Errors.Count == 0);
@@ -177,7 +177,7 @@ where ident = 'AAL2563'
                 return TestHelper.LoadJson("FlightQuery.Tests.FlightInfoEx.json");
             });
 
-            var context = new RunContext(code, string.Empty, ExecuteFlags.Run, new EmptyHttpExecutor(), new HttpExecutor(mock.Object));
+            var context = RunContext.CreateRunContext(code, new HttpExecutor(mock.Object));
             var result = context.Run();
 
             Assert.IsTrue(context.Errors.Count == 0);
@@ -199,7 +199,7 @@ where faFlightID = 'some-flight-number'
             var mock = new Mock<IHttpExecutor>();
             mock.Setup(x => x.GetFlightInfoEx(It.IsAny<HttpExecuteArg>())).Returns(() => new ApiExecuteResult<IEnumerable<FlightInfoEx>>(new FlightInfoEx[] { new FlightInfoEx() {aircrafttype = "B739", faFlightID = "some-flight-number" } }));
 
-            var context = new RunContext(code, string.Empty, ExecuteFlags.Run, new EmptyHttpExecutor(), mock.Object);
+            var context = RunContext.CreateRunContext(code, mock.Object);
             var result = context.Run();
 
             Assert.IsTrue(context.Errors.Count == 0);
@@ -238,7 +238,7 @@ where a.departuretime > '2020-1-21 9:15' and a.ident = 'ACI4600'
                     return TestHelper.LoadJson("FlightQuery.Tests.FlightInfoEx.json");
                 });
 
-            var context = new RunContext(code, string.Empty, ExecuteFlags.Run, new EmptyHttpExecutor(), new HttpExecutor(mock.Object));
+            var context = RunContext.CreateRunContext(code, new HttpExecutor(mock.Object));
             var result = context.Run();
 
             Assert.IsTrue(context.Errors.Count == 0);

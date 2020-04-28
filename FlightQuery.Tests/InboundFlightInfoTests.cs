@@ -22,7 +22,7 @@ where faFlightID = 'unique-flight-id'
                 return TestHelper.LoadJson("FlightQuery.Tests.InboundFlightInfo.json");
             });
 
-            var context = new RunContext(code, string.Empty, ExecuteFlags.Run, new EmptyHttpExecutor(), new HttpExecutor(mock.Object));
+            var context = RunContext.CreateRunContext(code, new HttpExecutor(mock.Object));
             var result = context.Run();
 
             Assert.IsTrue(context.Errors.Count == 0);

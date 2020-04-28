@@ -4,7 +4,7 @@ namespace FlightQuery.Sdk.SqlAst
 {
     public class WhereStatement : Element
     {
-        public WhereStatement(ParseInfo parseInfo) : base(parseInfo) { }
+        public WhereStatement(Cursor parseInfo) : base(parseInfo) { }
 
         public BooleanExpression BooleanExpression
         {

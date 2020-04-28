@@ -13,7 +13,25 @@ namespace FlightQuery.Tests
             string code = @"
 select
 ";
-            var context = new RunContext(code, string.Empty, ExecuteFlags.Semantic | ExecuteFlags.Intellisense);
+            var context = RunContext.CreateIntellisenseContext(code, new Cursor(2, 3));
+            context.Run();
+
+            Assert.IsTrue(context.ScopeModel.QueryScope.Items.Count == 0);
+        }
+
+
+        [Test]
+        public void TestFromComments()
+        {
+            string code = @"
+/*
+this is a comment
+*/
+
+select *
+from 
+";
+            var context = RunContext.CreateIntellisenseContext(code, new Cursor(7, 5));
             context.Run();
 
             Assert.IsTrue(context.ScopeModel.QueryScope.Items.Count == 0);
@@ -26,7 +44,7 @@ select
 select *
 from 
 ";
-            var context = new RunContext(code, string.Empty, ExecuteFlags.Semantic|ExecuteFlags.Intellisense);
+            var context = RunContext.CreateIntellisenseContext(code, new Cursor(3, 5));
             context.Run();
 
             Assert.IsTrue(context.ScopeModel.QueryScope.Items.Count == 0);
@@ -40,7 +58,7 @@ select *
 from airportinfo
 join 
 ";
-            var context = new RunContext(code, string.Empty, ExecuteFlags.Semantic | ExecuteFlags.Intellisense);
+            var context = RunContext.CreateIntellisenseContext(code, new Cursor(2, 3));
             context.Run();
 
             Assert.IsTrue(context.ScopeModel.QueryScope.Items.ContainsKey("airportinfo"));
@@ -54,7 +72,7 @@ select *
 from airportinfo a
 join airlineflightschedules s on 
 ";
-            var context = new RunContext(code, string.Empty, ExecuteFlags.Semantic | ExecuteFlags.Intellisense);
+            var context = RunContext.CreateIntellisenseContext(code, new Cursor(2, 3));
             context.Run();
 
             Assert.IsTrue(context.ScopeModel.QueryScope.Items.ContainsKey("a"));
@@ -71,7 +89,7 @@ from airlineflightschedules a
 join getflightid o on 
 where departuretime > '2020-4-10 1:00' and origin = 'kaus'
 ";
-            var context = new RunContext(code, string.Empty, ExecuteFlags.Semantic | ExecuteFlags.Intellisense);
+            var context = RunContext.CreateIntellisenseContext(code, new Cursor(2, 3));
             context.Run();
 
             Assert.IsTrue(context.ScopeModel.QueryScope.Items.ContainsKey("a"));
@@ -87,7 +105,7 @@ from airlineflightschedules a
 join getflightid o on o.
 where departuretime > '2020-4-10 1:00' and origin = 'kaus'
 ";
-            var context = new RunContext(code, string.Empty, ExecuteFlags.Semantic | ExecuteFlags.Intellisense);
+            var context = RunContext.CreateIntellisenseContext(code, new Cursor(2, 3));
             context.Run();
 
             Assert.IsTrue(context.ScopeModel.QueryScope.Items.ContainsKey("a"));
@@ -102,7 +120,7 @@ select *
 from airlineflightschedules a
 join getflightid o on o.ident = a.
 ";
-            var context = new RunContext(code, string.Empty, ExecuteFlags.Semantic | ExecuteFlags.Intellisense);
+            var context = RunContext.CreateIntellisenseContext(code, new Cursor(2, 3));
             context.Run();
 
             Assert.IsTrue(context.ScopeModel.QueryScope.Items.ContainsKey("a"));
@@ -119,7 +137,7 @@ from airlineflightschedules a
 join getflightid o on o.ident = a.ident and o.departuretime = a.
 where departuretime > '2020-4-10 1:00' and origin = 'kaus'
 ";
-            var context = new RunContext(code, string.Empty, ExecuteFlags.Semantic | ExecuteFlags.Intellisense);
+            var context = RunContext.CreateIntellisenseContext(code, new Cursor(2, 3));
             context.Run();
 
             Assert.IsTrue(context.ScopeModel.QueryScope.Items.ContainsKey("a"));
@@ -136,7 +154,7 @@ join airportinfo d on d.airportCode = f.departuretime
 join 
 where f.departuretime > '2020-4-13 2:8' and f.origin = 'kaus'
 ";
-            var context = new RunContext(code, string.Empty, ExecuteFlags.Semantic | ExecuteFlags.Intellisense);
+            var context = RunContext.CreateIntellisenseContext(code, new Cursor(2, 3));
             context.Run();
 
         
@@ -153,7 +171,7 @@ select *
 from airportinfo
 where 
 ";
-            var context = new RunContext(code, string.Empty, ExecuteFlags.Semantic | ExecuteFlags.Intellisense);
+            var context = RunContext.CreateIntellisenseContext(code, new Cursor(2, 3));
             context.Run();
 
             Assert.IsTrue(context.ScopeModel.QueryScope.Items.ContainsKey("airportinfo"));
@@ -168,7 +186,7 @@ from AirportInfo
 where airportCode = 'kaus'
 ";
 
-            var context = new RunContext(code, string.Empty, ExecuteFlags.Semantic | ExecuteFlags.Intellisense);
+            var context = RunContext.CreateIntellisenseContext(code, new Cursor(2, 3));
             context.Run();
 
             Assert.IsTrue(context.ScopeModel.QueryScope.Items.ContainsKey("airportinfo"));
@@ -183,7 +201,7 @@ from airlineflightschedules a
 join airlineflightschedules f on f.destination = a.
 ";
 
-            var context = new RunContext(code, string.Empty, ExecuteFlags.Semantic | ExecuteFlags.Intellisense);
+            var context = RunContext.CreateIntellisenseContext(code, new Cursor(2, 3));
             context.Run();
 
             Assert.IsTrue(context.ScopeModel.QueryScope.Items.ContainsKey("a"));
@@ -199,7 +217,7 @@ from airlineflightschedules a
 join airportinfo ar on ar.airportCode = a.arrivaltime
 ";
 
-            var context = new RunContext(code, string.Empty, ExecuteFlags.Semantic | ExecuteFlags.Intellisense);
+            var context = RunContext.CreateIntellisenseContext(code, new Cursor(2, 3));
             context.Run();
 
             Assert.IsTrue(context.ScopeModel.QueryScope.Items.ContainsKey("a"));

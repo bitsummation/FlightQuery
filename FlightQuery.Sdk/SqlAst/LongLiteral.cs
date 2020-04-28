@@ -2,7 +2,7 @@
 {
     public class LongLiteral : VariableExpresion
     {
-        public LongLiteral(ParseInfo parseInfo) : base(parseInfo) { }
+        public LongLiteral(Cursor parseInfo) : base(parseInfo) { }
 
         public long Value { get; set; }
 

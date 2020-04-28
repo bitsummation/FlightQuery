@@ -10,12 +10,12 @@ namespace FlightQuery.Interpreter.Execution
             var tables = _scope.FindTableFromPropertySameLevel(expression.Id);
             if (tables.Count == 0)
             {
-                Errors.Add(new VariableNotFound(expression.Id, expression.ParseInfo));
+                Errors.Add(new VariableNotFound(expression.Id, expression.Cursor));
                 return;
             }
             if(tables.Count > 1)
             {
-                Errors.Add(new AmbiguousVariable(expression.Id, expression.ParseInfo));
+                Errors.Add(new AmbiguousVariable(expression.Id, expression.Cursor));
                 return;
             }
 

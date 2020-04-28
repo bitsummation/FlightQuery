@@ -4,7 +4,7 @@ namespace FlightQuery.Sdk.SqlAst
 {
     public class AsExpression : Element
     {
-        public AsExpression(ParseInfo parseInfo) : base(parseInfo) { }
+        public AsExpression(Cursor parseInfo) : base(parseInfo) { }
 
         public string Alias { get; set; }
 

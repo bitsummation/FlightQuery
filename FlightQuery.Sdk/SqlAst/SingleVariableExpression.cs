@@ -2,7 +2,7 @@
 {
     public class SingleVariableExpression : VariableExpresion
     {
-        public SingleVariableExpression(ParseInfo parseInfo) : base(parseInfo) { }
+        public SingleVariableExpression(Cursor parseInfo) : base(parseInfo) { }
 
         public string Id { get; set; }
 

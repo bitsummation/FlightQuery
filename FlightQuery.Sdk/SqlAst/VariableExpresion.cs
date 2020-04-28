@@ -2,6 +2,6 @@
 {
     public abstract class VariableExpresion : Element
     {
-        protected VariableExpresion(ParseInfo parseInfo) : base(parseInfo) { }
+        protected VariableExpresion(Cursor parseInfo) : base(parseInfo) { }
     }
 }

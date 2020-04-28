@@ -2,7 +2,7 @@
 {
     public class StringLiteral : Element
     {
-        public StringLiteral(ParseInfo parseInfo) : base(parseInfo) { }
+        public StringLiteral(Cursor parseInfo) : base(parseInfo) { }
 
         public string Value { get; set; }
 

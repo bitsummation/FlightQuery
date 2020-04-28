@@ -2,7 +2,7 @@
 {
     public class GreaterThanExpression : BooleanExpression
     {
-        public GreaterThanExpression(ParseInfo parseInfo) : base(parseInfo) { }
+        public GreaterThanExpression(Cursor parseInfo) : base(parseInfo) { }
 
         public override void Accept(IElementVisitor visitor)
         {

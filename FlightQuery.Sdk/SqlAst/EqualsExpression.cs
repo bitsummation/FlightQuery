@@ -2,7 +2,7 @@
 {
     public class EqualsExpression : BooleanExpression
     {
-        public EqualsExpression(ParseInfo parseInfo) : base(parseInfo) { }
+        public EqualsExpression(Cursor parseInfo) : base(parseInfo) { }
 
         public override void Accept(IElementVisitor visitor)
         {

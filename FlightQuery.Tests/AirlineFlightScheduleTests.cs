@@ -19,7 +19,7 @@ from AirlineFlightSchedules
 where origin = 'katl'
 ";
 
-            var context = new RunContext(code, string.Empty, ExecuteFlags.Semantic);
+            var context = RunContext.CreateSemanticContext(code);
             context.Run();
 
             Assert.IsTrue(context.Errors.Count == 1);
@@ -41,7 +41,7 @@ where departuretime > '2020-1-21 9:15'
                 return TestHelper.LoadJson("FlightQuery.Tests.AirlineFlightSchedule.json"); 
             });
 
-            var context = new RunContext(code, string.Empty, ExecuteFlags.Run, new EmptyHttpExecutor(), new HttpExecutor(mock.Object));
+            var context = RunContext.CreateRunContext(code, new HttpExecutor(mock.Object));
             var result = context.Run();
             Assert.IsTrue(result.Columns.Length == 5);
             Assert.IsTrue(result.Columns[0] == "aircrafttype");
@@ -75,7 +75,7 @@ where departuretime > '2020-1-21 9:15' and departuretime < '2020-11-21 9:15'
                 Assert.IsTrue(end.Value == "1605950100");
             });
 
-            var context = new RunContext(code, string.Empty, ExecuteFlags.Run, new EmptyHttpExecutor(), new HttpExecutor(mock.Object));
+            var context = RunContext.CreateRunContext(code, new HttpExecutor(mock.Object));
             var result = context.Run();
 
             mock.Verify(v => v.GetAirlineFlightSchedule(It.IsAny<HttpExecuteArg>()), Times.Once());
@@ -95,7 +95,7 @@ where departuretime < '2020-1-21 9:15'
                 new ExecuteResult() { Result = @"{""error"":""INVALID_ARGUMENT startDate is too far in the past(3 months)""}" }
             );
 
-            var context = new RunContext(code, string.Empty, ExecuteFlags.Run, new EmptyHttpExecutor(), new HttpExecutor(mock.Object));
+            var context = RunContext.CreateRunContext(code, new HttpExecutor(mock.Object));
             var result = context.Run();
             Assert.IsTrue(context.Errors.Count == 1);
             Assert.IsTrue(context.Errors[0].Message == "Error executing request: INVALID_ARGUMENT startDate is too far in the past(3 months)");
@@ -133,7 +133,7 @@ where '2020-3-7 9:15' > a.departuretime and origin = 'kaus' and destination = 'k
                 Assert.IsTrue(args.Variables.Where(x => x.Variable == "flightno").Select(x => x.Value).Single() == "6879");
             });
 
-            var context = new RunContext(code, string.Empty, ExecuteFlags.Semantic, new HttpExecutor(mock.Object));
+            var context = RunContext.CreateSemanticContext(code, new HttpExecutor(mock.Object));
             context.Run();
 
             mock.Verify(v => v.GetAirlineFlightSchedule(It.IsAny<HttpExecuteArg>()), Times.Once());
@@ -159,7 +159,7 @@ where '2020-3-7 9:15' = departuretime
                 Assert.IsTrue(end.Value == "1583572560");
             });
 
-            var context = new RunContext(code, string.Empty, ExecuteFlags.Semantic, new HttpExecutor(mock.Object));
+            var context = RunContext.CreateSemanticContext(code, new HttpExecutor(mock.Object));
             context.Run();
 
             mock.Verify(v => v.GetAirlineFlightSchedule(It.IsAny<HttpExecuteArg>()), Times.Once());
@@ -185,7 +185,7 @@ where '2020-3-7 9:15' > departuretime
                 Assert.IsTrue(end.Value == "1583572500");
             });
 
-            var context = new RunContext(code, string.Empty, ExecuteFlags.Semantic, new HttpExecutor(mock.Object));
+            var context = RunContext.CreateSemanticContext(code, new HttpExecutor(mock.Object));
             context.Run();
 
             mock.Verify(v => v.GetAirlineFlightSchedule(It.IsAny<HttpExecuteArg>()), Times.Once());
@@ -212,7 +212,7 @@ where departuretime < '2020-3-7 9:15'
                 Assert.IsTrue(end.Value == "1583572500");
             });
 
-            var context = new RunContext(code, string.Empty, ExecuteFlags.Semantic, new HttpExecutor(mock.Object));
+            var context = RunContext.CreateSemanticContext(code, new HttpExecutor(mock.Object));
             context.Run();
 
             mock.Verify(v => v.GetAirlineFlightSchedule(It.IsAny<HttpExecuteArg>()), Times.Once());
@@ -240,7 +240,7 @@ where '2020-3-7 9:15' < departuretime
                 Assert.IsTrue(end.Value == "1584177300");
             });
 
-            var context = new RunContext(code, string.Empty, ExecuteFlags.Semantic, new HttpExecutor(mock.Object));
+            var context = RunContext.CreateSemanticContext(code, new HttpExecutor(mock.Object));
             context.Run();
 
             mock.Verify(v => v.GetAirlineFlightSchedule(It.IsAny<HttpExecuteArg>()), Times.Once());
@@ -267,7 +267,7 @@ where departuretime > '2020-3-7 9:15'
                 Assert.IsTrue(end.Value == "1584177300");
             });
 
-            var context = new RunContext(code, string.Empty, ExecuteFlags.Semantic, new HttpExecutor(mock.Object));
+            var context = RunContext.CreateSemanticContext(code, new HttpExecutor(mock.Object));
             context.Run();
 
             mock.Verify(v => v.GetAirlineFlightSchedule(It.IsAny<HttpExecuteArg>()), Times.Once());

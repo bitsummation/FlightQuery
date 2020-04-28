@@ -21,7 +21,7 @@ namespace FlightQuery.Web.Controllers
                 query = await reader.ReadToEndAsync();
             }
  
-            var context = new RunContext(query, "", ExecuteFlags.Semantic | ExecuteFlags.Intellisense);
+            var context = RunContext.CreateIntellisenseContext(query, new Cursor(row, column));
             context.Run();
 
             return context.ScopeModel;
@@ -38,7 +38,7 @@ namespace FlightQuery.Web.Controllers
             }
 
             var authorization = Request.Headers["Authorization"];
-            var context = new RunContext(query, authorization, ExecuteFlags.Run);
+            var context = RunContext.CreateRunContext(query, authorization);
             var result = context.Run();
 
             var isUnauthorized = context.Errors.Any(x =>
