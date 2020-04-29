@@ -7,9 +7,14 @@ namespace FlightQuery.Parser.AntlrParser
 {
     internal class AstBuilder : SqlParserBaseVisitor<Element>
     {
-        private Cursor CreateParseInfo(ParserRuleContext context)
+        private ElementBounds CreateParseInfo(ParserRuleContext context)
         {
-            return new Cursor(context.start.Line, context.start.Column);
+            var stop = context.Stop != null ? new Cursor(context.Stop.Line, context.Stop.Column) : null;
+
+            return new ElementBounds(
+                new Cursor(context.Start.Line, context.Start.Column),
+                stop
+                );
         }
 
         public override Element VisitProgram(SqlParser.ProgramContext context)

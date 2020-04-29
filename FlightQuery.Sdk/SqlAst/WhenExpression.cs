@@ -5,7 +5,7 @@ namespace FlightQuery.Sdk.SqlAst
 {
     public class WhenExpression : Element
     {
-        public WhenExpression(Cursor parseInfo) : base(parseInfo) { }
+        public WhenExpression(ElementBounds parseInfo) : base(parseInfo) { }
 
         public BooleanExpression BooleanExpression
         {

@@ -15,7 +15,6 @@ namespace FlightQuery.Interpreter.Execution
         private Element _program;
         private Scope _scope;
         private Stack<QueryPhaseArgs> _visitStack;
-        private QueryBounds _queryBounds;
         private Cursor _editorCursor;
         private IHttpExecutor _httpExecutor;
 
@@ -31,7 +30,6 @@ namespace FlightQuery.Interpreter.Execution
             _visitStack = new Stack<QueryPhaseArgs>();
             _httpExecutor = httpExecutor ?? new HttpExecutor(new HttpExecutorRaw(authorization));
             _editorCursor = cursor;
-            _queryBounds = new QueryBounds();
 
             Errors = new ErrorsCollection();
         }
@@ -40,11 +38,6 @@ namespace FlightQuery.Interpreter.Execution
         {
             if (node != null)
             {
-                if(node.Cursor <= _queryBounds.Min)
-                    _queryBounds = new QueryBounds(node.Cursor, _queryBounds.Max);
-                if(node.Cursor >= _queryBounds.Max)
-                    _queryBounds = new QueryBounds(_queryBounds.Min, node.Cursor);
-                
                 _visitStack.Push(arg);
                 node.Accept(this);
                 return _visitStack.Pop();

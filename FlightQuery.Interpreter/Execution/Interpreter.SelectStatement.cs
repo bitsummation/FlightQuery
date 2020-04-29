@@ -28,8 +28,8 @@ namespace FlightQuery.Interpreter.Execution
 
                         if (selectedIndex >= statement.Args.Length)
                         {
-                            var selectArg = new SelectArgExpression(statement.Cursor);
-                            selectArg.Children.Add(new SingleVariableExpression(statement.Cursor) { Id = p.Name });
+                            var selectArg = new SelectArgExpression(statement.Bounds);
+                            selectArg.Children.Add(new SingleVariableExpression(statement.Bounds) { Id = p.Name });
                             statement.Children.Add(selectArg);
                         }
                         selectedIndex++;

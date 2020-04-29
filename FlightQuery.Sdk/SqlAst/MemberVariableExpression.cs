@@ -2,7 +2,7 @@
 {
     public class MemberVariableExpression : VariableExpresion
     {
-        public MemberVariableExpression(Cursor parseInfo) : base(parseInfo) { }
+        public MemberVariableExpression(ElementBounds parseInfo) : base(parseInfo) { }
 
         public string Alias { get; set; }
         public string Id { get; set; }

@@ -107,11 +107,12 @@ namespace FlightQuery.Interpreter.Execution
 
             keys = new List<string>();
             items = new Dictionary<string, IEnumerable<string>>();
-
-            foreach (var key in scope[1].Variables.Keys)
+        
+            var lastIndex = scope.Length - 1;
+            foreach (var key in scope[lastIndex].Variables.Keys)
             {
                 keys.Add(key);
-                items.Add(key, scope[1].Variables[key].Descriptor.Properties.Select(x => x.Name).ToArray());
+                items.Add(key, scope[lastIndex].Variables[key].Descriptor.Properties.Select(x => x.Name).ToArray());
             }
 
             var globalScope = new ScopeDescriptor() { Keys = keys, Items = items };

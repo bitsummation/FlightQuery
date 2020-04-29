@@ -2,7 +2,7 @@
 {
     public abstract class BooleanExpression : Element
     {
-        protected BooleanExpression(Cursor parseInfo) : base(parseInfo) { }
+        protected BooleanExpression(ElementBounds parseInfo) : base(parseInfo) { }
 
         public Element Left { get;  set; }
         public Element Right { get; set; }

@@ -2,7 +2,7 @@
 {
     public class NotEqualsExpression : BooleanExpression
     {
-        public NotEqualsExpression(Cursor parseInfo) : base(parseInfo) { }
+        public NotEqualsExpression(ElementBounds parseInfo) : base(parseInfo) { }
 
         public override void Accept(IElementVisitor visitor)
         {

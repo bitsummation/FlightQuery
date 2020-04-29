@@ -5,7 +5,7 @@ namespace FlightQuery.Sdk.SqlAst
 {
     public class NestedFromStatement : FromStatement
     {
-        public NestedFromStatement(Cursor parseInfo) : base(parseInfo) { }
+        public NestedFromStatement(ElementBounds parseInfo) : base(parseInfo) { }
 
         public QueryStatement Query
         {

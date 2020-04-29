@@ -16,6 +16,7 @@ select
             var context = RunContext.CreateIntellisenseContext(code, new Cursor(2, 3));
             context.Run();
 
+            Assert.IsTrue(context.ScopeModel.Global.Items.Count != 0);
             Assert.IsTrue(context.ScopeModel.QueryScope.Items.Count == 0);
         }
 
@@ -34,7 +35,66 @@ from
             var context = RunContext.CreateIntellisenseContext(code, new Cursor(7, 5));
             context.Run();
 
+            Assert.IsTrue(context.ScopeModel.Global.Items.Count != 0);
             Assert.IsTrue(context.ScopeModel.QueryScope.Items.Count == 0);
+        }
+
+        [Test]
+        public void TestOuterQueryNestedJoin()
+        {
+            string code = @"
+select a.ident, f.faFlightID
+from (
+    select
+        departureTime,
+        case
+            when actual_ident != ''
+                then actual_ident
+            else
+                ident
+            end as ident
+    from airlineflightschedules
+    where departuretime > '2020-1-21 9:15'
+) a
+join GetFlightId f on f.ident = a.ident and f.departureTime = a.departureTime 
+";
+
+            var context = RunContext.CreateIntellisenseContext(code, new Cursor(15, 5));
+            context.Run();
+
+            Assert.IsTrue(context.ScopeModel.Global.Items.Count != 0);
+            Assert.IsTrue(context.ScopeModel.QueryScope.Items.Count == 2);
+            Assert.IsTrue(context.ScopeModel.QueryScope.Items.ContainsKey("a"));
+            Assert.IsTrue(context.ScopeModel.QueryScope.Items.ContainsKey("f"));
+
+        }
+
+        [Test]
+        public void TestInnerQueryNestedJoin()
+        {
+            string code = @"
+select a.ident, f.faFlightID
+from (
+    select
+        departureTime,
+        case
+            when actual_ident != ''
+                then actual_ident
+            else
+                ident
+            end as ident
+    from airlineflightschedules
+    where departuretime > '2020-1-21 9:15'
+) a
+join GetFlightId f on f.ident = a.ident and f.departureTime = a.departureTime 
+";
+
+            var context = RunContext.CreateIntellisenseContext(code, new Cursor(7, 5));
+            context.Run();
+
+            Assert.IsTrue(context.ScopeModel.Global.Items.Count != 0);
+            Assert.IsTrue(context.ScopeModel.QueryScope.Items.Count == 1);
+            Assert.IsTrue(context.ScopeModel.QueryScope.Items.ContainsKey("airlineflightschedules"));
         }
 
         [Test]
@@ -47,6 +107,7 @@ from
             var context = RunContext.CreateIntellisenseContext(code, new Cursor(3, 5));
             context.Run();
 
+            Assert.IsTrue(context.ScopeModel.Global.Items.Count != 0);
             Assert.IsTrue(context.ScopeModel.QueryScope.Items.Count == 0);
         }
 
@@ -61,6 +122,7 @@ join
             var context = RunContext.CreateIntellisenseContext(code, new Cursor(2, 3));
             context.Run();
 
+            Assert.IsTrue(context.ScopeModel.Global.Items.Count != 0);
             Assert.IsTrue(context.ScopeModel.QueryScope.Items.ContainsKey("airportinfo"));
         }
 
@@ -75,6 +137,8 @@ join airlineflightschedules s on
             var context = RunContext.CreateIntellisenseContext(code, new Cursor(2, 3));
             context.Run();
 
+            Assert.IsTrue(context.ScopeModel.Global.Items.Count != 0);
+            Assert.IsTrue(context.ScopeModel.QueryScope.Items.Count == 2);
             Assert.IsTrue(context.ScopeModel.QueryScope.Items.ContainsKey("a"));
             Assert.IsTrue(context.ScopeModel.QueryScope.Items.ContainsKey("s"));
         }
@@ -92,6 +156,8 @@ where departuretime > '2020-4-10 1:00' and origin = 'kaus'
             var context = RunContext.CreateIntellisenseContext(code, new Cursor(2, 3));
             context.Run();
 
+            Assert.IsTrue(context.ScopeModel.Global.Items.Count != 0);
+            Assert.IsTrue(context.ScopeModel.QueryScope.Items.Count == 2);
             Assert.IsTrue(context.ScopeModel.QueryScope.Items.ContainsKey("a"));
             Assert.IsTrue(context.ScopeModel.QueryScope.Items.ContainsKey("o"));
         }
@@ -108,6 +174,8 @@ where departuretime > '2020-4-10 1:00' and origin = 'kaus'
             var context = RunContext.CreateIntellisenseContext(code, new Cursor(2, 3));
             context.Run();
 
+            Assert.IsTrue(context.ScopeModel.Global.Items.Count != 0);
+            Assert.IsTrue(context.ScopeModel.QueryScope.Items.Count == 2);
             Assert.IsTrue(context.ScopeModel.QueryScope.Items.ContainsKey("a"));
             Assert.IsTrue(context.ScopeModel.QueryScope.Items.ContainsKey("o"));
         }
@@ -123,6 +191,8 @@ join getflightid o on o.ident = a.
             var context = RunContext.CreateIntellisenseContext(code, new Cursor(2, 3));
             context.Run();
 
+            Assert.IsTrue(context.ScopeModel.Global.Items.Count != 0);
+            Assert.IsTrue(context.ScopeModel.QueryScope.Items.Count == 2);
             Assert.IsTrue(context.ScopeModel.QueryScope.Items.ContainsKey("a"));
             Assert.IsTrue(context.ScopeModel.QueryScope.Items.ContainsKey("o"));
         }
@@ -140,6 +210,8 @@ where departuretime > '2020-4-10 1:00' and origin = 'kaus'
             var context = RunContext.CreateIntellisenseContext(code, new Cursor(2, 3));
             context.Run();
 
+            Assert.IsTrue(context.ScopeModel.Global.Items.Count != 0);
+            Assert.IsTrue(context.ScopeModel.QueryScope.Items.Count == 2);
             Assert.IsTrue(context.ScopeModel.QueryScope.Items.ContainsKey("a"));
             Assert.IsTrue(context.ScopeModel.QueryScope.Items.ContainsKey("o"));
         }
@@ -157,7 +229,8 @@ where f.departuretime > '2020-4-13 2:8' and f.origin = 'kaus'
             var context = RunContext.CreateIntellisenseContext(code, new Cursor(2, 3));
             context.Run();
 
-        
+
+            Assert.IsTrue(context.ScopeModel.Global.Items.Count != 0);
             Assert.IsTrue(context.ScopeModel.QueryScope.Items.ContainsKey("f"));
             Assert.IsTrue(context.ScopeModel.QueryScope.Items.ContainsKey("d"));
 
@@ -174,6 +247,7 @@ where
             var context = RunContext.CreateIntellisenseContext(code, new Cursor(2, 3));
             context.Run();
 
+            Assert.IsTrue(context.ScopeModel.Global.Items.Count != 0);
             Assert.IsTrue(context.ScopeModel.QueryScope.Items.ContainsKey("airportinfo"));
         }
 
@@ -189,6 +263,7 @@ where airportCode = 'kaus'
             var context = RunContext.CreateIntellisenseContext(code, new Cursor(2, 3));
             context.Run();
 
+            Assert.IsTrue(context.ScopeModel.Global.Items.Count != 0);
             Assert.IsTrue(context.ScopeModel.QueryScope.Items.ContainsKey("airportinfo"));
         }
 
@@ -204,6 +279,8 @@ join airlineflightschedules f on f.destination = a.
             var context = RunContext.CreateIntellisenseContext(code, new Cursor(2, 3));
             context.Run();
 
+            Assert.IsTrue(context.ScopeModel.Global.Items.Count != 0);
+            Assert.IsTrue(context.ScopeModel.QueryScope.Items.Count == 2);
             Assert.IsTrue(context.ScopeModel.QueryScope.Items.ContainsKey("a"));
             Assert.IsTrue(context.ScopeModel.QueryScope.Items.ContainsKey("f"));
         }
@@ -220,6 +297,8 @@ join airportinfo ar on ar.airportCode = a.arrivaltime
             var context = RunContext.CreateIntellisenseContext(code, new Cursor(2, 3));
             context.Run();
 
+            Assert.IsTrue(context.ScopeModel.Global.Items.Count != 0);
+            Assert.IsTrue(context.ScopeModel.QueryScope.Items.Count == 2);
             Assert.IsTrue(context.ScopeModel.QueryScope.Items.ContainsKey("a"));
             Assert.IsTrue(context.ScopeModel.QueryScope.Items.ContainsKey("ar"));
         }

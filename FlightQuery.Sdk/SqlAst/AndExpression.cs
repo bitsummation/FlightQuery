@@ -2,7 +2,7 @@
 {
     public class AndExpression : BooleanExpression
     {
-        public AndExpression(Cursor parseInfo) : base(parseInfo) { }
+        public AndExpression(ElementBounds parseInfo) : base(parseInfo) { }
 
         public override void Accept(IElementVisitor visitor)
         {

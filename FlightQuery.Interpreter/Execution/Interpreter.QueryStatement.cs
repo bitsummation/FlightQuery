@@ -12,8 +12,6 @@ namespace FlightQuery.Interpreter.Execution
         {
             using (var s = _scope.Push())
             {
-                _queryBounds = new QueryBounds(statement.Cursor, statement.Cursor);
-
                 //Visit from to get tables in scope
                 if (statement.From != null)
                     VisitChild(statement.From);
@@ -63,7 +61,7 @@ namespace FlightQuery.Interpreter.Execution
 
                 _visitStack.Peek().QueryTable = args.QueryTable;
 
-                if(_queryBounds.Contains(_editorCursor))
+                if(statement.Bounds.Contains(_editorCursor) && ScopeModel == null)
                     ScopeModel = _scope.BuildScopeModel();
             }
         }
