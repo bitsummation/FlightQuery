@@ -9,7 +9,8 @@ namespace FlightQuery.Interpreter.Execution
             var args = new QueryPhaseArgs();
             VisitChild(statement.Query, args);
 
-            _scope.AddTable(statement.Alias, args.QueryTable);
+            if(args.QueryTable != null)
+                _scope.AddTable(statement.Alias, args.QueryTable);
 
             VisitChild(statement.InnerJoin);
         }

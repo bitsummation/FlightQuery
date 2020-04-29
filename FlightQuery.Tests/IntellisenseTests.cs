@@ -40,6 +40,27 @@ from
         }
 
         [Test]
+        public void TestInnerQueryEditSelect()
+        {
+            string code = @"
+select *
+from (
+    select 
+    from airlineflightschedules
+    where actual_ident = ''
+) a
+join airlineinfo
+";
+
+            var context = RunContext.CreateIntellisenseContext(code, new Cursor(4, 10));
+            context.Run();
+
+            Assert.IsTrue(context.ScopeModel.Global.Items.Count != 0);
+            Assert.IsTrue(context.ScopeModel.QueryScope.Items.Count == 1);
+            Assert.IsTrue(context.ScopeModel.QueryScope.Items.ContainsKey("airlineflightschedules"));
+        }
+
+        [Test]
         public void TestOuterQueryNestedJoin()
         {
             string code = @"
