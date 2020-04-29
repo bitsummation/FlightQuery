@@ -2,6 +2,7 @@
 using FlightQuery.Sdk;
 using Moq;
 using NUnit.Framework;
+using System.Linq;
 
 namespace FlightQuery.Tests
 {
@@ -27,9 +28,9 @@ where airportCode = 'kaus'
             var context = RunContext.CreateRunContext(code, new HttpExecutor(mock.Object));
             var result = context.Run();
             Assert.IsTrue(context.Errors.Count == 0);
-            Assert.IsTrue(result.Columns.Length == 2);
-            Assert.IsTrue(result.Columns[0] == "name");
-            Assert.IsTrue(result.Columns[1] == "loc");
+            Assert.IsTrue(result.First().Columns.Length == 2);
+            Assert.IsTrue(result.First().Columns[0] == "name");
+            Assert.IsTrue(result.First().Columns[1] == "loc");
         }
 
         [Test]
@@ -98,10 +99,10 @@ where a.departuretime > '2020-1-21 9:15' and a.ident = 'ACI4600'
 
             Assert.IsTrue(context.Errors.Count == 0);
 
-            Assert.IsTrue(result.Columns[0] == "ident");
-            Assert.IsTrue(result.Columns[1] == "status");
-            Assert.AreEqual(result.Rows[0].Values[0], "ACI4600"); 
-            Assert.AreEqual(result.Rows[0].Values[1], "scheduled");
+            Assert.IsTrue(result.First().Columns[0] == "ident");
+            Assert.IsTrue(result.First().Columns[1] == "status");
+            Assert.AreEqual(result.First().Rows[0].Values[0], "ACI4600"); 
+            Assert.AreEqual(result.First().Rows[0].Values[1], "scheduled");
 
         }
 
@@ -144,10 +145,10 @@ where a.departuretime > '2020-1-21 9:15' and a.ident = 'ACI4600'
 
             Assert.IsTrue(context.Errors.Count == 0);
 
-            Assert.IsTrue(result.Columns[0] == "ident");
-            Assert.IsTrue(result.Columns[1] == "(No column name)");
-            Assert.AreEqual(result.Rows[0].Values[0], "ACI4600");
-            Assert.AreEqual(result.Rows[0].Values[1], "scheduled");
+            Assert.IsTrue(result.First().Columns[0] == "ident");
+            Assert.IsTrue(result.First().Columns[1] == "(No column name)");
+            Assert.AreEqual(result.First().Rows[0].Values[0], "ACI4600");
+            Assert.AreEqual(result.First().Rows[0].Values[1], "scheduled");
 
         }
 
@@ -190,10 +191,10 @@ where a.departuretime > '2020-1-21 9:15' and a.ident = 'ACI4600'
 
             Assert.IsTrue(context.Errors.Count == 0);
 
-            Assert.IsTrue(result.Columns[0] == "ident");
-            Assert.IsTrue(result.Columns[1] == "(No column name)");
-            Assert.AreEqual(result.Rows[0].Values[0], "ACI4600");
-            Assert.AreEqual(result.Rows[0].Values[1], null);
+            Assert.IsTrue(result.First().Columns[0] == "ident");
+            Assert.IsTrue(result.First().Columns[1] == "(No column name)");
+            Assert.AreEqual(result.First().Rows[0].Values[0], "ACI4600");
+            Assert.AreEqual(result.First().Rows[0].Values[1], null);
 
         }
 
@@ -237,10 +238,10 @@ where a.departuretime > '2020-1-21 9:15' and a.ident = 'ACI4600'
 
             Assert.IsTrue(context.Errors.Count == 0);
 
-            Assert.IsTrue(result.Columns[0] == "ident");
-            Assert.IsTrue(result.Columns[1] == "(No column name)");
-            Assert.AreEqual(result.Rows[0].Values[0], "ACI4600");
-            Assert.AreEqual(result.Rows[0].Values[1], 30);
+            Assert.IsTrue(result.First().Columns[0] == "ident");
+            Assert.IsTrue(result.First().Columns[1] == "(No column name)");
+            Assert.AreEqual(result.First().Rows[0].Values[0], "ACI4600");
+            Assert.AreEqual(result.First().Rows[0].Values[1], 30);
 
         }
 
@@ -285,10 +286,10 @@ where a.departuretime > '2020-1-21 9:15' and a.ident = 'ACI4600'
 
             Assert.IsTrue(context.Errors.Count == 0);
 
-            Assert.IsTrue(result.Columns[0] == "ident");
-            Assert.IsTrue(result.Columns[1] == "(No column name)");
-            Assert.AreEqual(result.Rows[0].Values[0], "ACI4600");
-            Assert.AreEqual(result.Rows[0].Values[1], "cancelled");
+            Assert.IsTrue(result.First().Columns[0] == "ident");
+            Assert.IsTrue(result.First().Columns[1] == "(No column name)");
+            Assert.AreEqual(result.First().Rows[0].Values[0], "ACI4600");
+            Assert.AreEqual(result.First().Rows[0].Values[1], "cancelled");
 
         }
 
@@ -334,10 +335,10 @@ where a.departuretime > '2020-1-21 9:15' and a.ident = 'ACI4600'
 
             Assert.IsTrue(context.Errors.Count == 0);
 
-            Assert.IsTrue(result.Columns[0] == "ident");
-            Assert.IsTrue(result.Columns[1] == "(No column name)");
-            Assert.AreEqual(result.Rows[0].Values[0], "ACI4600");
-            Assert.AreEqual(result.Rows[0].Values[1], "arrived");
+            Assert.IsTrue(result.First().Columns[0] == "ident");
+            Assert.IsTrue(result.First().Columns[1] == "(No column name)");
+            Assert.AreEqual(result.First().Rows[0].Values[0], "ACI4600");
+            Assert.AreEqual(result.First().Rows[0].Values[1], "arrived");
 
         }
     }

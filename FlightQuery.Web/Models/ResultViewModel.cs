@@ -6,6 +6,6 @@ namespace FlightQuery.Web.Models
     public class ResultViewModel
     {
         public ErrorsCollection Errors { get; set; }
-        public SelectTable Table { get; set; }
+        public SelectTable[] Tables { get; set; }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using FlightQuery.Parser;
 using FlightQuery.Sdk;
 using FlightQuery.Sdk.Semantic;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace FlightQuery.Context
@@ -65,9 +66,9 @@ namespace FlightQuery.Context
             Errors = new ErrorsCollection();
         }
 
-        public SelectTable Run()
+        public SelectTable[] Run()
         {
-            SelectTable table = null;
+            SelectTable[] table = null;
             
             var parser = new LangParser(_source, _flags);
             var ast = parser.Parse();

@@ -114,7 +114,8 @@ namespace FlightQuery.Interpreter.Execution
             var selectTable = new ExecutedTable(tableDescriptor) { Rows = rows.ToArray() };
             _visitStack.Peek().QueryTable = selectTable;
 
-            _selectResult = ToSelectTable(selectTable);
+            if (!statement.IsNestedQuery)
+                _selectResult.Add(ToSelectTable(selectTable));
         }
 
         private SelectTable ToSelectTable(ExecutedTable table)

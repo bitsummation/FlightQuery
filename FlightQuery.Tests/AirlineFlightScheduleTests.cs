@@ -43,16 +43,16 @@ where departuretime > '2020-1-21 9:15'
 
             var context = RunContext.CreateRunContext(code, new HttpExecutor(mock.Object));
             var result = context.Run();
-            Assert.IsTrue(result.Columns.Length == 5);
-            Assert.IsTrue(result.Columns[0] == "aircrafttype");
+            Assert.IsTrue(result.First().Columns.Length == 5);
+            Assert.IsTrue(result.First().Columns[0] == "aircrafttype");
 
             Assert.IsTrue(context.Errors.Count == 0);
-            Assert.IsTrue(result.Rows.Length == 15);
-            Assert.AreEqual(result.Rows[0].Values[0], "B762");
-            Assert.AreEqual(result.Rows[0].Values[1], "OAE2412");
-            Assert.AreEqual(result.Rows[0].Values[2], "ACA2412");
-            Assert.AreEqual(result.Rows[0].Values[3], 18);
-            Assert.AreEqual(((DateTime)result.Rows[0].Values[4]).ToString(Json.PrintDateTimeFormat), "2020-03-07 14:55");
+            Assert.IsTrue(result.First().Rows.Length == 15);
+            Assert.AreEqual(result.First().Rows[0].Values[0], "B762");
+            Assert.AreEqual(result.First().Rows[0].Values[1], "OAE2412");
+            Assert.AreEqual(result.First().Rows[0].Values[2], "ACA2412");
+            Assert.AreEqual(result.First().Rows[0].Values[3], 18);
+            Assert.AreEqual(((DateTime)result.First().Rows[0].Values[4]).ToString(Json.PrintDateTimeFormat), "2020-03-07 14:55");
         }
 
         [Test]

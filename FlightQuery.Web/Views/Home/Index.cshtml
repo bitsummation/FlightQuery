@@ -5,39 +5,43 @@
     <script id="results-template" type="text/x-handlebars-template">
         {{#if errors}}
         {{#each errors}}
-        <div class="error">
+        <div class="error result">
             {{this.message}}
         </div>
         {{/each}}
         {{else}}
-    <div>
-        {{table.rows.length }} Results
-    </div>
-        <table class="data">
-            <thead>
-                <tr></tr>
-                <tr>
-                    {{#each table.columns}}
-                    <th>{{this}}</th>
-                    {{/each}}
-                </tr>
-            </thead>
-            <tbody>
-                {{#each table.rows}}
-                <tr>
-                    {{#each this.values}}
+        {{#each tables}}
+        <div class="result">
+            <div>
+                {{rows.length }} Results
+            </div>
+            <table class="data">
+                <thead>
+                    <tr></tr>
+                    <tr>
+                        {{#each columns}}
+                        <th>{{this}}</th>
+                        {{/each}}
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each rows}}
+                    <tr>
+                        {{#each this.values}}
                         {{#if (isNull this)}}
                         <td>NULL</td>
                         {{else}}
                         <td>{{this}}</td>
                         {{/if}}
+                        {{/each}}
+                    </tr>
                     {{/each}}
-                </tr>
+                </tbody>
+            </table>
+        </div>
             {{/each}}
-            </tbody>
-        </table>
-         {{/if}}
-</script>
+        {{/if}}
+    </script>
 
 <div id="sitenav-wrapper" class="wrapper">
     <div id="sitenav-wrap" class="wrap xxw8">

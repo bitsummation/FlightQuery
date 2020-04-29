@@ -2,6 +2,7 @@
 using FlightQuery.Sdk;
 using Moq;
 using NUnit.Framework;
+using System.Linq;
 
 namespace FlightQuery.Tests
 {
@@ -35,9 +36,10 @@ from (
             var result = context.Run();
 
             Assert.IsTrue(context.Errors.Count == 0);
-            Assert.IsTrue(result.Rows.Length > 0);
-            Assert.AreEqual(result.Columns[0], "(No column name)");
-            Assert.AreEqual(result.Rows[0].Values[0], "OAE2412");
+            
+            Assert.IsTrue(result.First().Rows.Length > 0);
+            Assert.AreEqual(result.First().Columns[0], "(No column name)");
+            Assert.AreEqual(result.First().Rows[0].Values[0], "OAE2412");
         }
 
         [Test]
@@ -74,12 +76,12 @@ join GetFlightId f on f.ident = a.ident and f.departureTime = a.departureTime
             var result = context.Run();
 
             Assert.IsTrue(context.Errors.Count == 0);
-            Assert.IsTrue(result.Rows.Length == 15);
+            Assert.IsTrue(result.First().Rows.Length == 15);
 
-            Assert.AreEqual(result.Columns[0], "ident");
-            Assert.AreEqual(result.Columns[1], "faFlightID");
-            Assert.AreEqual(result.Rows[0].Values[0], "OAE2412");
-            Assert.AreEqual(result.Rows[0].Values[1], "AAL2594-1586309220-schedule-0000");
+            Assert.AreEqual(result.First().Columns[0], "ident");
+            Assert.AreEqual(result.First().Columns[1], "faFlightID");
+            Assert.AreEqual(result.First().Rows[0].Values[0], "OAE2412");
+            Assert.AreEqual(result.First().Rows[0].Values[1], "AAL2594-1586309220-schedule-0000");
 
         }
 
@@ -117,7 +119,7 @@ join GetFlightId f on f.ident = a.ident and f.departureTime = a.departureTime
 
             Assert.IsTrue(context.Errors.Count == 1);
             Assert.IsTrue(context.Errors[0].Message == "Error executing request: INVALID_ARGUMENT startDate is too far in the past(3 months)");
-            Assert.IsTrue(result.Rows.Length == 0);
+            Assert.IsTrue(result.First().Rows.Length == 0);
         }
     }
 }

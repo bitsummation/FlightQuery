@@ -53,7 +53,7 @@ namespace FlightQuery.Web.Controllers
             if(isUnauthorized)
                 return Unauthorized();
 
-            return Ok(new ResultViewModel() {Table = result, Errors = context.Errors });
+            return Ok(new ResultViewModel() {Tables = result, Errors = context.Errors });
         }
     }
 }

@@ -63,7 +63,7 @@ where faFlightID = 'AAL2594-1586309220-schedule-0000' and actualdeparturetime = 
             var result = context.Run();
 
             Assert.IsTrue(context.Errors.Count == 0);
-            Assert.IsTrue(result.Rows.Length == 1);
+            Assert.IsTrue(result.First().Rows.Length == 1);
         }
 
         [Test]
@@ -83,7 +83,7 @@ where ident = 'AAL2563'
             var context = RunContext.CreateRunContext(code, new HttpExecutor(mock.Object));
             var result = context.Run();
             Assert.IsTrue(context.Errors.Count == 0);
-            Assert.IsTrue(result.Rows.Length == 0);
+            Assert.IsTrue(result.First().Rows.Length == 0);
         }
 
         [Test]
@@ -105,7 +105,7 @@ where faFlightID = 'AAL2594-1586309220-schedule-0000' and actualdeparturetime !=
             var result = context.Run();
 
             Assert.IsTrue(context.Errors.Count == 0);
-            Assert.IsTrue(result.Rows.Length == 0);
+            Assert.IsTrue(result.First().Rows.Length == 0);
         }
 
         [Test]
@@ -181,9 +181,9 @@ where ident = 'AAL2563'
             var result = context.Run();
 
             Assert.IsTrue(context.Errors.Count == 0);
-            Assert.IsTrue(result.Rows.Length == 1);
-            Assert.IsTrue(result.Columns.Length == 1);
-            Assert.AreEqual(result.Rows[0].Values[0], "KDFW");
+            Assert.IsTrue(result.First().Rows.Length == 1);
+            Assert.IsTrue(result.First().Columns.Length == 1);
+            Assert.AreEqual(result.First().Rows[0].Values[0], "KDFW");
 
         }
 
@@ -203,11 +203,11 @@ where faFlightID = 'some-flight-number'
             var result = context.Run();
 
             Assert.IsTrue(context.Errors.Count == 0);
-            Assert.IsTrue(result.Columns.Length == 1);
-            Assert.IsTrue(result.Columns[0] == "aircrafttype");
+            Assert.IsTrue(result.First().Columns.Length == 1);
+            Assert.IsTrue(result.First().Columns[0] == "aircrafttype");
 
-            Assert.IsTrue(result.Rows.Length == 1);
-            Assert.AreEqual(result.Rows[0].Values[0], "B739");
+            Assert.IsTrue(result.First().Rows.Length == 1);
+            Assert.AreEqual(result.First().Rows[0].Values[0], "B739");
         }
 
        
@@ -242,8 +242,8 @@ where a.departuretime > '2020-1-21 9:15' and a.ident = 'ACI4600'
             var result = context.Run();
 
             Assert.IsTrue(context.Errors.Count == 0);
-            Assert.IsTrue(result.Rows.Length == 1);
-            Assert.AreEqual(result.Rows[0].Values[2], "ELOEL2 FORSS GUTZZ SOCKK3");
+            Assert.IsTrue(result.First().Rows.Length == 1);
+            Assert.AreEqual(result.First().Rows[0].Values[2], "ELOEL2 FORSS GUTZZ SOCKK3");
         }
     }
 }

@@ -11,7 +11,7 @@ namespace FlightQuery.Interpreter.Execution
 {
     public partial class Interpreter : IElementVisitor
     {
-        private SelectTable _selectResult;
+        private IList<SelectTable> _selectResult;
         private Element _program;
         private Scope _scope;
         private Stack<QueryPhaseArgs> _visitStack;
@@ -30,6 +30,7 @@ namespace FlightQuery.Interpreter.Execution
             _visitStack = new Stack<QueryPhaseArgs>();
             _httpExecutor = httpExecutor ?? new HttpExecutor(new HttpExecutorRaw(authorization));
             _editorCursor = cursor;
+            _selectResult = new List<SelectTable>();
 
             Errors = new ErrorsCollection();
         }
@@ -123,11 +124,11 @@ namespace FlightQuery.Interpreter.Execution
             return false;
         }
 
-        public SelectTable Execute()
+        public SelectTable[] Execute()
         {
             VisitChild(_program);
 
-            return _selectResult;
+            return _selectResult.ToArray();
         }
     }
 }

@@ -43,19 +43,19 @@ where airportCode = 'kaus'
             var result = context.Run();
 
             Assert.IsTrue(context.Errors.Count == 0);
-            Assert.IsTrue(result.Columns.Length == 6);
-            Assert.IsTrue(result.Columns[0] == "airportCode");
-            Assert.IsTrue(result.Columns[1] == "latitude");
-            Assert.IsTrue(result.Columns[2] == "longitude");
-            Assert.IsTrue(result.Columns[3] == "location");
-            Assert.IsTrue(result.Columns[4] == "name");
-            Assert.IsTrue(result.Columns[5] == "timezone");
+            Assert.IsTrue(result.First().Columns.Length == 6);
+            Assert.IsTrue(result.First().Columns[0] == "airportCode");
+            Assert.IsTrue(result.First().Columns[1] == "latitude");
+            Assert.IsTrue(result.First().Columns[2] == "longitude");
+            Assert.IsTrue(result.First().Columns[3] == "location");
+            Assert.IsTrue(result.First().Columns[4] == "name");
+            Assert.IsTrue(result.First().Columns[5] == "timezone");
 
-            Assert.AreEqual(result.Rows[0].Values[0], "kaus");
-            Assert.AreEqual(result.Rows[0].Values[1], 30.1945272f);
-            Assert.AreEqual(result.Rows[0].Values[2], -97.6698761f);
-            Assert.AreEqual(result.Rows[0].Values[3], "Austin, TX");
-            Assert.AreEqual(result.Rows[0].Values[5], ":America/Chicago");
+            Assert.AreEqual(result.First().Rows[0].Values[0], "kaus");
+            Assert.AreEqual(result.First().Rows[0].Values[1], 30.1945272f);
+            Assert.AreEqual(result.First().Rows[0].Values[2], -97.6698761f);
+            Assert.AreEqual(result.First().Rows[0].Values[3], "Austin, TX");
+            Assert.AreEqual(result.First().Rows[0].Values[5], ":America/Chicago");
         }
 
         [Test]
@@ -76,11 +76,11 @@ where airportCode = 'kaus'
             var context = RunContext.CreateRunContext(code, new HttpExecutor(mock.Object));
             var result = context.Run();
             Assert.IsTrue(context.Errors.Count == 0);
-            Assert.IsTrue(result.Columns.Length == 1);
-            Assert.IsTrue(result.Columns[0] == "location");
+            Assert.IsTrue(result.First().Columns.Length == 1);
+            Assert.IsTrue(result.First().Columns[0] == "location");
 
-            Assert.IsTrue(result.Rows.Length == 1);
-            Assert.AreEqual(result.Rows[0].Values[0], "Austin, TX");
+            Assert.IsTrue(result.First().Rows.Length == 1);
+            Assert.AreEqual(result.First().Rows[0].Values[0], "Austin, TX");
         }
 
         [Test]
@@ -106,8 +106,8 @@ where f.departuretime > '2020-1-16 1:46'and f.ident = 'DAL1381'";
             var context = RunContext.CreateRunContext(code, new HttpExecutor(mock.Object));
             var result = context.Run();
             Assert.IsTrue(context.Errors.Count == 0);
-            Assert.IsTrue(result.Columns.Length == 5);
-            Assert.IsTrue(result.Rows.Length == 1);
+            Assert.IsTrue(result.First().Columns.Length == 5);
+            Assert.IsTrue(result.First().Rows.Length == 1);
 
             mock.Verify(x => x.GetAirlineFlightSchedule(It.IsAny<HttpExecuteArg>()), Times.Once);
             mock.Verify(x => x.GetAirportInfo(It.IsAny<HttpExecuteArg>()), Times.Exactly(30));

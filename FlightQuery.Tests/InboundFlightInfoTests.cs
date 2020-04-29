@@ -2,6 +2,7 @@
 using FlightQuery.Sdk;
 using Moq;
 using NUnit.Framework;
+using System.Linq;
 
 namespace FlightQuery.Tests
 {
@@ -26,10 +27,10 @@ where faFlightID = 'unique-flight-id'
             var result = context.Run();
 
             Assert.IsTrue(context.Errors.Count == 0);
-            Assert.IsTrue(result.Rows.Length > 0);
+            Assert.IsTrue(result.First().Rows.Length > 0);
 
-            Assert.AreEqual(result.Rows[0].Values[0], "unique-flight-id");
-            Assert.AreEqual(result.Rows[0].Values[1], "SWA2055-1587444311-airline-0873");
+            Assert.AreEqual(result.First().Rows[0].Values[0], "unique-flight-id");
+            Assert.AreEqual(result.First().Rows[0].Values[1], "SWA2055-1587444311-airline-0873");
 
         }
     }

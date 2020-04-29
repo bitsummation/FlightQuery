@@ -68,11 +68,11 @@ where ident = 'DAL503' and departuretime = '2020-3-7 9:15'
             var result = context.Run();
 
             Assert.IsTrue(context.Errors.Count == 0);
-            Assert.IsTrue(result.Columns.Length == 1);
-            Assert.IsTrue(result.Columns[0] == "faFlightID");
+            Assert.IsTrue(result.First().Columns.Length == 1);
+            Assert.IsTrue(result.First().Columns[0] == "faFlightID");
 
-            Assert.IsTrue(result.Rows.Length == 1);
-            Assert.AreEqual(result.Rows[0].Values[0], "XYZ1234-1530000000-airline-0500");
+            Assert.IsTrue(result.First().Rows.Length == 1);
+            Assert.AreEqual(result.First().Rows[0].Values[0], "XYZ1234-1530000000-airline-0500");
         }
 
         [Test]
@@ -93,7 +93,7 @@ where ident = 'DAL503' and departuretime = '2020-3-7 9:15'
             var context = RunContext.CreateRunContext(code, new HttpExecutor(mock.Object));
             var result = context.Run();
             Assert.IsTrue(context.Errors.Count == 0);
-            Assert.IsTrue(result.Rows.Length == 0);
+            Assert.IsTrue(result.First().Rows.Length == 0);
         }
 
         [Test]
@@ -118,7 +118,7 @@ where a.departuretime > '2020-1-21 9:15'
             var context = RunContext.CreateRunContext(code, new HttpExecutor(mock.Object));
             var result = context.Run();
             Assert.IsTrue(context.Errors.Count == 0);
-            Assert.IsTrue(result.Rows.Length == 0);
+            Assert.IsTrue(result.First().Rows.Length == 0);
 
         }
 
@@ -171,7 +171,7 @@ where a.departuretime > '2020-1-21 9:15'
             var result = context.Run();
 
             Assert.IsTrue(context.Errors.Count == 0);
-            Assert.IsTrue(result.Rows.Length == 15);
+            Assert.IsTrue(result.First().Rows.Length == 15);
 
             mock.Verify(v => v.GetFlightID(It.IsAny<HttpExecuteArg>()), Times.Exactly(15));
             mock.Verify(v => v.GetAirlineFlightSchedule(It.IsAny<HttpExecuteArg>()), Times.Once());

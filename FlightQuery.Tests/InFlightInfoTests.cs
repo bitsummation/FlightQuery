@@ -2,6 +2,7 @@
 using FlightQuery.Sdk;
 using Moq;
 using NUnit.Framework;
+using System.Linq;
 
 namespace FlightQuery.Tests
 {
@@ -26,10 +27,10 @@ where ident = ""SWA5302""
             var result = context.Run();
 
             Assert.IsTrue(context.Errors.Count == 0);
-            Assert.IsTrue(result.Rows.Length > 0);
+            Assert.IsTrue(result.First().Rows.Length > 0);
 
-            Assert.AreEqual(result.Rows[0].Values[0], 400);
-            Assert.AreEqual(result.Rows[0].Values[6], "SWA5302-1587617128-airline-0319");
+            Assert.AreEqual(result.First().Rows[0].Values[0], 400);
+            Assert.AreEqual(result.First().Rows[0].Values[6], "SWA5302-1587617128-airline-0319");
         }
     }
 }
