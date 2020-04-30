@@ -30,7 +30,7 @@ namespace FlightQuery.Interpreter.QueryTables
             {
                 var flightid = QueryArgs["faFlightID"];
                 QueryArgs.Clear();
-                QueryArgs.Add(new QueryArgs { Variable = "ident", PropertyValue = new PropertyValue(flightid.PropertyValue.Value) });
+                QueryArgs.Add(new EqualQueryArg { Variable = "ident", PropertyValue = new PropertyValue(flightid.PropertyValue.Value) });
             }
         }
 

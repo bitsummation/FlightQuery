@@ -52,8 +52,8 @@ namespace FlightQuery.Interpreter.QueryTables
                 {
                     var airline = match.Groups[1].Value;
                     var flightno = match.Groups[2].Value;
-                    QueryArgs.Add(new QueryArgs { Variable = "airline", PropertyValue = new PropertyValue(airline) });
-                    QueryArgs.Add(new QueryArgs { Variable = "flightno", PropertyValue = new PropertyValue(flightno) });
+                    QueryArgs.Add(new EqualQueryArg { Variable = "airline", PropertyValue = new PropertyValue(airline) });
+                    QueryArgs.Add(new EqualQueryArg { Variable = "flightno", PropertyValue = new PropertyValue(flightno) });
                     QueryArgs.Remove(ident);
                 }
             }
@@ -85,7 +85,7 @@ namespace FlightQuery.Interpreter.QueryTables
                     startDate = startDate.AddMinutes(-1);
 
                     param.PropertyValue = new PropertyValue(Conversion.ConvertDateTimeToLong(startDate));
-                    QueryArgs.Add(new QueryArgs { Variable = "endDate", PropertyValue = new PropertyValue(Conversion.ConvertDateTimeToLong(endDate)) });
+                    QueryArgs.Add(new EqualQueryArg { Variable = "endDate", PropertyValue = new PropertyValue(Conversion.ConvertDateTimeToLong(endDate)) });
                 }
             }
             else //two departureTImes
