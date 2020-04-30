@@ -211,9 +211,19 @@ namespace FlightQuery.Parser.AntlrParser
             return new GreaterThanExpression(CreateParseInfo(context));
         }
 
+        public override Element VisitGreaterThanEqualStatementExp(GreaterThanEqualStatementExpContext context)
+        {
+            return new GreaterThanEqualExpression(CreateParseInfo(context));
+        }
+
         public override Element VisitLessThanStatementExp(SqlParser.LessThanStatementExpContext context)
         {
             return new LessThanExpression(CreateParseInfo(context));
+        }
+
+        public override Element VisitLessThanEqualStatementExp(LessThanEqualStatementExpContext context)
+        {
+            return new LessThanEqualExpression(CreateParseInfo(context));
         }
 
         public override Element VisitIntegerExp(SqlParser.IntegerExpContext context)

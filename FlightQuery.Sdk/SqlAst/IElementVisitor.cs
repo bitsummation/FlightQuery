@@ -19,7 +19,9 @@
         void Visit(EqualsExpression expression);
         void Visit(NotEqualsExpression expression);
         void Visit(GreaterThanExpression expression);
+        void Visit(GreaterThanEqualExpression expression);
         void Visit(LessThanExpression expression);
+        void Visit(LessThanEqualExpression expression);
         
         void Visit(MemberVariableExpression expression);
         void Visit(SingleVariableExpression expression);

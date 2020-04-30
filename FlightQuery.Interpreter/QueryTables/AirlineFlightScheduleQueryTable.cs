@@ -61,17 +61,21 @@ namespace FlightQuery.Interpreter.QueryTables
             if (departTimeCount == 1)
             {
                 var param = QueryArgs["departuretime"];
-                if ( (param is QueryGreaterThan && param.LeftProperty) || (param is QueryLessThan && !param.LeftProperty))
+                if ( ((param is QueryGreaterThan || param is QueryGreaterThanEqual) && param.LeftProperty)
+                    || ((param is QueryLessThan || param is QueryLessThanEqual) && !param.LeftProperty))
                 {
                     param.Variable = "startDate";
                     var startDate = (DateTime)Conversion.ConvertLongToDateTime(param.PropertyValue.Value);
                     var endDate = startDate.AddDays(7); //no end date we just assume a week forward
                     QueryArgs.Add(new QueryArgs { Variable = "endDate", PropertyValue = new PropertyValue(Conversion.ConvertDateTimeToLong(endDate)) });
                 }
-                else if( (param is QueryLessThan && param.LeftProperty) || (param is QueryGreaterThan && !param.LeftProperty) )
+                else if( ((param is QueryLessThan || param is QueryLessThanEqual) && param.LeftProperty)
+                    || ((param is QueryGreaterThan || param is QueryGreaterThanEqual) && !param.LeftProperty) )
                 {
                     param.Variable = "endDate";
-                    QueryArgs.Add(new QueryArgs { Variable = "startDate", PropertyValue = new PropertyValue(Conversion.MinUnixDate) });
+                    var endDate = (DateTime)Conversion.ConvertLongToDateTime(param.PropertyValue.Value);
+                    var startDate = endDate.AddDays(-7); //no end date we just move a week backword
+                    QueryArgs.Add(new QueryArgs { Variable = "startDate", PropertyValue = new PropertyValue(Conversion.ConvertDateTimeToLong(startDate)) });
                 }
                 else if(param is EqualQueryArg)
                 {
@@ -88,17 +92,18 @@ namespace FlightQuery.Interpreter.QueryTables
             {
                 foreach (var param in QueryArgs.Args.Where(x => x.Variable == "departuretime"))
                 {
-                    if ((param is QueryGreaterThan && param.LeftProperty) || (param is QueryLessThan && !param.LeftProperty))
+                    if (((param is QueryGreaterThan || param is QueryGreaterThanEqual) && param.LeftProperty)
+                        || ((param is QueryLessThan || param is QueryLessThanEqual) && !param.LeftProperty))
                     {
                         param.Variable = "startDate";
                     }
-                    else if ((param is QueryLessThan && param.LeftProperty) || (param is QueryGreaterThan && !param.LeftProperty))
+                    else if (((param is QueryLessThan || param is QueryLessThanEqual) && param.LeftProperty)
+                     || ((param is QueryGreaterThan || param is QueryGreaterThanEqual) && !param.LeftProperty))
                     {
                         param.Variable = "endDate";
                     }
                 }
             }
-
         }
 
         protected override ExecutedTable ExecuteCore(HttpExecuteArg args)

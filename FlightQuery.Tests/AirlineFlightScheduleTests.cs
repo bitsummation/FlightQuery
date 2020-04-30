@@ -27,6 +27,35 @@ where origin = 'katl'
         }
 
         [Test]
+        public void TestSimpleExecuteGreaterThanEqual()
+        {
+            string code = @"
+select aircrafttype, actual_ident, ident, seats_cabin_business, arrivaltime
+from AirlineFlightSchedules
+where departuretime >= '2020-1-21 9:15'
+";
+
+            var mock = new Mock<IHttpExecutorRaw>();
+            mock.Setup(x => x.GetAirlineFlightSchedule(It.IsAny<HttpExecuteArg>())).Returns(() =>
+            {
+                return TestHelper.LoadJson("FlightQuery.Tests.AirlineFlightSchedule.json");
+            });
+
+            var context = RunContext.CreateRunContext(code, new HttpExecutor(mock.Object));
+            var result = context.Run();
+            Assert.IsTrue(result.First().Columns.Length == 5);
+            Assert.IsTrue(result.First().Columns[0] == "aircrafttype");
+
+            Assert.IsTrue(context.Errors.Count == 0);
+            Assert.IsTrue(result.First().Rows.Length == 15);
+            Assert.AreEqual(result.First().Rows[0].Values[0], "B762");
+            Assert.AreEqual(result.First().Rows[0].Values[1], "OAE2412");
+            Assert.AreEqual(result.First().Rows[0].Values[2], "ACA2412");
+            Assert.AreEqual(result.First().Rows[0].Values[3], 18);
+            Assert.AreEqual(((DateTime)result.First().Rows[0].Values[4]).ToString(Json.PrintDateTimeFormat), "2020-03-07 14:55");
+        }
+
+        [Test]
         public void TestSimpleExecute()
         {
             string code = @"
@@ -53,6 +82,32 @@ where departuretime > '2020-1-21 9:15'
             Assert.AreEqual(result.First().Rows[0].Values[2], "ACA2412");
             Assert.AreEqual(result.First().Rows[0].Values[3], 18);
             Assert.AreEqual(((DateTime)result.First().Rows[0].Values[4]).ToString(Json.PrintDateTimeFormat), "2020-03-07 14:55");
+        }
+
+        [Test]
+        public void TestQuerableParametersTwoDepartureTimeGreaterLessEqual()
+        {
+            string code = @"
+select aircrafttype, actual_ident, ident, seats_cabin_business, arrivaltime
+from AirlineFlightSchedules
+where departuretime >= '2020-1-21 9:15' and departuretime <= '2020-11-21 9:15'
+";
+
+            var mock = new Mock<IHttpExecutorRaw>();
+            mock.Setup(x => x.GetAirlineFlightSchedule(It.IsAny<HttpExecuteArg>())).Callback<HttpExecuteArg>(args =>
+            {
+                Assert.IsTrue(args.Variables.Count() == 2);
+                var start = args.Variables.Where(x => x.Variable == "startDate").SingleOrDefault();
+                Assert.IsTrue(start.Value == "1579598100");
+
+                var end = args.Variables.Where(x => x.Variable == "endDate").SingleOrDefault();
+                Assert.IsTrue(end.Value == "1605950100");
+            });
+
+            var context = RunContext.CreateRunContext(code, new HttpExecutor(mock.Object));
+            var result = context.Run();
+
+            mock.Verify(v => v.GetAirlineFlightSchedule(It.IsAny<HttpExecuteArg>()), Times.Once());
         }
 
         [Test]
@@ -115,7 +170,7 @@ where '2020-3-7 9:15' > a.departuretime and origin = 'kaus' and destination = 'k
                 Assert.IsTrue(args.Variables.Count() == 6);
                 var start = args.Variables.Where(x => x.Variable == "startDate").SingleOrDefault();
                 Assert.IsTrue(start != null);
-                Assert.IsTrue(start.Value == "1");
+                Assert.IsTrue(start.Value == "1582967700");
 
                 var end = args.Variables.Where(x => x.Variable == "endDate").SingleOrDefault();
                 Assert.IsTrue(end.Value == "1583572500");
@@ -179,7 +234,7 @@ where '2020-3-7 9:15' > departuretime
                 Assert.IsTrue(args.Variables.Count() == 2);
                 var start = args.Variables.Where(x => x.Variable == "startDate").SingleOrDefault();
                 Assert.IsTrue(start != null);
-                Assert.IsTrue(start.Value == "1");
+                Assert.IsTrue(start.Value == "1582967700");
 
                 var end = args.Variables.Where(x => x.Variable == "endDate").SingleOrDefault();
                 Assert.IsTrue(end.Value == "1583572500");
@@ -206,7 +261,7 @@ where departuretime < '2020-3-7 9:15'
                 Assert.IsTrue(args.Variables.Count() == 2);
                 var start = args.Variables.Where(x => x.Variable == "startDate").SingleOrDefault();
                 Assert.IsTrue(start != null);
-                Assert.IsTrue(start.Value == "1");
+                Assert.IsTrue(start.Value == "1582967700");
 
                 var end = args.Variables.Where(x => x.Variable == "endDate").SingleOrDefault();
                 Assert.IsTrue(end.Value == "1583572500");
