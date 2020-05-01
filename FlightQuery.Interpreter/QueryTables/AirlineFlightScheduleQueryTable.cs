@@ -10,7 +10,7 @@ using System.Text.RegularExpressions;
 
 namespace FlightQuery.Interpreter.QueryTables
 {
-    public class AirlineFlightScheduleQueryTable : QueryTable
+    public class AirlineFlightScheduleQueryTable : LimitQueryTable
     {
         public AirlineFlightScheduleQueryTable(IHttpExecutor httpExecutor, TableDescriptor descriptor) : base(httpExecutor, descriptor) { }
 

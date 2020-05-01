@@ -26,7 +26,7 @@ namespace FlightQuery.Interpreter.QueryResults
 
         public abstract bool HasExecuted { get; }
         public abstract void AddArg(QueryArgs args);
-        public abstract ExecutedTable Execute();
+        public abstract ExecutedTable Execute(int offset, int limit);
 
         protected static PropertyValue[] ToValues(object value, TableDescriptor table)
         {

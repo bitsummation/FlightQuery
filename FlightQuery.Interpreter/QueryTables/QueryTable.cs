@@ -24,13 +24,14 @@ namespace FlightQuery.Interpreter.QueryTables
         public override bool HasExecuted { get { return false; } }
         protected abstract string TableName { get; }
 
-        public override void AddArg(QueryArgs args)
+        public sealed override void AddArg(QueryArgs args)
         {
             QueryArgs.Add(args);
         }
 
-        public sealed override ExecutedTable Execute()
+        public sealed override ExecutedTable Execute(int offset, int limit)
         {
+            LimitQuery(offset, limit);
             ValidateArgs();
 
             var args = new HttpExecuteArg() {
@@ -42,6 +43,10 @@ namespace FlightQuery.Interpreter.QueryTables
         }
 
         protected abstract ExecutedTable ExecuteCore(HttpExecuteArg args);
+
+        protected virtual void LimitQuery(int offset, int limit)
+        {
+        }
 
         private void ValidateRequired()
         {

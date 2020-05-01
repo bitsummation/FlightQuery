@@ -15,6 +15,7 @@ COMMA : ',';
 DOT : '.';
 STAR : '*';
 
+LIMIT : L I M I T;
 CASE : C A S E;
 WHEN : W H E N;
 THEN: T H E N;

@@ -9,6 +9,7 @@
         void Visit(NestedFromStatement statement);
         void Visit(WhereStatement statement);
         void Visit(InnerJoinStatement statement);
+        void Visit(LimitStatement statement);
 
         void Visit(SelectArgExpression expression);
         void Visit(CaseStatement statement);

@@ -22,9 +22,21 @@ namespace FlightQuery.Sdk.SqlAst
             get { return Children.OfType<WhereStatement>().SingleOrDefault(); }
         }
 
-        public override WhereStatement ParentWhere
+        public LimitStatement Limit
         {
-            get { return Where; }
+            get
+            {
+                var l = Children.OfType<LimitStatement>().SingleOrDefault();
+                if (l == null)
+                    return new LimitStatement(Bounds);
+                else
+                    return l;
+            }
+        }
+
+        public override QueryStatement ParentQueryStatement
+        {
+            get { return this; }
         }
 
         public override void Accept(IElementVisitor visitor)

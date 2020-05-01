@@ -1,7 +1,6 @@
 ﻿using FlightQuery.Sdk.Semantic;
 using FlightQuery.Sdk.SqlAst;
 using System;
-using System.Linq;
 
 namespace FlightQuery.Interpreter.Execution
 {
@@ -32,9 +31,9 @@ namespace FlightQuery.Interpreter.Execution
             table = table.Create();
             _scope.AddTable(tableVariable, table);
 
-            VisitWhereIgnoreErrors(statement.ParentWhere);
+            VisitWhereIgnoreErrors(statement.ParentQueryStatement.Where);
 
-            var result = table.Execute();
+            var result = table.Execute(statement.ParentQueryStatement.Limit.Offset, statement.ParentQueryStatement.Limit.Count);
             foreach (var e in table.Errors)
                 Errors.Add(e);
 

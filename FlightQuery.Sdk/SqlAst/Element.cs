@@ -14,13 +14,13 @@ namespace FlightQuery.Sdk.SqlAst
         public ChildCollection Children { get; private set; }
         public Element Parent { get; set; }
 
-        public virtual WhereStatement ParentWhere
+        public virtual QueryStatement ParentQueryStatement
         {
             get
             {
                 if(Parent != null)
                 {
-                    return Parent.ParentWhere;
+                    return Parent.ParentQueryStatement;
                 }
 
                 return null;

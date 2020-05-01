@@ -8,7 +8,7 @@ program
 	;
 
 queryStatement
-	: s=selectStatement f=fromStatement w=whereStatement?	# QueryStatementExp
+	: s=selectStatement f=fromStatement w=whereStatement? l=limitStatement?	# QueryStatementExp
 	;
 
 selectStatement
@@ -45,7 +45,11 @@ innerJoinStatement
 	;
 
 whereStatement
-	: WHERE b=boolExpression								# whereStatementExp
+	: WHERE b=boolExpression 								# whereStatementExp
+	;
+
+limitStatement
+	: LIMIT (o=INT COMMA)? c=INT							# limitStatementExp 	
 	;
 
 boolExpression

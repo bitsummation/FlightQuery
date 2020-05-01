@@ -20,7 +20,7 @@ namespace FlightQuery.Interpreter.QueryResults
             return this;
         }
 
-        public override ExecutedTable Execute()
+        public override ExecutedTable Execute(int offset, int limit)
         {
             return this;
         }

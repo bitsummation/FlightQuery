@@ -43,9 +43,9 @@ namespace FlightQuery.Interpreter.Execution
                 table = table.Create();
                 _scope.AddTable(tableVariable, table);
                 VisitChild(statement.BooleanExpression);
-                VisitWhereIgnoreErrors(statement.ParentWhere);
+                VisitWhereIgnoreErrors(statement.ParentQueryStatement.Where);
 
-                var executeTable = table.Execute();
+                var executeTable = table.Execute(statement.ParentQueryStatement.Limit.Offset, statement.ParentQueryStatement.Limit.Count);
                 foreach (var e in table.Errors)
                     Errors.Add(e);
 
@@ -61,8 +61,8 @@ namespace FlightQuery.Interpreter.Execution
 
                     Array.ForEach(executedTables, (x) => x.RowIndex = row);
                     VisitChild(statement.BooleanExpression);
-                    VisitWhereIgnoreErrors(statement.ParentWhere);
-                    var executeTable = table.Execute();
+                    VisitWhereIgnoreErrors(statement.ParentQueryStatement.Where);
+                    var executeTable = table.Execute(statement.ParentQueryStatement.Limit.Offset, statement.ParentQueryStatement.Limit.Count);
 
                     foreach (var e in table.Errors)
                         Errors.Add(e);

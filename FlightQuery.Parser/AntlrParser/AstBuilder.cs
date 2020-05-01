@@ -34,9 +34,21 @@ namespace FlightQuery.Parser.AntlrParser
             query.Children.Add(Visit(context.f));
             if(context.w != null)
                 query.Children.Add(Visit(context.w));
+            if (context.l != null)
+                query.Children.Add(Visit(context.l));
 
             return query;
-        }   
+        }
+
+        public override Element VisitLimitStatementExp(LimitStatementExpContext context)
+        {
+            var limit = new LimitStatement(CreateParseInfo(context));
+            limit.Count = int.Parse(context.c.Text);
+            if (context.o != null)
+                limit.Offset = int.Parse(context.o.Text);
+
+            return limit;
+        }
 
         public override Element VisitSelectStatementExp(SqlParser.SelectStatementExpContext context)
         {
