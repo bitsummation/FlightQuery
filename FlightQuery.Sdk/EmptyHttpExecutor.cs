@@ -50,5 +50,9 @@ namespace FlightQuery.Sdk
             return new ApiExecuteResult<InFlightInfo>(new InFlightInfo());
         }
 
+        public ApiExecuteResult<IEnumerable<GetHistoricalTrack>> GetHistoricalTrack(HttpExecuteArg args)
+        {
+            return new ApiExecuteResult<IEnumerable<GetHistoricalTrack>>(new[] { new GetHistoricalTrack() });
+        }
     }
 }

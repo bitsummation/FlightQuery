@@ -20,6 +20,7 @@ namespace FlightQuery.Interpreter.Execution
                 _scope.AddTable("inflightinfo", new InFlightInfoQueryTable(_httpExecutor, PropertyDescriptor.GenerateQueryDescriptor(typeof(InFlightInfo))));
                 _scope.AddTable("scheduled", new ScheduledQueryTable(_httpExecutor, PropertyDescriptor.GenerateQueryDescriptor(typeof(Scheduled))));
                 _scope.AddTable("arrived", new ArrivedQueryTable(_httpExecutor, PropertyDescriptor.GenerateQueryDescriptor(typeof(Arrived))));
+                _scope.AddTable("gethistoricaltrack", new GetHistoricalTrackQueryTable(_httpExecutor, PropertyDescriptor.GenerateQueryDescriptor(typeof(GetHistoricalTrack))));
 
                 foreach (var c in program.Statements)
                     VisitChild(c);

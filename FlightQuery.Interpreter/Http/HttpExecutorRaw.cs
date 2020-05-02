@@ -24,7 +24,7 @@ namespace FlightQuery.Interpreter.Http
             ApiExecuteError error = null;
             try
             {
-               
+
                 using (var client = new HttpClient())
                 {
                     var dict = new Dictionary<string, string>();
@@ -52,7 +52,7 @@ namespace FlightQuery.Interpreter.Http
                     }
                 }
             }
-            catch(Exception)
+            catch (Exception)
             {
                 return new ExecuteResult() { Result = string.Empty, Error = new ApiExecuteError(ApiExecuteErrorType.Fail, "Api error") };
             }
@@ -101,6 +101,11 @@ namespace FlightQuery.Interpreter.Http
         }
 
         public ExecuteResult GetArrived(HttpExecuteArg args)
+        {
+            return Task.Run(async () => await ExecuteInternal(args)).Result;
+        }
+
+        public ExecuteResult GetHistoricalTrack(HttpExecuteArg args)
         {
             return Task.Run(async () => await ExecuteInternal(args)).Result;
         }

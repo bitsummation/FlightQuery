@@ -133,6 +133,13 @@ namespace FlightQuery.Sdk
                 );
         }
 
-        
+        public ApiExecuteResult<IEnumerable<GetHistoricalTrack>> GetHistoricalTrack(HttpExecuteArg args)
+        {
+            return ParseFindResult(
+              () => _raw.GetHistoricalTrack(args),
+              () => _empty.GetHistoricalTrack(args).Data,
+              (dynamic json) => json.GetHistoricalTrackResult.data
+              );
+        }
     }
 }

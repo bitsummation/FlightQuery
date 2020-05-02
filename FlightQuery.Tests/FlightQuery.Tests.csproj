@@ -13,6 +13,7 @@
     <None Remove="FlightInfoExCancelled.json" />
     <None Remove="FlightInfoExNotDeparted.json" />
     <None Remove="GetFlightId.json" />
+    <None Remove="GetHistoricTrack.json" />
     <None Remove="InboundFlightInfo.json" />
     <None Remove="InFightInfo.json" />
     <None Remove="Scheduled.json" />
@@ -24,6 +25,7 @@
     <EmbeddedResource Include="Arrived.json" />
     <EmbeddedResource Include="FlightInfoExCancelled.json" />
     <EmbeddedResource Include="FlightInfoExNotDeparted.json" />
+    <EmbeddedResource Include="GetHistoricTrack.json" />
     <EmbeddedResource Include="InboundFlightInfo.json" />
     <EmbeddedResource Include="InFightInfo.json" />
     <EmbeddedResource Include="Scheduled.json" />

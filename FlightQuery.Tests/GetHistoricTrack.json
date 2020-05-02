@@ -1,0 +1,3926 @@
+{
+  "GetHistoricalTrackResult": {
+    "data": [
+      {
+        "timestamp": 1588379670,
+        "latitude": 25.80304,
+        "longitude": -80.25925,
+        "groundspeed": 169,
+        "altitude": 8,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": ""
+      },
+      {
+        "timestamp": 1588379686,
+        "latitude": 25.80437,
+        "longitude": -80.24592,
+        "groundspeed": 178,
+        "altitude": 13,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "C"
+      },
+      {
+        "timestamp": 1588379702,
+        "latitude": 25.80583,
+        "longitude": -80.23117,
+        "groundspeed": 186,
+        "altitude": 18,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "C"
+      },
+      {
+        "timestamp": 1588379719,
+        "latitude": 25.80743,
+        "longitude": -80.21261,
+        "groundspeed": 209,
+        "altitude": 21,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "C"
+      },
+      {
+        "timestamp": 1588379737,
+        "latitude": 25.80885,
+        "longitude": -80.19252,
+        "groundspeed": 230,
+        "altitude": 25,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "C"
+      },
+      {
+        "timestamp": 1588379758,
+        "latitude": 25.81110,
+        "longitude": -80.16729,
+        "groundspeed": 246,
+        "altitude": 32,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "C"
+      },
+      {
+        "timestamp": 1588379777,
+        "latitude": 25.82136,
+        "longitude": -80.14640,
+        "groundspeed": 257,
+        "altitude": 37,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "C"
+      },
+      {
+        "timestamp": 1588379793,
+        "latitude": 25.83966,
+        "longitude": -80.13644,
+        "groundspeed": 257,
+        "altitude": 44,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "C"
+      },
+      {
+        "timestamp": 1588379809,
+        "latitude": 25.85791,
+        "longitude": -80.13956,
+        "groundspeed": 258,
+        "altitude": 50,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "C"
+      },
+      {
+        "timestamp": 1588379825,
+        "latitude": 25.87230,
+        "longitude": -80.15169,
+        "groundspeed": 260,
+        "altitude": 56,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "C"
+      },
+      {
+        "timestamp": 1588379843,
+        "latitude": 25.88584,
+        "longitude": -80.17389,
+        "groundspeed": 279,
+        "altitude": 61,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "C"
+      },
+      {
+        "timestamp": 1588379862,
+        "latitude": 25.89844,
+        "longitude": -80.19626,
+        "groundspeed": 284,
+        "altitude": 69,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "C"
+      },
+      {
+        "timestamp": 1588379892,
+        "latitude": 25.91852,
+        "longitude": -80.23168,
+        "groundspeed": 275,
+        "altitude": 84,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "C"
+      },
+      {
+        "timestamp": 1588379922,
+        "latitude": 25.93950,
+        "longitude": -80.26819,
+        "groundspeed": 281,
+        "altitude": 98,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "C"
+      },
+      {
+        "timestamp": 1588379952,
+        "latitude": 25.96172,
+        "longitude": -80.30631,
+        "groundspeed": 302,
+        "altitude": 108,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "C"
+      },
+      {
+        "timestamp": 1588379982,
+        "latitude": 25.98477,
+        "longitude": -80.34675,
+        "groundspeed": 317,
+        "altitude": 119,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "C"
+      },
+      {
+        "timestamp": 1588380012,
+        "latitude": 26.00908,
+        "longitude": -80.38919,
+        "groundspeed": 326,
+        "altitude": 133,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "C"
+      },
+      {
+        "timestamp": 1588380042,
+        "latitude": 26.03359,
+        "longitude": -80.43244,
+        "groundspeed": 340,
+        "altitude": 145,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "C"
+      },
+      {
+        "timestamp": 1588380072,
+        "latitude": 26.05998,
+        "longitude": -80.47843,
+        "groundspeed": 358,
+        "altitude": 156,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "C"
+      },
+      {
+        "timestamp": 1588380102,
+        "latitude": 26.08575,
+        "longitude": -80.52471,
+        "groundspeed": 362,
+        "altitude": 170,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "C"
+      },
+      {
+        "timestamp": 1588380132,
+        "latitude": 26.11313,
+        "longitude": -80.57497,
+        "groundspeed": 371,
+        "altitude": 182,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "C"
+      },
+      {
+        "timestamp": 1588380162,
+        "latitude": 26.13908,
+        "longitude": -80.62224,
+        "groundspeed": 370,
+        "altitude": 198,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "C"
+      },
+      {
+        "timestamp": 1588380192,
+        "latitude": 26.16901,
+        "longitude": -80.67282,
+        "groundspeed": 377,
+        "altitude": 210,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "C"
+      },
+      {
+        "timestamp": 1588380222,
+        "latitude": 26.19890,
+        "longitude": -80.72088,
+        "groundspeed": 387,
+        "altitude": 220,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "C"
+      },
+      {
+        "timestamp": 1588380252,
+        "latitude": 26.22599,
+        "longitude": -80.76768,
+        "groundspeed": 395,
+        "altitude": 228,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "C"
+      },
+      {
+        "timestamp": 1588380273,
+        "latitude": 26.25113,
+        "longitude": -80.80196,
+        "groundspeed": 401,
+        "altitude": 235,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "C"
+      },
+      {
+        "timestamp": 1588380316,
+        "latitude": 26.31290,
+        "longitude": -80.86502,
+        "groundspeed": 412,
+        "altitude": 249,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "C"
+      },
+      {
+        "timestamp": 1588380346,
+        "latitude": 26.35378,
+        "longitude": -80.90664,
+        "groundspeed": 418,
+        "altitude": 258,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "C"
+      },
+      {
+        "timestamp": 1588380376,
+        "latitude": 26.39552,
+        "longitude": -80.94934,
+        "groundspeed": 417,
+        "altitude": 269,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "C"
+      },
+      {
+        "timestamp": 1588380406,
+        "latitude": 26.43888,
+        "longitude": -80.99401,
+        "groundspeed": 417,
+        "altitude": 279,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "C"
+      },
+      {
+        "timestamp": 1588380436,
+        "latitude": 26.48133,
+        "longitude": -81.04007,
+        "groundspeed": 419,
+        "altitude": 288,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "C"
+      },
+      {
+        "timestamp": 1588380466,
+        "latitude": 26.52301,
+        "longitude": -81.08527,
+        "groundspeed": 415,
+        "altitude": 299,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "C"
+      },
+      {
+        "timestamp": 1588380496,
+        "latitude": 26.56331,
+        "longitude": -81.12859,
+        "groundspeed": 414,
+        "altitude": 309,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "C"
+      },
+      {
+        "timestamp": 1588380526,
+        "latitude": 26.60540,
+        "longitude": -81.17365,
+        "groundspeed": 413,
+        "altitude": 318,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "C"
+      },
+      {
+        "timestamp": 1588380556,
+        "latitude": 26.64664,
+        "longitude": -81.21791,
+        "groundspeed": 412,
+        "altitude": 326,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "C"
+      },
+      {
+        "timestamp": 1588380586,
+        "latitude": 26.68775,
+        "longitude": -81.26207,
+        "groundspeed": 413,
+        "altitude": 334,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "C"
+      },
+      {
+        "timestamp": 1588380616,
+        "latitude": 26.72904,
+        "longitude": -81.30654,
+        "groundspeed": 414,
+        "altitude": 341,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "C"
+      },
+      {
+        "timestamp": 1588380639,
+        "latitude": 26.76004,
+        "longitude": -81.33998,
+        "groundspeed": 410,
+        "altitude": 347,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "C"
+      },
+      {
+        "timestamp": 1588380659,
+        "latitude": 26.78719,
+        "longitude": -81.36925,
+        "groundspeed": 405,
+        "altitude": 353,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "C"
+      },
+      {
+        "timestamp": 1588380688,
+        "latitude": 26.82605,
+        "longitude": -81.41107,
+        "groundspeed": 393,
+        "altitude": 364,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "C"
+      },
+      {
+        "timestamp": 1588380728,
+        "latitude": 26.87746,
+        "longitude": -81.46653,
+        "groundspeed": 370,
+        "altitude": 379,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "C"
+      },
+      {
+        "timestamp": 1588380746,
+        "latitude": 26.89751,
+        "longitude": -81.49016,
+        "groundspeed": 360,
+        "altitude": 380,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "C"
+      },
+      {
+        "timestamp": 1588380769,
+        "latitude": 26.91486,
+        "longitude": -81.52959,
+        "groundspeed": 342,
+        "altitude": 380,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "D"
+      },
+      {
+        "timestamp": 1588380799,
+        "latitude": 26.92954,
+        "longitude": -81.57718,
+        "groundspeed": 342,
+        "altitude": 380,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588380828,
+        "latitude": 26.94499,
+        "longitude": -81.62514,
+        "groundspeed": 342,
+        "altitude": 380,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588380858,
+        "latitude": 26.96129,
+        "longitude": -81.67580,
+        "groundspeed": 342,
+        "altitude": 380,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588380890,
+        "latitude": 26.97833,
+        "longitude": -81.73136,
+        "groundspeed": 342,
+        "altitude": 380,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588380920,
+        "latitude": 26.99318,
+        "longitude": -81.78212,
+        "groundspeed": 342,
+        "altitude": 380,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588380950,
+        "latitude": 27.00806,
+        "longitude": -81.83218,
+        "groundspeed": 343,
+        "altitude": 380,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588380974,
+        "latitude": 27.01934,
+        "longitude": -81.86985,
+        "groundspeed": 343,
+        "altitude": 380,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588381004,
+        "latitude": 27.03438,
+        "longitude": -81.92023,
+        "groundspeed": 343,
+        "altitude": 380,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588381034,
+        "latitude": 27.04941,
+        "longitude": -81.97100,
+        "groundspeed": 343,
+        "altitude": 380,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588381064,
+        "latitude": 27.06487,
+        "longitude": -82.02308,
+        "groundspeed": 345,
+        "altitude": 380,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588381094,
+        "latitude": 27.07993,
+        "longitude": -82.07383,
+        "groundspeed": 346,
+        "altitude": 380,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588381124,
+        "latitude": 27.09415,
+        "longitude": -82.12217,
+        "groundspeed": 346,
+        "altitude": 380,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588381154,
+        "latitude": 27.11021,
+        "longitude": -82.17689,
+        "groundspeed": 347,
+        "altitude": 380,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588381184,
+        "latitude": 27.12515,
+        "longitude": -82.22785,
+        "groundspeed": 348,
+        "altitude": 380,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588381214,
+        "latitude": 27.14042,
+        "longitude": -82.27967,
+        "groundspeed": 349,
+        "altitude": 380,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588381244,
+        "latitude": 27.15582,
+        "longitude": -82.33196,
+        "groundspeed": 349,
+        "altitude": 380,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588381274,
+        "latitude": 27.17075,
+        "longitude": -82.38274,
+        "groundspeed": 350,
+        "altitude": 380,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588381304,
+        "latitude": 27.18506,
+        "longitude": -82.43158,
+        "groundspeed": 351,
+        "altitude": 380,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588381334,
+        "latitude": 27.20089,
+        "longitude": -82.48577,
+        "groundspeed": 352,
+        "altitude": 380,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588381364,
+        "latitude": 27.21620,
+        "longitude": -82.53826,
+        "groundspeed": 353,
+        "altitude": 380,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588381394,
+        "latitude": 27.23096,
+        "longitude": -82.58925,
+        "groundspeed": 354,
+        "altitude": 380,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588381424,
+        "latitude": 27.24596,
+        "longitude": -82.64071,
+        "groundspeed": 355,
+        "altitude": 380,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588381454,
+        "latitude": 27.26207,
+        "longitude": -82.69611,
+        "groundspeed": 358,
+        "altitude": 380,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588381484,
+        "latitude": 27.27718,
+        "longitude": -82.74794,
+        "groundspeed": 359,
+        "altitude": 380,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588381514,
+        "latitude": 27.29283,
+        "longitude": -82.80209,
+        "groundspeed": 359,
+        "altitude": 380,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588381544,
+        "latitude": 27.30829,
+        "longitude": -82.85582,
+        "groundspeed": 362,
+        "altitude": 380,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588381574,
+        "latitude": 27.32346,
+        "longitude": -82.90838,
+        "groundspeed": 362,
+        "altitude": 380,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588381604,
+        "latitude": 27.33861,
+        "longitude": -82.96108,
+        "groundspeed": 364,
+        "altitude": 380,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588381634,
+        "latitude": 27.35433,
+        "longitude": -83.01586,
+        "groundspeed": 365,
+        "altitude": 380,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588381665,
+        "latitude": 27.36996,
+        "longitude": -83.07037,
+        "groundspeed": 366,
+        "altitude": 380,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588381695,
+        "latitude": 27.38659,
+        "longitude": -83.12837,
+        "groundspeed": 367,
+        "altitude": 380,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588381725,
+        "latitude": 27.40219,
+        "longitude": -83.18278,
+        "groundspeed": 367,
+        "altitude": 380,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588381755,
+        "latitude": 27.41666,
+        "longitude": -83.23332,
+        "groundspeed": 366,
+        "altitude": 380,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588381785,
+        "latitude": 27.43249,
+        "longitude": -83.28846,
+        "groundspeed": 365,
+        "altitude": 380,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588381815,
+        "latitude": 27.44794,
+        "longitude": -83.34255,
+        "groundspeed": 365,
+        "altitude": 380,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588381845,
+        "latitude": 27.46349,
+        "longitude": -83.39743,
+        "groundspeed": 366,
+        "altitude": 380,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588381875,
+        "latitude": 27.47946,
+        "longitude": -83.45373,
+        "groundspeed": 366,
+        "altitude": 380,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588381905,
+        "latitude": 27.49425,
+        "longitude": -83.50615,
+        "groundspeed": 366,
+        "altitude": 380,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588381935,
+        "latitude": 27.50981,
+        "longitude": -83.56123,
+        "groundspeed": 367,
+        "altitude": 380,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588381965,
+        "latitude": 27.52464,
+        "longitude": -83.61389,
+        "groundspeed": 368,
+        "altitude": 380,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588381995,
+        "latitude": 27.54026,
+        "longitude": -83.66923,
+        "groundspeed": 369,
+        "altitude": 380,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588382026,
+        "latitude": 27.55609,
+        "longitude": -83.72533,
+        "groundspeed": 370,
+        "altitude": 380,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588382056,
+        "latitude": 27.57202,
+        "longitude": -83.78200,
+        "groundspeed": 371,
+        "altitude": 380,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588382086,
+        "latitude": 27.58737,
+        "longitude": -83.83683,
+        "groundspeed": 372,
+        "altitude": 380,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588382116,
+        "latitude": 27.60268,
+        "longitude": -83.89144,
+        "groundspeed": 374,
+        "altitude": 380,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588382146,
+        "latitude": 27.61867,
+        "longitude": -83.94866,
+        "groundspeed": 375,
+        "altitude": 380,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588382176,
+        "latitude": 27.63434,
+        "longitude": -84.00500,
+        "groundspeed": 376,
+        "altitude": 380,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588382206,
+        "latitude": 27.64993,
+        "longitude": -84.06094,
+        "groundspeed": 377,
+        "altitude": 380,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588382236,
+        "latitude": 27.66525,
+        "longitude": -84.11566,
+        "groundspeed": 378,
+        "altitude": 380,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588382266,
+        "latitude": 27.68117,
+        "longitude": -84.17302,
+        "groundspeed": 379,
+        "altitude": 380,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588382296,
+        "latitude": 27.69677,
+        "longitude": -84.22938,
+        "groundspeed": 379,
+        "altitude": 380,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588382326,
+        "latitude": 27.71250,
+        "longitude": -84.28658,
+        "groundspeed": 379,
+        "altitude": 380,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588382356,
+        "latitude": 27.72796,
+        "longitude": -84.34262,
+        "groundspeed": 381,
+        "altitude": 380,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588382386,
+        "latitude": 27.74414,
+        "longitude": -84.40117,
+        "groundspeed": 381,
+        "altitude": 380,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588382416,
+        "latitude": 27.75989,
+        "longitude": -84.45814,
+        "groundspeed": 382,
+        "altitude": 380,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588382448,
+        "latitude": 27.77655,
+        "longitude": -84.51870,
+        "groundspeed": 383,
+        "altitude": 380,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588382478,
+        "latitude": 27.79234,
+        "longitude": -84.57640,
+        "groundspeed": 384,
+        "altitude": 380,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588382508,
+        "latitude": 27.80765,
+        "longitude": -84.63244,
+        "groundspeed": 386,
+        "altitude": 380,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588382539,
+        "latitude": 27.82441,
+        "longitude": -84.69360,
+        "groundspeed": 388,
+        "altitude": 380,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588382571,
+        "latitude": 27.84061,
+        "longitude": -84.75318,
+        "groundspeed": 390,
+        "altitude": 380,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588382602,
+        "latitude": 27.85744,
+        "longitude": -84.81549,
+        "groundspeed": 392,
+        "altitude": 380,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588382633,
+        "latitude": 27.87357,
+        "longitude": -84.87509,
+        "groundspeed": 394,
+        "altitude": 380,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588382664,
+        "latitude": 27.89014,
+        "longitude": -84.93588,
+        "groundspeed": 395,
+        "altitude": 380,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588382700,
+        "latitude": 27.90962,
+        "longitude": -85.00739,
+        "groundspeed": 397,
+        "altitude": 380,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588382730,
+        "latitude": 27.92537,
+        "longitude": -85.06621,
+        "groundspeed": 397,
+        "altitude": 380,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588382765,
+        "latitude": 27.94475,
+        "longitude": -85.13828,
+        "groundspeed": 398,
+        "altitude": 380,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588382795,
+        "latitude": 27.96098,
+        "longitude": -85.19829,
+        "groundspeed": 399,
+        "altitude": 380,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588382825,
+        "latitude": 27.97710,
+        "longitude": -85.25805,
+        "groundspeed": 399,
+        "altitude": 380,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588382855,
+        "latitude": 27.99303,
+        "longitude": -85.31755,
+        "groundspeed": 400,
+        "altitude": 380,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588382885,
+        "latitude": 28.00908,
+        "longitude": -85.37788,
+        "groundspeed": 400,
+        "altitude": 380,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588382915,
+        "latitude": 28.02529,
+        "longitude": -85.43879,
+        "groundspeed": 399,
+        "altitude": 380,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588382945,
+        "latitude": 28.04121,
+        "longitude": -85.49862,
+        "groundspeed": 399,
+        "altitude": 380,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588382975,
+        "latitude": 28.05693,
+        "longitude": -85.55798,
+        "groundspeed": 399,
+        "altitude": 380,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588383005,
+        "latitude": 28.07268,
+        "longitude": -85.61742,
+        "groundspeed": 399,
+        "altitude": 380,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588383035,
+        "latitude": 28.08888,
+        "longitude": -85.67841,
+        "groundspeed": 399,
+        "altitude": 380,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588383065,
+        "latitude": 28.10449,
+        "longitude": -85.73773,
+        "groundspeed": 398,
+        "altitude": 380,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588383096,
+        "latitude": 28.12016,
+        "longitude": -85.79724,
+        "groundspeed": 400,
+        "altitude": 380,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588383126,
+        "latitude": 28.13608,
+        "longitude": -85.85752,
+        "groundspeed": 400,
+        "altitude": 380,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588383156,
+        "latitude": 28.15182,
+        "longitude": -85.91742,
+        "groundspeed": 401,
+        "altitude": 380,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588383186,
+        "latitude": 28.16792,
+        "longitude": -85.97868,
+        "groundspeed": 401,
+        "altitude": 380,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588383216,
+        "latitude": 28.18389,
+        "longitude": -86.03964,
+        "groundspeed": 401,
+        "altitude": 380,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588383246,
+        "latitude": 28.19980,
+        "longitude": -86.10070,
+        "groundspeed": 402,
+        "altitude": 380,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588383276,
+        "latitude": 28.21550,
+        "longitude": -86.16119,
+        "groundspeed": 403,
+        "altitude": 380,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588383308,
+        "latitude": 28.23249,
+        "longitude": -86.22641,
+        "groundspeed": 404,
+        "altitude": 380,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588383340,
+        "latitude": 28.24911,
+        "longitude": -86.29039,
+        "groundspeed": 405,
+        "altitude": 380,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588383370,
+        "latitude": 28.26530,
+        "longitude": -86.35296,
+        "groundspeed": 406,
+        "altitude": 380,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588383401,
+        "latitude": 28.28128,
+        "longitude": -86.41501,
+        "groundspeed": 406,
+        "altitude": 380,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "C"
+      },
+      {
+        "timestamp": 1588383431,
+        "latitude": 28.29698,
+        "longitude": -86.47598,
+        "groundspeed": 407,
+        "altitude": 380,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "D"
+      },
+      {
+        "timestamp": 1588383461,
+        "latitude": 28.31282,
+        "longitude": -86.53741,
+        "groundspeed": 407,
+        "altitude": 380,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588383491,
+        "latitude": 28.32820,
+        "longitude": -86.59714,
+        "groundspeed": 407,
+        "altitude": 380,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588383521,
+        "latitude": 28.34426,
+        "longitude": -86.66005,
+        "groundspeed": 405,
+        "altitude": 380,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588383551,
+        "latitude": 28.36002,
+        "longitude": -86.72153,
+        "groundspeed": 405,
+        "altitude": 380,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588383581,
+        "latitude": 28.37582,
+        "longitude": -86.78343,
+        "groundspeed": 405,
+        "altitude": 380,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588383611,
+        "latitude": 28.39147,
+        "longitude": -86.84477,
+        "groundspeed": 405,
+        "altitude": 380,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588383641,
+        "latitude": 28.40698,
+        "longitude": -86.90603,
+        "groundspeed": 406,
+        "altitude": 380,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588383671,
+        "latitude": 28.42232,
+        "longitude": -86.96629,
+        "groundspeed": 406,
+        "altitude": 380,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588383702,
+        "latitude": 28.43779,
+        "longitude": -87.02746,
+        "groundspeed": 407,
+        "altitude": 380,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588383733,
+        "latitude": 28.45390,
+        "longitude": -87.09132,
+        "groundspeed": 408,
+        "altitude": 380,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588383764,
+        "latitude": 28.47006,
+        "longitude": -87.15549,
+        "groundspeed": 409,
+        "altitude": 380,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588383794,
+        "latitude": 28.48567,
+        "longitude": -87.21750,
+        "groundspeed": 409,
+        "altitude": 380,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588383827,
+        "latitude": 28.50334,
+        "longitude": -87.28786,
+        "groundspeed": 410,
+        "altitude": 380,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588383857,
+        "latitude": 28.51893,
+        "longitude": -87.35046,
+        "groundspeed": 409,
+        "altitude": 380,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588383888,
+        "latitude": 28.53457,
+        "longitude": -87.41310,
+        "groundspeed": 409,
+        "altitude": 380,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588383918,
+        "latitude": 28.54988,
+        "longitude": -87.47449,
+        "groundspeed": 409,
+        "altitude": 380,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588383948,
+        "latitude": 28.56555,
+        "longitude": -87.53748,
+        "groundspeed": 410,
+        "altitude": 380,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588383981,
+        "latitude": 28.58249,
+        "longitude": -87.60556,
+        "groundspeed": 411,
+        "altitude": 380,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588384019,
+        "latitude": 28.60167,
+        "longitude": -87.68321,
+        "groundspeed": 412,
+        "altitude": 380,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588384049,
+        "latitude": 28.61723,
+        "longitude": -87.74632,
+        "groundspeed": 412,
+        "altitude": 380,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588384079,
+        "latitude": 28.63270,
+        "longitude": -87.80893,
+        "groundspeed": 413,
+        "altitude": 380,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588384109,
+        "latitude": 28.64827,
+        "longitude": -87.87224,
+        "groundspeed": 413,
+        "altitude": 380,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588384139,
+        "latitude": 28.66360,
+        "longitude": -87.93478,
+        "groundspeed": 413,
+        "altitude": 380,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588384169,
+        "latitude": 28.67851,
+        "longitude": -87.99570,
+        "groundspeed": 414,
+        "altitude": 380,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588384200,
+        "latitude": 28.69433,
+        "longitude": -88.06048,
+        "groundspeed": 414,
+        "altitude": 380,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588384230,
+        "latitude": 28.70937,
+        "longitude": -88.12188,
+        "groundspeed": 414,
+        "altitude": 380,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588384260,
+        "latitude": 28.72515,
+        "longitude": -88.18672,
+        "groundspeed": 415,
+        "altitude": 380,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588384290,
+        "latitude": 28.74046,
+        "longitude": -88.24995,
+        "groundspeed": 415,
+        "altitude": 380,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588384320,
+        "latitude": 28.75612,
+        "longitude": -88.31455,
+        "groundspeed": 416,
+        "altitude": 380,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588384350,
+        "latitude": 28.77132,
+        "longitude": -88.37756,
+        "groundspeed": 416,
+        "altitude": 380,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588384380,
+        "latitude": 28.78632,
+        "longitude": -88.44005,
+        "groundspeed": 417,
+        "altitude": 380,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588384420,
+        "latitude": 28.80718,
+        "longitude": -88.52632,
+        "groundspeed": 417,
+        "altitude": 380,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588384450,
+        "latitude": 28.82259,
+        "longitude": -88.59074,
+        "groundspeed": 418,
+        "altitude": 380,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588384480,
+        "latitude": 28.83783,
+        "longitude": -88.65460,
+        "groundspeed": 418,
+        "altitude": 380,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588384510,
+        "latitude": 28.85238,
+        "longitude": -88.71562,
+        "groundspeed": 418,
+        "altitude": 380,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588384540,
+        "latitude": 28.86777,
+        "longitude": -88.78020,
+        "groundspeed": 418,
+        "altitude": 380,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588384570,
+        "latitude": 28.88296,
+        "longitude": -88.84423,
+        "groundspeed": 418,
+        "altitude": 380,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588384600,
+        "latitude": 28.89816,
+        "longitude": -88.90839,
+        "groundspeed": 418,
+        "altitude": 380,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588384629,
+        "latitude": 28.91481,
+        "longitude": -88.97132,
+        "groundspeed": 418,
+        "altitude": 380,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588384650,
+        "latitude": 28.93077,
+        "longitude": -89.00994,
+        "groundspeed": 419,
+        "altitude": 380,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588384680,
+        "latitude": 28.96161,
+        "longitude": -89.06970,
+        "groundspeed": 420,
+        "altitude": 380,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588384723,
+        "latitude": 29.00194,
+        "longitude": -89.14830,
+        "groundspeed": 420,
+        "altitude": 380,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588384755,
+        "latitude": 29.03421,
+        "longitude": -89.21038,
+        "groundspeed": 420,
+        "altitude": 380,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588384785,
+        "latitude": 29.06346,
+        "longitude": -89.26730,
+        "groundspeed": 424,
+        "altitude": 381,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "C"
+      },
+      {
+        "timestamp": 1588384815,
+        "latitude": 29.09290,
+        "longitude": -89.32466,
+        "groundspeed": 422,
+        "altitude": 386,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "C"
+      },
+      {
+        "timestamp": 1588384845,
+        "latitude": 29.12279,
+        "longitude": -89.38271,
+        "groundspeed": 420,
+        "altitude": 391,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "C"
+      },
+      {
+        "timestamp": 1588384875,
+        "latitude": 29.15194,
+        "longitude": -89.43964,
+        "groundspeed": 416,
+        "altitude": 397,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "C"
+      },
+      {
+        "timestamp": 1588384905,
+        "latitude": 29.18099,
+        "longitude": -89.49651,
+        "groundspeed": 415,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "C"
+      },
+      {
+        "timestamp": 1588384935,
+        "latitude": 29.20944,
+        "longitude": -89.55215,
+        "groundspeed": 413,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588384965,
+        "latitude": 29.23860,
+        "longitude": -89.60935,
+        "groundspeed": 414,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588384995,
+        "latitude": 29.26648,
+        "longitude": -89.66412,
+        "groundspeed": 414,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588385027,
+        "latitude": 29.29816,
+        "longitude": -89.72635,
+        "groundspeed": 414,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588385057,
+        "latitude": 29.32712,
+        "longitude": -89.78334,
+        "groundspeed": 414,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588385087,
+        "latitude": 29.35597,
+        "longitude": -89.84017,
+        "groundspeed": 414,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588385117,
+        "latitude": 29.38489,
+        "longitude": -89.89725,
+        "groundspeed": 414,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588385147,
+        "latitude": 29.41365,
+        "longitude": -89.95410,
+        "groundspeed": 414,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588385177,
+        "latitude": 29.44263,
+        "longitude": -90.01136,
+        "groundspeed": 414,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588385207,
+        "latitude": 29.47176,
+        "longitude": -90.06899,
+        "groundspeed": 414,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588385225,
+        "latitude": 29.48895,
+        "longitude": -90.10310,
+        "groundspeed": 414,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588385256,
+        "latitude": 29.51775,
+        "longitude": -90.16046,
+        "groundspeed": 414,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588385286,
+        "latitude": 29.54671,
+        "longitude": -90.21822,
+        "groundspeed": 413,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588385316,
+        "latitude": 29.57648,
+        "longitude": -90.27714,
+        "groundspeed": 413,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588385344,
+        "latitude": 29.60238,
+        "longitude": -90.32873,
+        "groundspeed": 413,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588385360,
+        "latitude": 29.61765,
+        "longitude": -90.35926,
+        "groundspeed": 413,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588385376,
+        "latitude": 29.63242,
+        "longitude": -90.38885,
+        "groundspeed": 412,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588385392,
+        "latitude": 29.64848,
+        "longitude": -90.42107,
+        "groundspeed": 411,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588385421,
+        "latitude": 29.67519,
+        "longitude": -90.47473,
+        "groundspeed": 412,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588385465,
+        "latitude": 29.71588,
+        "longitude": -90.55632,
+        "groundspeed": 411,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588385481,
+        "latitude": 29.73138,
+        "longitude": -90.58734,
+        "groundspeed": 410,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588385525,
+        "latitude": 29.77258,
+        "longitude": -90.67032,
+        "groundspeed": 410,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588385541,
+        "latitude": 29.78815,
+        "longitude": -90.70159,
+        "groundspeed": 411,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588385571,
+        "latitude": 29.81625,
+        "longitude": -90.75811,
+        "groundspeed": 412,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588385615,
+        "latitude": 29.85718,
+        "longitude": -90.84082,
+        "groundspeed": 411,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588385632,
+        "latitude": 29.87457,
+        "longitude": -90.87600,
+        "groundspeed": 412,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588385662,
+        "latitude": 29.90320,
+        "longitude": -90.93400,
+        "groundspeed": 412,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588385692,
+        "latitude": 29.92946,
+        "longitude": -90.98734,
+        "groundspeed": 413,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588385722,
+        "latitude": 29.95795,
+        "longitude": -91.04540,
+        "groundspeed": 414,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588385752,
+        "latitude": 29.98645,
+        "longitude": -91.10348,
+        "groundspeed": 414,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588385782,
+        "latitude": 30.01483,
+        "longitude": -91.16109,
+        "groundspeed": 415,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588385812,
+        "latitude": 30.04385,
+        "longitude": -91.22018,
+        "groundspeed": 416,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588385842,
+        "latitude": 30.07154,
+        "longitude": -91.27661,
+        "groundspeed": 416,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588385872,
+        "latitude": 30.10100,
+        "longitude": -91.33698,
+        "groundspeed": 416,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588385902,
+        "latitude": 30.12847,
+        "longitude": -91.39323,
+        "groundspeed": 414,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588385932,
+        "latitude": 30.15617,
+        "longitude": -91.45020,
+        "groundspeed": 413,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588385962,
+        "latitude": 30.18457,
+        "longitude": -91.50857,
+        "groundspeed": 412,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588385992,
+        "latitude": 30.21343,
+        "longitude": -91.56813,
+        "groundspeed": 412,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588386022,
+        "latitude": 30.24117,
+        "longitude": -91.62537,
+        "groundspeed": 411,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588386052,
+        "latitude": 30.26917,
+        "longitude": -91.68301,
+        "groundspeed": 411,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588386082,
+        "latitude": 30.29604,
+        "longitude": -91.73848,
+        "groundspeed": 410,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588386112,
+        "latitude": 30.32431,
+        "longitude": -91.79687,
+        "groundspeed": 410,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588386142,
+        "latitude": 30.35108,
+        "longitude": -91.85229,
+        "groundspeed": 410,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588386172,
+        "latitude": 30.37939,
+        "longitude": -91.91130,
+        "groundspeed": 410,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588386203,
+        "latitude": 30.40755,
+        "longitude": -91.96978,
+        "groundspeed": 410,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588386233,
+        "latitude": 30.43497,
+        "longitude": -92.02687,
+        "groundspeed": 412,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588386263,
+        "latitude": 30.46318,
+        "longitude": -92.08559,
+        "groundspeed": 412,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588386293,
+        "latitude": 30.49111,
+        "longitude": -92.14409,
+        "groundspeed": 412,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588386323,
+        "latitude": 30.51862,
+        "longitude": -92.20150,
+        "groundspeed": 411,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588386354,
+        "latitude": 30.54618,
+        "longitude": -92.25928,
+        "groundspeed": 410,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588386384,
+        "latitude": 30.57495,
+        "longitude": -92.31989,
+        "groundspeed": 409,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588386416,
+        "latitude": 30.60379,
+        "longitude": -92.38069,
+        "groundspeed": 408,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588386457,
+        "latitude": 30.63982,
+        "longitude": -92.45598,
+        "groundspeed": 407,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588386474,
+        "latitude": 30.65565,
+        "longitude": -92.48948,
+        "groundspeed": 408,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588386504,
+        "latitude": 30.68225,
+        "longitude": -92.54592,
+        "groundspeed": 406,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588386534,
+        "latitude": 30.71112,
+        "longitude": -92.60706,
+        "groundspeed": 406,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588386564,
+        "latitude": 30.73653,
+        "longitude": -92.66072,
+        "groundspeed": 405,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588386588,
+        "latitude": 30.75824,
+        "longitude": -92.70684,
+        "groundspeed": 405,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588386608,
+        "latitude": 30.77666,
+        "longitude": -92.74581,
+        "groundspeed": 404,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588386637,
+        "latitude": 30.80173,
+        "longitude": -92.79904,
+        "groundspeed": 404,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588386667,
+        "latitude": 30.82878,
+        "longitude": -92.85645,
+        "groundspeed": 403,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588386685,
+        "latitude": 30.84635,
+        "longitude": -92.89385,
+        "groundspeed": 403,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588386715,
+        "latitude": 30.87298,
+        "longitude": -92.95071,
+        "groundspeed": 403,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588386745,
+        "latitude": 30.89960,
+        "longitude": -93.00778,
+        "groundspeed": 403,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588386775,
+        "latitude": 30.92464,
+        "longitude": -93.06163,
+        "groundspeed": 402,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588386807,
+        "latitude": 30.95431,
+        "longitude": -93.12512,
+        "groundspeed": 403,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588386837,
+        "latitude": 30.98098,
+        "longitude": -93.18235,
+        "groundspeed": 403,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588386867,
+        "latitude": 31.00770,
+        "longitude": -93.23948,
+        "groundspeed": 404,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588386897,
+        "latitude": 31.03428,
+        "longitude": -93.29661,
+        "groundspeed": 405,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588386927,
+        "latitude": 31.06119,
+        "longitude": -93.35487,
+        "groundspeed": 405,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588386958,
+        "latitude": 31.08670,
+        "longitude": -93.41005,
+        "groundspeed": 406,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588386988,
+        "latitude": 31.11392,
+        "longitude": -93.46888,
+        "groundspeed": 406,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588387018,
+        "latitude": 31.14065,
+        "longitude": -93.52661,
+        "groundspeed": 406,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588387048,
+        "latitude": 31.16840,
+        "longitude": -93.58677,
+        "groundspeed": 406,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588387079,
+        "latitude": 31.19577,
+        "longitude": -93.64638,
+        "groundspeed": 407,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588387109,
+        "latitude": 31.22214,
+        "longitude": -93.70395,
+        "groundspeed": 406,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588387139,
+        "latitude": 31.24887,
+        "longitude": -93.76212,
+        "groundspeed": 407,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588387170,
+        "latitude": 31.27598,
+        "longitude": -93.82126,
+        "groundspeed": 407,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588387200,
+        "latitude": 31.30302,
+        "longitude": -93.88049,
+        "groundspeed": 407,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588387230,
+        "latitude": 31.32935,
+        "longitude": -93.93801,
+        "groundspeed": 407,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588387260,
+        "latitude": 31.35549,
+        "longitude": -93.99523,
+        "groundspeed": 408,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588387290,
+        "latitude": 31.38313,
+        "longitude": -94.05595,
+        "groundspeed": 408,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588387320,
+        "latitude": 31.40817,
+        "longitude": -94.11115,
+        "groundspeed": 409,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588387350,
+        "latitude": 31.43491,
+        "longitude": -94.17019,
+        "groundspeed": 410,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588387380,
+        "latitude": 31.46169,
+        "longitude": -94.22936,
+        "groundspeed": 410,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588387410,
+        "latitude": 31.48854,
+        "longitude": -94.28906,
+        "groundspeed": 411,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588387437,
+        "latitude": 31.51130,
+        "longitude": -94.33954,
+        "groundspeed": 412,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588387467,
+        "latitude": 31.53969,
+        "longitude": -94.40223,
+        "groundspeed": 411,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588387483,
+        "latitude": 31.55338,
+        "longitude": -94.43250,
+        "groundspeed": 410,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588387513,
+        "latitude": 31.57955,
+        "longitude": -94.49061,
+        "groundspeed": 409,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588387543,
+        "latitude": 31.60588,
+        "longitude": -94.54899,
+        "groundspeed": 409,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588387563,
+        "latitude": 31.62373,
+        "longitude": -94.58877,
+        "groundspeed": 409,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588387603,
+        "latitude": 31.65894,
+        "longitude": -94.66763,
+        "groundspeed": 407,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588387622,
+        "latitude": 31.67573,
+        "longitude": -94.70511,
+        "groundspeed": 406,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588387659,
+        "latitude": 31.70789,
+        "longitude": -94.77735,
+        "groundspeed": 405,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588387687,
+        "latitude": 31.73201,
+        "longitude": -94.83135,
+        "groundspeed": 404,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588387717,
+        "latitude": 31.75887,
+        "longitude": -94.89161,
+        "groundspeed": 403,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588387747,
+        "latitude": 31.78452,
+        "longitude": -94.94934,
+        "groundspeed": 403,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588387792,
+        "latitude": 31.82204,
+        "longitude": -95.03348,
+        "groundspeed": 403,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588387822,
+        "latitude": 31.84799,
+        "longitude": -95.09216,
+        "groundspeed": 404,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588387852,
+        "latitude": 31.87381,
+        "longitude": -95.15072,
+        "groundspeed": 405,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588387882,
+        "latitude": 31.89935,
+        "longitude": -95.20895,
+        "groundspeed": 407,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588387912,
+        "latitude": 31.92525,
+        "longitude": -95.26806,
+        "groundspeed": 409,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588387942,
+        "latitude": 31.95262,
+        "longitude": -95.33039,
+        "groundspeed": 411,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588387972,
+        "latitude": 31.97781,
+        "longitude": -95.38786,
+        "groundspeed": 413,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588388002,
+        "latitude": 32.00455,
+        "longitude": -95.44878,
+        "groundspeed": 414,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588388032,
+        "latitude": 32.03069,
+        "longitude": -95.50835,
+        "groundspeed": 416,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588388062,
+        "latitude": 32.05664,
+        "longitude": -95.56776,
+        "groundspeed": 417,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588388092,
+        "latitude": 32.08334,
+        "longitude": -95.62876,
+        "groundspeed": 418,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588388122,
+        "latitude": 32.11034,
+        "longitude": -95.69075,
+        "groundspeed": 419,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588388152,
+        "latitude": 32.13579,
+        "longitude": -95.74937,
+        "groundspeed": 419,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588388182,
+        "latitude": 32.16339,
+        "longitude": -95.81298,
+        "groundspeed": 420,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588388209,
+        "latitude": 32.18673,
+        "longitude": -95.86692,
+        "groundspeed": 420,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588388238,
+        "latitude": 32.21126,
+        "longitude": -95.92376,
+        "groundspeed": 416,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588388281,
+        "latitude": 32.24916,
+        "longitude": -96.01120,
+        "groundspeed": 411,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588388302,
+        "latitude": 32.26796,
+        "longitude": -96.05470,
+        "groundspeed": 408,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588388329,
+        "latitude": 32.29054,
+        "longitude": -96.10711,
+        "groundspeed": 408,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588388360,
+        "latitude": 32.31738,
+        "longitude": -96.16948,
+        "groundspeed": 408,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588388376,
+        "latitude": 32.33052,
+        "longitude": -96.20008,
+        "groundspeed": 408,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588388415,
+        "latitude": 32.36403,
+        "longitude": -96.27880,
+        "groundspeed": 407,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588388444,
+        "latitude": 32.38853,
+        "longitude": -96.33620,
+        "groundspeed": 407,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588388471,
+        "latitude": 32.41031,
+        "longitude": -96.38729,
+        "groundspeed": 407,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588388488,
+        "latitude": 32.42526,
+        "longitude": -96.42218,
+        "groundspeed": 407,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588388505,
+        "latitude": 32.44021,
+        "longitude": -96.45738,
+        "groundspeed": 406,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588388539,
+        "latitude": 32.46844,
+        "longitude": -96.52396,
+        "groundspeed": 406,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588388561,
+        "latitude": 32.48783,
+        "longitude": -96.56943,
+        "groundspeed": 407,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588388578,
+        "latitude": 32.50086,
+        "longitude": -96.60004,
+        "groundspeed": 406,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588388604,
+        "latitude": 32.52361,
+        "longitude": -96.65365,
+        "groundspeed": 406,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588388626,
+        "latitude": 32.54150,
+        "longitude": -96.69605,
+        "groundspeed": 408,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588388660,
+        "latitude": 32.57121,
+        "longitude": -96.76648,
+        "groundspeed": 408,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588388680,
+        "latitude": 32.58774,
+        "longitude": -96.80570,
+        "groundspeed": 410,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588388720,
+        "latitude": 32.62184,
+        "longitude": -96.88651,
+        "groundspeed": 412,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588388759,
+        "latitude": 32.65453,
+        "longitude": -96.96418,
+        "groundspeed": 416,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588388788,
+        "latitude": 32.67995,
+        "longitude": -97.02492,
+        "groundspeed": 416,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "C"
+      },
+      {
+        "timestamp": 1588388810,
+        "latitude": 32.69811,
+        "longitude": -97.06796,
+        "groundspeed": 415,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "D"
+      },
+      {
+        "timestamp": 1588388849,
+        "latitude": 32.73111,
+        "longitude": -97.14683,
+        "groundspeed": 410,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588388879,
+        "latitude": 32.75676,
+        "longitude": -97.20882,
+        "groundspeed": 411,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588388909,
+        "latitude": 32.78209,
+        "longitude": -97.26953,
+        "groundspeed": 410,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588388939,
+        "latitude": 32.80625,
+        "longitude": -97.32766,
+        "groundspeed": 410,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588388969,
+        "latitude": 32.83145,
+        "longitude": -97.38864,
+        "groundspeed": 410,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588388999,
+        "latitude": 32.85718,
+        "longitude": -97.45093,
+        "groundspeed": 408,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588389029,
+        "latitude": 32.88166,
+        "longitude": -97.51005,
+        "groundspeed": 408,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588389045,
+        "latitude": 32.89563,
+        "longitude": -97.54380,
+        "groundspeed": 407,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588389075,
+        "latitude": 32.92081,
+        "longitude": -97.60529,
+        "groundspeed": 407,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588389101,
+        "latitude": 32.94159,
+        "longitude": -97.65604,
+        "groundspeed": 405,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588389131,
+        "latitude": 32.96671,
+        "longitude": -97.71728,
+        "groundspeed": 405,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588389150,
+        "latitude": 32.98133,
+        "longitude": -97.75287,
+        "groundspeed": 405,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588389180,
+        "latitude": 33.00614,
+        "longitude": -97.81330,
+        "groundspeed": 406,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588389198,
+        "latitude": 33.02156,
+        "longitude": -97.85083,
+        "groundspeed": 407,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588389223,
+        "latitude": 33.04175,
+        "longitude": -97.90032,
+        "groundspeed": 410,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588389251,
+        "latitude": 33.06487,
+        "longitude": -97.95707,
+        "groundspeed": 409,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588389281,
+        "latitude": 33.08947,
+        "longitude": -98.01699,
+        "groundspeed": 410,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588389307,
+        "latitude": 33.11115,
+        "longitude": -98.07039,
+        "groundspeed": 411,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588389323,
+        "latitude": 33.12392,
+        "longitude": -98.10220,
+        "groundspeed": 414,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588389366,
+        "latitude": 33.16003,
+        "longitude": -98.19174,
+        "groundspeed": 417,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588389394,
+        "latitude": 33.18132,
+        "longitude": -98.24453,
+        "groundspeed": 418,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588389412,
+        "latitude": 33.19885,
+        "longitude": -98.28787,
+        "groundspeed": 419,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588389437,
+        "latitude": 33.22009,
+        "longitude": -98.34033,
+        "groundspeed": 417,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588389467,
+        "latitude": 33.24495,
+        "longitude": -98.40185,
+        "groundspeed": 417,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588389512,
+        "latitude": 33.28258,
+        "longitude": -98.49567,
+        "groundspeed": 416,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588389552,
+        "latitude": 33.31516,
+        "longitude": -98.57690,
+        "groundspeed": 417,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588389582,
+        "latitude": 33.33969,
+        "longitude": -98.63845,
+        "groundspeed": 417,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588389612,
+        "latitude": 33.36566,
+        "longitude": -98.70397,
+        "groundspeed": 417,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588389642,
+        "latitude": 33.39076,
+        "longitude": -98.76709,
+        "groundspeed": 415,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588389672,
+        "latitude": 33.41487,
+        "longitude": -98.82806,
+        "groundspeed": 413,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588389702,
+        "latitude": 33.43912,
+        "longitude": -98.88889,
+        "groundspeed": 411,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588389740,
+        "latitude": 33.47083,
+        "longitude": -98.96838,
+        "groundspeed": 408,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588389770,
+        "latitude": 33.49331,
+        "longitude": -99.02527,
+        "groundspeed": 406,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588389800,
+        "latitude": 33.51780,
+        "longitude": -99.08737,
+        "groundspeed": 404,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588389830,
+        "latitude": 33.54167,
+        "longitude": -99.14825,
+        "groundspeed": 402,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588389860,
+        "latitude": 33.56506,
+        "longitude": -99.20778,
+        "groundspeed": 402,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588389890,
+        "latitude": 33.58882,
+        "longitude": -99.26865,
+        "groundspeed": 404,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588389920,
+        "latitude": 33.61286,
+        "longitude": -99.32985,
+        "groundspeed": 411,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588389950,
+        "latitude": 33.63799,
+        "longitude": -99.39370,
+        "groundspeed": 413,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588389968,
+        "latitude": 33.65280,
+        "longitude": -99.43159,
+        "groundspeed": 413,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588389984,
+        "latitude": 33.66463,
+        "longitude": -99.46209,
+        "groundspeed": 413,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588390002,
+        "latitude": 33.67717,
+        "longitude": -99.49426,
+        "groundspeed": 413,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "D"
+      },
+      {
+        "timestamp": 1588390034,
+        "latitude": 33.70116,
+        "longitude": -99.55598,
+        "groundspeed": 413,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "C"
+      },
+      {
+        "timestamp": 1588390066,
+        "latitude": 33.73059,
+        "longitude": -99.63176,
+        "groundspeed": 411,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588390086,
+        "latitude": 33.74679,
+        "longitude": -99.67375,
+        "groundspeed": 412,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588390115,
+        "latitude": 33.77014,
+        "longitude": -99.73434,
+        "groundspeed": 410,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588390145,
+        "latitude": 33.79427,
+        "longitude": -99.79711,
+        "groundspeed": 410,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588390175,
+        "latitude": 33.81806,
+        "longitude": -99.85926,
+        "groundspeed": 408,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588390206,
+        "latitude": 33.84264,
+        "longitude": -99.92271,
+        "groundspeed": 405,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588390236,
+        "latitude": 33.86508,
+        "longitude": -99.98051,
+        "groundspeed": 405,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588390266,
+        "latitude": 33.88916,
+        "longitude": -100.04296,
+        "groundspeed": 405,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588390296,
+        "latitude": 33.91370,
+        "longitude": -100.10759,
+        "groundspeed": 405,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588390326,
+        "latitude": 33.93581,
+        "longitude": -100.16650,
+        "groundspeed": 404,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588390356,
+        "latitude": 33.95911,
+        "longitude": -100.22730,
+        "groundspeed": 404,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588390399,
+        "latitude": 33.99298,
+        "longitude": -100.31594,
+        "groundspeed": 409,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588390430,
+        "latitude": 34.01711,
+        "longitude": -100.37956,
+        "groundspeed": 411,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588390457,
+        "latitude": 34.03928,
+        "longitude": -100.43856,
+        "groundspeed": 411,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588390487,
+        "latitude": 34.06157,
+        "longitude": -100.49715,
+        "groundspeed": 413,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588390517,
+        "latitude": 34.08549,
+        "longitude": -100.56055,
+        "groundspeed": 415,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588390547,
+        "latitude": 34.10957,
+        "longitude": -100.62469,
+        "groundspeed": 415,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588390577,
+        "latitude": 34.13350,
+        "longitude": -100.68821,
+        "groundspeed": 417,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588390607,
+        "latitude": 34.15691,
+        "longitude": -100.75023,
+        "groundspeed": 417,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588390637,
+        "latitude": 34.18140,
+        "longitude": -100.81535,
+        "groundspeed": 420,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588390671,
+        "latitude": 34.20845,
+        "longitude": -100.88762,
+        "groundspeed": 422,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588390704,
+        "latitude": 34.23540,
+        "longitude": -100.96018,
+        "groundspeed": 423,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588390735,
+        "latitude": 34.26072,
+        "longitude": -101.02839,
+        "groundspeed": 423,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588390765,
+        "latitude": 34.28274,
+        "longitude": -101.08801,
+        "groundspeed": 424,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588390795,
+        "latitude": 34.30784,
+        "longitude": -101.15599,
+        "groundspeed": 425,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588390825,
+        "latitude": 34.33214,
+        "longitude": -101.22162,
+        "groundspeed": 423,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588390857,
+        "latitude": 34.35727,
+        "longitude": -101.28985,
+        "groundspeed": 424,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588390887,
+        "latitude": 34.38171,
+        "longitude": -101.35611,
+        "groundspeed": 424,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588390909,
+        "latitude": 34.39861,
+        "longitude": -101.40215,
+        "groundspeed": 423,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588390932,
+        "latitude": 34.41682,
+        "longitude": -101.45185,
+        "groundspeed": 424,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588390962,
+        "latitude": 34.44012,
+        "longitude": -101.51547,
+        "groundspeed": 424,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588391000,
+        "latitude": 34.47063,
+        "longitude": -101.59853,
+        "groundspeed": 424,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588391023,
+        "latitude": 34.48883,
+        "longitude": -101.64831,
+        "groundspeed": 424,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588391053,
+        "latitude": 34.51282,
+        "longitude": -101.71428,
+        "groundspeed": 424,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      },
+      {
+        "timestamp": 1588391084,
+        "latitude": 34.53678,
+        "longitude": -101.78049,
+        "groundspeed": 425,
+        "altitude": 400,
+        "altitudeStatus": "",
+        "updateType": "TA",
+        "altitudeChange": "-"
+      }
+    ]
+  }
+}

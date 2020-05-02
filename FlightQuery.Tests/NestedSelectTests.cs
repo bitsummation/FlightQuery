@@ -86,6 +86,42 @@ join GetFlightId f on f.ident = a.ident and f.departureTime = a.departureTime
         }
 
         [Test]
+        public void TestNestedSelectJoinInvalidSelectArgInner()
+        {
+            string code = @"
+select a.ident, f.faFlightID
+from (
+    select
+        blah,
+        case
+            when actual_ident != ''
+                then actual_ident
+            else
+                ident
+            end as ident
+    from airlineflightschedules
+    where departuretime > '2020-1-21 9:15'
+) a
+join GetFlightId f on f.ident = a.ident and f.departureTime = a.departureTime 
+";
+
+            var mock = new Mock<IHttpExecutorRaw>();
+            mock.Setup(x => x.GetAirlineFlightSchedule(It.IsAny<HttpExecuteArg>())).Returns(() =>
+            {
+                return TestHelper.LoadJson("FlightQuery.Tests.AirlineFlightSchedule.json");
+            });
+            mock.Setup(x => x.GetFlightID(It.IsAny<HttpExecuteArg>())).Returns<HttpExecuteArg>((args) =>
+            {
+                return TestHelper.LoadJson("FlightQuery.Tests.GetFlightId.json");
+            });
+
+            var context = RunContext.CreateRunContext(code, new HttpExecutor(mock.Object));
+            var result = context.Run();
+
+            Assert.IsTrue(context.Errors.Count == 2);
+        }
+
+        [Test]
         public void TestNestedSelectInnerError()
         {
             string code = @"
