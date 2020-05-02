@@ -1,0 +1,67 @@
+{
+  "ArrivedResult": {
+    "next_offset": 5,
+    "arrivals": [
+      {
+        "ident": "UAL2343",
+        "aircrafttype": "B739",
+        "actualdeparturetime": 1588379960,
+        "actualarrivaltime": 1588386014,
+        "origin": "KDEN",
+        "destination": "KAUS",
+        "originName": "Denver Intl",
+        "originCity": "Denver, CO",
+        "destinationName": "Austin-Bergstrom Intl",
+        "destinationCity": "Austin, TX"
+      },
+      {
+        "ident": "ASH6058",
+        "aircrafttype": "E75L",
+        "actualdeparturetime": 1588383960,
+        "actualarrivaltime": 1588385640,
+        "origin": "KIAH",
+        "destination": "KAUS",
+        "originName": "Houston Bush Int'ctl",
+        "originCity": "Houston, TX",
+        "destinationName": "Austin-Bergstrom Intl",
+        "destinationCity": "Austin, TX"
+      },
+      {
+        "ident": "AAL2707",
+        "aircrafttype": "A321",
+        "actualdeparturetime": 1588382901,
+        "actualarrivaltime": 1588384800,
+        "origin": "KDFW",
+        "destination": "KAUS",
+        "originName": "Dallas-Fort Worth Intl",
+        "originCity": "Dallas-Fort Worth, TX",
+        "destinationName": "Austin-Bergstrom Intl",
+        "destinationCity": "Austin, TX"
+      },
+      {
+        "ident": "DAL1837",
+        "aircrafttype": "A319",
+        "actualdeparturetime": 1588377463,
+        "actualarrivaltime": 1588384260,
+        "origin": "KATL",
+        "destination": "KAUS",
+        "originName": "Hartsfield-Jackson Intl",
+        "originCity": "Atlanta, GA",
+        "destinationName": "Austin-Bergstrom Intl",
+        "destinationCity": "Austin, TX"
+      },
+      {
+        "ident": "UPS301",
+        "aircrafttype": "A306",
+        "actualdeparturetime": 1588380167,
+        "actualarrivaltime": 1588383355,
+        "origin": "MMMY",
+        "destination": "KAUS",
+        "originName": "General Mariano Escobedo Int'l",
+        "originCity": "Monterrey, Nuevo Leon",
+        "destinationName": "Austin-Bergstrom Intl",
+        "destinationCity": "Austin, TX"
+      }
+    ]
+  }
+}

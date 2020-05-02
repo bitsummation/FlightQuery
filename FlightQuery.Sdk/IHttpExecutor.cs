@@ -13,6 +13,6 @@ namespace FlightQuery.Sdk
         ApiExecuteResult<InboundFlightInfo> GetInboundFlightInfo(HttpExecuteArg args);
         ApiExecuteResult<InFlightInfo> GetInFlightInfo(HttpExecuteArg args);
         ApiExecuteResult<IEnumerable<Scheduled>> GetScheduled(HttpExecuteArg args);
-
+        ApiExecuteResult<IEnumerable<Arrived>> GetArrived(HttpExecuteArg args);
     }
 }

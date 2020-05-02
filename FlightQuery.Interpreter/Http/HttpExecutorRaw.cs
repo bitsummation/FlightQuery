@@ -99,5 +99,10 @@ namespace FlightQuery.Interpreter.Http
         {
             return Task.Run(async () => await ExecuteInternal(args)).Result;
         }
+
+        public ExecuteResult GetArrived(HttpExecuteArg args)
+        {
+            return Task.Run(async () => await ExecuteInternal(args)).Result;
+        }
     }
 }

@@ -10,5 +10,6 @@
         ExecuteResult GetInboundFlightInfo(HttpExecuteArg args);
         ExecuteResult GetInFlightInfo(HttpExecuteArg args);
         ExecuteResult GetScheduled(HttpExecuteArg args);
+        ExecuteResult GetArrived(HttpExecuteArg args);
     }
 }

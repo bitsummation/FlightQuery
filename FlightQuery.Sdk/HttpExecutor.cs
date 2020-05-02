@@ -72,6 +72,15 @@ namespace FlightQuery.Sdk
                );
         }
 
+        public ApiExecuteResult<IEnumerable<Arrived>> GetArrived(HttpExecuteArg args)
+        {
+            return ParseFindResult(
+              () => _raw.GetArrived(args),
+              () => _empty.GetArrived(args).Data,
+              (dynamic json) => json.ArrivedResult.arrivals
+              );
+        }
+
         public ApiExecuteResult<AirportInfo> AirportInfo(HttpExecuteArg args)
         {
             return ParseFindResult(
@@ -123,5 +132,7 @@ namespace FlightQuery.Sdk
                 (dynamic json) => json.InFlightInfoResult
                 );
         }
+
+        
     }
 }
