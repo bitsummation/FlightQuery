@@ -21,7 +21,7 @@ namespace FlightQuery.Sdk
         {
             if(error.StartsWith("NO_DATA"))
                 return new ApiExecuteError(ApiExecuteErrorType.NoData, error);
-            if(error.StartsWith("INVALID_ARGUMENT"))
+            if(error.StartsWith("INVALID_ARGUMENT") || error.StartsWith("INVALID"))
                 return new ApiExecuteError(ApiExecuteErrorType.InvalidArgument, error);
 
             return new ApiExecuteError(ApiExecuteErrorType.Fail, error);

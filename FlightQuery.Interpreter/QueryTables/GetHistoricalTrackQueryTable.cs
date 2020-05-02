@@ -20,6 +20,7 @@ namespace FlightQuery.Interpreter.QueryTables
 
         protected override ExecutedTable ExecuteCore(HttpExecuteArg args)
         {
+            //{ "error":"INVALID: invalid {faFlightID}"}
             var result = HttpExecutor.GetHistoricalTrack(args);
             if (result.Error != null && result.Error.Type != ApiExecuteErrorType.NoData)
                 Errors.Add(result.Error);

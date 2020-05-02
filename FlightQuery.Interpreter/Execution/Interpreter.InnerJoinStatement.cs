@@ -67,15 +67,16 @@ namespace FlightQuery.Interpreter.Execution
                     foreach (var e in table.Errors)
                         Errors.Add(e);
 
-                    _scope.RemoveTable(tableVariable);
-                    _scope.AddTable(tableVariable, executeTable);
+                    _scope.RemoveTable(tableVariable); //remove query table
+                    _scope.AddTable(tableVariable, executeTable); // add execute table
                     var arg = new QueryPhaseArgs();
                     VisitChild(statement.BooleanExpression, arg);
                     if (arg.RowResult) //row passed join. If didn't row needs to be removed from the left joining result
                     {
+                        Array.ForEach(executedTables, (x) => x.Rows[x.RowIndex].Expand = executeTable.Rows.Length);
                         rightTableRows.AddRange(executeTable.Rows);
                     }
-                    else
+                    else //flag row as unmatching for all executed tables
                     {
                         Array.ForEach(executedTables, (x) => x.Rows[x.RowIndex].Match = false);
                     }
@@ -84,19 +85,22 @@ namespace FlightQuery.Interpreter.Execution
                 }
             }
 
-
             var returnTable = _scope.TableLookupAnyLevel(tableName);
             var returnExecuteTable = new ExecutedTable(returnTable.Create().Descriptor) { Rows = rightTableRows.ToArray() };
             _scope.AddTable(tableVariable, returnExecuteTable);
 
-            //remove rows that didn't match through all executed tables
             executedTables = _scope.FetchAllExecutedTablesSameLevel();
             Array.ForEach(executedTables, (e) =>
             {
                 var joinedRows = new List<Row>();
+
+                //Add matched rows
                 Array.ForEach(e.Rows, r => {
                     if (r.Match)
-                        joinedRows.Add(r);
+                    {
+                        for(int x = 0; x < r.Expand; x++)
+                            joinedRows.Add(r);
+                    }
                 });
 
                 e.Rows = joinedRows.ToArray();

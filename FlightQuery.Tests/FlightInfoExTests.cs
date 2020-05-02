@@ -210,40 +210,5 @@ where faFlightID = 'some-flight-number'
             Assert.AreEqual(result.First().Rows[0].Values[0], "B739");
         }
 
-       
-
-        [Test]
-        public void TestJoin()
-        {
-            string code = @"
-select a.ident, i.faFlightID, i.route
-from AirlineFlightSchedules a
-join GetFlightId f on f.ident = a.ident and f.departureTime = a.departureTime 
-join FlightInfoEx i on i.faFlightID = f.faFlightID
-where a.departuretime > '2020-1-21 9:15' and a.ident = 'ACI4600'
-";
-
-            var mock = new Mock<IHttpExecutorRaw>();
-            mock.Setup(x => x.GetAirlineFlightSchedule(It.IsAny<HttpExecuteArg>())).Returns(() =>
-            {
-                return TestHelper.LoadJson("FlightQuery.Tests.AirlineFlightSchedule.json");
-            });
-            mock.Setup(x => x.GetFlightID(It.IsAny<HttpExecuteArg>())).Returns<HttpExecuteArg>((args) =>
-            {
-                return TestHelper.LoadJson("FlightQuery.Tests.GetFlightId.json");
-            });
-            mock.Setup(x => x.GetFlightInfoEx(It.IsAny<HttpExecuteArg>()))
-                .Returns<HttpExecuteArg>((args) => 
-                {
-                    return TestHelper.LoadJson("FlightQuery.Tests.FlightInfoEx.json");
-                });
-
-            var context = RunContext.CreateRunContext(code, new HttpExecutor(mock.Object));
-            var result = context.Run();
-
-            Assert.IsTrue(context.Errors.Count == 0);
-            Assert.IsTrue(result.First().Rows.Length == 1);
-            Assert.AreEqual(result.First().Rows[0].Values[2], "ELOEL2 FORSS GUTZZ SOCKK3");
-        }
     }
 }

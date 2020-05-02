@@ -324,5 +324,22 @@ join airportinfo ar on ar.airportCode = a.arrivaltime
             Assert.IsTrue(context.ScopeModel.QueryScope.Items.ContainsKey("ar"));
         }
 
+        [Test]
+        public void TestAliasFromFirst()
+        {
+            string code = @"
+select *
+from (
+    select *
+    from scheduled
+    where 
+) f
+";
+            var context = RunContext.CreateIntellisenseContext(code, new Cursor(2, 3));
+            context.Run();
+
+            Assert.IsTrue(context.ScopeModel.Global.Items.Count != 0);
+        }
+
     }
 }

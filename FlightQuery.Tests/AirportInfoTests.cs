@@ -84,36 +84,6 @@ where airportCode = 'kaus'
         }
 
         [Test]
-        public void TestJoin()
-        {
-            string code = @"
-select f.ident, f.departuretime, f.arrivaltime, o.name, d.name
-from airlineflightschedules f
-join airportinfo d on d.airportCode = f.destination
-join airportinfo o on o.airportCode = f.origin
-where f.departuretime > '2020-1-16 1:46'and f.ident = 'DAL1381'";
-
-            var mock = new Mock<IHttpExecutorRaw>();
-            mock.Setup(x => x.GetAirlineFlightSchedule(It.IsAny<HttpExecuteArg>())).Returns(() =>
-            {
-                return TestHelper.LoadJson("FlightQuery.Tests.AirlineFlightSchedule.json");
-            });
-            mock.Setup(x => x.GetAirportInfo(It.IsAny<HttpExecuteArg>())).Returns(() =>
-            {
-                return TestHelper.LoadJson("FlightQuery.Tests.AirportInfo.json");
-            });
-
-            var context = RunContext.CreateRunContext(code, new HttpExecutor(mock.Object));
-            var result = context.Run();
-            Assert.IsTrue(context.Errors.Count == 0);
-            Assert.IsTrue(result.First().Columns.Length == 5);
-            Assert.IsTrue(result.First().Rows.Length == 1);
-
-            mock.Verify(x => x.GetAirlineFlightSchedule(It.IsAny<HttpExecuteArg>()), Times.Once);
-            mock.Verify(x => x.GetAirportInfo(It.IsAny<HttpExecuteArg>()), Times.Exactly(30));
-        }
-
-        [Test]
         public void TestNoAuth()
         {
             string code = @"
