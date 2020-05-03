@@ -2,6 +2,7 @@
 using FlightQuery.Interpreter.Http;
 using FlightQuery.Interpreter.QueryResults;
 using FlightQuery.Sdk;
+using FlightQuery.Sdk.SqlAst;
 
 namespace FlightQuery.Interpreter.QueryTables
 {
@@ -9,10 +10,13 @@ namespace FlightQuery.Interpreter.QueryTables
     {
         protected LimitQueryTable(IHttpExecutor httpExecutor, TableDescriptor descriptor) : base(httpExecutor, descriptor) { }
 
-        protected sealed override void LimitQuery(int offset, int limit)
+        protected sealed override void LimitQuery(LimitStatement statement)
         {
-            QueryArgs.Add(new EqualQueryArg() { Variable = "offset", PropertyValue = new PropertyValue(offset) });
-            QueryArgs.Add(new EqualQueryArg() { Variable = "howMany", PropertyValue = new PropertyValue(limit) });
+            if (statement != null)
+            {
+                QueryArgs.Add(new EqualQueryArg() { Variable = "offset", PropertyValue = new PropertyValue(statement.Offset) });
+                QueryArgs.Add(new EqualQueryArg() { Variable = "howMany", PropertyValue = new PropertyValue(statement.Count) });
+            }
         }
 
     }

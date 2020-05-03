@@ -55,6 +55,9 @@ namespace FlightQuery.Interpreter.Execution
                     });
                 }
 
+                if(statement.Limit != null)
+                    VisitChild(statement.Limit);
+
                 var args = new QueryPhaseArgs();
                 if (statement.Select != null)
                     VisitChild(statement.Select, args);

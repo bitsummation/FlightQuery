@@ -2,6 +2,7 @@
 using FlightQuery.Interpreter.Http;
 using FlightQuery.Sdk;
 using FlightQuery.Sdk.Semantic;
+using FlightQuery.Sdk.SqlAst;
 using System.Collections.Generic;
 
 namespace FlightQuery.Interpreter.QueryResults
@@ -26,7 +27,7 @@ namespace FlightQuery.Interpreter.QueryResults
 
         public abstract bool HasExecuted { get; }
         public abstract void AddArg(QueryArgs args);
-        public abstract ExecutedTable Execute(int offset, int limit);
+        public abstract ExecutedTable Execute(LimitStatement limit);
 
         protected static PropertyValue[] ToValues(object value, TableDescriptor table)
         {

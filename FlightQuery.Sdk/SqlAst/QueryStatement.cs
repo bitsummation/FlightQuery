@@ -26,11 +26,7 @@ namespace FlightQuery.Sdk.SqlAst
         {
             get
             {
-                var l = Children.OfType<LimitStatement>().SingleOrDefault();
-                if (l == null)
-                    return new LimitStatement(Bounds);
-                else
-                    return l;
+                return Children.OfType<LimitStatement>().SingleOrDefault();
             }
         }
 

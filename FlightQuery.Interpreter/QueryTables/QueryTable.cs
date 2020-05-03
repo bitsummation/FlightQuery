@@ -3,6 +3,7 @@ using FlightQuery.Interpreter.Http;
 using FlightQuery.Interpreter.QueryResults;
 using FlightQuery.Sdk;
 using FlightQuery.Sdk.Semantic;
+using FlightQuery.Sdk.SqlAst;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,9 +30,9 @@ namespace FlightQuery.Interpreter.QueryTables
             QueryArgs.Add(args);
         }
 
-        public sealed override ExecutedTable Execute(int offset, int limit)
+        public sealed override ExecutedTable Execute(LimitStatement statement)
         {
-            LimitQuery(offset, limit);
+            LimitQuery(statement);
             ValidateArgs();
 
             var args = new HttpExecuteArg() {
@@ -44,7 +45,7 @@ namespace FlightQuery.Interpreter.QueryTables
 
         protected abstract ExecutedTable ExecuteCore(HttpExecuteArg args);
 
-        protected virtual void LimitQuery(int offset, int limit)
+        protected virtual void LimitQuery(LimitStatement statement)
         {
         }
 

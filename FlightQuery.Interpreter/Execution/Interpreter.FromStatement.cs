@@ -33,7 +33,7 @@ namespace FlightQuery.Interpreter.Execution
 
             VisitWhereIgnoreErrors(statement.ParentQueryStatement.Where);
 
-            var result = table.Execute(statement.ParentQueryStatement.Limit.Offset, statement.ParentQueryStatement.Limit.Count);
+            var result = table.Execute(statement.ParentQueryStatement.Limit);
             foreach (var e in table.Errors)
                 Errors.Add(e);
 

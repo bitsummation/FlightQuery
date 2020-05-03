@@ -45,7 +45,7 @@ namespace FlightQuery.Interpreter.Execution
                 VisitChild(statement.BooleanExpression);
                 VisitWhereIgnoreErrors(statement.ParentQueryStatement.Where);
 
-                var executeTable = table.Execute(statement.ParentQueryStatement.Limit.Offset, statement.ParentQueryStatement.Limit.Count);
+                var executeTable = table.Execute(statement.ParentQueryStatement.Limit);
                 foreach (var e in table.Errors)
                     Errors.Add(e);
 
@@ -62,7 +62,7 @@ namespace FlightQuery.Interpreter.Execution
                     Array.ForEach(executedTables, (x) => x.RowIndex = row);
                     VisitChild(statement.BooleanExpression);
                     VisitWhereIgnoreErrors(statement.ParentQueryStatement.Where);
-                    var executeTable = table.Execute(statement.ParentQueryStatement.Limit.Offset, statement.ParentQueryStatement.Limit.Count);
+                    var executeTable = table.Execute(statement.ParentQueryStatement.Limit);
 
                     foreach (var e in table.Errors)
                         Errors.Add(e);

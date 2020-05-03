@@ -1,6 +1,7 @@
 ﻿
 using FlightQuery.Interpreter.Descriptors.Model;
 using FlightQuery.Interpreter.Http;
+using FlightQuery.Sdk.SqlAst;
 
 namespace FlightQuery.Interpreter.QueryResults
 {
@@ -20,7 +21,7 @@ namespace FlightQuery.Interpreter.QueryResults
             return this;
         }
 
-        public override ExecutedTable Execute(int offset, int limit)
+        public override ExecutedTable Execute(LimitStatement statement)
         {
             return this;
         }
