@@ -13,7 +13,7 @@
 
         private bool IsValid()
         {
-            return Start != null && Stop != null;
+            return Start != null && Stop != null && Start.Line <= Stop.Line;
         }
 
         public bool Contains(Cursor cursor)

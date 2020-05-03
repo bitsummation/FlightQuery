@@ -21,11 +21,13 @@
         var that = this;
        
         this.fetch(args, function (scope) {
-           
-            if (that.globalTriggers.includes(args.token)) {
+            if (!scope)
+                return;
+
+            if (that.globalTriggers.includes(args.token)) { //global tables
                 callback(scope.global.keys)
             }
-            else if (that.scopeTriggers.includes(args.token) || args.promptToken == ',') {
+            else if (that.scopeTriggers.includes(args.token) || args.token == ',') { //variables
                 if (scope.queryScope.keys.length > 0) {
                     var prompts = []
                     prompts = prompts.concat(scope.queryScope.keys);
@@ -33,9 +35,9 @@
                     callback(prompts);
                 }
             }
-            else { 
-                if (args.promptToken == '.' && scope.queryScope.keys.length > 0 && scope.queryScope.keys.includes(args.token)) { //do we match alias with a dot
-                    var prompts = scope.queryScope.items[args.token]
+            else { //member variables
+                if (args.token == '.' && scope.queryScope.keys.length > 0 && scope.queryScope.keys.includes(args.previousToken)) { 
+                    var prompts = scope.queryScope.items[args.previousToken]
                     callback(prompts);
                 }
                 else
@@ -50,30 +52,47 @@
         var that = this;
         var editor = ace.edit("code");
         var langTools = ace.require('ace/ext/language_tools');
+        var Tokenizer = ace.require("ace/token_iterator").TokenIterator;
 
         langTools.setCompleters([])
 
         editor.getSession().setMode("ace/mode/mysql");
         editor.setValue(""); //clear global ones
 
+        var getLastTokens = function (row, column) {
+            var iterator = new Tokenizer(editor.getSession(), row, column);
+            var token = iterator.getCurrentToken();
+            var args = { token: '', previousToken: ''};
+            while (token !== null) {
+                if (token === undefined) {
+                    token = iterator.stepBackward();
+                    continue;
+                }
+                if (/^\s+$/.test(token.value)) { //skip whitespace
+                    token = iterator.stepBackward();
+                }
+                else {
+                    if (args.token == '') {
+                        args.token = token.value.trim();
+                        token = iterator.stepBackward();
+                    }
+                    else if (args.previousToken == '') {
+                        args.previousToken = token.value.trim();
+                        break;
+                    }
+                }
+            }
+            return args;
+        }
+
         var staticWordCompleter = {
             getCompletions: function (editor, session, pos, prefix, callback) {
-               
-                var args = {};
-                var firstToken = editor.session.getTokenAt(pos.row, pos.column);
-                if (firstToken != null) {
-                    args.promptToken = firstToken.value;
-                }
-               
-                var token = editor.session.getTokenAt(pos.row, pos.column - 1);
-                if (token != null) {
-                    token = token.value.toLowerCase();
-                    args.token = token.trim();
-                }
+                var args = getLastTokens(pos.row, pos.column);
 
                 var code = editor.getValue();
                 args.code = code;
-                args.pos = { row: pos.row+1, column: pos.column };
+                args.pos = { row: pos.row + 1, column: pos.column };
+               
                 that.getPrompts(args, function (wordList) {
 
                     callback(null, wordList.map(function (word) {
@@ -95,7 +114,7 @@
         var doLiveAutocomplete = function (e) {
             var editor = e.editor;
             if (e.command.name === "insertstring") {
-                // Only autocomplete if there's a prefix that can be matched 
+                // Only autocomplete if there's a prefix that can be matched     
                 if (/[\.|\s|,]/.test(e.args)) {
                     editor.execCommand("startAutocomplete")
                 }
