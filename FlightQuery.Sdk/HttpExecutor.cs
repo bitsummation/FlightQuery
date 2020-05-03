@@ -81,6 +81,15 @@ namespace FlightQuery.Sdk
               );
         }
 
+        public ApiExecuteResult<IEnumerable<Enroute>> GetEnroute(HttpExecuteArg args)
+        {
+            return ParseFindResult(
+              () => _raw.GetEnroute(args),
+              () => _empty.GetEnroute(args).Data,
+              (dynamic json) => json.EnrouteResult.enroute
+              );
+        }
+
         public ApiExecuteResult<AirportInfo> AirportInfo(HttpExecuteArg args)
         {
             return ParseFindResult(

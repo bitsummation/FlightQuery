@@ -109,5 +109,10 @@ namespace FlightQuery.Interpreter.Http
         {
             return Task.Run(async () => await ExecuteInternal(args)).Result;
         }
+
+        public ExecuteResult GetEnroute(HttpExecuteArg args)
+        {
+            return Task.Run(async () => await ExecuteInternal(args)).Result;
+        }
     }
 }

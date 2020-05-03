@@ -11,6 +11,7 @@
         ExecuteResult GetInFlightInfo(HttpExecuteArg args);
         ExecuteResult GetScheduled(HttpExecuteArg args);
         ExecuteResult GetArrived(HttpExecuteArg args);
+        ExecuteResult GetEnroute(HttpExecuteArg args);
         ExecuteResult GetHistoricalTrack(HttpExecuteArg args);
     }
 }

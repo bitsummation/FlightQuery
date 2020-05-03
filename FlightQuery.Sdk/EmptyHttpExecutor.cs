@@ -40,6 +40,11 @@ namespace FlightQuery.Sdk
             return new ApiExecuteResult<IEnumerable<Arrived>>(new [] { new Arrived() });
         }
 
+        public ApiExecuteResult<IEnumerable<Enroute>> GetEnroute(HttpExecuteArg args)
+        {
+            return new ApiExecuteResult<IEnumerable<Enroute>>(new[] { new Enroute() });
+        }
+
         public ApiExecuteResult<InboundFlightInfo> GetInboundFlightInfo(HttpExecuteArg args)
         {
             return new ApiExecuteResult<InboundFlightInfo>(new InboundFlightInfo());
