@@ -96,6 +96,9 @@ join inflightinfo i on i.ident = e.ident
 join gethistoricaltrack h on h.faFlightID = i.faFlightID
 </script>
 <script id="example-austinInbound" type="text/x-handlebars-template">
+/*
+* Flights enroute to austin
+*/
 select e.ident,
     actualdeparturetime,
     filed_departuretime,
@@ -196,7 +199,7 @@ where airport = 'kaus' and actualdeparturetime != 0 and filter = 'airline'
                 <a href="" query="example-austinDepartures">Austin Airport Departures</a>
                 <a href="" query="example-austinDeparturesFriendly">Austin Airport Departures Friendly</a>
                 <a href="" query="example-austinDeparturesStatus">Austin Airport Departures Status</a>
-                <a href="" query="example-austinInbound">Austin Inbound Track Flights</a>
+                <a href="" query="example-austinInbound">Austin Inbound Flights</a>
                 <a href="" query="example-historicalTrack">Track One Inbound Flight</a>
             </div>
         </div>
