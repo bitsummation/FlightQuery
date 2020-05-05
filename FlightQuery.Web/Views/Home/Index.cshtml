@@ -88,15 +88,27 @@ from (
     from (
         select ident, filed_departuretime
         from enroute e
-        where airport = 'kaus' and actualdeparturetime != 0
+        where airport = 'kaus' and actualdeparturetime != 0 and filter = 'airline'
     ) e
     limit 1
 ) e
 join inflightinfo i on i.ident = e.ident
 join gethistoricaltrack h on h.faFlightID = i.faFlightID
 </script>
-
-
+<script id="example-austinInbound" type="text/x-handlebars-template">
+select e.ident,
+    actualdeparturetime,
+    filed_departuretime,
+    estimatedarrivaltime,
+    originCity,
+    destinationCity,
+    latitude,
+    longitude,
+    altitude
+from enroute e
+join inflightinfo i on e.ident = i.ident
+where airport = 'kaus' and actualdeparturetime != 0 and filter = 'airline'
+</script>
 
 <script id="results-template" type="text/x-handlebars-template">
     {{#if errors}}
@@ -184,6 +196,7 @@ join gethistoricaltrack h on h.faFlightID = i.faFlightID
                 <a href="" query="example-austinDepartures">Austin Airport Departures</a>
                 <a href="" query="example-austinDeparturesFriendly">Austin Airport Departures Friendly</a>
                 <a href="" query="example-austinDeparturesStatus">Austin Airport Departures Status</a>
+                <a href="" query="example-austinInbound">Austin Inbound Track Flights</a>
                 <a href="" query="example-historicalTrack">Track One Inbound Flight</a>
             </div>
         </div>
