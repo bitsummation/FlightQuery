@@ -13,6 +13,9 @@ namespace FlightQuery.Interpreter.Execution
         public void Visit(SelectStatement statement)
         {
             var executedTables = _scope.FetchAllExecutedTablesSameLevel();
+            if (executedTables.Length == 0) //no executed tables. nothing to do
+                return;
+
             var dynamicColumns = new List<DynamicColumn>();
             var descriptors = new List<IResult>();
 

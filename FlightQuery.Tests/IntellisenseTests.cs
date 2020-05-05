@@ -325,6 +325,40 @@ join airportinfo ar on ar.airportCode = a.arrivaltime
         }
 
         [Test]
+        public void TestDoubleNested()
+        {
+            string code = @"
+select e.ident,
+    filed_departuretime,
+    departureTime,
+    origin,
+    destination,
+    h.timestamp,
+    h.altitude,
+    h.groundspeed,
+    h.latitude,
+    h.longitude
+from (
+    select ident, filed_departuretime
+    from ( 
+        select 
+        from enroute e
+        where airport = 'kaus' and actualdeparturetime != 0
+    ) e
+    limit 1
+) e
+join inflightinfo i on i.ident = e.ident
+join gethistoricaltrack h on h.faFlightID = i.faFlightID
+";
+
+            var context = RunContext.CreateIntellisenseContext(code, new Cursor(2, 3));
+            context.Run();
+
+            Assert.IsTrue(context.ScopeModel.Global.Items.Count != 0);
+
+        }
+
+        [Test]
         public void TestAliasFromFirst()
         {
             string code = @"

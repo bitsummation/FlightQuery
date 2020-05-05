@@ -2,46 +2,142 @@
     ViewBag.Title = "Flight Query";
 }
 
-    <script id="results-template" type="text/x-handlebars-template">
-        {{#if errors}}
-        {{#each errors}}
-        <div class="error result">
-            {{this.message}}
+<script id="example-airportInfo" type="text/x-handlebars-template">
+/*
+* Airport Information for Austin
+*/
+
+select *
+from airportinfo
+where airportCode = 'kaus'
+</script>
+<script id="example-austinDepartures" type="text/x-handlebars-template">
+/*
+* Current upcoming Austin departures
+*/
+
+select *
+from airlineflightschedules
+where departuretime > '{{currentDate}}' and origin = 'kaus'
+</script>
+<script id="example-austinDeparturesFriendly" type="text/x-handlebars-template">
+/*
+* Current upcoming Austin departures
+* joins against airportinfo to display friendly name of origin and destination
+*/
+
+select
+    f.ident,
+    f.departuretime,
+    f.arrivaltime,
+    o.name as origin,
+    d.name as destination
+from airlineflightschedules f
+join airportinfo d on d.airportCode = f.destination
+join airportinfo o on o.airportCode = f.origin
+where f.departuretime > '{{currentDate}}' and f.origin = 'kaus'
+</script>
+<script id="example-austinDeparturesStatus" type="text/x-handlebars-template">
+/*
+* Current upcoming Austin departures
+* joins to get flightid and uses the flightinfoex to get the status of the flight
+* It uses a case statement to determine status
+*/
+
+select s.ident,
+    e.origin,
+    s.originCity,
+    e.destination,
+    s.destinationCity,
+    s.filed_departuretime,
+    s.estimatedarrivaltime,
+    case
+        when e.actualarrivaltime = -1 and e.actualdeparturetime = -1 and e.estimatedarrivaltime = -1
+            then 'cancelled'
+        when e.actualdeparturetime != 0 and e.actualarrivaltime = 0
+            then 'enroute'
+        when e.actualdeparturetime != 0 and e.actualarrivaltime != 0 and e.actualdeparturetime != e.actualarrivaltime
+            then 'arrived'
+        else 'not departed'
+        end as status
+from scheduled s
+join getflightid f on f.departureTime = s.filed_departuretime and f.ident = s.ident
+join flightinfoex e on e.faFlightID = f.faFlightID
+where airport = "kaus" and filter = "airline"
+</script>
+<script id="example-historicalTrack" type="text/x-handlebars-template">
+/*
+* Queries enroute for flights enroute to Austin.  
+* Takes 1 result from the inner query and joins to get 
+* the historical track of the flight. Results 
+* should update if flight is in progress.
+*/
+
+select e.ident,
+    filed_departuretime,
+    departureTime,
+    origin,
+    destination,
+    h.timestamp,
+    h.altitude,
+    h.groundspeed,
+    h.latitude,
+    h.longitude
+from (
+    select ident, filed_departuretime
+    from (
+        select ident, filed_departuretime
+        from enroute e
+        where airport = 'kaus' and actualdeparturetime != 0
+    ) e
+    limit 1
+) e
+join inflightinfo i on i.ident = e.ident
+join gethistoricaltrack h on h.faFlightID = i.faFlightID
+</script>
+
+
+
+<script id="results-template" type="text/x-handlebars-template">
+    {{#if errors}}
+    {{#each errors}}
+    <div class="error result">
+        {{this.message}}
+    </div>
+    {{/each}}
+    {{else}}
+    {{#each tables}}
+    <div class="result">
+        <div>
+            {{rows.length }} Results
         </div>
-        {{/each}}
-        {{else}}
-        {{#each tables}}
-        <div class="result">
-            <div>
-                {{rows.length }} Results
-            </div>
-            <table class="data">
-                <thead>
-                    <tr></tr>
-                    <tr>
-                        {{#each columns}}
-                        <th>{{this}}</th>
-                        {{/each}}
-                    </tr>
-                </thead>
-                <tbody>
-                    {{#each rows}}
-                    <tr>
-                        {{#each this.values}}
-                        {{#if (isNull this)}}
-                        <td>NULL</td>
-                        {{else}}
-                        <td>{{this}}</td>
-                        {{/if}}
-                        {{/each}}
-                    </tr>
+        <table class="data">
+            <thead>
+                <tr></tr>
+                <tr>
+                    {{#each columns}}
+                    <th>{{this}}</th>
                     {{/each}}
-                </tbody>
-            </table>
-        </div>
-            {{/each}}
-        {{/if}}
-    </script>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each rows}}
+                <tr>
+                    {{#each this.values}}
+                    {{#if (isNull this)}}
+                    <td>NULL</td>
+                    {{else}}
+                    <td>{{this}}</td>
+                    {{/if}}
+                    {{/each}}
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+    </div>
+    {{/each}}
+    {{/if}}
+</script>
 
 <div id="sitenav-wrapper" class="wrapper">
     <div id="sitenav-wrap" class="wrap xxw8">
@@ -58,13 +154,13 @@
     <div id="discussion" class="xxw8 xcw8">
         <div style="width: 760px; float:left">
             <div>Enter Query:</div>
-           
+
             <div id="code">
             </div>
             <div>
                 <button type="button" class="button" id="run">Run Query</button>
             </div>
-      
+
 
             <div id="loading" class="none">
                 <img src="@Url.Content("~/img/ajax-loader.gif")" alt="loading" />
@@ -84,10 +180,11 @@
             </div>
             <div class="title">Examples</div>
             <div id="examples">
-                <a href="" query="airportInfo">Austin Airport Info</a>
-                <a href="" query="austinDepartures">Austin Airport Departures</a>
-                <a href="" query="austinDeparturesFriendly">Austin Airport Departures Friendly</a>
-                <a href="" query="austinDeparturesNoStatus">Austin Airport Departures Status</a>
+                <a href="" query="example-airportInfo">Austin Airport Info</a>
+                <a href="" query="example-austinDepartures">Austin Airport Departures</a>
+                <a href="" query="example-austinDeparturesFriendly">Austin Airport Departures Friendly</a>
+                <a href="" query="example-austinDeparturesStatus">Austin Airport Departures Status</a>
+                <a href="" query="example-historicalTrack">Track One Inbound Flight</a>
             </div>
         </div>
         <div id="results" style="float:left; width:1070px; overflow-x:auto">
