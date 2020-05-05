@@ -1,4 +1,7 @@
-Ability to query the flighaware xml api using sql syntax. Application runs as a web app in docker that includes an editor.
+## Flight Query
+![](https://user-images.githubusercontent.com/13210937/81029719-9d3e0400-8e4b-11ea-921c-1b74dac4a55c.png)
+## Run
+Ability to query the flighaware xml 2 api using sql syntax. Application runs as a web app in docker that includes an editor.
 To Run:
 ```
 docker run -d -p 5001:80 --name flightquery bitsummation/flightquery
@@ -12,26 +15,28 @@ To send a query from code, post the sql text and authorization header to:
 ```
 http://localhost:5001/query
 ```
+## Query
+The queries follow the FlightXML2 documentation [here](https://flightaware.com/commercial/flightxml/explorer/). Each API is modeled as a table with the name matching the api call. The arguments to the api can be specified in the where clause or on joins.
+
+The editor includes auto complete.
 
 Example below and more docs to follow.
 
 ```sql
-select
-	a.ident,
-	a.departuretime,
-	a.origin,
-	a.destination,
-	case
-	when e.actualarrivaltime = -1 and e.actualdeparturetime = -1 and e.estimatedarrivaltime = -1
-		then 'cancelled'
-	when e.actualdeparturetime != 0 and e.actualarrivaltime = 0
-		then 'enroute'
-	when e.actualdeparturetime != 0 and e.actualarrivaltime != 0 and e.actualdeparturetime != e.actualarrivaltime
-		then 'arrived'
-	else 'not departed'
-	end as status
-from airlineflightschedules a
-join getflightid f on f.departureTime = a.departuretime and f.ident = a.ident
-join flightinfoex e on e.faFlightID = f.faFlightID
-where a.departuretime > '2020-4-19 21:43' and a.origin = 'kaus'
+/*
+* Flights enroute to austin
+*/
+select e.ident,
+    actualdeparturetime,
+    filed_departuretime,
+    estimatedarrivaltime,
+    originCity,
+    destinationCity,
+    latitude,
+    longitude,
+    altitude
+from enroute e
+join inflightinfo i on e.ident = i.ident
+where airport = 'kaus' and actualdeparturetime != 0 and filter = 'airline'
+
 ```
