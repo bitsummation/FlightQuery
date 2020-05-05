@@ -205,18 +205,16 @@ var home = {
     getBasicHeader: function () {
         var userName = this.getUserName();
         var pass = this.getPassword();
-        var token = userName + ":" + pass;
+        var token = '';
+        if (userName != '' && pass != ''){
+            token = userName + ":" + pass;
+        }
+
         var hash = btoa(token);
         return "Basic " + hash;
     },
 
     renderQuery: function () {
-        if (this.getUserName() == '' || this.getPassword() == '') {
-            $(".green-form input").addClass("error");
-            this.loadResults({ errors: [{ message: 'Authentication error' }] });
-            return;
-        }
-
         this.preLoad();
         var data = this.getQuery();
         var that = this;

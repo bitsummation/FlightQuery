@@ -1,7 +1,6 @@
 ﻿using FlightQuery.Parser;
 using FlightQuery.Sdk;
 using FlightQuery.Sdk.Semantic;
-using System.Collections.Generic;
 using System.Linq;
 
 namespace FlightQuery.Context
@@ -85,6 +84,11 @@ namespace FlightQuery.Context
                         Errors = inter.Errors;
 
                     ScopeModel = inter.ScopeModel;
+                }
+
+                if(Authorization == "Basic" && Errors.Count == 0){ //empty auth header
+                    Errors.Add(new ApiExecuteError(ApiExecuteErrorType.AuthError, "Authentication error"));
+                    return table;
                 }
 
                 if (Errors.Count == 0 && ((_flags & ExecuteFlags.Execute) == ExecuteFlags.Execute)) // we run
