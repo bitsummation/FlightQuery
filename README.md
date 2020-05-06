@@ -11,7 +11,7 @@ then go to
 ```
 http://localhost:5001
 ```
-Enter your username and apikey. Type your query or click on the example links on the right side.
+Enter your username and API key. Type your query or click on the example links on the right side.
 
 ## Query
 The queries follow the FlightXML2 documentation [here](https://flightaware.com/commercial/flightxml/explorer/). Each API is modeled as a table with the name matching the api call. The arguments to the api can be specified in the where clause or on joins.
