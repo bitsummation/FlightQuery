@@ -18,12 +18,23 @@ The queries follow the FlightXML2 documentation [here](https://flightaware.com/c
 
 The editor includes auto complete to help author queries.
 
-Examples below and more docs to follow.
+Examples below.
+#### Austin Airport Info
+```
+/*
+* Airport Information for Austin
+*/
+
+select *
+from airportinfo
+where airportCode = 'kaus'
+```
 #### Enroute to Austin
 ```sql
 /*
 * Flights enroute to austin
 */
+
 select e.ident,
     actualdeparturetime,
     filed_departuretime,
