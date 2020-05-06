@@ -20,7 +20,7 @@ The editor includes auto complete to help author queries.
 
 Examples below.
 #### Austin Airport Info
-```
+```sql
 /*
 * Airport Information for Austin
 */
