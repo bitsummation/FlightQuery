@@ -1,7 +1,8 @@
 ## Flight Query
+Ability to query the FlightAware FlightXML 2 API using SQL syntax. 
 ![](https://user-images.githubusercontent.com/13210937/81029719-9d3e0400-8e4b-11ea-921c-1b74dac4a55c.png)
 ## Run
-Ability to query the flighaware xml 2 api using sql syntax. Application runs as a web app in docker that includes an editor.
+Application runs as a web app in docker that includes an editor.
 To Run:
 ```
 docker run -d -p 5001:80 --name flightquery bitsummation/flightquery
@@ -10,18 +11,15 @@ then go to
 ```
 http://localhost:5001
 ```
-Enter your username and apikey and type your query or click on the example links on the right side.
-To send a query from code, post the sql text and authorization header to:
-```
-http://localhost:5001/query
-```
+Enter your username and apikey. Type your query or click on the example links on the right side.
+
 ## Query
 The queries follow the FlightXML2 documentation [here](https://flightaware.com/commercial/flightxml/explorer/). Each API is modeled as a table with the name matching the api call. The arguments to the api can be specified in the where clause or on joins.
 
-The editor includes auto complete.
+The editor includes auto complete to help author queries.
 
 Example below and more docs to follow.
-
+#### Enroute to Austin
 ```sql
 /*
 * Flights enroute to austin
@@ -38,5 +36,38 @@ select e.ident,
 from enroute e
 join inflightinfo i on e.ident = i.ident
 where airport = 'kaus' and actualdeparturetime != 0 and filter = 'airline'
+```
+#### Austin Scheduled Flights With Status
+```sql
+/*
+* Current upcoming Austin departures
+* joins to get flightid and uses the flightinfoex to get the status of the flight
+* It uses a case statement to determine status
+*/
 
+select s.ident,
+    e.origin,
+    s.originCity,
+    e.destination,
+    s.destinationCity,
+    s.filed_departuretime,
+    s.estimatedarrivaltime,
+    case
+        when e.actualarrivaltime = -1 and e.actualdeparturetime = -1 and e.estimatedarrivaltime = -1
+            then 'cancelled'
+        when e.actualdeparturetime != 0 and e.actualarrivaltime = 0
+            then 'enroute'
+        when e.actualdeparturetime != 0 and e.actualarrivaltime != 0 and e.actualdeparturetime != e.actualarrivaltime
+            then 'arrived'
+        else 'not departed'
+        end as status
+from scheduled s
+join getflightid f on f.departureTime = s.filed_departuretime and f.ident = s.ident
+join flightinfoex e on e.faFlightID = f.faFlightID
+where airport = "kaus" and filter = "airline"
+```
+## Call Programmatically
+To send a query from code, post the SQL text and authorization header to:
+```
+http://localhost:5001/query
 ```
