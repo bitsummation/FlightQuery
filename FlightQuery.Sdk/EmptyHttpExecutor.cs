@@ -45,6 +45,11 @@ namespace FlightQuery.Sdk
             return new ApiExecuteResult<IEnumerable<Enroute>>(new[] { new Enroute() });
         }
 
+        public ApiExecuteResult<IEnumerable<Departed>> GetDeparted(HttpExecuteArg args)
+        {
+            return new ApiExecuteResult<IEnumerable<Departed>>(new[] { new Departed() });
+        }
+
         public ApiExecuteResult<InboundFlightInfo> GetInboundFlightInfo(HttpExecuteArg args)
         {
             return new ApiExecuteResult<InboundFlightInfo>(new InboundFlightInfo());
@@ -59,5 +64,7 @@ namespace FlightQuery.Sdk
         {
             return new ApiExecuteResult<IEnumerable<GetHistoricalTrack>>(new[] { new GetHistoricalTrack() });
         }
+
+       
     }
 }

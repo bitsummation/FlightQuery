@@ -90,6 +90,15 @@ namespace FlightQuery.Sdk
               );
         }
 
+        public ApiExecuteResult<IEnumerable<Departed>> GetDeparted(HttpExecuteArg args)
+        {
+            return ParseFindResult(
+             () => _raw.GetDeparted(args),
+             () => _empty.GetDeparted(args).Data,
+             (dynamic json) => json.DepartedResult.departures
+             );
+        }
+
         public ApiExecuteResult<AirportInfo> AirportInfo(HttpExecuteArg args)
         {
             return ParseFindResult(
@@ -150,5 +159,6 @@ namespace FlightQuery.Sdk
               (dynamic json) => json.GetHistoricalTrackResult.data
               );
         }
+
     }
 }

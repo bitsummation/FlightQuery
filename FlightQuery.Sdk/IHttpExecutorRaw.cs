@@ -12,6 +12,7 @@
         ExecuteResult GetScheduled(HttpExecuteArg args);
         ExecuteResult GetArrived(HttpExecuteArg args);
         ExecuteResult GetEnroute(HttpExecuteArg args);
+        ExecuteResult GetDeparted(HttpExecuteArg args);
         ExecuteResult GetHistoricalTrack(HttpExecuteArg args);
     }
 }
