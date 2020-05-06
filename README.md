@@ -66,6 +66,37 @@ join getflightid f on f.departureTime = s.filed_departuretime and f.ident = s.id
 join flightinfoex e on e.faFlightID = f.faFlightID
 where airport = "kaus" and filter = "airline"
 ```
+#### Track 1 Flight
+```sql
+/*
+* Queries enroute for flights enroute to Austin.  
+* Takes 1 result from the inner query and joins to get 
+* the historical track of the flight. Results 
+* should update if flight is in progress.
+*/
+
+select e.ident,
+    filed_departuretime,
+    departureTime,
+    origin,
+    destination,
+    h.timestamp,
+    h.altitude,
+    h.groundspeed,
+    h.latitude,
+    h.longitude
+from (
+    select ident, filed_departuretime
+    from (
+        select ident, filed_departuretime
+        from enroute e
+        where airport = 'kaus' and actualdeparturetime != 0 and filter = 'airline'
+    ) e
+    limit 1
+) e
+join inflightinfo i on i.ident = e.ident
+join gethistoricaltrack h on h.faFlightID = i.faFlightID
+```
 ## Call Programmatically
 To send a query from code, post the SQL text and authorization header to:
 ```
