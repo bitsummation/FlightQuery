@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace FlightQuery.Interpreter.QueryTables
 {
-    public class ScheduledQueryTable : QueryTable
+    public class ScheduledQueryTable : LimitQueryTable
     {
         public ScheduledQueryTable(IHttpExecutor httpExecutor, TableDescriptor descriptor) : base(httpExecutor, descriptor) { }
 

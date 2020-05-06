@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace FlightQuery.Interpreter.QueryTables
 {
-    public class FlightInfoExQueryTable : QueryTable
+    public class FlightInfoExQueryTable : LimitQueryTable
     {
         public FlightInfoExQueryTable(IHttpExecutor httpExecutor, TableDescriptor descriptor) : base(httpExecutor, descriptor) { }
 
