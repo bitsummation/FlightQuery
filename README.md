@@ -18,7 +18,7 @@ The queries follow the FlightXML2 documentation [here](https://flightaware.com/c
 
 The editor includes auto complete to help author queries.
 
-Example below and more docs to follow.
+Examples below and more docs to follow.
 #### Enroute to Austin
 ```sql
 /*
