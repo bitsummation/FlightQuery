@@ -65,6 +65,9 @@ namespace FlightQuery.Sdk
             return new ApiExecuteResult<IEnumerable<GetHistoricalTrack>>(new[] { new GetHistoricalTrack() });
         }
 
-       
+        public ApiExecuteResult<MapFlight> GetMapFlight(HttpExecuteArg args)
+        {
+            return new ApiExecuteResult<MapFlight>(new MapFlight());
+        }
     }
 }

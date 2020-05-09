@@ -160,5 +160,20 @@ namespace FlightQuery.Sdk
               );
         }
 
+        public ApiExecuteResult<MapFlight> GetMapFlight(HttpExecuteArg args)
+        {
+            var result = _raw.GetMapFlight(args);
+            if (result == null || result.Error != null)
+            {
+                return new ApiExecuteResult<MapFlight>(_empty.GetMapFlight(args).Data, result != null ? result.Error : null);
+            }
+            dynamic dynamicResult = JsonConvert.DeserializeObject(result.Result, null, new UnixDateTimeConverter());
+            if (dynamicResult.error != null)
+            {
+                return new ApiExecuteResult<MapFlight>(_empty.GetMapFlight(args).Data, ParseFlightAwareError((string)dynamicResult.error));
+            }
+
+            return new ApiExecuteResult<MapFlight>(new MapFlight() { image = dynamicResult.MapFlightResult }, result.Error);
+        }
     }
 }

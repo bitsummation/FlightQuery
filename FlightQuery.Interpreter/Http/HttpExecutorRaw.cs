@@ -20,6 +20,8 @@ namespace FlightQuery.Interpreter.Http
 
         private async Task<ExecuteResult> ExecuteInternal(HttpExecuteArg args)
         {
+          
+
             var json = string.Empty;
             ApiExecuteError error = null;
             try
@@ -116,6 +118,11 @@ namespace FlightQuery.Interpreter.Http
         }
 
         public ExecuteResult GetDeparted(HttpExecuteArg args)
+        {
+            return Task.Run(async () => await ExecuteInternal(args)).Result;
+        }
+
+        public ExecuteResult GetMapFlight(HttpExecuteArg args)
         {
             return Task.Run(async () => await ExecuteInternal(args)).Result;
         }

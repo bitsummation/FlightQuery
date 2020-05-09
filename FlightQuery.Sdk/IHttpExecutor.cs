@@ -17,5 +17,7 @@ namespace FlightQuery.Sdk
         ApiExecuteResult<IEnumerable<Arrived>> GetArrived(HttpExecuteArg args);
         ApiExecuteResult<IEnumerable<Enroute>> GetEnroute(HttpExecuteArg args);
         ApiExecuteResult<IEnumerable<GetHistoricalTrack>> GetHistoricalTrack(HttpExecuteArg args);
+        ApiExecuteResult<MapFlight> GetMapFlight(HttpExecuteArg args);
+
     }
 }

@@ -14,5 +14,6 @@
         ExecuteResult GetEnroute(HttpExecuteArg args);
         ExecuteResult GetDeparted(HttpExecuteArg args);
         ExecuteResult GetHistoricalTrack(HttpExecuteArg args);
+        ExecuteResult GetMapFlight(HttpExecuteArg args);
     }
 }

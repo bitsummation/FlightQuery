@@ -16,6 +16,7 @@
     <None Remove="GetHistoricTrack.json" />
     <None Remove="InboundFlightInfo.json" />
     <None Remove="InFightInfo.json" />
+    <None Remove="MapFlight.json" />
     <None Remove="Scheduled.json" />
   </ItemGroup>
 
@@ -28,6 +29,7 @@
     <EmbeddedResource Include="GetHistoricTrack.json" />
     <EmbeddedResource Include="InboundFlightInfo.json" />
     <EmbeddedResource Include="InFightInfo.json" />
+    <EmbeddedResource Include="MapFlight.json" />
     <EmbeddedResource Include="Scheduled.json" />
   </ItemGroup>
 
