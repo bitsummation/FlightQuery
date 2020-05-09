@@ -11,6 +11,6 @@
         [Queryable]
         public int mapWidth { get; set; }
 
-        public string image { get; set; }
+        public Base64Image image { get; set; }
     }
 }

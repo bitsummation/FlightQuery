@@ -38,7 +38,7 @@ from (
             Assert.IsTrue(context.Errors.Count == 0);
             
             Assert.IsTrue(result.First().Rows.Length > 0);
-            Assert.AreEqual(result.First().Columns[0], "(No column name)");
+            Assert.AreEqual(result.First().Columns[0].Name, "(No column name)");
             Assert.AreEqual(result.First().Rows[0].Values[0], "OAE2412");
         }
 
@@ -78,8 +78,8 @@ join GetFlightId f on f.ident = a.ident and f.departureTime = a.departureTime
             Assert.IsTrue(context.Errors.Count == 0);
             Assert.IsTrue(result.First().Rows.Length == 15);
 
-            Assert.AreEqual(result.First().Columns[0], "ident");
-            Assert.AreEqual(result.First().Columns[1], "faFlightID");
+            Assert.AreEqual(result.First().Columns[0].Name, "ident");
+            Assert.AreEqual(result.First().Columns[1].Name, "faFlightID");
             Assert.AreEqual(result.First().Rows[0].Values[0], "OAE2412");
             Assert.AreEqual(result.First().Rows[0].Values[1], "AAL2594-1586309220-schedule-0000");
 

@@ -44,12 +44,12 @@ where airportCode = 'kaus'
 
             Assert.IsTrue(context.Errors.Count == 0);
             Assert.IsTrue(result.First().Columns.Length == 6);
-            Assert.IsTrue(result.First().Columns[0] == "airportCode");
-            Assert.IsTrue(result.First().Columns[1] == "latitude");
-            Assert.IsTrue(result.First().Columns[2] == "longitude");
-            Assert.IsTrue(result.First().Columns[3] == "location");
-            Assert.IsTrue(result.First().Columns[4] == "name");
-            Assert.IsTrue(result.First().Columns[5] == "timezone");
+            Assert.IsTrue(result.First().Columns[0].Name == "airportCode");
+            Assert.IsTrue(result.First().Columns[1].Name == "latitude");
+            Assert.IsTrue(result.First().Columns[2].Name == "longitude");
+            Assert.IsTrue(result.First().Columns[3].Name == "location");
+            Assert.IsTrue(result.First().Columns[4].Name == "name");
+            Assert.IsTrue(result.First().Columns[5].Name == "timezone");
 
             Assert.AreEqual(result.First().Rows[0].Values[0], "kaus");
             Assert.AreEqual(result.First().Rows[0].Values[1], 30.1945272f);
@@ -77,7 +77,7 @@ where airportCode = 'kaus'
             var result = context.Run();
             Assert.IsTrue(context.Errors.Count == 0);
             Assert.IsTrue(result.First().Columns.Length == 1);
-            Assert.IsTrue(result.First().Columns[0] == "location");
+            Assert.IsTrue(result.First().Columns[0].Name == "location");
 
             Assert.IsTrue(result.First().Rows.Length == 1);
             Assert.AreEqual(result.First().Rows[0].Values[0], "Austin, TX");

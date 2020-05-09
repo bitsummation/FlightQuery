@@ -204,7 +204,7 @@ where faFlightID = 'some-flight-number'
 
             Assert.IsTrue(context.Errors.Count == 0);
             Assert.IsTrue(result.First().Columns.Length == 1);
-            Assert.IsTrue(result.First().Columns[0] == "aircrafttype");
+            Assert.IsTrue(result.First().Columns[0].Name == "aircrafttype");
 
             Assert.IsTrue(result.First().Rows.Length == 1);
             Assert.AreEqual(result.First().Rows[0].Values[0], "B739");

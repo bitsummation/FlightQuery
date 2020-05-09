@@ -1,4 +1,5 @@
-﻿using FlightQuery.Sdk.Model.V2;
+﻿using FlightQuery.Sdk.Model;
+using FlightQuery.Sdk.Model.V2;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using System;
@@ -173,7 +174,7 @@ namespace FlightQuery.Sdk
                 return new ApiExecuteResult<MapFlight>(_empty.GetMapFlight(args).Data, ParseFlightAwareError((string)dynamicResult.error));
             }
 
-            return new ApiExecuteResult<MapFlight>(new MapFlight() { image = dynamicResult.MapFlightResult }, result.Error);
+            return new ApiExecuteResult<MapFlight>(new MapFlight() { image = new Base64Image((string)dynamicResult.MapFlightResult) }, result.Error);
         }
     }
 }

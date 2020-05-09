@@ -2,7 +2,7 @@
 {
     public class SelectTable
     {
-        public string[] Columns { get; set; }
+        public SelectColumn[] Columns { get; set; }
         public SelectRow[] Rows { get; set; }
     }
 }

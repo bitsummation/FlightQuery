@@ -124,7 +124,7 @@ namespace FlightQuery.Interpreter.Execution
         private SelectTable ToSelectTable(ExecutedTable table)
         {
             var select = new SelectTable();
-            select.Columns = table.Descriptor.Properties.Select(x => x.Name).ToArray();
+            select.Columns = table.Descriptor.Properties.Select(x => new Sdk.SelectColumn() { Name = x.Name, Type = x.Type == null ? "" : x.Type.Name.ToString().ToLower() }).ToArray();
 
             var list = new List<SelectRow>();
             foreach(var row in table.Rows)

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FlightQuery.Sdk.Model;
+using System;
 
 namespace FlightQuery.Interpreter.QueryResults
 {
@@ -17,6 +18,10 @@ namespace FlightQuery.Interpreter.QueryResults
         public PropertyValue(object comparable)
         {
             _comparable = comparable as IComparable;
+            if (_comparable == null && comparable is IValue)
+            {
+                _comparable = (comparable as IValue).ToValue();
+            }
         }
 
         public override bool Equals(object obj)

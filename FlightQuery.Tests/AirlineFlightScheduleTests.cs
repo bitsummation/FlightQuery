@@ -44,7 +44,7 @@ where departuretime >= '2020-1-21 9:15'
             var context = RunContext.CreateRunContext(code, new HttpExecutor(mock.Object));
             var result = context.Run();
             Assert.IsTrue(result.First().Columns.Length == 5);
-            Assert.IsTrue(result.First().Columns[0] == "aircrafttype");
+            Assert.IsTrue(result.First().Columns[0].Name == "aircrafttype");
 
             Assert.IsTrue(context.Errors.Count == 0);
             Assert.IsTrue(result.First().Rows.Length == 15);
@@ -73,7 +73,7 @@ where departuretime > '2020-1-21 9:15'
             var context = RunContext.CreateRunContext(code, new HttpExecutor(mock.Object));
             var result = context.Run();
             Assert.IsTrue(result.First().Columns.Length == 5);
-            Assert.IsTrue(result.First().Columns[0] == "aircrafttype");
+            Assert.IsTrue(result.First().Columns[0].Name == "aircrafttype");
 
             Assert.IsTrue(context.Errors.Count == 0);
             Assert.IsTrue(result.First().Rows.Length == 15);

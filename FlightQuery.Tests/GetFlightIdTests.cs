@@ -69,7 +69,7 @@ where ident = 'DAL503' and departuretime = '2020-3-7 9:15'
 
             Assert.IsTrue(context.Errors.Count == 0);
             Assert.IsTrue(result.First().Columns.Length == 1);
-            Assert.IsTrue(result.First().Columns[0] == "faFlightID");
+            Assert.IsTrue(result.First().Columns[0].Name == "faFlightID");
 
             Assert.IsTrue(result.First().Rows.Length == 1);
             Assert.AreEqual(result.First().Rows[0].Values[0], "XYZ1234-1530000000-airline-0500");
