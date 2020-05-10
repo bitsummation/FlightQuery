@@ -38,7 +38,7 @@ where ident = ""SWA5302""
         {
             string code = @"
 select departureTime,
-    arrivalTime - UTC_TIMESTAMP()
+    arrivalTime - UTC_TIMESTAMP() as timeLeft
 from inflightinfo
 where ident = ""SWA5302""
 ";
@@ -56,9 +56,7 @@ where ident = ""SWA5302""
             Assert.IsTrue(result.First().Rows.Length == 1);
             Assert.IsTrue(result.First().Columns.Length == 2);
 
-            Assert.IsTrue(result.First().Rows[0].Values[1] != null);
-
-
+            Assert.AreNotEqual(Conversion.ConvertTimespanToString(result.First().Rows[0].Values[1]), null);
         }
     }
 }

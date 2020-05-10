@@ -6,6 +6,9 @@ namespace FlightQuery.Sdk
 {
     public class Conversion
     {
+        private const string PrintDateTimeFormat = "yyyy-MM-dd HH:mm";
+        private const string PrintTimespanFormat = @"dd\.hh\:mm";
+
         public static long MaxUnixDate = int.MaxValue - 1;
         public static long MinUnixDate = 1;
 
@@ -26,7 +29,7 @@ namespace FlightQuery.Sdk
         public static object ConvertDateTimeToString(object f)
         {
             var date = (DateTime)f;
-            return date.ToString(Json.PrintDateTimeFormat);
+            return date.ToString(PrintDateTimeFormat);
         }
 
         public static object ConvertLongToDateTime(object f)
@@ -61,6 +64,12 @@ namespace FlightQuery.Sdk
             }*/
 
             return null;
+        }
+
+        public static object ConvertTimespanToString(object f)
+        {
+            var span = ((TimeSpan)f);
+            return (span < TimeSpan.Zero ? "-" : "") + span.ToString(PrintTimespanFormat);
         }
 
     }

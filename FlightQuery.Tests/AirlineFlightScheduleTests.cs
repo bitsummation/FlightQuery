@@ -52,7 +52,7 @@ where departuretime >= '2020-1-21 9:15'
             Assert.AreEqual(result.First().Rows[0].Values[1], "OAE2412");
             Assert.AreEqual(result.First().Rows[0].Values[2], "ACA2412");
             Assert.AreEqual(result.First().Rows[0].Values[3], 18);
-            Assert.AreEqual(((DateTime)result.First().Rows[0].Values[4]).ToString(Json.PrintDateTimeFormat), "2020-03-07 14:55");
+            Assert.AreEqual(Conversion.ConvertDateTimeToString((DateTime)result.First().Rows[0].Values[4]), "2020-03-07 14:55");
         }
 
         [Test]
@@ -81,7 +81,7 @@ where departuretime > '2020-1-21 9:15'
             Assert.AreEqual(result.First().Rows[0].Values[1], "OAE2412");
             Assert.AreEqual(result.First().Rows[0].Values[2], "ACA2412");
             Assert.AreEqual(result.First().Rows[0].Values[3], 18);
-            Assert.AreEqual(((DateTime)result.First().Rows[0].Values[4]).ToString(Json.PrintDateTimeFormat), "2020-03-07 14:55");
+            Assert.AreEqual(Conversion.ConvertDateTimeToString((DateTime)result.First().Rows[0].Values[4]), "2020-03-07 14:55");
         }
 
         [Test]

@@ -69,7 +69,7 @@ namespace FlightQuery.Web
                 if(val <= 0)
                     writer.WriteStringValue(val.ToString());
                 else
-                    writer.WriteStringValue(value.ToString(Json.PrintDateTimeFormat));
+                    writer.WriteStringValue((string)Conversion.ConvertDateTimeToString(value));
             }
         }
 

@@ -34,6 +34,14 @@ namespace FlightQuery.Interpreter.QueryResults
             return _comparable.GetHashCode();
         }
 
+        public static PropertyValue operator -(PropertyValue p, PropertyValue c)
+        {
+            if (p._comparable is DateTime && c._comparable is DateTime)
+                return new PropertyValue(((DateTime)p._comparable) - ((DateTime)c._comparable));
+
+            return null;
+        }
+
         public static bool operator ==(PropertyValue p, PropertyValue c)
         {
             if(p._comparable is string && c._comparable is string)

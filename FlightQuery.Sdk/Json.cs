@@ -5,8 +5,6 @@ namespace FlightQuery.Sdk
 {
     public static class Json
     {
-        public const string PrintDateTimeFormat = "yyyy-MM-dd HH:mm";
-
         public static TValue DeserializeObject<TValue>(string json)
         {
             return JsonConvert.DeserializeObject<TValue>(json, new UnixDateTimeConverter());
@@ -33,7 +31,7 @@ namespace FlightQuery.Sdk
             public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
             {
                 var val = (DateTime)value;
-                writer.WriteValue(val.ToString(PrintDateTimeFormat));
+                writer.WriteValue((string)Conversion.ConvertDateTimeToString(val));
             }
         }
     }

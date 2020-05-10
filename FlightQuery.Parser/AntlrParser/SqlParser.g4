@@ -19,7 +19,7 @@ selectStatement
 selectArg
 	: selectVariable (AS a=ID)?								# SelectArgsExp
 	| caseStatement	(AS a=ID)?								# SelectArgsExp
-	| mathExpression										# SelectArgsExp
+	| mathExpression (AS a=ID)?								# SelectArgsExp
 	;
 
 caseStatement

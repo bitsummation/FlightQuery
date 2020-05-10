@@ -17,7 +17,22 @@ namespace FlightQuery.Tests
             Assert.IsTrue(date.Day == day);
             Assert.IsTrue(date.Year == year);
             Assert.IsTrue(date.Kind == DateTimeKind.Utc);
+        }
 
+        [Test]
+        public void TestTimespanToString()
+        {
+            var span = new DateTime(2003, 2, 15, 8, 0, 0) - new DateTime(2003, 2, 15, 7, 50, 12);
+            var display = (string)Conversion.ConvertTimespanToString(span);
+            Assert.IsTrue(display == "00.00:09");
+
+            span = new DateTime(2003, 2, 15, 7, 50, 12) - new DateTime(2003, 2, 15, 8, 0, 0);
+            display = (string)Conversion.ConvertTimespanToString(span);
+            Assert.IsTrue(display == "-00.00:09");
+
+            span = new DateTime(2015, 2, 15, 7, 50, 12) - new DateTime(2003, 2, 15, 8, 0, 0);
+            display = (string)Conversion.ConvertTimespanToString(span);
+            Assert.IsTrue(display == "4382.23:50");
         }
     }
 }

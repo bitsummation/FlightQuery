@@ -80,7 +80,7 @@ namespace FlightQuery.Interpreter.Execution
             }
         }
 
-        private bool ValidateTypes(QueryArgs leftArg, QueryArgs rightArg, Func<PropertyValue, PropertyValue, bool> comparer)
+        private TValue ValidateTypes<TValue>(QueryArgs leftArg, QueryArgs rightArg, Func<PropertyValue, PropertyValue, TValue> operation)
         {
             if (leftArg.HasValue && rightArg.HasValue) //both values
             {
@@ -103,8 +103,8 @@ namespace FlightQuery.Interpreter.Execution
                     var converstion = Conversion.Map[key](queryValue.PropertyValue.Value);
                     queryValue.PropertyValue = new PropertyValue(converstion);
                 }
-
-                return comparer(leftArg.PropertyValue, rightArg.PropertyValue);
+               
+                return operation(leftArg.PropertyValue, rightArg.PropertyValue);
             }
             else if (leftArg.HasValue && rightArg.HasProperty) //Give Property Value For Query
             {
@@ -121,7 +121,7 @@ namespace FlightQuery.Interpreter.Execution
             //else //Two Variables, no Value
               //  throw new InvalidOperationException("Two variables with no value");
 
-            return false;
+            return default(TValue);
         }
 
         public SelectTable[] Execute()

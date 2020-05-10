@@ -1,4 +1,5 @@
-﻿using FlightQuery.Sdk.SqlAst;
+﻿using FlightQuery.Interpreter.QueryResults;
+using FlightQuery.Sdk.SqlAst;
 
 namespace FlightQuery.Interpreter.Execution
 {
@@ -6,6 +7,8 @@ namespace FlightQuery.Interpreter.Execution
     {
         public void Visit(UtcTimestampExpression expression)
         {
+            var arg = _visitStack.Peek().BoolQueryArg;
+            arg.PropertyValue = new PropertyValue(expression.Value);
         }
     }
 }
