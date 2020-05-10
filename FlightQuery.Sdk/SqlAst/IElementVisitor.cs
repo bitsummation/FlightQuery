@@ -23,11 +23,14 @@
         void Visit(GreaterThanEqualExpression expression);
         void Visit(LessThanExpression expression);
         void Visit(LessThanEqualExpression expression);
-        
+
+        void Visit(SubtractExpression expression);
+
         void Visit(MemberVariableExpression expression);
         void Visit(SingleVariableExpression expression);
 
         void Visit(LongLiteral literal);
         void Visit(StringLiteral literal);
+        void Visit(UtcTimestampExpression expression);
     }
 }

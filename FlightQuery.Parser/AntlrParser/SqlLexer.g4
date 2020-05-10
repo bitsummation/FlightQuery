@@ -14,6 +14,9 @@ WHERE : W H E R E;
 COMMA : ',';
 DOT : '.';
 STAR : '*';
+ADD : '+';
+SUBTRACT: MINUS;
+DIVIDE : '/';
 
 LIMIT : L I M I T;
 CASE : C A S E;
@@ -24,7 +27,6 @@ ELSE: E L S E;
 
 AND : A N D;
 OR : O R;
-
 INT : MINUS? DIGIT+;
 
 EQUALS : '=';
@@ -33,6 +35,8 @@ LESSTHANEQUAL: '<=';
 GREATERTHAN: '>';
 GREATERTHANEQUAL: '>=';
 NOTEQUAL: '!=';
+
+CURRENT_TIMESTAMP : U T C '_' T I M E S T A M P;
 
 ID : (LETTER | '_')+;
 STRING_LITERAL: ('\''|'"') ~('\''|'"')* ('\''|'"');

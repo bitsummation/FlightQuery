@@ -19,6 +19,7 @@ selectStatement
 selectArg
 	: selectVariable (AS a=ID)?								# SelectArgsExp
 	| caseStatement	(AS a=ID)?								# SelectArgsExp
+	| mathExpression										# SelectArgsExp
 	;
 
 caseStatement
@@ -52,6 +53,19 @@ limitStatement
 	: LIMIT (o=INT COMMA)? c=INT							# limitStatementExp 	
 	;
 
+mathExpression
+    :  l=mathExpressionGroup (( ADD | SUBTRACT ) mathExpressionGroup)*	# addSubtractStatementExp
+	;
+
+mathExpressionGroup
+	: l=atom (( STAR | DIVIDE ) atom)*						# multDivStatementExp
+  	;
+
+atom
+    : selectVariable
+    | OPENPAREN mathExpression CLOSEPAREN
+    ;
+
 boolExpression
 	: l=andExpression (OR andExpression)*					# BoolStatementExp
 	;
@@ -77,4 +91,5 @@ boolOperator
 literal
 	: INT													# IntegerExp
 	| STRING_LITERAL										# StringLiteralExp
+	| CURRENT_TIMESTAMP (OPENPAREN CLOSEPAREN)?				# CurrentTimestampExp
 	;

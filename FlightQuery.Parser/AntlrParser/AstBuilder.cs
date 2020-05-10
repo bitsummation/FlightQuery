@@ -2,6 +2,8 @@
 using FlightQuery.Sdk;
 using FlightQuery.Sdk.SqlAst;
 using static FlightQuery.Parser.AntlrParser.SqlParser;
+using System;
+using Antlr4.Runtime.Tree;
 
 namespace FlightQuery.Parser.AntlrParser
 {
@@ -203,6 +205,28 @@ namespace FlightQuery.Parser.AntlrParser
             return left;
         }
 
+        public override Element VisitAddSubtractStatementExp(AddSubtractStatementExpContext context)
+        {
+            var left = Visit(context.l);
+            int x = 2;
+            while (x < context.ChildCount)
+            {
+                var right = Visit(context.GetChild(x));
+                var symbol = context.GetChild(x-1) as TerminalNodeImpl;
+                if(symbol.Symbol.Type == SqlLexer.SUBTRACT)
+                    left = new SubtractExpression(CreateParseInfo(context)) { Left = left, Right = right };
+
+                x += 2;
+            }
+
+            return left;
+        }
+
+        public override Element VisitMultDivStatementExp(MultDivStatementExpContext context)
+        {
+            return base.VisitMultDivStatementExp(context);
+        }
+
         public override Element VisitBoolTermParenStatementExpr(SqlParser.BoolTermParenStatementExprContext context)
         {
             return Visit(context.b);
@@ -246,6 +270,11 @@ namespace FlightQuery.Parser.AntlrParser
         public override Element VisitStringLiteralExp(SqlParser.StringLiteralExpContext context)
         {
             return new StringLiteral(CreateParseInfo(context)) { Value = context.GetText().Replace("'", "").Replace("\"", "")};
+        }
+
+        public override Element VisitCurrentTimestampExp(CurrentTimestampExpContext context)
+        {
+            return new UtcTimestampExpression(CreateParseInfo(context)) { Value = DateTime.UtcNow };
         }
     }
 }
