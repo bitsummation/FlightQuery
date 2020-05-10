@@ -112,6 +112,34 @@ from enroute e
 join inflightinfo i on e.ident = i.ident
 where airport = 'kaus' and actualdeparturetime != 0 and filter = 'airline'
 </script>
+<script id="example-austinInboundImage" type="text/x-handlebars-template">
+/*
+* Queries enroute for flights enroute to Austin.  
+* Takes 3 result from the inner query and joins to get 
+* and maps and displays the image.
+*
+*/
+
+select e.ident,
+    filed_departuretime,
+    departureTime,
+    origin,
+    destination,
+    i.latitude,
+    i.longitude,
+    m.image   
+from (
+    select ident, filed_departuretime
+    from (
+        select ident, filed_departuretime
+        from enroute e
+        where airport = 'kaus' and actualdeparturetime != 0 and filter = 'airline'
+    ) e
+    limit 3
+) e
+join inflightinfo i on i.ident = e.ident
+join mapflight m on m.ident = i.ident
+</script>
 
 <script id="results-template" type="text/x-handlebars-template">
     {{#if errors}}
@@ -203,6 +231,7 @@ where airport = 'kaus' and actualdeparturetime != 0 and filter = 'airline'
                 <a href="" query="example-austinDeparturesStatus">Austin Airport Departures Status</a>
                 <a href="" query="example-austinInbound">Austin Inbound Flights</a>
                 <a href="" query="example-historicalTrack">Track One Inbound Flight</a>
+                <a href="" query="example-austinInboundImage">Map Three Inbound Flight</a>
             </div>
         </div>
         <div id="results" style="float:left; width:1070px; overflow-x:auto">
