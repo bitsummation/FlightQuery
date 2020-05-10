@@ -141,6 +141,8 @@ where airport = 'kaus' and actualdeparturetime != 0 and filter = 'airline'
                     {{#each this.values}}
                     {{#if (isNull this)}}
                     <td>NULL</td>
+                    {{else if (eq @@root.tables @@../../index @@index "base64image")}}
+                    <td><img src="data:image/png;base64, {{this}}" /></td>
                     {{else}}
                     <td>{{this}}</td>
                     {{/if}}

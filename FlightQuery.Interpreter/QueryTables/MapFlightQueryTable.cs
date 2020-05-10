@@ -26,10 +26,17 @@ namespace FlightQuery.Interpreter.QueryTables
             var dto = result.Data;
             if(QueryArgs.ContainsVariable("ident"))
                 dto.ident = (string)QueryArgs["ident"].PropertyValue.Value;
+
+            long mapHeight = 480;
             if (QueryArgs.ContainsVariable("mapHeight"))
-                dto.mapHeight = (int)QueryArgs["mapHeight"].PropertyValue.Value;
+                mapHeight = (long)QueryArgs["mapHeight"].PropertyValue.Value;
+
+            long mapWidth = 640;
             if (QueryArgs.ContainsVariable("mapWidth"))
-                dto.mapHeight = (int)QueryArgs["mapWidth"].PropertyValue.Value;
+                mapWidth = (long)QueryArgs["mapWidth"].PropertyValue.Value;
+
+            dto.mapHeight = mapHeight;
+            dto.mapWidth = mapWidth;
 
             TableDescriptor tableDescriptor = PropertyDescriptor.GenerateRunDescriptor(typeof(MapFlight));
 

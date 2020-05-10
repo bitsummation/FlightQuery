@@ -140,6 +140,10 @@ var home = {
         Handlebars.registerHelper('isNull', function (value) {
             return value == null;
         });
+
+        Handlebars.registerHelper('eq', function (tables, tableIndex, columnIndex, arg2) {
+            return tables[tableIndex].columns[columnIndex].type == arg2;
+        });
     },
 
     preLoad: function () {

@@ -7,9 +7,9 @@
         public string ident { get; set; }
 
         [Queryable]
-        public int mapHeight { get; set; }
+        public long mapHeight { get; set; }
         [Queryable]
-        public int mapWidth { get; set; }
+        public long mapWidth { get; set; }
 
         public Base64Image image { get; set; }
     }
