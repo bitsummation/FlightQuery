@@ -27,6 +27,7 @@ namespace FlightQuery.Web
                 .AddJsonOptions(options =>
                 {
                     options.JsonSerializerOptions.Converters.Add(new DateTimeConverter());
+                    options.JsonSerializerOptions.Converters.Add(new TimespanConveter());
                 });
         }
 
@@ -53,6 +54,19 @@ namespace FlightQuery.Web
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
+        }
+
+        public class TimespanConveter : JsonConverter<TimeSpan>
+        {
+            public override TimeSpan Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+            {
+                throw new NotImplementedException();
+            }
+
+            public override void Write(Utf8JsonWriter writer, TimeSpan value, JsonSerializerOptions options)
+            {
+                writer.WriteStringValue((string)Conversion.ConvertTimespanToString(value));
+            }
         }
 
         public class DateTimeConverter : JsonConverter<DateTime>
